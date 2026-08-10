@@ -13,11 +13,11 @@ Six sections, in the order the problems actually arrive:
 1. **Indexing** — making the crawler see your pages, and getting them into the index.
 2. **AI search** — being found and cited by ChatGPT, Perplexity, Google AI Overviews.
 3. **Content** — what to write while nobody is searching for your product by name.
-4. **Distribution** — catalogs, launches, communities, and what each one is worth.
+4. **Distribution** — where the first external links come from, and search inside a platform rather than Google.
 5. **Analytics** — the handful of numbers worth watching, and how to tie a signup to a source.
-6. **Money** — pricing, payments, what a solo project brings in.
+6. **Money** — what one user costs when the product calls an AI, and how many payers close the month.
 
-Three more sections hold them together: **Start here** is the route from zero to first traffic, **Tools** says which skill to run for which symptom, **Cases** is full write-ups — mine and guests'.
+Three more sections hold them together. **Start here** is the route from zero to first traffic. **Tools** says which skill to run for which symptom. **Cases** will hold full write-ups, mine and guests', and is an empty index until the first one lands.
 
 ## Every page has the same four blocks
 
@@ -39,7 +39,9 @@ The repo also ships a thin Claude Code plugin, so the atlas answers from inside 
 /plugin install atlas
 ```
 
-**This does not work yet.** The `plugin/` directory is not in the repo — it lands in a later commit. The commands above are here so you know what is coming, not so you run them today.
+That gives you four commands. `/atlas:start` walks a live URL through the route and calls the audit skills at the right points. `/atlas:content-plan` turns a project description and a query export into clusters. `/atlas:report` cuts a weekly slice of Search Console and Analytics. `/atlas:voice` brings a draft in line with `STYLE.md` before the linter sees it.
+
+The skills live in [`plugin/`](plugin/). [Tools](https://atlas.smolevich.com/tools/skills/) says which one to run for which symptom.
 
 ## Run the site locally
 

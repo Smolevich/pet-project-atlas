@@ -71,9 +71,9 @@ Say exactly which one failed and what the author has to do. **Do not continue wi
    Both of these are permission problems, not empty data. Report them as such and stop.
 4. **A GA4 property id**, if metrics 4 to 6 come from GA4 rather than the product's own database. The
    numeric id, not the measurement id.
-4. **The product's own source for signups, activation and repeat use** — a database, a query, an export.
+5. **The product's own source for signups, activation and repeat use** — a database, a query, an export.
    Ask which one. Search Console cannot answer any of metrics 4 to 6.
-5. **The name of the single action that counts as activation.** If the author cannot name one action,
+6. **The name of the single action that counts as activation.** If the author cannot name one action,
    the metric does not exist yet. Say that, and report metrics 1 to 4 only.
 
 Missing prerequisites are the expected outcome the first time. A report that quietly comes back empty

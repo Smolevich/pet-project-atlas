@@ -30,10 +30,10 @@ answer — quote the section the linter names and fix against that section.
 
 ## Run the linter
 
-The script walks directories. **It cannot take a single file** — passing one fails with `ENOTDIR`.
+The script takes either a directory or a single file. Point it straight at the page you are fixing:
 
 ```bash
-node scripts/lint-voice.mjs src/content/docs/<section>
+node scripts/lint-voice.mjs src/content/docs/<section>/<page>.md
 ```
 
 For the whole repository, use the package script:
@@ -41,8 +41,6 @@ For the whole repository, use the package script:
 ```bash
 npm run lint:voice
 ```
-
-Filter the output down to the page you are working on by its path. Ignore rows for other files.
 
 Output shape, one finding per line:
 
@@ -71,7 +69,7 @@ has not given you, ask for it. An unanswered question is a better outcome than a
 
 ## Finish
 
-1. Re-run the linter on the same directory. The page's rows must be gone.
+1. Re-run the linter on the same path. The page's rows must be gone.
 2. Show the diff:
 
    ```bash

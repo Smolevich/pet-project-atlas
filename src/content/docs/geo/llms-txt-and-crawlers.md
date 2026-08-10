@@ -4,10 +4,11 @@ description: Which AI agents visit a site, who owns them, where access is really
 updated: 2026-08-10
 sources:
   - https://www.rfc-editor.org/rfc/rfc9309.html
-  - https://platform.openai.com/docs/bots
-  - https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
+  - https://developers.openai.com/api/docs/bots
+  - https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
   - https://docs.perplexity.ai/guides/bots
   - https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - https://developers.google.com/search/docs/appearance/ai-features
   - https://llmstxt.org/
   - https://darkvisitors.com/
 ---
@@ -32,14 +33,15 @@ Sort the agents by job before you decide anything. A search crawler, a training 
 | `ClaudeBot` | Anthropic | Training corpus | Nothing in today's answers |
 | `PerplexityBot` | Perplexity | Search index | You are gone from the engine with the clearest attribution |
 | `Perplexity-User` | Perplexity | Fetch on user request | Links your reader sends do not open |
-| `Google-Extended` | Google | Control token | Excluded from Gemini and AI Overviews grounding |
+| `Google-Extended` | Google | Control token | Out of Gemini training and Vertex AI grounding |
 | `GoogleOther` | Google | Assorted internal fetches | Little in AI answers |
 | `CCBot` | Common Crawl | Open corpus for training | Nothing in today's answers |
 
 1. **Allow search and user-triggered agents, always** — these two decide whether you exist in an answer today.
    The training group is a values call, not a traffic call. Saying no there costs nothing you can measure this quarter.
-2. **Know what `Google-Extended` is not** — it is a control token, not a crawler, and `Googlebot` ignores it.
-   Blocking it does not change your position in Google Search. It only removes you from Gemini and AI Overviews grounding.
+2. **Know what `Google-Extended` is not** — a control token with no user agent of its own, and no ranking signal.
+   It covers training of Gemini models and Grounding with Google Search on Vertex AI. Blocking it changes nothing in Google Search.
+   AI Overviews is part of Search, and `Googlebot` crawls for it. The levers there are `nosnippet`, `data-nosnippet`, `max-snippet` and `noindex`.
 3. **Write `robots.txt` per agent, most specific first** — a crawler obeys the single group that matches its name best.
    That is the rule in RFC 9309. A generous `User-agent: *` does not rescue an agent you named and blocked above it.
 4. **Check the layers under `robots.txt`** — the `X-Robots-Tag` header, the meta tag, and the edge.
@@ -71,7 +73,7 @@ Sort the agents by job before you decide anything. A search crawler, a training 
 
 - **Blocking everything to save bandwidth**. The training crawlers went, and the user-triggered fetchers went with them. A reader who pasted the URL into a chat got told the page could not be opened.
 - **Losing the citation along with the bill**. Bandwidth from these agents is a rounding error on a static site. Presence in the answer is not.
-- **Blocking `Google-Extended` to protect rankings**. It protects nothing, because `Googlebot` was never the agent being blocked. The site paid with AI Overviews presence and got no ranking in return.
+- **Reaching for `Google-Extended` to steer AI Overviews**. Wrong lever: AI Overviews runs on `Googlebot`, and the token covers Gemini training and Vertex AI grounding. The rule moved nothing, and the snippet directives are what actually touch Search.
 - **Editing `robots.txt` while the edge did the blocking**. The file allowed every agent by name. The bot-protection rule in front of it returned 403, and the log showed no successful fetches at all.
 - **Listing outlines in `llms.txt`**. A line in that file is a promise that the page behind it is written. Half-finished links teach a reader — human or model — to ignore the file.
 - **Treating `robots.txt` as enforcement**. It is a request that well-behaved crawlers honour. A scraper that ignores it is stopped at the edge or not at all.
