@@ -5,15 +5,15 @@ import mermaid from 'astro-mermaid';
 
 // Разделы атласа. Порядок и есть маршрут «0 -> первый трафик».
 const SECTIONS = [
-  { slug: 'start', label: 'Start here' },
-  { slug: 'indexing', label: '1. Indexing' },
-  { slug: 'geo', label: '2. AI search' },
-  { slug: 'content', label: '3. Content' },
-  { slug: 'distribution', label: '4. Distribution' },
-  { slug: 'analytics', label: '5. Analytics' },
-  { slug: 'money', label: '6. Money' },
-  { slug: 'tools', label: 'Tools' },
-  { slug: 'cases', label: 'Cases' },
+  { slug: 'start', label: 'Start here', ru: 'Начать здесь' },
+  { slug: 'indexing', label: '1. Indexing', ru: '1. Индексация' },
+  { slug: 'geo', label: '2. AI search', ru: '2. AI-поиск' },
+  { slug: 'content', label: '3. Content', ru: '3. Контент' },
+  { slug: 'distribution', label: '4. Distribution', ru: '4. Дистрибуция' },
+  { slug: 'analytics', label: '5. Analytics', ru: '5. Аналитика' },
+  { slug: 'money', label: '6. Money', ru: '6. Деньги' },
+  { slug: 'tools', label: 'Tools', ru: 'Инструменты' },
+  { slug: 'cases', label: 'Cases', ru: 'Кейсы' },
 ];
 
 export default defineConfig({
@@ -34,8 +34,9 @@ export default defineConfig({
       },
       components: { Footer: './src/components/Footer.astro' },
       customCss: ['./src/styles/atlas.css'],
-      sidebar: SECTIONS.map(({ slug, label }) => ({
+      sidebar: SECTIONS.map(({ slug, label, ru }) => ({
         label,
+        translations: { ru },
         items: [{ autogenerate: { directory: slug } }],
       })),
     }),
