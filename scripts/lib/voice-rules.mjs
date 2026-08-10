@@ -71,3 +71,25 @@ export function findBannedPhrases(text) {
   }
   return hits.sort((a, b) => a.line - b.line);
 }
+
+export const REQUIRED_SECTIONS = {
+  en: ['What we are solving', 'Steps', 'What did not work', 'Verify'],
+  ru: ['Что решаем', 'Шаги', 'Что не сработало', 'Проверить'],
+};
+
+/** Возвращает заголовки, которых нет или под которыми пусто. */
+export function findMissingSections(markdown, lang = 'en') {
+  const required = REQUIRED_SECTIONS[lang] ?? REQUIRED_SECTIONS.en;
+  const blocks = new Map();
+  let current = null;
+  for (const line of markdown.split('\n')) {
+    const heading = line.match(/^##\s+(.+?)\s*$/);
+    if (heading) {
+      current = heading[1];
+      blocks.set(current, '');
+      continue;
+    }
+    if (current) blocks.set(current, blocks.get(current) + line.trim());
+  }
+  return required.filter((title) => !blocks.get(title));
+}
