@@ -21,7 +21,7 @@ The section numbers are a reading order. The doing order crosses them twice, and
 
 ### Week one — make the site fetchable, then hand it over
 
-1. Fetch your own page with `curl -sL` and find a sentence of body text in the response — [Google does not see your site](/indexing/why-google-does-not-see-you/).
+1. Run `curl -sL` on your own page. Find body text in the response — [Google does not see your site](/indexing/why-google-does-not-see-you/).
 2. Read `robots.txt` on the live domain, every line of it — [same page](/indexing/why-google-does-not-see-you/).
 3. Check `noindex` in the meta tag and in the `X-Robots-Tag` header — [same page](/indexing/why-google-does-not-see-you/).
 4. Check the canonical on a few pages points at those pages — [same page](/indexing/why-google-does-not-see-you/).
@@ -56,7 +56,7 @@ Step nine belongs to section five and has to happen now. Attribution cannot be r
 25. State break-even as a whole number of payers per month — [what one user costs](/money/unit-economics/).
 26. Read the series and fix the earliest large drop, not the last one — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
-Step twenty-three goes back to section two. On-page citability pays once a model has seen you named somewhere else, and month two is when that starts being true.
+Step twenty-three goes back to section two. On-page citability pays once a model has seen you named somewhere else. Month two is when that starts being true.
 
 ## What did not work
 
@@ -73,8 +73,8 @@ These are mistakes of order. Each of them is work I did correctly, at a moment w
 
 At the end of each stage there is one sentence you should be able to say out loud. If you cannot, stay in the stage.
 
-- **End of week one**. URL Inspection says the URL is on Google, and a link published today carries a source tag that lands in the database.
-- **End of week two**. Every cluster has exactly one owning URL, the first page answers its own title in its opening sentences, and the snapshot file has a row.
-- **End of month two**. At least one listing whose HTML contains your link, one recorded cost on a real event row, and a break-even you can say as a whole number.
+- **End of week one**. URL Inspection says the URL is on Google. A link published today carries a source tag that lands in the database.
+- **End of week two**. Every cluster has exactly one owning URL. The first page answers its own title in its opening sentences, and the snapshot file has a row.
+- **End of month two**. At least one listing whose HTML contains your link, and one recorded cost on a real event row. A break-even you can say as a whole number.
 
 Symptom-first instead of stage-first, when something specific is broken: [Tools](/tools/).

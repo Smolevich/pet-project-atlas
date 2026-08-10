@@ -19,7 +19,7 @@ Search for `site:yourdomain.com` and count what comes back.
 
 Open the Performance report in Search Console and read impressions first.
 
-- **Impressions with no clicks** — a title and snippet problem, not a body problem: [the numbers worth reading weekly](/analytics/what-to-measure/), then [what a page is made of](/content/page-templates/).
+- **Impressions with no clicks** — a title and snippet problem, not a body problem. Start with [the numbers worth reading weekly](/analytics/what-to-measure/), then [what a page is made of](/content/page-templates/).
 - **No impressions at all** — you rank for phrases nobody types: [what to write when nobody searches your name](/content/keyword-clusters/).
 - **Page two for everything, pages technically clean** — the gap is off-site: [where the first external links come from](/distribution/catalogs/).
 - **An assistant recommends competitors** — run `geo-crawlers` first: [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/). Access clean, still not cited: run `geo-citability` and read [why AI answers cite someone else](/geo/citable-pages/).
@@ -29,22 +29,22 @@ Open the Performance report in Search Console and read impressions first.
 
 - **You cannot say which page they land on** — start with the short list: [the numbers worth reading weekly](/analytics/what-to-measure/).
 - **The page promises something the product does not** — fix the page shape: [what a page is made of](/content/page-templates/).
-- **They sign up and never act** — activation is one named action, and it is probably unnamed: [the numbers worth reading weekly](/analytics/what-to-measure/).
+- **They sign up and never act** — activation is one named action, and it is probably unnamed. See [the numbers worth reading weekly](/analytics/what-to-measure/).
 
 ## Signups, and no idea where from
 
 - **Links went out untagged** — this one expires. Untagged arrivals stay unclassified forever: [where the user actually came from](/analytics/attribution/).
-- **Everything reads as direct or as your own channel** — a last-touch write is overwriting the answer: same page, [attribution](/analytics/attribution/).
+- **Everything reads as direct or as your own channel** — a last-touch write is overwriting the answer. Same page: [attribution](/analytics/attribution/).
 
 ## Signups, and no repeat use
 
-- **Nobody comes back on a later day** — cohort by week of first contact before concluding anything: [the numbers worth reading weekly](/analytics/what-to-measure/).
+- **Nobody comes back on a later day** — cohort by week of first contact before concluding anything. Start from [the numbers worth reading weekly](/analytics/what-to-measure/).
 - **The people who do come back cost you money** — go to the next branch.
 
 ## It works, and costs more than it earns
 
 - **You cannot say what one action costs** — record it on the event row: [what one user costs](/money/unit-economics/).
-- **You know the cost and there are no payers** — that is a demand problem: [distribution](/distribution/) and activation, not another round of cost cutting.
+- **You know the cost and there are no payers** — that is a demand problem. Look at [distribution](/distribution/) and activation, not another round of cost cutting.
 
 ## None of the above
 
