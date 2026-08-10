@@ -17,7 +17,7 @@ Six sections, in the order the problems actually arrive:
 5. **Analytics** — the handful of numbers worth watching, and how to tie a signup to a source.
 6. **Money** — pricing, payments, what a solo project brings in.
 
-Three more sections hold them together: **Start here** is the route from zero to first traffic, **Tools** is what gets paid for and what got dropped, **Cases** is full write-ups — mine and guests'.
+Three more sections hold them together: **Start here** is the route from zero to first traffic, **Tools** says which skill to run for which symptom, **Cases** is full write-ups — mine and guests'.
 
 ## Every page has the same four blocks
 
