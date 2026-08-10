@@ -1,3 +1,5 @@
+import yaml from 'js-yaml';
+
 // Обороты, которые не склоняются: сверяем целиком, с границами слова с обеих
 // сторон.
 export const BANNED_PHRASES = [
@@ -159,35 +161,32 @@ export function findLongSentences(markdown, maxWords = 20) {
   return hits;
 }
 
-// Минимальный YAML: скалярные "key: value" и простые списки через "  - item".
-// Полноценный парсер не нужен — frontmatter атласа заведомо плоский.
+const FRONTMATTER = /^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/;
+
+/**
+ * Разбирает frontmatter настоящим YAML-парсером.
+ *
+ * Возвращает { data, body, bodyStartLine, error }. bodyStartLine — номер
+ * первой строки тела в файле: линтер прибавляет его к своим номерам, иначе
+ * автор открывает не ту строку. error заполняется, если YAML не разобрался.
+ */
 export function parseFrontmatter(raw) {
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  if (!match) return { data: {}, body: raw };
+  // CRLF: без нормализации regexp не находил frontmatter вовсе, и весь
+  // frontmatter уходил в тело как проза.
+  const text = raw.replace(/\r\n/g, '\n');
+  const match = text.match(FRONTMATTER);
+  if (!match) return { data: {}, body: text, bodyStartLine: 1 };
 
-  const [, frontmatter, body] = match;
-  const data = {};
-  let currentListKey = null;
+  const consumed = match[0];
+  const body = text.slice(consumed.length);
+  const bodyStartLine = consumed.split('\n').length;
 
-  for (const line of frontmatter.split('\n')) {
-    const listItem = line.match(/^\s+-\s+(.+?)\s*$/);
-    if (listItem && currentListKey) {
-      data[currentListKey].push(listItem[1]);
-      continue;
-    }
-    const pair = line.match(/^([A-Za-z0-9_]+):\s*(.*?)\s*$/);
-    if (!pair) continue;
-    const [, key, value] = pair;
-    if (value === '') {
-      data[key] = [];
-      currentListKey = key;
-    } else {
-      data[key] = value;
-      currentListKey = null;
-    }
+  try {
+    const data = yaml.load(match[1]);
+    return { data: data && typeof data === 'object' ? data : {}, body, bodyStartLine };
+  } catch (error) {
+    return { data: {}, body, bodyStartLine, error: error.message };
   }
-
-  return { data, body };
 }
 
 const NUMBER_PATTERN = /\d/;

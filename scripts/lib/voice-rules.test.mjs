@@ -266,3 +266,49 @@ test('основа не ловится в середине другого сло
   assert.deepEqual(findBannedPhrases('эволюционный путь'), []);
   assert.deepEqual(findBannedPhrases('Deleveraging is a finance term'), []);
 });
+
+// --- Группа C: frontmatter ---
+
+test('кавычки вокруг значения не попадают в значение', () => {
+  assert.equal(parseFrontmatter('---\nvoice: "guest"\n---\nbody').data.voice, 'guest');
+  assert.equal(parseFrontmatter("---\nvoice: 'guest'\n---\nbody").data.voice, 'guest');
+});
+
+test('список в одну строку разбирается как список', () => {
+  const raw = '---\nsources: [https://a.dev, https://b.dev]\n---\nbody';
+  assert.deepEqual(parseFrontmatter(raw).data.sources, ['https://a.dev', 'https://b.dev']);
+});
+
+test('CRLF не ломает разбор frontmatter', () => {
+  const raw = '---\r\ntitle: X\r\nvoice: guest\r\nsources:\r\n  - https://a.dev\r\n---\r\nbody\r\n';
+  const { data, body } = parseFrontmatter(raw);
+  assert.equal(data.voice, 'guest');
+  assert.deepEqual(data.sources, ['https://a.dev']);
+  assert.equal(body.trim(), 'body');
+});
+
+test('вложенный frontmatter не роняет разбор', () => {
+  const raw = '---\ntitle: X\nhero:\n  title: X\n  actions:\n    - text: Start\n      link: /start/\n---\nbody';
+  const { data } = parseFrontmatter(raw);
+  assert.equal(data.title, 'X');
+  assert.equal(data.hero.actions[0].link, '/start/');
+});
+
+test('без frontmatter тело возвращается целиком и начинается с первой строки', () => {
+  const { data, body, bodyStartLine } = parseFrontmatter('# Title\ntext');
+  assert.deepEqual(data, {});
+  assert.equal(body, '# Title\ntext');
+  assert.equal(bodyStartLine, 1);
+});
+
+test('bodyStartLine указывает на первую строку тела в файле', () => {
+  const raw = '---\ntitle: X\nupdated: 2026-08-10\n---\nfirst body line\n';
+  const { bodyStartLine, body } = parseFrontmatter(raw);
+  assert.equal(bodyStartLine, 5);
+  assert.equal(body.split('\n')[0], 'first body line');
+});
+
+test('сломанный YAML отдаётся как ошибка, а не как пустой frontmatter', () => {
+  const { error } = parseFrontmatter('---\ntitle: [unclosed\n---\nbody');
+  assert.ok(error);
+});

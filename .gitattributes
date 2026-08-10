@@ -1,0 +1,7 @@
+# Разметка и скрипты живут с LF в репозитории. Frontmatter с CRLF ломал
+# разбор целиком, и вся шапка страницы уходила в линтер как проза.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
