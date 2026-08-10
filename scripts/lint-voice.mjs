@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import {
   findBannedPhrases,
@@ -17,6 +17,9 @@ const STYLE = {
 };
 
 async function walk(dir) {
+  // Одиночный файл — чтобы «проверь эту страницу» работало без обхода каталога.
+  if ((await stat(dir)).isFile()) return /\.mdx?$/.test(dir) ? [dir] : [];
+
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
   for (const entry of entries) {
