@@ -4,3 +4,6 @@ dist/
 .env
 *.log
 .DS_Store
+
+# Рабочие доки: спека и план живут вне репо, см. ~/pet-projects/pet-project-atlas-notes/
+docs/superpowers/
