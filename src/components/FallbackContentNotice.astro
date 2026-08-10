@@ -1,0 +1,34 @@
+---
+// Плашку «страница не переведена» Starlight рисует сам на fallback-маршрутах и
+// сам ставит на <main> lang содержимого. Чего в ней нет — ссылки на оригинал:
+// читатель видит предупреждение и не знает, куда идти за тем же текстом.
+//
+// Оговорка: Page.astro показывает плашку только в ветке без hero. Страница с
+// hero: во frontmatter, оставшаяся без перевода, останется без предупреждения.
+// Сейчас такая одна — index.mdx, и её русская версия написана.
+import Default from '@astrojs/starlight/components/FallbackContentNotice.astro';
+
+const STRINGS: Record<string, string> = {
+  ru: 'Открыть оригинал на английском',
+};
+const ORIGINAL_EN = 'Open the original in English';
+
+const { entry, locale } = Astro.locals.starlightRoute;
+const label = (locale && STRINGS[locale]) ?? ORIGINAL_EN;
+
+// entry на fallback-маршруте — английский исходник, его id и есть путь оригинала.
+const href = `/${entry.id ? `${entry.id}/` : ''}`;
+---
+
+<Default />
+
+<p class="atlas-fallback-link">
+  <a href={href} hreflang="en">{label}</a>
+</p>
+
+<style>
+  .atlas-fallback-link {
+    margin-top: 0.5rem;
+    font-size: var(--sl-text-body-sm);
+  }
+</style>
