@@ -137,3 +137,73 @@ test('число в теле пункта списка остаётся нару
   const hits = findUnsourcedNumbers('2. Clicks grew to 1200 in six weeks.', { sources: [] });
   assert.equal(hits.length, 1);
 });
+
+// --- Группа A: ложные срабатывания на числах-неутверждениях ---
+
+const NO_SOURCES = { sources: [] };
+const clean = (text) => assert.deepEqual(findUnsourcedNumbers(text, NO_SOURCES), []);
+
+test('цифры внутри адреса почты не считаются утверждением', () => {
+  clean('Maintained by Stanislav Shupilkin ([@Smolevich](https://github.com/Smolevich), smolevich90@gmail.com).');
+});
+
+test('цифры в никнейме автора не считаются утверждением', () => {
+  clean('Written by @user123 of Example.');
+});
+
+test('имя продукта с цифрой не считается утверждением', () => {
+  clean('Open GA4 and read the report.');
+});
+
+test('имя модели с цифрой не считается утверждением', () => {
+  clean('Ask GPT-4 about your tool.');
+});
+
+test('уровень заголовка H2 не считается утверждением', () => {
+  clean('Use H2 headings for the blocks.');
+});
+
+test('имя протокола с цифрой не считается утверждением', () => {
+  clean('Enable IPv6 on the host.');
+});
+
+test('номер стандарта не считается утверждением', () => {
+  clean('Read the RFC 9309 spec.');
+});
+
+test('год не считается измерением', () => {
+  clean('Track INP, not FID, since 2024.');
+});
+
+test('порядковый номер в жирном начертании не считается утверждением', () => {
+  clean('**1. Indexing** comes first.');
+});
+
+test('порядковый номер внутри пункта списка не считается утверждением', () => {
+  clean('- 1. Check rendering.');
+});
+
+// --- Группа A: бан-лист не должен видеть код и ссылки ---
+
+test('бан-лист не читает содержимое блока кода', () => {
+  const md = '```bash\ncurl https://api.example.com/unlock\n```';
+  assert.deepEqual(findBannedPhrases(md), []);
+});
+
+test('бан-лист не читает inline-код', () => {
+  assert.deepEqual(findBannedPhrases('Run `git leverage --help` first.'), []);
+});
+
+test('бан-лист не читает URL', () => {
+  assert.deepEqual(findBannedPhrases('See https://example.com/leverage/ for details.'), []);
+});
+
+test('бан-лист не читает цель markdown-ссылки', () => {
+  assert.deepEqual(findBannedPhrases('See [the notes](/tools/unlock/) for details.'), []);
+});
+
+test('бан-лист всё ещё видит фразу в прозе рядом с кодом', () => {
+  const hits = findBannedPhrases('Run `npm test`. This is a game-changer.');
+  assert.equal(hits.length, 1);
+  assert.equal(hits[0].line, 1);
+});

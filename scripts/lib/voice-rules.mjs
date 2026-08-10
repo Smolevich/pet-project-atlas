@@ -42,9 +42,23 @@ function findMatches(text, needle, { rightBoundary }) {
   return matches;
 }
 
+// Заменяет символы пробелами, сохраняя длину и переводы строк: индексы
+// совпадений остаются валидными для исходного текста.
+const blankOut = (fragment) => fragment.replace(/[^\n]/g, ' ');
+
+const INLINE_CODE = /`[^`]*`/g;
+const LINK_TARGET = /\]\([^)]*\)/g;
+const BARE_URL = /https?:\/\/\S+/g;
+
+// Код и адреса — не проза. Слово в имени команды или в URL автор не выбирал
+// как оборот речи, и заменить его на «конкретное утверждение» нельзя.
+function blankCodeAndLinks(text) {
+  return text.replace(INLINE_CODE, blankOut).replace(LINK_TARGET, blankOut).replace(BARE_URL, blankOut);
+}
+
 /** Ищет фразы и основы из бан-листа STYLE.md, регистронезависимо. */
 export function findBannedPhrases(text) {
-  const lower = text.toLowerCase();
+  const lower = blankCodeAndLinks(stripCode(text)).toLowerCase();
   const lineStarts = [0];
   for (let i = 0; i < text.length; i++) {
     if (text[i] === '\n') lineStarts.push(i + 1);
@@ -94,19 +108,25 @@ export function findMissingSections(markdown, lang = 'en') {
   return required.filter((title) => !blocks.get(title));
 }
 
-// Заменяет содержимое ``` ``` -блоков пустыми строками, а не убирает их,
-// чтобы номера строк у остального текста не съезжали.
-function stripCode(markdown) {
-  const lines = markdown.split('\n');
+/** Маска строк, лежащих внутри ``` ```-блока (включая сами маркеры). */
+function fenceMask(markdown) {
   let inFence = false;
-  return lines
-    .map((line) => {
-      if (/^\s*```/.test(line)) {
-        inFence = !inFence;
-        return '';
-      }
-      return inFence ? '' : line;
-    })
+  return markdown.split('\n').map((line) => {
+    if (/^\s*```/.test(line)) {
+      inFence = !inFence;
+      return true;
+    }
+    return inFence;
+  });
+}
+
+// Забивает ``` ```-блоки пробелами, а не убирает их: и номера строк, и
+// смещения символов у остального текста остаются прежними.
+function stripCode(markdown) {
+  const mask = fenceMask(markdown);
+  return markdown
+    .split('\n')
+    .map((line, i) => (mask[i] ? blankOut(line) : line))
     .join('\n');
 }
 
@@ -165,7 +185,9 @@ const TOOL_WORDS = [
   'node', 'astro', 'starlight', 'http', 'https', 'python', 'npm',
   'react', 'vue', 'typescript', 'chrome', 'firefox', 'ios', 'macos',
   'windows', 'ubuntu', 'docker', 'postgresql', 'postgres', 'mysql',
-  'redis', 'nginx', 'ssh', 'tls', 'ssl', 'es',
+  'redis', 'nginx', 'ssh', 'tls', 'ssl',
+  // Номера стандартов: "RFC 9309", "ISO 8601", "PEP 695".
+  'rfc', 'iso', 'pep', 'ecma',
 ];
 const TOOL_VERSION_PATTERN = new RegExp(
   `\\b(?:${TOOL_WORDS.join('|')})[/\\s]?v?\\d+(?:\\.\\d+)*\\b`,
@@ -175,15 +197,32 @@ const TOOL_VERSION_PATTERN = new RegExp(
 // "7.0.2", "v1.2" — версия по форме, даже без имени инструмента рядом.
 const DOTTED_VERSION_PATTERN = /\bv?\d+\.\d+(?:\.\d+)*\b/gi;
 
+// Цифра, приклеенная к концу слова, — часть имени: GA4, GPT-4, IPv6, H2,
+// Apache-2.0. Цифра перед словом — измерение: "200ms", "40%". Граница слова
+// проверяется вручную: \b не считает кириллицу словесным символом.
+const NAMED_IDENTIFIER_PATTERN = /(?<![\p{L}\p{N}])\p{L}+[-/]?\d+(?:\.\d+)*(?![\p{L}\p{N}])/gu;
+
+// Дата и год — не измерения. Год ограничен диапазоном, чтобы "1200 кликов"
+// осталось числом; рядом с валютой или процентом это уже не год.
+const ISO_DATE_PATTERN = /(?<![\p{L}\p{N}])\d{4}-\d{2}-\d{2}(?![\p{L}\p{N}])/gu;
+const YEAR_PATTERN = /(?<![\p{L}\p{N}$€£₽¥.])(?:19|20)\d{2}(?![\p{L}\p{N}%]|\.\d)/gu;
+
+const EMAIL_PATTERN = /[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.\p{L}{2,}/gu;
+const HANDLE_PATTERN = /(?<![\p{L}\p{N}])@[\p{L}\p{N}_-]+/gu;
+
+// "1. ", "2) ", "- 1. ", "**1. ", "## 1. " — порядок шагов, а не измерение.
+const ORDINAL_PREFIX = /^(\s*(?:[-*+]\s+)?(?:#{1,6}\s+)?(?:\*\*|__|\*|_)?\s*)\d+[.)](?=\s|\*|_|$)/;
+
 // Убирает из строки то, что несёт цифры, но не является утверждением:
-// inline-код, цель markdown-ссылки, голый URL.
+// порядковый номер, inline-код, цель markdown-ссылки, URL, почту, никнейм.
 function stripNonClaimNoise(line) {
   return line
-    // Маркер нумерованного списка — порядок шагов, а не измерение.
-    .replace(/^\s*\d+[.)]\s+/, '')
-    .replace(/`[^`]*`/g, '')
-    .replace(/\]\([^)]*\)/g, ']')
-    .replace(/https?:\/\/\S+/g, '');
+    .replace(ORDINAL_PREFIX, '$1')
+    .replace(INLINE_CODE, ' ')
+    .replace(LINK_TARGET, ']')
+    .replace(BARE_URL, ' ')
+    .replace(EMAIL_PATTERN, ' ')
+    .replace(HANDLE_PATTERN, ' ');
 }
 
 /** Строки прозы (вне кода) с числом-утверждением, когда data.sources пуст. */
@@ -197,8 +236,11 @@ export function findUnsourcedNumbers(markdown, data) {
 
     const withoutNoise = stripNonClaimNoise(line);
     const withoutIdentifiers = withoutNoise
+      .replace(ISO_DATE_PATTERN, '')
       .replace(TOOL_VERSION_PATTERN, '')
-      .replace(DOTTED_VERSION_PATTERN, '');
+      .replace(NAMED_IDENTIFIER_PATTERN, '')
+      .replace(DOTTED_VERSION_PATTERN, '')
+      .replace(YEAR_PATTERN, '');
 
     if (NUMBER_PATTERN.test(withoutIdentifiers)) hits.push({ line: i + 1, text: line.trim() });
   });
