@@ -1,0 +1,27 @@
+name: This page did not help
+description: A page left you stuck. Say where it stopped being useful.
+labels: [feedback]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Link to the page, or the file path under src/content/docs/.
+      placeholder: https://atlas.smolevich.com/indexing/sitemap/
+    validations:
+      required: true
+  - type: textarea
+    id: missing
+    attributes:
+      label: What exactly was missing
+      description: >-
+        The concrete gap: a step that skipped something, a number with no source,
+        a command that failed, an assumption about your setup that did not hold.
+      placeholder: Step 3 assumes the site is on Vercel. Mine is nginx on a VPS and the rewrite does not apply.
+    validations:
+      required: true
+  - type: textarea
+    id: instead
+    attributes:
+      label: What you did instead
+      description: If you solved it another way, what worked? This is often the fix for the page.

@@ -28,6 +28,7 @@ export default defineConfig({
         root: { label: 'English', lang: 'en' },
         ru: { label: 'Русский', lang: 'ru' },
       },
+      components: { Footer: './src/components/Footer.astro' },
       customCss: ['./src/styles/atlas.css'],
       sidebar: SECTIONS.map(({ slug, label }) => ({
         label,

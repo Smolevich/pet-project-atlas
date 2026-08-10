@@ -1,0 +1,34 @@
+name: Suggest a topic
+description: A page the atlas is missing.
+labels: [topic]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      description: One line. What would the page be called?
+      placeholder: Getting a Telegram bot into search results
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is needed
+      description: >-
+        What are you stuck on, and what did you find when you looked for an answer
+        elsewhere? Links to the pages that did not answer it help.
+    validations:
+      required: true
+  - type: dropdown
+    id: experience
+    attributes:
+      label: Have you done this yourself?
+      description: >-
+        Pages are written from real logs. If you have done it, the topic may come
+        back to you as a guest case.
+      options:
+        - Yes, and I could write it up
+        - Yes, but I would rather someone else wrote it
+        - No, I am looking for the answer
+    validations:
+      required: true

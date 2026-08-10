@@ -1,0 +1,36 @@
+---
+// Дефолтный футер Starlight плюс две ссылки на GitHub.
+//
+// editUrl считает сам Starlight из editLink.baseUrl — он знает реальный путь файла
+// (index.md, .mdx, локаль ru), а собранный из entry.id путь на них промахивается.
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const { entry, editUrl } = Astro.locals.starlightRoute;
+
+const issueUrl =
+  'https://github.com/Smolevich/pet-project-atlas/issues/new' +
+  '?template=page-did-not-help.yml' +
+  `&title=${encodeURIComponent(`Did not help: ${entry.id}`)}`;
+---
+
+<Default><slot /></Default>
+
+<p class="atlas-feedback">
+  {editUrl && <a href={editUrl.href}>Suggest an edit</a>}
+  {editUrl && ' · '}
+  <a href={issueUrl}>This did not help</a>
+</p>
+
+<style>
+  .atlas-feedback {
+    margin-top: 1.5rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .atlas-feedback a {
+    color: var(--sl-color-gray-3);
+  }
+  .atlas-feedback a:hover {
+    color: var(--sl-color-white);
+  }
+</style>

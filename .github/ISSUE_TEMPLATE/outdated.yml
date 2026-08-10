@@ -1,0 +1,31 @@
+name: Something is out of date
+description: A number, a price, a screenshot or an API that has moved on.
+labels: [outdated]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Link to the page, or the file path under src/content/docs/.
+      placeholder: https://atlas.smolevich.com/tools/rank-trackers/
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is out of date
+      description: Quote the line as it stands, then say what it should say now.
+      placeholder: |
+        Page says the free tier is 100 queries/day. It has been 50 since July 2026.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Link to a current source
+      description: >-
+        Pricing page, changelog, official docs, release notes. A number without a
+        source cannot replace another number.
+      placeholder: https://example.com/pricing
+    validations:
+      required: true

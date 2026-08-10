@@ -1,0 +1,42 @@
+name: Share your case
+description: Your project, your numbers, your dead ends.
+labels: [case]
+body:
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: Name and link. What it does, in a few words.
+      placeholder: Pagefold — a bookmarking app for developers, https://example.com
+    validations:
+      required: true
+  - type: textarea
+    id: numbers
+    attributes:
+      label: Numbers, with a source for each
+      description: >-
+        Traffic, signups, revenue, ranking — whatever moved. Every number needs a
+        date and where it is read off: Search Console, GA4, Stripe, your own database.
+      placeholder: |
+        - 0 -> 340 clicks/month between March and June 2026 (Search Console, screenshot below)
+        - 9 paying users as of 2026-08-01 (Stripe dashboard)
+    validations:
+      required: true
+  - type: textarea
+    id: failed
+    attributes:
+      label: What did not work
+      description: >-
+        The dead ends, in order. This is the part other people cannot get anywhere
+        else, and a case without it does not get published.
+    validations:
+      required: true
+  - type: checkboxes
+    id: license
+    attributes:
+      label: License
+      options:
+        - label: >-
+            I agree to publish this case in the atlas under CC BY 4.0, with my byline
+            and a link to my project.
+          required: true
