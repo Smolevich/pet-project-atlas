@@ -17,7 +17,7 @@ Six sections, in the order the problems actually arrive:
 5. **Analytics** — the handful of numbers worth watching, and how to tie a signup to a source.
 6. **Money** — what one user costs when the product calls an AI, and how many payers close the month.
 
-Three more sections hold them together. **Start here** is the route from zero to first traffic. **Tools** says which skill to run for which symptom. **Cases** will hold full write-ups, mine and guests', and is an empty index until the first one lands.
+Three more sections hold them together. **Start here** is the route from zero to first traffic. **Tools** says which skill to run for which symptom. **Cases** will hold full write-ups, mine and guests'. Until the first one lands it states the bar a case has to clear, and how to send yours.
 
 ## Every page has the same four blocks
 
