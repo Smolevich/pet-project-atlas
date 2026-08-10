@@ -1,0 +1,73 @@
+export const BANNED_PHRASES = [
+  'game-changer',
+  'leverage',
+  'unlock',
+  'dive in',
+  'synergy',
+  'seamless',
+  'in the age of ai',
+  'cannot be ignored',
+  'в эпоху ai',
+  'нельзя игнорировать',
+  'синергия',
+  'экосистема',
+];
+
+// "революционн" — падежная основа, а не целое слово: "революционный",
+// "революционная", "революционные" и т.д. Проверка границы с обеих сторон
+// сделала бы этот пункт списка мёртвым.
+export const BANNED_STEMS = ['революционн'];
+
+// \b не понимает кириллицу как "словесный" символ, поэтому границу слова
+// проверяем вручную по классам Unicode-букв и цифр.
+const WORD_CHAR = /[\p{L}\p{N}]/u;
+
+function isWordChar(char) {
+  return char !== undefined && WORD_CHAR.test(char);
+}
+
+function findMatches(text, needle, { rightBoundary }) {
+  const matches = [];
+  let fromIndex = 0;
+  while (true) {
+    const index = text.indexOf(needle, fromIndex);
+    if (index === -1) break;
+    const before = text[index - 1];
+    const after = text[index + needle.length];
+    const leftOk = !isWordChar(before);
+    const rightOk = !rightBoundary || !isWordChar(after);
+    if (leftOk && rightOk) matches.push(index);
+    fromIndex = index + needle.length;
+  }
+  return matches;
+}
+
+/** Ищет фразы и основы из бан-листа STYLE.md, регистронезависимо. */
+export function findBannedPhrases(text) {
+  const lower = text.toLowerCase();
+  const lineStarts = [0];
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '\n') lineStarts.push(i + 1);
+  }
+  const lineOf = (index) => {
+    let line = 1;
+    for (let i = 1; i < lineStarts.length; i++) {
+      if (lineStarts[i] > index) break;
+      line = i + 1;
+    }
+    return line;
+  };
+
+  const hits = [];
+  for (const phrase of BANNED_PHRASES) {
+    for (const index of findMatches(lower, phrase, { rightBoundary: true })) {
+      hits.push({ phrase, line: lineOf(index) });
+    }
+  }
+  for (const stem of BANNED_STEMS) {
+    for (const index of findMatches(lower, stem, { rightBoundary: false })) {
+      hits.push({ phrase: stem, line: lineOf(index) });
+    }
+  }
+  return hits.sort((a, b) => a.line - b.line);
+}
