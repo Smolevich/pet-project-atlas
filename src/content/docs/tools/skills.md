@@ -33,10 +33,10 @@ Every third-party row below is a package installed on my own machine. The licenc
 | `geo-report` | Collects the audit results into one document for a reader | Somebody else has to act on the findings | Skill, `zubair-trabzada/geo-seo-claude` | MIT |
 | Playwright MCP | Drives a real browser in your own profile, with your live sessions | Search Console, a store console, any panel with no usable API | npm `@playwright/mcp`, `microsoft/playwright-mcp` | Apache-2.0 |
 | `gws` | One authenticated command line over the Google Workspace APIs | Keeping the weekly series in a Sheet, pulling an export out of Drive | npm `@googleworkspace/cli`, `googleworkspace/cli` | Apache-2.0 |
-| `/atlas:start` | **Not built yet.** Walks a project through the route, calling the audit skills at the right points | — | This repo, `plugin/` | MIT |
-| `/atlas:content-plan` | **Not built yet.** Turns a project description and a query export into clusters, one page each | — | This repo, `plugin/` | MIT |
-| `/atlas:report` | **Not built yet.** A weekly slice of Search Console and Analytics: what moved, what to do | — | This repo, `plugin/` | MIT |
-| `/atlas:voice` | **Not built yet.** Brings a draft in line with `STYLE.md` before the linter sees it | — | This repo, `plugin/` | MIT |
+| `/atlas:start` | Walks a project through the route, calling the audit skills at the right points | You have a live URL and no idea which problem to fix first | This repo, `plugin/` | MIT |
+| `/atlas:content-plan` | Turns a project description and a query export into clusters, one page each | You need to know what to write, and in which order | This repo, `plugin/` | MIT |
+| `/atlas:report` | A weekly slice of Search Console and Analytics: what moved, what to do | The weekly snapshot, once the property is verified and a token exists | This repo, `plugin/` | MIT |
+| `/atlas:voice` | Brings a draft in line with `STYLE.md` before the linter sees it | Before opening a pull request against this repository | This repo, `plugin/` | MIT |
 
 1. **Install the third-party skills from their repositories** — the skills CLI takes an owner and a repo name.
 
@@ -57,8 +57,8 @@ Every third-party row below is a package installed on my own machine. The licenc
    Drive your own profile, so the authenticated sessions already exist. A fresh profile shows you a login form.
 7. **Check `gws --help` for the service you need** — the list is printed by your own installed build.
    It covers Workspace. Search Console and Analytics are not in it.
-8. **Do not plan around the four `/atlas:` commands** — the `plugin/` directory is not in the repository yet.
-   Where a page tells you to run one, run the third-party skill in the same row instead.
+8. **Reach the four `/atlas:` commands through the plugin in `plugin/`** — add this repository as a marketplace, then install `atlas`.
+   The commands route and order. The auditing stays with the third-party skills above, which is why the plugin stays thin.
 
 ## What did not work
 
