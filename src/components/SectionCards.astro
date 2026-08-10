@@ -1,0 +1,18 @@
+---
+// Шесть карточек маршрута. Заголовки с номерами живут здесь, а не в index.mdx:
+// линтер голоса ловит любую цифру в прозе страницы без sources.
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { ROUTE } from '../sections';
+---
+
+<CardGrid>
+  {
+    ROUTE.map((section) => (
+      <LinkCard
+        title={`${section.num}. ${section.label}`}
+        href={`/${section.slug}/`}
+        description={section.symptom}
+      />
+    ))
+  }
+</CardGrid>

@@ -1,0 +1,169 @@
+---
+// Карта маршрута: шесть разделов слева направо, каждый — ссылка.
+// Две раскладки вместо одной масштабируемой: при сжатии одного широкого SVG
+// до ширины телефона подписи уходят в 6px, читать нечем.
+import { ROUTE } from '../sections';
+
+const wide = { step: 130, w: 112, y: 14, h: 68, vbW: 762, vbH: 96 };
+const tall = { x: 8, w: 304, step: 76, y: 8, h: 54, vbW: 320, vbH: 456 };
+
+const wideNodes = ROUTE.map((section, i) => ({
+  ...section,
+  x: i * wide.step,
+  cx: i * wide.step + wide.w / 2,
+}));
+
+const tallNodes = ROUTE.map((section, i) => ({
+  ...section,
+  y: tall.y + i * tall.step,
+}));
+---
+
+<svg
+  class="map map--wide"
+  viewBox={`0 0 ${wide.vbW} ${wide.vbH}`}
+  role="img"
+  aria-labelledby="atlas-map-wide-title"
+>
+  <title id="atlas-map-wide-title">
+    The route: indexing, AI search, content, distribution, analytics, money.
+  </title>
+
+  {
+    wideNodes.slice(0, -1).map((node) => (
+      <g class="link">
+        <line x1={node.x + wide.w + 5} y1={48} x2={node.x + wide.step - 4} y2={48} />
+        <path
+          d={`M ${node.x + wide.step - 9} 44 L ${node.x + wide.step - 4} 48 L ${node.x + wide.step - 9} 52`}
+        />
+      </g>
+    ))
+  }
+
+  {
+    wideNodes.map((node) => (
+      <a href={`/${node.slug}/`} class="node" style={`--atlas-node: var(--atlas-s${node.num})`}>
+        <rect x={node.x} y={wide.y} width={wide.w} height={wide.h} rx="12" />
+        <text class="num" x={node.cx} y={45}>
+          {node.num}
+        </text>
+        <text class="label" x={node.cx} y={67}>
+          {node.label}
+        </text>
+      </a>
+    ))
+  }
+</svg>
+
+<svg
+  class="map map--tall"
+  viewBox={`0 0 ${tall.vbW} ${tall.vbH}`}
+  role="img"
+  aria-labelledby="atlas-map-tall-title"
+>
+  <title id="atlas-map-tall-title">
+    The route: indexing, AI search, content, distribution, analytics, money.
+  </title>
+
+  {
+    tallNodes.slice(0, -1).map((node) => (
+      <g class="link">
+        <line x1={38} y1={node.y + tall.h + 4} x2={38} y2={node.y + tall.step - 3} />
+        <path
+          d={`M 34 ${node.y + tall.step - 8} L 38 ${node.y + tall.step - 3} L 42 ${node.y + tall.step - 8}`}
+        />
+      </g>
+    ))
+  }
+
+  {
+    tallNodes.map((node) => (
+      <a href={`/${node.slug}/`} class="node" style={`--atlas-node: var(--atlas-s${node.num})`}>
+        <rect x={tall.x} y={node.y} width={tall.w} height={tall.h} rx="12" />
+        <text class="num" x={38} y={node.y + 35}>
+          {node.num}
+        </text>
+        <text class="label label--start" x={64} y={node.y + 35}>
+          {node.label}
+        </text>
+      </a>
+    ))
+  }
+</svg>
+
+<style>
+  .map {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1rem auto 1.75rem;
+    font-family: inherit;
+    color: var(--sl-color-white);
+  }
+
+  .map--wide {
+    display: none;
+  }
+
+  .map--tall {
+    max-width: 23rem;
+  }
+
+  @media (min-width: 50rem) {
+    .map--wide {
+      display: block;
+    }
+    .map--tall {
+      display: none;
+    }
+  }
+
+  .node rect {
+    fill: none;
+    stroke: var(--atlas-node);
+    stroke-width: 2;
+  }
+
+  .num {
+    fill: var(--atlas-node);
+    font-size: 21px;
+    font-weight: 700;
+    text-anchor: middle;
+  }
+
+  .label {
+    fill: currentColor;
+    font-size: 14px;
+    text-anchor: middle;
+  }
+
+  .map--tall .num {
+    font-size: 22px;
+  }
+
+  .map--tall .label {
+    font-size: 17px;
+  }
+
+  .label--start {
+    text-anchor: start;
+  }
+
+  .link line,
+  .link path {
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+    opacity: 0.45;
+  }
+
+  .node:hover rect,
+  .node:focus-visible rect {
+    stroke-width: 3.5;
+  }
+
+  .node:hover .label,
+  .node:focus-visible .label {
+    text-decoration: underline;
+  }
+</style>
