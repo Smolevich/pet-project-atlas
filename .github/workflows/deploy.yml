@@ -1,0 +1,87 @@
+name: Deploy to Hetzner
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-atlas
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      # This repo takes outside contributions, so a broken build must never
+      # reach the box: full preflight before anything touches the server.
+      - name: Preflight
+        run: |
+          npm ci
+          npm test
+          npm run lint:voice
+          npm run build
+          npm run check:links
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:gha-runner
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VDS_HOST }}
+          port: ${{ secrets.VDS_PORT }}
+          username: ${{ secrets.VDS_USER }}
+          key: ${{ secrets.VDS_SSH_KEY }}
+          passphrase: ${{ secrets.VDS_SSH_PASSPHRASE }}
+          source: dist/**,nginx-atlas.conf
+          target: /tmp/deploy-atlas
+          strip_components: 0
+
+      - name: Install and reload
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VDS_HOST }}
+          port: ${{ secrets.VDS_PORT }}
+          username: ${{ secrets.VDS_USER }}
+          key: ${{ secrets.VDS_SSH_KEY }}
+          passphrase: ${{ secrets.VDS_SSH_PASSPHRASE }}
+          script: |
+            set -e
+            WEB_DIR=/var/www/atlas
+            RELEASE_DIR=/tmp/atlas-release
+
+            rm -rf "$RELEASE_DIR"
+            mkdir -p "$RELEASE_DIR"
+            cp -a /tmp/deploy-atlas/dist/. "$RELEASE_DIR/"
+
+            sudo rm -rf "$WEB_DIR"
+            sudo mkdir -p /var/www
+            sudo mv "$RELEASE_DIR" "$WEB_DIR"
+            # Root umask on this host sometimes leaves 700 on moved trees —
+            # nginx (www-data) can't read that.
+            sudo chown -R root:root "$WEB_DIR"
+            sudo find "$WEB_DIR" -type d -exec chmod 755 {} +
+            sudo find "$WEB_DIR" -type f -exec chmod 644 {} +
+
+            sudo install -m 0644 /tmp/deploy-atlas/nginx-atlas.conf /etc/nginx/sites-available/atlas.conf
+            sudo ln -sfn /etc/nginx/sites-available/atlas.conf /etc/nginx/sites-enabled/atlas.conf
+            rm -rf /tmp/deploy-atlas
+
+            sudo nginx -t
+            sudo systemctl reload nginx
+            sleep 1
+            curl -fsS -H "Host: atlas.smolevich.com" http://127.0.0.1/ | grep -q "a route out of zero traffic"
