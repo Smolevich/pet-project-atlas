@@ -93,3 +93,35 @@ export function findMissingSections(markdown, lang = 'en') {
   }
   return required.filter((title) => !blocks.get(title));
 }
+
+// Заменяет содержимое ``` ``` -блоков пустыми строками, а не убирает их,
+// чтобы номера строк у остального текста не съезжали.
+function stripCode(markdown) {
+  const lines = markdown.split('\n');
+  let inFence = false;
+  return lines
+    .map((line) => {
+      if (/^\s*```/.test(line)) {
+        inFence = !inFence;
+        return '';
+      }
+      return inFence ? '' : line;
+    })
+    .join('\n');
+}
+
+/** Ищет предложения длиннее maxWords слов вне кода, таблиц и отступов. */
+export function findLongSentences(markdown, maxWords = 20) {
+  const stripped = stripCode(markdown);
+  const hits = [];
+  stripped.split('\n').forEach((line, i) => {
+    if (line.startsWith('|') || line.startsWith('    ')) return;
+    const trimmed = line.trim();
+    if (!trimmed) return;
+    for (const sentence of trimmed.split(/(?<=[.!?])\s+/).filter(Boolean)) {
+      const words = sentence.split(/\s+/).filter(Boolean);
+      if (words.length > maxWords) hits.push({ line: i + 1, words: words.length });
+    }
+  });
+  return hits;
+}

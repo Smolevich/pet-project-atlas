@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { findBannedPhrases, findMissingSections } from './voice-rules.mjs';
+import { findBannedPhrases, findMissingSections, findLongSentences } from './voice-rules.mjs';
 
 test('находит запрещённую фразу и её строку', () => {
   const text = 'Fine line.\nThis is a game-changer for indexing.';
@@ -51,4 +51,20 @@ test('русская страница проверяется по русским
 test('блок с заголовком, но пустым телом считается пропущенным', () => {
   const md = '## What we are solving\na\n## Steps\nb\n## What did not work\n\n## Verify\nd';
   assert.deepEqual(findMissingSections(md, 'en'), ['What did not work']);
+});
+
+test('предложение длиннее порога попадает в предупреждения', () => {
+  const long = Array.from({ length: 25 }, (_, i) => `word${i}`).join(' ') + '.';
+  const hits = findLongSentences(long, 20);
+  assert.equal(hits.length, 1);
+  assert.equal(hits[0].words, 25);
+});
+
+test('короткие предложения молчат', () => {
+  assert.deepEqual(findLongSentences('Sitemap submitted. 40 pages indexed.', 20), []);
+});
+
+test('блоки кода не проверяются', () => {
+  const md = '```\n' + Array.from({ length: 30 }, (_, i) => `w${i}`).join(' ') + '\n```';
+  assert.deepEqual(findLongSentences(md, 20), []);
 });
