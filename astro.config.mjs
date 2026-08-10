@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import mermaid from 'astro-mermaid';
 
 // Разделы атласа. Порядок и есть маршрут «0 -> первый трафик».
 const SECTIONS = [
@@ -18,6 +19,9 @@ const SECTIONS = [
 export default defineConfig({
   site: 'https://atlas.smolevich.com',
   integrations: [
+    // Строго до starlight: интеграция перехватывает ```mermaid раньше, чем Starlight
+    // отдаст блок подсветке синтаксиса.
+    mermaid({ theme: 'neutral', autoTheme: true }),
     starlight({
       title: 'Pet Project Atlas',
       description: 'How to get your pet project found: search, AI search, content, distribution, analytics, money.',
