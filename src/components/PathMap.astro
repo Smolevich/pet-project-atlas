@@ -2,18 +2,21 @@
 // Карта маршрута: шесть разделов слева направо, каждый — ссылка.
 // Две раскладки вместо одной масштабируемой: при сжатии одного широкого SVG
 // до ширины телефона подписи уходят в 6px, читать нечем.
-import { ROUTE } from '../sections';
+import { mapTitleFor, routeFor } from '../sections';
+
+const route = routeFor(Astro.locals.starlightRoute?.locale);
+const mapTitle = mapTitleFor(Astro.locals.starlightRoute?.locale);
 
 const wide = { step: 130, w: 112, y: 14, h: 68, vbW: 762, vbH: 96 };
 const tall = { x: 8, w: 304, step: 76, y: 8, h: 54, vbW: 320, vbH: 456 };
 
-const wideNodes = ROUTE.map((section, i) => ({
+const wideNodes = route.map((section, i) => ({
   ...section,
   x: i * wide.step,
   cx: i * wide.step + wide.w / 2,
 }));
 
-const tallNodes = ROUTE.map((section, i) => ({
+const tallNodes = route.map((section, i) => ({
   ...section,
   y: tall.y + i * tall.step,
 }));
@@ -25,9 +28,7 @@ const tallNodes = ROUTE.map((section, i) => ({
   role="img"
   aria-labelledby="atlas-map-wide-title"
 >
-  <title id="atlas-map-wide-title">
-    The route: indexing, AI search, content, distribution, analytics, money.
-  </title>
+  <title id="atlas-map-wide-title">{mapTitle}</title>
 
   {
     wideNodes.slice(0, -1).map((node) => (
@@ -42,7 +43,7 @@ const tallNodes = ROUTE.map((section, i) => ({
 
   {
     wideNodes.map((node) => (
-      <a href={`/${node.slug}/`} class="node" style={`--atlas-node: var(--atlas-s${node.num})`}>
+      <a href={node.href} class="node" style={`--atlas-node: var(--atlas-s${node.num})`}>
         <rect x={node.x} y={wide.y} width={wide.w} height={wide.h} rx="12" />
         <text class="num" x={node.cx} y={45}>
           {node.num}
@@ -61,9 +62,7 @@ const tallNodes = ROUTE.map((section, i) => ({
   role="img"
   aria-labelledby="atlas-map-tall-title"
 >
-  <title id="atlas-map-tall-title">
-    The route: indexing, AI search, content, distribution, analytics, money.
-  </title>
+  <title id="atlas-map-tall-title">{mapTitle}</title>
 
   {
     tallNodes.slice(0, -1).map((node) => (
@@ -78,7 +77,7 @@ const tallNodes = ROUTE.map((section, i) => ({
 
   {
     tallNodes.map((node) => (
-      <a href={`/${node.slug}/`} class="node" style={`--atlas-node: var(--atlas-s${node.num})`}>
+      <a href={node.href} class="node" style={`--atlas-node: var(--atlas-s${node.num})`}>
         <rect x={tall.x} y={node.y} width={tall.w} height={tall.h} rx="12" />
         <text class="num" x={38} y={node.y + 35}>
           {node.num}
