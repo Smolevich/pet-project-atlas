@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Pet Project Atlas">
+  <title>Pet Project Atlas</title>
+  <rect width="32" height="32" rx="7" fill="#2f6f4f"/>
+  <path d="M9 23.5C9 17 23 15.5 23 9" fill="none" stroke="#a7d7bd" stroke-width="4.2" stroke-linecap="round"/>
+  <circle cx="9" cy="23.5" r="4.6" fill="#ffffff"/>
+  <circle cx="23" cy="9" r="4.6" fill="#ffffff"/>
+</svg>

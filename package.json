@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "postbuild": "node scripts/build-llms.mjs dist",
     "preview": "astro preview",
     "lint:voice": "node scripts/lint-voice.mjs src/content/docs",
     "test": "node --test \"scripts/**/*.test.mjs\""
