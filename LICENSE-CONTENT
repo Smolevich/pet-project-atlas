@@ -1,0 +1,20 @@
+Content license: CC BY 4.0
+
+Everything under src/content/docs/** — pages, translations, examples inside
+them — is licensed under the Creative Commons Attribution 4.0 International
+License (CC BY 4.0).
+
+Copyright (c) 2026 Stanislav Shupilkin and the atlas contributors.
+
+You may copy, republish, translate and adapt this content, including for
+commercial use. The one condition is attribution: name the source and link to
+
+    https://atlas.smolevich.com
+
+Guest pages (frontmatter voice: guest) are contributed under the same license
+and carry their author's byline. Keep that byline when you reuse them.
+
+Code in this repository is licensed separately, under MIT. See LICENSE.
+
+Full legal text:
+https://creativecommons.org/licenses/by/4.0/legalcode
