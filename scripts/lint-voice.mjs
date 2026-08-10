@@ -41,7 +41,14 @@ const isIndexPage = (filePath) => /^index\.mdx?$/.test(path.basename(filePath));
 
 async function lintFile(filePath) {
   const raw = await readFile(filePath, 'utf8');
-  const { data, body, bodyStartLine } = parseFrontmatter(raw);
+  const { data, body, bodyStartLine, error: frontmatterError } = parseFrontmatter(raw);
+  if (frontmatterError) {
+    return {
+      errors: [`${filePath}:1: frontmatter не разобрался — ${frontmatterError}`],
+      warnings: [],
+    };
+  }
+
   const lang = isRuPage(filePath) ? 'ru' : 'en';
   const checkVoice = data.voice !== 'guest';
   // Освобождена от формы только навигация: index-страница, которая не
@@ -105,6 +112,13 @@ async function main() {
 
   const files = (await Promise.all(dirs.map(walk))).flat().sort();
 
+  // Молчаливый успех на пустом наборе — это опечатка в пути, которая в CI
+  // читается как «всё в порядке».
+  if (files.length === 0) {
+    console.error(`Markdown не нашёлся: ${dirs.join(', ')}. Проверь путь.`);
+    process.exit(2);
+  }
+
   let errorCount = 0;
   let warningCount = 0;
 
@@ -124,4 +138,9 @@ async function main() {
   process.exit(errorCount > 0 ? 1 : 0);
 }
 
-main();
+main().catch((error) => {
+  // Без этого несуществующий путь падал сырым стеком ENOENT.
+  const reason = error?.code === 'ENOENT' ? `путь не найден: ${error.path}` : (error?.message ?? error);
+  console.error(`lint-voice: ${reason}`);
+  process.exit(2);
+});
