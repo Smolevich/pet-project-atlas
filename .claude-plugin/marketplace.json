@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "pet-project-atlas",
+  "description": "Commands from the Pet Project Atlas: routing, content planning, weekly reporting and voice.",
+  "owner": {
+    "name": "Stanislav Shupilkin"
+  },
+  "plugins": [
+    {
+      "name": "atlas",
+      "source": "./plugin",
+      "description": "Pet Project Atlas commands."
+    }
+  ]
+}
