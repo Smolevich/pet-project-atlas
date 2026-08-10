@@ -1,22 +1,29 @@
+// Обороты, которые не склоняются: сверяем целиком, с границами слова с обеих
+// сторон.
 export const BANNED_PHRASES = [
-  'game-changer',
-  'leverage',
-  'unlock',
-  'dive in',
-  'synergy',
-  'seamless',
   'in the age of ai',
   'cannot be ignored',
   'в эпоху ai',
   'нельзя игнорировать',
-  'синергия',
-  'экосистема',
 ];
 
-// "революционн" — падежная основа, а не целое слово: "революционный",
-// "революционная", "революционные" и т.д. Проверка границы с обеих сторон
-// сделала бы этот пункт списка мёртвым.
-export const BANNED_STEMS = ['революционн'];
+// Основы, а не целые слова: граница проверяется только слева, окончание любое.
+// "leverage" ловит и "leveraging", "экосистем" — и "экосистемы", "unlock" — и
+// "unlocks". Сверка целого слова оставляла бы половину списка мёртвой: сайт
+// двуязычный, а русские слова из списка склоняются в каждом падеже.
+export const BANNED_STEMS = [
+  'game-chang',
+  'leverag',
+  'unlock',
+  'dive in',
+  'dives in',
+  'diving in',
+  'synerg',
+  'seamless',
+  'синерг',
+  'экосистем',
+  'революционн',
+];
 
 // \b не понимает кириллицу как "словесный" символ, поэтому границу слова
 // проверяем вручную по классам Unicode-букв и цифр.
@@ -36,7 +43,13 @@ function findMatches(text, needle, { rightBoundary }) {
     const after = text[index + needle.length];
     const leftOk = !isWordChar(before);
     const rightOk = !rightBoundary || !isWordChar(after);
-    if (leftOk && rightOk) matches.push(index);
+    if (leftOk && rightOk) {
+      // Основу дотягиваем до конца слова, чтобы в ошибке стояло то слово,
+      // которое автор написал, а не обрубок из списка.
+      let end = index + needle.length;
+      while (!rightBoundary && isWordChar(text[end])) end++;
+      matches.push({ index, phrase: text.slice(index, end) });
+    }
     fromIndex = index + needle.length;
   }
   return matches;
@@ -74,13 +87,13 @@ export function findBannedPhrases(text) {
 
   const hits = [];
   for (const phrase of BANNED_PHRASES) {
-    for (const index of findMatches(lower, phrase, { rightBoundary: true })) {
-      hits.push({ phrase, line: lineOf(index) });
+    for (const match of findMatches(lower, phrase, { rightBoundary: true })) {
+      hits.push({ phrase: match.phrase, line: lineOf(match.index) });
     }
   }
   for (const stem of BANNED_STEMS) {
-    for (const index of findMatches(lower, stem, { rightBoundary: false })) {
-      hits.push({ phrase: stem, line: lineOf(index) });
+    for (const match of findMatches(lower, stem, { rightBoundary: false })) {
+      hits.push({ phrase: match.phrase, line: lineOf(match.index) });
     }
   }
   return hits.sort((a, b) => a.line - b.line);
@@ -194,8 +207,11 @@ const TOOL_VERSION_PATTERN = new RegExp(
   'gi',
 );
 
-// "7.0.2", "v1.2" — версия по форме, даже без имени инструмента рядом.
-const DOTTED_VERSION_PATTERN = /\bv?\d+\.\d+(?:\.\d+)*\b/gi;
+// Версия по форме, без имени инструмента рядом: либо с префиксом "v" ("v1.2"),
+// либо из трёх и более частей ("7.0.2"). Голое "9.99" — десятичная дробь, то
+// есть измерение; раньше оно проходило как версия и уносило с собой цены и
+// проценты. Валюта или процент рядом снимают версию однозначно.
+const DOTTED_VERSION_PATTERN = /(?<![$€£₽¥])\b(?:v\d+(?:\.\d+)+|\d+\.\d+\.\d+(?:\.\d+)*)\b(?!\s*%)/gi;
 
 // Цифра, приклеенная к концу слова, — часть имени: GA4, GPT-4, IPv6, H2,
 // Apache-2.0. Цифра перед словом — измерение: "200ms", "40%". Граница слова
@@ -232,7 +248,9 @@ export function findUnsourcedNumbers(markdown, data) {
   const stripped = stripCode(markdown);
   const hits = [];
   stripped.split('\n').forEach((line, i) => {
-    if (line.startsWith('|') || line.startsWith('    ') || line.trimStart().startsWith('#')) return;
+    // Таблицы и заголовки не освобождены от источника: STYLE.md §5 выводит из
+    // подсчёта только длину. В таблицах числа как раз и живут.
+    if (line.startsWith('    ')) return;
 
     const withoutNoise = stripNonClaimNoise(line);
     const withoutIdentifiers = withoutNoise

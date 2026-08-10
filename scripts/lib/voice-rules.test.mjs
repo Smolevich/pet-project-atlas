@@ -25,14 +25,14 @@ test('чистый текст не даёт срабатываний', () => {
   assert.deepEqual(findBannedPhrases('Sitemap submitted. 40 pages indexed in 6 days.'), []);
 });
 
-test('фраза внутри длинного слова не считается', () => {
-  assert.deepEqual(findBannedPhrases('The unlockable achievement'), []);
-});
+// "The unlockable achievement" раньше считалось чистым текстом. Это был
+// ложный пропуск: "unlock" в списке стоит как основа, и окончание его не
+// спасает. Осталась проверка левой границы — она держит "эволюционный".
 
 test('основа слова ловится с любым окончанием', () => {
   const hits = findBannedPhrases('Это революционный подход к индексации.');
   assert.equal(hits.length, 1);
-  assert.equal(hits[0].phrase, 'революционн');
+  assert.equal(hits[0].phrase, 'революционный');
 });
 
 test('основа не ловится в середине другого слова', () => {
@@ -206,4 +206,63 @@ test('бан-лист всё ещё видит фразу в прозе рядо
   const hits = findBannedPhrases('Run `npm test`. This is a game-changer.');
   assert.equal(hits.length, 1);
   assert.equal(hits[0].line, 1);
+});
+
+// --- Группа B: пропуски, которые линтер обязан ловить ---
+
+const flagged = (text) => assert.equal(findUnsourcedNumbers(text, NO_SOURCES).length, 1);
+
+test('десятичная дробь с процентом — измерение, а не версия', () => {
+  flagged('Conversion rose to 3.5%.');
+});
+
+test('десятичная дробь как цена — измерение, а не версия', () => {
+  flagged('The plan costs 9.99 a month.');
+});
+
+test('цена с валютой — измерение, а не версия', () => {
+  flagged('We charge $4.99 per user.');
+});
+
+test('трёхчастная версия остаётся идентификатором', () => {
+  clean('Built on Astro 7.0.2 and Starlight 0.41.7.');
+});
+
+test('версия с префиксом v остаётся идентификатором', () => {
+  clean('Pinned at v1.2 for now.');
+});
+
+test('число в строке таблицы остаётся нарушением', () => {
+  flagged('| Clicks | 1200 | 40% |');
+});
+
+test('число в заголовке остаётся нарушением', () => {
+  flagged('## We got 1200 clicks');
+});
+
+test('порядковый номер в заголовке по-прежнему не нарушение', () => {
+  clean('## 1. Indexing');
+});
+
+test('короткое слово перед числом не делает его идентификатором', () => {
+  flagged('Signups: es 12 people.');
+});
+
+test('склонения английских фраз из бан-листа ловятся', () => {
+  assert.equal(findBannedPhrases('We are leveraging the sitemap.').length, 1);
+  assert.equal(findBannedPhrases('This unlocks new traffic.').length, 1);
+  assert.equal(findBannedPhrases('Let us dive into the data.').length, 1);
+  assert.equal(findBannedPhrases('It works seamlessly.').length, 1);
+  assert.equal(findBannedPhrases('Pure synergies here.').length, 1);
+  assert.equal(findBannedPhrases('A game-changing release.').length, 1);
+});
+
+test('склонения русских слов из бан-листа ловятся', () => {
+  assert.equal(findBannedPhrases('Часть экосистемы Google.').length, 1);
+  assert.equal(findBannedPhrases('Эффект синергии каналов.').length, 1);
+});
+
+test('основа не ловится в середине другого слова после расширения списка', () => {
+  assert.deepEqual(findBannedPhrases('эволюционный путь'), []);
+  assert.deepEqual(findBannedPhrases('Deleveraging is a finance term'), []);
 });

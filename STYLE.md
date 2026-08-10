@@ -67,25 +67,38 @@ After:
 
 ## 3. Ban list
 
-These strings fail the build. The match is case-insensitive and on whole words.
+These strings fail the build. The match is case-insensitive.
+
+Four of them are fixed phrases, matched as whole words:
 
 ```text
-game-changer
-leverage
-unlock
-dive in
-synergy
-seamless
 in the age of AI
 cannot be ignored
 в эпоху AI
 нельзя игнорировать
-синергия
-экосистема
+```
+
+The rest are stems. The word has to *start* with them; the ending is free.
+
+```text
+game-chang
+leverag
+unlock
+dive in
+dives in
+diving in
+synerg
+seamless
+синерг
+экосистем
 революционн
 ```
 
-`революционн` is a stem. It covers революционный, революционное, революционная and the rest of the endings.
+So `leverag` covers leverage, leveraging and leveraged; `unlock` covers unlocks, unlocked and unlockable; `экосистем` covers экосистемы and экосистеме; `революционн` covers революционный, революционное and революционная. Only the left edge is checked, which is what keeps `эволюционный` and `deleveraging` clean.
+
+The error message quotes the word you actually wrote, not the stem.
+
+Code is not prose: a fenced block, an inline `` `…` ``, a link target and a bare URL are all skipped. `curl https://api.example.com/unlock` is a command, not a claim.
 
 A banned word is a symptom. It almost always sits in a sentence that carries no claim. So the fix is a concrete claim, not a synonym from the thesaurus.
 
@@ -115,7 +128,18 @@ A page with numbers and an empty `sources:` fails the build. This check also app
 
 A number without a source gets deleted, not softened. "Roughly a couple of thousand visits" is worse than silence: it looks like data and is not.
 
-The check targets claims, not identifiers. A version or tool name ("Node 24", "Astro 7", "HTTP/2"), an ordinal in a heading ("## 1. Indexing"), and a number inside inline code or a link do not need a source. "Traffic grew to 1200 visits" does.
+The check targets claims, not identifiers. These do not need a source:
+
+- a tool with its version — "Node 24", "Astro 7.0.2", "v1.2", "HTTP/2";
+- a digit glued to the end of a name — GA4, GPT-4, IPv6, H2, Apache-2.0;
+- a standard number — "RFC 9309", "ISO 8601";
+- a year or an ISO date — "since 2024", "measured 2026-08-10";
+- an ordinal that opens a line, a bullet or a heading — "## 1. Indexing", "**1. Indexing**", "- 1. Check rendering";
+- a number inside inline code, a link target, a URL, an email address or an `@handle`.
+
+The rule behind the second one: a digit at the end of a word is part of a name, a digit in front of a word is a measurement. `GA4` is a product, `40%` is a number.
+
+"Traffic grew to 1200 visits" needs a source. So do "9.99 a month", "$4.99 per user" and "3.5%" — a bare decimal is a price or a rate, not a version. Numbers in tables and in headings need a source like any other. Only the length rule exempts tables (§5), never this one.
 
 Numbers are digits, not words. Zero is a result worth publishing: "0 clicks in the first month" tells the reader more than a hedge.
 
