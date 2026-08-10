@@ -125,3 +125,49 @@ export function findLongSentences(markdown, maxWords = 20) {
   });
   return hits;
 }
+
+// Минимальный YAML: скалярные "key: value" и простые списки через "  - item".
+// Полноценный парсер не нужен — frontmatter атласа заведомо плоский.
+export function parseFrontmatter(raw) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!match) return { data: {}, body: raw };
+
+  const [, frontmatter, body] = match;
+  const data = {};
+  let currentListKey = null;
+
+  for (const line of frontmatter.split('\n')) {
+    const listItem = line.match(/^\s+-\s+(.+?)\s*$/);
+    if (listItem && currentListKey) {
+      data[currentListKey].push(listItem[1]);
+      continue;
+    }
+    const pair = line.match(/^([A-Za-z0-9_]+):\s*(.*?)\s*$/);
+    if (!pair) continue;
+    const [, key, value] = pair;
+    if (value === '') {
+      data[key] = [];
+      currentListKey = key;
+    } else {
+      data[key] = value;
+      currentListKey = null;
+    }
+  }
+
+  return { data, body };
+}
+
+const NUMBER_PATTERN = /\d/;
+
+/** Строки прозы (вне кода) с цифрой, когда data.sources пуст. */
+export function findUnsourcedNumbers(markdown, data) {
+  if (Array.isArray(data?.sources) && data.sources.length > 0) return [];
+
+  const stripped = stripCode(markdown);
+  const hits = [];
+  stripped.split('\n').forEach((line, i) => {
+    if (line.startsWith('|') || line.startsWith('    ')) return;
+    if (NUMBER_PATTERN.test(line)) hits.push({ line: i + 1, text: line.trim() });
+  });
+  return hits;
+}

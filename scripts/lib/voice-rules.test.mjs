@@ -1,6 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { findBannedPhrases, findMissingSections, findLongSentences } from './voice-rules.mjs';
+import {
+  findBannedPhrases,
+  findMissingSections,
+  findLongSentences,
+  parseFrontmatter,
+  findUnsourcedNumbers,
+} from './voice-rules.mjs';
 
 test('находит запрещённую фразу и её строку', () => {
   const text = 'Fine line.\nThis is a game-changer for indexing.';
@@ -67,4 +73,27 @@ test('короткие предложения молчат', () => {
 test('блоки кода не проверяются', () => {
   const md = '```\n' + Array.from({ length: 30 }, (_, i) => `w${i}`).join(' ') + '\n```';
   assert.deepEqual(findLongSentences(md, 20), []);
+});
+
+test('парсит voice и sources из frontmatter', () => {
+  const raw = '---\ntitle: X\nvoice: guest\nsources:\n  - https://a.dev\n---\nbody';
+  const { data, body } = parseFrontmatter(raw);
+  assert.equal(data.voice, 'guest');
+  assert.deepEqual(data.sources, ['https://a.dev']);
+  assert.equal(body.trim(), 'body');
+});
+
+test('число без sources — нарушение', () => {
+  const hits = findUnsourcedNumbers('Traffic grew to 1200 visits.', { sources: [] });
+  assert.equal(hits.length, 1);
+});
+
+test('число при наличии sources — не нарушение', () => {
+  const hits = findUnsourcedNumbers('Traffic grew to 1200 visits.', { sources: ['https://a.dev'] });
+  assert.deepEqual(hits, []);
+});
+
+test('версии и номера в коде не считаются числами-утверждениями', () => {
+  const hits = findUnsourcedNumbers('```\nastro 7.0.2\n```', { sources: [] });
+  assert.deepEqual(hits, []);
 });
