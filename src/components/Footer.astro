@@ -4,21 +4,26 @@
 // editUrl считает сам Starlight из editLink.baseUrl — он знает реальный путь файла
 // (index.md, .mdx, локаль ru), а собранный из entry.id путь на них промахивается.
 import Default from '@astrojs/starlight/components/Footer.astro';
+import { footerStringsFor } from '../footer-strings';
 
-const { entry, editUrl } = Astro.locals.starlightRoute;
+const { editUrl, locale } = Astro.locals.starlightRoute;
+const t = footerStringsFor(locale);
 
+// Заголовок issue называет адрес, который читатель видел. entry.id для этого не
+// годится: на непереведённой русской странице он указывает на английский исходник,
+// а на английской главной он пустой.
 const issueUrl =
   'https://github.com/Smolevich/pet-project-atlas/issues/new' +
   '?template=page-did-not-help.yml' +
-  `&title=${encodeURIComponent(`Did not help: ${entry.id}`)}`;
+  `&title=${encodeURIComponent(t.issueTitle(Astro.url.pathname))}`;
 ---
 
 <Default><slot /></Default>
 
 <p class="atlas-feedback">
-  {editUrl && <a href={editUrl.href}>Suggest an edit</a>}
+  {editUrl && <a href={editUrl.href}>{t.edit}</a>}
   {editUrl && ' · '}
-  <a href={issueUrl}>This did not help</a>
+  <a href={issueUrl}>{t.didNotHelp}</a>
 </p>
 
 <style>
