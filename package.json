@@ -9,6 +9,8 @@
     "postbuild": "node scripts/build-llms.mjs dist",
     "preview": "astro preview",
     "lint:voice": "node scripts/lint-voice.mjs src/content/docs",
+    "check:links": "node scripts/check-links.mjs dist",
+    "check:types": "astro check",
     "test": "node --test \"scripts/**/*.test.mjs\""
   },
   "dependencies": {
@@ -17,6 +19,8 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "js-yaml": "^4.3.1"
+    "@astrojs/check": "^0.9.10",
+    "js-yaml": "^4.3.1",
+    "typescript": "^6.0.3"
   }
 }

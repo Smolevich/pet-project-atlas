@@ -16,4 +16,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run lint:voice
+      - run: npm run check:types
       - run: npm run build
+      # Ссылки проверяются по собранному сайту, поэтому только после build.
+      - run: npm run check:links
