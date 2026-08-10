@@ -106,21 +106,67 @@ export const REQUIRED_SECTIONS = {
   ru: ['Что решаем', 'Шаги', 'Что не сработало', 'Проверить'],
 };
 
+const H2 = /^##\s+(.+?)\s*$/;
+
+/** Заголовки второго уровня в порядке появления, без тех, что внутри кода. */
+function collectH2(markdown) {
+  const mask = fenceMask(markdown);
+  const headings = [];
+  markdown.split('\n').forEach((line, i) => {
+    if (mask[i]) return;
+    const match = line.match(H2);
+    if (match) headings.push({ title: match[1], line: i + 1 });
+  });
+  return headings;
+}
+
 /** Возвращает заголовки, которых нет или под которыми пусто. */
 export function findMissingSections(markdown, lang = 'en') {
   const required = REQUIRED_SECTIONS[lang] ?? REQUIRED_SECTIONS.en;
+  const mask = fenceMask(markdown);
   const blocks = new Map();
   let current = null;
-  for (const line of markdown.split('\n')) {
-    const heading = line.match(/^##\s+(.+?)\s*$/);
-    if (heading) {
-      current = heading[1];
-      blocks.set(current, '');
-      continue;
+  markdown.split('\n').forEach((line, i) => {
+    // Заголовок внутри ``` ```-блока — это пример разметки, а не раздел
+    // страницы. Иначе страница с одним шаблоном в блоке кода проходила
+    // проверку формы, не имея ни одного настоящего раздела.
+    if (!mask[i]) {
+      const heading = line.match(H2);
+      if (heading) {
+        current = heading[1];
+        blocks.set(current, '');
+        return;
+      }
     }
+    // Тело считается по исходным строкам, включая код: раздел, под которым
+    // только команда, не пустой.
     if (current) blocks.set(current, blocks.get(current) + line.trim());
-  }
+  });
   return required.filter((title) => !blocks.get(title));
+}
+
+/** Сколько обязательных блоков страница вообще объявила. */
+export function countRequiredSections(markdown, lang = 'en') {
+  const required = REQUIRED_SECTIONS[lang] ?? REQUIRED_SECTIONS.en;
+  const declared = new Set(collectH2(markdown).map((heading) => heading.title));
+  return required.filter((title) => declared.has(title)).length;
+}
+
+/**
+ * Проверяет то, что STYLE.md §2 обещает словами: четыре блока идут в этом
+ * порядке и раньше любого другого H2. Возвращает [] или один объект
+ * { expected, actual }.
+ */
+export function findSectionOrderProblems(markdown, lang = 'en') {
+  const required = REQUIRED_SECTIONS[lang] ?? REQUIRED_SECTIONS.en;
+  const headings = collectH2(markdown).map((heading) => heading.title);
+  // Отсутствующий блок — забота findMissingSections. Две ошибки на одну
+  // причину автору ничего не добавляют.
+  if (required.some((title) => !headings.includes(title))) return [];
+
+  const actual = headings.slice(0, required.length);
+  if (actual.every((title, i) => title === required[i])) return [];
+  return [{ expected: required, actual }];
 }
 
 /** Маска строк, лежащих внутри ``` ```-блока (включая сами маркеры). */
@@ -145,20 +191,78 @@ function stripCode(markdown) {
     .join('\n');
 }
 
+const LIST_MARKER = /^\s*(?:[-*+]|\d+[.)])\s+/;
+const HEADING_LINE = /^\s*#{1,6}\s+/;
+const BLOCKQUOTE = /^\s*>/;
+
+/**
+ * Собирает соседние строки прозы в один блок. Предложение живёт в абзаце, а
+ * не в строке: при жёстком переносе построчная проверка не видела ничего
+ * длинного, а переносы никто не запрещал.
+ *
+ * Пункт списка, заголовок и цитата начинают новый блок — их склейка дала бы
+ * предложение-химеру. Код, таблицы и отступы по STYLE.md §5 не считаются.
+ */
+function paragraphUnits(markdown) {
+  const mask = fenceMask(markdown);
+  const units = [];
+  let current = null;
+  const flush = () => {
+    if (current) units.push(current);
+    current = null;
+  };
+
+  markdown.split('\n').forEach((line, i) => {
+    if (mask[i] || !line.trim() || line.startsWith('|') || line.startsWith('    ')) {
+      flush();
+      return;
+    }
+    const trimmed = line.trim();
+    const startsUnit = LIST_MARKER.test(line) || HEADING_LINE.test(line) || BLOCKQUOTE.test(line);
+    if (!current || startsUnit) {
+      flush();
+      current = { text: trimmed, starts: [{ offset: 0, line: i + 1 }] };
+      return;
+    }
+    current.starts.push({ offset: current.text.length + 1, line: i + 1 });
+    current.text += ` ${trimmed}`;
+  });
+  flush();
+  return units;
+}
+
+function splitSentences(text) {
+  const sentences = [];
+  const boundary = /(?<=[.!?])\s+/g;
+  let start = 0;
+  let match;
+  while ((match = boundary.exec(text)) !== null) {
+    sentences.push({ text: text.slice(start, match.index), offset: start });
+    start = match.index + match[0].length;
+  }
+  if (start < text.length) sentences.push({ text: text.slice(start), offset: start });
+  return sentences;
+}
+
+function lineAt(unit, offset) {
+  let line = unit.starts[0].line;
+  for (const start of unit.starts) {
+    if (start.offset > offset) break;
+    line = start.line;
+  }
+  return line;
+}
+
 /** Ищет предложения длиннее maxWords слов вне кода, таблиц и отступов. */
 export function findLongSentences(markdown, maxWords = 20) {
-  const stripped = stripCode(markdown);
   const hits = [];
-  stripped.split('\n').forEach((line, i) => {
-    if (line.startsWith('|') || line.startsWith('    ')) return;
-    const trimmed = line.trim();
-    if (!trimmed) return;
-    for (const sentence of trimmed.split(/(?<=[.!?])\s+/).filter(Boolean)) {
-      const words = sentence.split(/\s+/).filter(Boolean);
-      if (words.length > maxWords) hits.push({ line: i + 1, words: words.length });
+  for (const unit of paragraphUnits(markdown)) {
+    for (const sentence of splitSentences(unit.text)) {
+      const words = sentence.text.split(/\s+/).filter(Boolean);
+      if (words.length > maxWords) hits.push({ line: lineAt(unit, sentence.offset), words: words.length });
     }
-  });
-  return hits;
+  }
+  return hits.sort((a, b) => a.line - b.line);
 }
 
 const FRONTMATTER = /^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/;
@@ -240,10 +344,8 @@ function stripNonClaimNoise(line) {
     .replace(HANDLE_PATTERN, ' ');
 }
 
-/** Строки прозы (вне кода) с числом-утверждением, когда data.sources пуст. */
-export function findUnsourcedNumbers(markdown, data) {
-  if (Array.isArray(data?.sources) && data.sources.length > 0) return [];
-
+/** Строки прозы (вне кода) с числом-утверждением, независимо от frontmatter. */
+export function findNumericClaims(markdown) {
   const stripped = stripCode(markdown);
   const hits = [];
   stripped.split('\n').forEach((line, i) => {
@@ -262,4 +364,10 @@ export function findUnsourcedNumbers(markdown, data) {
     if (NUMBER_PATTERN.test(withoutIdentifiers)) hits.push({ line: i + 1, text: line.trim() });
   });
   return hits;
+}
+
+/** То же, но только когда sources: пуст. */
+export function findUnsourcedNumbers(markdown, data) {
+  if (Array.isArray(data?.sources) && data.sources.length > 0) return [];
+  return findNumericClaims(markdown);
 }

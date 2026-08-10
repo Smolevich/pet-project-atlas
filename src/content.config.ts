@@ -8,8 +8,8 @@ export const collections = {
     loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
-        // Дата последнего замера. Ничем не enforced: STYLE.md §4 требует её на
-        // страницах с числами, но линтер смотрит только на sources:.
+        // Дата замера. Обязательна на странице с числами — это проверяет
+        // lint-voice, схема оставляет поле необязательным для страниц без чисел.
         updated: z.date().optional(),
         // guest — чужой кейс, проверку голоса не проходит, только проверку фактов.
         voice: z.enum(['house', 'guest']).default('house'),

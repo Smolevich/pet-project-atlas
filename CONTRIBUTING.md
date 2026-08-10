@@ -33,7 +33,9 @@ Every page under `src/content/docs/**` carries four H2 headings, in this order, 
 
 Russian pages use `## Что решаем`, `## Шаги`, `## Что не сработало`, `## Проверить`.
 
-The linter matches the text literally. Extra H2 headings after these four are fine. Section landing pages (`index.md`, `index.mdx`) are exempt — they are navigation.
+The linter matches the text literally and checks the order, and nothing else at level two may come first. Extra H2 headings after these four are fine. A heading inside a fenced code block does not count as a section.
+
+Section landing pages are exempt from the four blocks, and only from those: an `index.md` or `index.mdx` that declares none of the four is navigation. Declare one and you have to declare all four, in order. The ban list and the length rule apply to landing pages like to any other page.
 
 "What did not work" is never empty. A heading with nothing under it fails the build. Everything else about voice — the ban list, sentence length, what we do not do — is in [STYLE.md](STYLE.md). Read it once before your first page.
 
@@ -50,7 +52,7 @@ sources:
 ---
 ```
 
-A page with numbers and an empty `sources:` fails the build. This applies to guest pages too. A number you cannot source gets deleted, not softened — "a couple of thousand visits" looks like data and is not.
+A page with numbers and an empty `sources:` fails the build, and so does a page with numbers and no `updated:`. Both apply to guest pages too. A number you cannot source gets deleted, not softened — "a couple of thousand visits" looks like data and is not.
 
 ## English first, Russian follows
 

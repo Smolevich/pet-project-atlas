@@ -6,6 +6,12 @@ import {
   findLongSentences,
   parseFrontmatter,
   findUnsourcedNumbers,
+  findNumericClaims,
+  findSectionOrderProblems,
+  countRequiredSections,
+  BANNED_PHRASES,
+  BANNED_STEMS,
+  REQUIRED_SECTIONS,
 } from './voice-rules.mjs';
 
 test('находит запрещённую фразу и её строку', () => {
@@ -311,4 +317,108 @@ test('bodyStartLine указывает на первую строку тела �
 test('сломанный YAML отдаётся как ошибка, а не как пустой frontmatter', () => {
   const { error } = parseFrontmatter('---\ntitle: [unclosed\n---\nbody');
   assert.ok(error);
+});
+
+// --- Группа D: правила, которые доки обещали, а код не проверял ---
+
+test('четыре блока в обратном порядке — нарушение порядка', () => {
+  const md = '## Verify\na\n## What did not work\nb\n## Steps\nc\n## What we are solving\nd';
+  assert.deepEqual(findMissingSections(md, 'en'), []);
+  assert.equal(findSectionOrderProblems(md, 'en').length, 1);
+});
+
+test('порядок соблюдён — нарушения нет', () => {
+  const md = '## What we are solving\na\n## Steps\nb\n## What did not work\nc\n## Verify\nd';
+  assert.deepEqual(findSectionOrderProblems(md, 'en'), []);
+});
+
+test('лишний H2 перед четвёркой — нарушение порядка', () => {
+  const md = '## Intro\nx\n## What we are solving\na\n## Steps\nb\n## What did not work\nc\n## Verify\nd';
+  assert.equal(findSectionOrderProblems(md, 'en').length, 1);
+});
+
+test('лишний H2 после четвёрки — не нарушение', () => {
+  const md = '## What we are solving\na\n## Steps\nb\n## What did not work\nc\n## Verify\nd\n## Notes\ne';
+  assert.deepEqual(findSectionOrderProblems(md, 'en'), []);
+});
+
+test('пропущенный блок не превращается ещё и в ошибку порядка', () => {
+  const md = '## Steps\nb\n## Verify\nd';
+  assert.deepEqual(findSectionOrderProblems(md, 'en'), []);
+});
+
+test('русские блоки проверяются на порядок по-русски', () => {
+  const md = '## Проверить\na\n## Что не сработало\nb\n## Шаги\nc\n## Что решаем\nd';
+  assert.equal(findSectionOrderProblems(md, 'ru').length, 1);
+});
+
+test('заголовки внутри блока кода не считаются заголовками страницы', () => {
+  const md = '```markdown\n## What we are solving\n## Steps\n## What did not work\n## Verify\n```\nreal text';
+  assert.deepEqual(findMissingSections(md, 'en'), REQUIRED_SECTIONS.en);
+  assert.equal(countRequiredSections(md, 'en'), 0);
+});
+
+test('блок, под которым только код, не считается пустым', () => {
+  const md = '## What we are solving\na\n## Steps\n```\nnpm test\n```\n## What did not work\nc\n## Verify\nd';
+  assert.deepEqual(findMissingSections(md, 'en'), []);
+});
+
+test('перенос строки не прячет длинное предложение', () => {
+  const words = Array.from({ length: 40 }, (_, i) => `w${i}`);
+  const md = [words.slice(0, 15).join(' '), words.slice(15, 30).join(' '), words.slice(30).join(' ') + '.'].join('\n');
+  const hits = findLongSentences(md, 20);
+  assert.equal(hits.length, 1);
+  assert.equal(hits[0].words, 40);
+  assert.equal(hits[0].line, 1);
+});
+
+test('соседние абзацы не склеиваются в одно предложение', () => {
+  const short = Array.from({ length: 15 }, (_, i) => `w${i}`).join(' ') + '.';
+  assert.deepEqual(findLongSentences(`${short}\n\n${short}`, 20), []);
+});
+
+test('соседние пункты списка не склеиваются', () => {
+  const bullet = '- ' + Array.from({ length: 15 }, (_, i) => `w${i}`).join(' ') + '.';
+  assert.deepEqual(findLongSentences(`${bullet}\n${bullet}`, 20), []);
+});
+
+test('заголовок не приклеивается к следующему абзацу', () => {
+  const short = Array.from({ length: 15 }, (_, i) => `w${i}`).join(' ') + '.';
+  assert.deepEqual(findLongSentences(`## Steps\n${short}`, 20), []);
+});
+
+test('строки таблицы по длине не считаются', () => {
+  const row = '| ' + Array.from({ length: 30 }, (_, i) => `w${i}`).join(' ') + ' |';
+  assert.deepEqual(findLongSentences(row, 20), []);
+});
+
+test('номер строки указывает на предложение, а не на начало абзаца', () => {
+  const short = 'Short one.';
+  const long = Array.from({ length: 25 }, (_, i) => `w${i}`).join(' ') + '.';
+  const hits = findLongSentences(`${short}\n${long}`, 20);
+  assert.equal(hits.length, 1);
+  assert.equal(hits[0].line, 2);
+});
+
+test('findNumericClaims видит число независимо от sources', () => {
+  assert.equal(findNumericClaims('Traffic grew to 1200 visits.').length, 1);
+  assert.deepEqual(findNumericClaims('Works on Node 24 and Astro 7.'), []);
+});
+
+test('countRequiredSections считает объявленные блоки', () => {
+  assert.equal(countRequiredSections('## Steps\nx', 'en'), 1);
+  assert.equal(countRequiredSections('Just navigation links.', 'en'), 0);
+});
+
+// --- Группа E: экспортированные константы действительно описывают правило ---
+
+test('бан-лист хранится в нижнем регистре — иначе сверка регистра мимо', () => {
+  for (const phrase of [...BANNED_PHRASES, ...BANNED_STEMS]) {
+    assert.equal(phrase, phrase.toLowerCase());
+  }
+});
+
+test('в обоих языках ровно четыре обязательных блока', () => {
+  assert.equal(REQUIRED_SECTIONS.en.length, 4);
+  assert.equal(REQUIRED_SECTIONS.ru.length, 4);
 });

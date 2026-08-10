@@ -4,9 +4,12 @@ import path from 'node:path';
 import {
   findBannedPhrases,
   findMissingSections,
+  findSectionOrderProblems,
+  countRequiredSections,
   findLongSentences,
   parseFrontmatter,
   findUnsourcedNumbers,
+  findNumericClaims,
 } from './lib/voice-rules.mjs';
 
 const STYLE = {
@@ -38,33 +41,54 @@ const isIndexPage = (filePath) => /^index\.mdx?$/.test(path.basename(filePath));
 
 async function lintFile(filePath) {
   const raw = await readFile(filePath, 'utf8');
-  const { data, body } = parseFrontmatter(raw);
+  const { data, body, bodyStartLine } = parseFrontmatter(raw);
   const lang = isRuPage(filePath) ? 'ru' : 'en';
-  const checkVoice = data.voice !== 'guest' && !isIndexPage(filePath);
+  const checkVoice = data.voice !== 'guest';
+  // Освобождена от формы только навигация: index-страница, которая не
+  // объявила ни одного обязательного блока. Как только объявила хотя бы
+  // один — это процедура, и блоки нужны все четыре, в порядке.
+  const checkShape = checkVoice && (!isIndexPage(filePath) || countRequiredSections(body, lang) > 0);
+  // Номера строк правил считаются от тела; читателю нужен номер в файле.
+  const at = (line) => `${filePath}:${line + bodyStartLine - 1}`;
 
   const errors = [];
   const warnings = [];
 
   for (const hit of findUnsourcedNumbers(body, data)) {
     errors.push(
-      `${filePath}:${hit.line}: число без источника — "${hit.text}". Добавь дату в updated: и URL в sources:, либо убери число. (${STYLE.numbers})`,
+      `${at(hit.line)}: число без источника — "${hit.text}". Добавь источник в sources: либо убери число. (${STYLE.numbers})`,
+    );
+  }
+
+  const numericClaims = findNumericClaims(body);
+  if (numericClaims.length > 0 && !data.updated) {
+    errors.push(
+      `${at(numericClaims[0].line)}: на странице есть числа, но нет updated:. Поставь дату замера. (${STYLE.numbers})`,
     );
   }
 
   if (checkVoice) {
     for (const hit of findBannedPhrases(body)) {
       errors.push(
-        `${filePath}:${hit.line}: запрещённая фраза "${hit.phrase}". Замени на конкретное утверждение. (${STYLE.banned})`,
-      );
-    }
-    for (const title of findMissingSections(body, lang)) {
-      errors.push(
-        `${filePath}: отсутствует или пуст блок "## ${title}". Все четыре обязательных блока идут первыми, в этом порядке. (${STYLE.shape})`,
+        `${at(hit.line)}: запрещённая фраза "${hit.phrase}". Замени на конкретное утверждение. (${STYLE.banned})`,
       );
     }
     for (const hit of findLongSentences(body, 20)) {
       warnings.push(
-        `${filePath}:${hit.line}: предложение на ${hit.words} слов, порог 20. Раздели на два. (${STYLE.length})`,
+        `${at(hit.line)}: предложение на ${hit.words} слов, порог 20. Раздели на два. (${STYLE.length})`,
+      );
+    }
+  }
+
+  if (checkShape) {
+    for (const title of findMissingSections(body, lang)) {
+      errors.push(
+        `${filePath}: отсутствует или пуст блок "## ${title}". (${STYLE.shape})`,
+      );
+    }
+    for (const problem of findSectionOrderProblems(body, lang)) {
+      errors.push(
+        `${filePath}: блоки идут не в том порядке — ${problem.actual.join(' → ')}. Нужно: ${problem.expected.join(' → ')}, и раньше любого другого H2. (${STYLE.shape})`,
       );
     }
   }

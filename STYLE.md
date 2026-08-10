@@ -36,9 +36,13 @@ Russian pages (`src/content/docs/ru/**`):
 ## Проверить
 ```
 
-The linter matches the heading text literally, at level two. No extra words, no rephrasing, no emoji in the heading. Extra H2 headings are fine after these four.
+The linter matches the heading text literally, at level two. No extra words, no rephrasing, no emoji in the heading. It checks the order too, and that nothing else at level two comes first. Extra H2 headings are fine after these four.
 
-Section landing pages (`index.md`, `index.mdx`) are exempt. They are navigation, not procedure.
+A heading inside a fenced code block is an example of markup, not a section. The linter does not count it.
+
+Section landing pages are exempt from this block, and only from this block. The exemption is narrow: an `index.md` or `index.mdx` that declares **none** of the four headings is navigation, and the shape check skips it. The moment it declares one, it is a procedure page and needs all four, in order — `start/index.md` is that kind of page.
+
+The ban list and the length rule apply to landing pages like to everything else. A page being navigation is not a reason to write "game-changer" in it.
 
 What goes under each:
 
@@ -124,7 +128,7 @@ sources:
 ---
 ```
 
-A page with numbers and an empty `sources:` fails the build. This check also applies to guest pages.
+A page with numbers and an empty `sources:` fails the build. So does a page with numbers and no `updated:`. Both checks also apply to guest pages.
 
 A number without a source gets deleted, not softened. "Roughly a couple of thousand visits" is worse than silence: it looks like data and is not.
 
@@ -149,7 +153,9 @@ A paragraph is at most 3 sentences. A sentence is at most 20 words.
 
 The threshold is soft. The linter prints a warning and the build stays green.
 
-Warnings piling up on one page mean the page needs cutting, not an exception. Code blocks and tables are not counted.
+A sentence is counted as one sentence whether it sits on one line or is wrapped across four. Hard wrapping is allowed and changes nothing.
+
+Warnings piling up on one page mean the page needs cutting, not an exception. Code blocks and tables are not counted — this is the only rule that exempts tables.
 
 ## 6. Failures are mandatory
 
