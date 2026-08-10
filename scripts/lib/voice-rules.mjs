@@ -159,15 +159,46 @@ export function parseFrontmatter(raw) {
 
 const NUMBER_PATTERN = /\d/;
 
-/** Строки прозы (вне кода) с цифрой, когда data.sources пуст. */
+// Слова инструментов/версий, за которыми номер — идентификатор, а не измерение:
+// "Node 24", "Astro 7", "HTTP/2", "Starlight 0.41.7".
+const TOOL_WORDS = [
+  'node', 'astro', 'starlight', 'http', 'https', 'python', 'npm',
+  'react', 'vue', 'typescript', 'chrome', 'firefox', 'ios', 'macos',
+  'windows', 'ubuntu', 'docker', 'postgresql', 'postgres', 'mysql',
+  'redis', 'nginx', 'ssh', 'tls', 'ssl', 'es',
+];
+const TOOL_VERSION_PATTERN = new RegExp(
+  `\\b(?:${TOOL_WORDS.join('|')})[/\\s]?v?\\d+(?:\\.\\d+)*\\b`,
+  'gi',
+);
+
+// "7.0.2", "v1.2" — версия по форме, даже без имени инструмента рядом.
+const DOTTED_VERSION_PATTERN = /\bv?\d+\.\d+(?:\.\d+)*\b/gi;
+
+// Убирает из строки то, что несёт цифры, но не является утверждением:
+// inline-код, цель markdown-ссылки, голый URL.
+function stripNonClaimNoise(line) {
+  return line
+    .replace(/`[^`]*`/g, '')
+    .replace(/\]\([^)]*\)/g, ']')
+    .replace(/https?:\/\/\S+/g, '');
+}
+
+/** Строки прозы (вне кода) с числом-утверждением, когда data.sources пуст. */
 export function findUnsourcedNumbers(markdown, data) {
   if (Array.isArray(data?.sources) && data.sources.length > 0) return [];
 
   const stripped = stripCode(markdown);
   const hits = [];
   stripped.split('\n').forEach((line, i) => {
-    if (line.startsWith('|') || line.startsWith('    ')) return;
-    if (NUMBER_PATTERN.test(line)) hits.push({ line: i + 1, text: line.trim() });
+    if (line.startsWith('|') || line.startsWith('    ') || line.trimStart().startsWith('#')) return;
+
+    const withoutNoise = stripNonClaimNoise(line);
+    const withoutIdentifiers = withoutNoise
+      .replace(TOOL_VERSION_PATTERN, '')
+      .replace(DOTTED_VERSION_PATTERN, '');
+
+    if (NUMBER_PATTERN.test(withoutIdentifiers)) hits.push({ line: i + 1, text: line.trim() });
   });
   return hits;
 }

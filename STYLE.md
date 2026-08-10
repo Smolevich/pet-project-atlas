@@ -115,6 +115,8 @@ A page with numbers and an empty `sources:` fails the build. This check also app
 
 A number without a source gets deleted, not softened. "Roughly a couple of thousand visits" is worse than silence: it looks like data and is not.
 
+The check targets claims, not identifiers. A version or tool name ("Node 24", "Astro 7", "HTTP/2"), an ordinal in a heading ("## 1. Indexing"), and a number inside inline code or a link do not need a source. "Traffic grew to 1200 visits" does.
+
 Numbers are digits, not words. Zero is a result worth publishing: "0 clicks in the first month" tells the reader more than a hedge.
 
 ## 5. Length

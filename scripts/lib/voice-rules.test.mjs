@@ -97,3 +97,34 @@ test('версии и номера в коде не считаются числ�
   const hits = findUnsourcedNumbers('```\nastro 7.0.2\n```', { sources: [] });
   assert.deepEqual(hits, []);
 });
+
+test('версия инструмента не считается утверждением', () => {
+  assert.deepEqual(findUnsourcedNumbers('Works on Node 24 and Astro 7.', { sources: [] }), []);
+});
+
+test('порядковый номер в заголовке не считается утверждением', () => {
+  assert.deepEqual(findUnsourcedNumbers('## 1. Indexing', { sources: [] }), []);
+});
+
+test('число в inline-коде не считается утверждением', () => {
+  assert.deepEqual(findUnsourcedNumbers('Set `max-age=3600` in the header.', { sources: [] }), []);
+});
+
+test('число в ссылке не считается утверждением', () => {
+  assert.deepEqual(findUnsourcedNumbers('See [the RFC](https://example.dev/rfc/9110).', { sources: [] }), []);
+});
+
+test('измерение остаётся нарушением', () => {
+  const hits = findUnsourcedNumbers('Clicks grew to 1200 in six weeks.', { sources: [] });
+  assert.equal(hits.length, 1);
+});
+
+test('процент остаётся нарушением', () => {
+  const hits = findUnsourcedNumbers('Only 4% of signups came from the site.', { sources: [] });
+  assert.equal(hits.length, 1);
+});
+
+test('ноль как результат остаётся нарушением', () => {
+  const hits = findUnsourcedNumbers('Paying users after three months: 0.', { sources: [] });
+  assert.equal(hits.length, 1);
+});
