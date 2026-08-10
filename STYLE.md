@@ -116,7 +116,7 @@ After: «`llms.txt` запрашивают не все AI-краулеры. Я �
 
 ## 4. Numbers
 
-Every number ships with a date and a source. The date goes into `updated:`. The source goes into `sources:`, a list of URLs.
+Every number ships with a date and a source. The date goes into `updated:`. The source goes into `sources:` — a URL, or a provenance line for a measurement of your own (below).
 
 ```yaml
 ---
@@ -129,6 +129,27 @@ sources:
 ```
 
 A page with numbers and an empty `sources:` fails the build. So does a page with numbers and no `updated:`. Both checks also apply to guest pages.
+
+### A source that has no URL
+
+Most of the numbers here come off the author's own dashboards, and a figure from your own Search Console has no public link. There has to be a way to state one honestly, or the only way past the check is an invented URL — which is exactly what the check exists to stop.
+
+So a `sources:` entry is one of two things. Either an `http(s)` URL, or a provenance line in exactly this shape:
+
+```yaml
+sources:
+  - Search Console, property atlas.smolevich.com, measured 2026-08-10
+  - Plausible, site atlas.smolevich.com, measured 2026-08-10
+  - psql, dataset signup_events, measured 2026-01-31
+```
+
+Three parts, separated by commas, all three required:
+
+1. **The instrument** — the named tool or panel you read the number off. "Search Console", "Plausible", "Stripe", "psql". Not "my own data": that is not an instrument, it is a refusal to answer.
+2. **The scope** — one of `property`, `account`, `project`, `site`, `repo`, `workspace`, `dataset`, `instance`, `channel`, `bot`, `table`, followed by a single identifier: a domain, a repository, a bot handle, a table name. One token, so the scope cannot be described in words of general meaning.
+3. **The date** — `measured` and an ISO date. The day you read the figure, which is often not the day you wrote the page.
+
+The point of the shape is that another person, or you in six months, can open the same panel, filter to the same scope and get the same number back. A line that does not let anyone repeat the measurement is not a source, and the linter and the build both reject it.
 
 A number without a source gets deleted, not softened. "Roughly a couple of thousand visits" is worse than silence: it looks like data and is not.
 

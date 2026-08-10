@@ -52,6 +52,15 @@ sources:
 ---
 ```
 
+A number off your own dashboard has no public URL, and inventing one is worse than having none. For those, `sources:` also takes a provenance line in exactly this shape:
+
+```yaml
+sources:
+  - Search Console, property atlas.smolevich.com, measured 2026-08-10
+```
+
+Instrument, scope with a single identifier, `measured` and an ISO date. The scope keyword is one of `property`, `account`, `project`, `site`, `repo`, `workspace`, `dataset`, `instance`, `channel`, `bot`, `table`. "My own data" is not a source and does not pass: the line has to let somebody open the same panel and get the same number. Full rules in [STYLE.md](STYLE.md) §4.
+
 A page with numbers and an empty `sources:` fails the build, and so does a page with numbers and no `updated:`. Both apply to guest pages too. A number you cannot source gets deleted, not softened — "a couple of thousand visits" looks like data and is not.
 
 ## English first, Russian follows

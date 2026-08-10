@@ -12,6 +12,8 @@ import {
   BANNED_PHRASES,
   BANNED_STEMS,
   REQUIRED_SECTIONS,
+  isValidSource,
+  findInvalidSources,
 } from './voice-rules.mjs';
 
 test('находит запрещённую фразу и её строку', () => {
@@ -421,4 +423,46 @@ test('бан-лист хранится в нижнем регистре — ин
 test('в обоих языках ровно четыре обязательных блока', () => {
   assert.equal(REQUIRED_SECTIONS.en.length, 4);
   assert.equal(REQUIRED_SECTIONS.ru.length, 4);
+});
+
+// --- Группа F: источник может быть не только URL ---
+
+const PROVENANCE = 'Search Console, property atlas.smolevich.com, measured 2026-08-10';
+
+test('URL остаётся годным источником', () => {
+  assert.equal(isValidSource('https://example.dev/notes/'), true);
+  assert.equal(isValidSource('http://example.dev/notes/'), true);
+});
+
+test('строка происхождения годится как источник', () => {
+  assert.equal(isValidSource(PROVENANCE), true);
+  assert.equal(isValidSource('Plausible, site atlas.smolevich.com, measured 2026-08-10'), true);
+  assert.equal(isValidSource('psql, dataset signup_events, measured 2026-01-31'), true);
+});
+
+test('своё измерение с строкой происхождения снимает ошибку про источник', () => {
+  assert.deepEqual(findUnsourcedNumbers('Clicks grew to 1200.', { sources: [PROVENANCE] }), []);
+});
+
+test('расплывчатая ссылка на себя источником не считается', () => {
+  assert.equal(isValidSource('my own data'), false);
+  assert.equal(isValidSource('my own data, my own data, measured 2026-08-10'), false);
+  assert.equal(isValidSource('Search Console, my own data, measured 2026-08-10'), false);
+  assert.equal(isValidSource('Search Console, property atlas.smolevich.com'), false);
+  assert.equal(isValidSource('Search Console, property atlas.smolevich.com, measured вчера'), false);
+  assert.equal(isValidSource('Search Console, property atlas.smolevich.com, measured 2026-13-40'), false);
+  assert.equal(isValidSource('Search Console, atlas.smolevich.com, measured 2026-08-10'), false);
+  assert.equal(isValidSource('Search Console, property x, measured 2026-08-10'), false);
+});
+
+test('негодный источник не открывает страницу числам', () => {
+  const hits = findUnsourcedNumbers('Clicks grew to 1200.', { sources: ['my own data'] });
+  assert.equal(hits.length, 1);
+});
+
+test('негодные записи в sources возвращаются отдельно', () => {
+  assert.deepEqual(findInvalidSources({ sources: ['https://a.dev', PROVENANCE] }), []);
+  assert.deepEqual(findInvalidSources({ sources: ['my own data'] }), ['my own data']);
+  assert.deepEqual(findInvalidSources({ sources: [] }), []);
+  assert.deepEqual(findInvalidSources({}), []);
 });

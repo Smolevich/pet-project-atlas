@@ -366,8 +366,69 @@ export function findNumericClaims(markdown) {
   return hits;
 }
 
-/** То же, но только когда sources: пуст. */
+// Область замера: ключевое слово из закрытого списка плюс один
+// идентификатор. Домен, репозиторий, хэндл бота, номер счёта — что угодно,
+// по чему замер можно повторить. Именно это и не даёт записи выродиться в
+// «мои данные»: назвать область словами общего смысла нельзя.
+const PROVENANCE_SCOPES = [
+  'property', 'account', 'project', 'site', 'repo',
+  'workspace', 'dataset', 'instance', 'channel', 'bot', 'table',
+];
+const PROVENANCE_SCOPE_PATTERN = new RegExp(`^(?:${PROVENANCE_SCOPES.join('|')})\\s+\\S{3,}$`, 'i');
+const PROVENANCE_DATE_PATTERN = /^measured (\d{4})-(\d{2})-(\d{2})$/;
+// Прибор нельзя назвать «своими данными»: это не прибор, а отказ отвечать.
+const VAGUE_INSTRUMENT = /^(?:my|our|own|personal|internal|свои|своя|мои|наши|собственн)/i;
+
+function isRealDate(year, month, day) {
+  const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
+  return (
+    date.getUTCFullYear() === Number(year) &&
+    date.getUTCMonth() === Number(month) - 1 &&
+    date.getUTCDate() === Number(day)
+  );
+}
+
+function isHttpUrl(entry) {
+  try {
+    return /^https?:$/.test(new URL(entry).protocol);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Строка происхождения для замера, у которого нет публичного URL:
+ * "Search Console, property atlas.smolevich.com, measured 2026-08-10".
+ * Ровно три части: прибор, область с идентификатором, дата замера.
+ */
+export function isProvenanceSource(entry) {
+  if (typeof entry !== 'string') return false;
+  const parts = entry.split(',').map((part) => part.trim());
+  if (parts.length !== 3) return false;
+
+  const [instrument, scope, measured] = parts;
+  if (instrument.length < 3 || VAGUE_INSTRUMENT.test(instrument)) return false;
+  if (!/^[\p{L}\p{N}]/u.test(instrument)) return false;
+  if (!PROVENANCE_SCOPE_PATTERN.test(scope)) return false;
+
+  const date = measured.match(PROVENANCE_DATE_PATTERN);
+  return date !== null && isRealDate(date[1], date[2], date[3]);
+}
+
+/** Годный источник — http(s)-URL либо строка происхождения. */
+export function isValidSource(entry) {
+  return isHttpUrl(entry) || isProvenanceSource(entry);
+}
+
+/** Записи из sources:, которые источником не являются. */
+export function findInvalidSources(data) {
+  const sources = Array.isArray(data?.sources) ? data.sources : [];
+  return sources.filter((entry) => !isValidSource(entry));
+}
+
+/** То же, но только когда в sources: нет ни одного годного источника. */
 export function findUnsourcedNumbers(markdown, data) {
-  if (Array.isArray(data?.sources) && data.sources.length > 0) return [];
+  const sources = Array.isArray(data?.sources) ? data.sources : [];
+  if (sources.some(isValidSource)) return [];
   return findNumericClaims(markdown);
 }

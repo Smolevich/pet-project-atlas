@@ -10,6 +10,7 @@ import {
   parseFrontmatter,
   findUnsourcedNumbers,
   findNumericClaims,
+  findInvalidSources,
 } from './lib/voice-rules.mjs';
 
 const STYLE = {
@@ -60,6 +61,12 @@ async function lintFile(filePath) {
 
   const errors = [];
   const warnings = [];
+
+  for (const entry of findInvalidSources(data)) {
+    errors.push(
+      `${filePath}: sources: "${entry}" — не источник. Нужен http(s)-URL либо строка происхождения "Инструмент, scope идентификатор, measured YYYY-MM-DD". (${STYLE.numbers})`,
+    );
+  }
 
   for (const hit of findUnsourcedNumbers(body, data)) {
     errors.push(
