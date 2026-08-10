@@ -179,6 +179,8 @@ const DOTTED_VERSION_PATTERN = /\bv?\d+\.\d+(?:\.\d+)*\b/gi;
 // inline-код, цель markdown-ссылки, голый URL.
 function stripNonClaimNoise(line) {
   return line
+    // Маркер нумерованного списка — порядок шагов, а не измерение.
+    .replace(/^\s*\d+[.)]\s+/, '')
     .replace(/`[^`]*`/g, '')
     .replace(/\]\([^)]*\)/g, ']')
     .replace(/https?:\/\/\S+/g, '');

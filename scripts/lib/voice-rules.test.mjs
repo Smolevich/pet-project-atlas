@@ -128,3 +128,12 @@ test('ноль как результат остаётся нарушением',
   const hits = findUnsourcedNumbers('Paying users after three months: 0.', { sources: [] });
   assert.equal(hits.length, 1);
 });
+
+test('маркер нумерованного списка не считается утверждением', () => {
+  assert.deepEqual(findUnsourcedNumbers('1. Check rendering without JavaScript.', { sources: [] }), []);
+});
+
+test('число в теле пункта списка остаётся нарушением', () => {
+  const hits = findUnsourcedNumbers('2. Clicks grew to 1200 in six weeks.', { sources: [] });
+  assert.equal(hits.length, 1);
+});
