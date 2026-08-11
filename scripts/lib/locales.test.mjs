@@ -131,8 +131,17 @@ test('id коллекции и путь файла дают один и тот �
   assert.deepEqual([...writtenTranslations(['ru/start'])], ['/ru/start/']);
 });
 
+// Список переведённых страниц меняется по мере перевода, поэтому проверяем
+// правило, а не сегодняшний снимок: адрес попадает в набор тогда и только
+// тогда, когда под ru/ лежит файл.
 test('переводы, прочитанные с диска, совпадают с написанными страницами', () => {
-  const written = writtenTranslations(readDocFiles(new URL('../../src/content/docs/', import.meta.url)));
-  assert.equal(written.has('/ru/indexing/submit-and-verify/'), true);
-  assert.equal(written.has('/ru/money/unit-economics/'), false);
+  const root = new URL('../../src/content/docs/', import.meta.url);
+  const files = readDocFiles(root);
+  const written = writtenTranslations(files);
+
+  for (const url of written) {
+    assert.match(url, /^\/ru\//, `в набор попал нерусский адрес: ${url}`);
+  }
+  assert.equal(written.size, files.filter((f) => f.startsWith('ru/')).length);
+  assert.equal(written.has('/ru/такой-страницы-нет/'), false);
 });

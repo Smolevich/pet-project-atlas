@@ -60,7 +60,7 @@ The script walks every page under `src/content/docs` and reports, per file and p
 - a number in prose while `sources:` is empty;
 - a sentence over the length threshold, as a warning that keeps the build green.
 
-Two exemptions let the check survive contact with contributors. Section index pages are navigation, so the block check skips them. Guest cases keep the author's voice, so the voice checks skip them.
+Two exemptions let the check survive contact with contributors. An index page that declares none of the four blocks is navigation, so the check skips it. Declare one block and all four become required. Guest cases keep the author's voice, so the voice checks skip them.
 
 The number rule still applies to guest pages. Facts are checked the same way for everyone.
 
