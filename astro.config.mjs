@@ -22,6 +22,7 @@ export default defineConfig({
         ru: { label: 'Русский', lang: 'ru' },
       },
       components: {
+        Head: './src/components/Head.astro',
         Footer: './src/components/Footer.astro',
         FallbackContentNotice: './src/components/FallbackContentNotice.astro',
       },

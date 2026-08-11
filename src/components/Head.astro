@@ -1,0 +1,49 @@
+---
+// Дефолтный <head> Starlight плюс JSON-LD. Атлас требует эту разметку от
+// читателя на /geo/citable-pages/ восьмым шагом и сам не отдавал ни строчки.
+//
+// Блок один и лежит в head — там же, где страница советует его держать:
+// микроданные, размазанные по вёрстке, тихо ломаются на первом же редизайне.
+import Default from '@astrojs/starlight/components/Head.astro';
+import { isoDate, pageGraph } from '../../scripts/lib/schema.mjs';
+
+const route = Astro.locals.starlightRoute;
+const site = Astro.site;
+
+// Канонический адрес берётся из уже собранного head: там он в том же формате,
+// что отдаётся браузеру, и на непереведённой странице уже указывает на оригинал.
+const canonical = route.head.find(
+  (tag) => tag.tag === 'link' && tag.attrs?.rel === 'canonical',
+)?.attrs?.href;
+
+// Страница с hero — витрина раздела, а не процедура. Fallback описывать нечем:
+// его canonical указывает на английский оригинал, там статья и описана.
+const isArticle = route.entry.data.template !== 'splash' && !route.isFallback;
+
+let graph = null;
+if (site && typeof canonical === 'string') {
+  graph = pageGraph({
+    siteRoot: site.href,
+    localeRoot: new URL(route.siteTitleHref, site).href,
+    siteName: route.siteTitle,
+    inLanguage: route.lang,
+    page: isArticle
+      ? {
+          url: canonical,
+          headline: route.entry.data.title,
+          description: route.entry.data.description,
+          // Язык текста, а не адреса: на непереведённой странице это разные вещи.
+          inLanguage: route.entryMeta.lang,
+          dateModified: isoDate(route.entry.data.updated),
+        }
+      : null,
+  });
+}
+
+// `<` внутри JSON закрыл бы <script> раньше времени, если он попадёт в описание.
+const json = graph && JSON.stringify(graph).replaceAll('<', '\\u003c');
+---
+
+<Default />
+
+{json && <script type="application/ld+json" set:html={json} />}
