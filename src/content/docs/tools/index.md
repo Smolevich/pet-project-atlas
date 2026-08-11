@@ -22,6 +22,7 @@ Open the Performance report in Search Console and read impressions first.
 - **Impressions with no clicks** — a title and snippet problem, not a body problem. Start with [the numbers worth reading weekly](/analytics/what-to-measure/), then [what a page is made of](/content/page-templates/).
 - **No impressions at all** — you rank for phrases nobody types: [what to write when nobody searches your name](/content/keyword-clusters/).
 - **Page two for everything, pages technically clean** — the gap is off-site: [where the first external links come from](/distribution/catalogs/).
+- **The panel says you rank and nothing arrives** — check that row by hand: [what a paid tracker measures](/tools/paid-tools/).
 - **An assistant recommends competitors** — run `geo-crawlers` first: [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/). Access clean, still not cited: run `geo-citability` and read [why AI answers cite someone else](/geo/citable-pages/).
 - **The product lives inside Telegram or a store** — that platform runs its own index: [search inside the platform](/distribution/in-platform-visibility/).
 

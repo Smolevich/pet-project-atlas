@@ -7,6 +7,7 @@ sources:
   - https://github.com/zubair-trabzada/geo-seo-claude
   - https://github.com/microsoft/playwright-mcp
   - https://github.com/googleworkspace/cli
+  - https://www.semrush.com/
   - https://skills.sh/
   - https://github.com/Smolevich/pet-project-atlas
 ---
@@ -17,7 +18,7 @@ The atlas does not ship audit tooling. Good tooling exists, and rewriting it wou
 
 What is missing is the map: which tool answers which question, and in what order to run them.
 
-Every third-party row below is a package installed on my own machine. The licence column comes from the source repository, not from a guess.
+Every third-party row below is a package installed on my own machine, apart from one paid service. The licence column comes from the source repository, or, for that service, from what the money buys.
 
 ## Steps
 
@@ -33,6 +34,7 @@ Every third-party row below is a package installed on my own machine. The licenc
 | `geo-report` | Collects the audit results into one document for a reader | Somebody else has to act on the findings | Skill, `zubair-trabzada/geo-seo-claude` | MIT |
 | Playwright MCP | Drives a real browser in your own profile, with your live sessions | Search Console, a store console, any panel with no usable API | npm `@playwright/mcp`, `microsoft/playwright-mcp` | Apache-2.0 |
 | `gws` | One authenticated command line over the Google Workspace APIs | Keeping the weekly series in a Sheet, pulling an export out of Drive | npm `@googleworkspace/cli`, `googleworkspace/cli` | Apache-2.0 |
+| Semrush | Domain Overview over Google data: positions, backlinks, an authority score, an AI Search panel | You want positions and links for a domain you cannot measure from the inside | Hosted service, `semrush.com` | Paid subscription, not a skill |
 | `/atlas:start` | Walks a project through the route, calling the audit skills at the right points | You have a live URL and no idea which problem to fix first | This repo, `plugin/` | MIT |
 | `/atlas:content-plan` | Turns a project description and a query export into clusters, one page each | You need to know what to write, and in which order | This repo, `plugin/` | MIT |
 | `/atlas:report` | A weekly slice of Search Console and Analytics: what moved, what to do | The weekly snapshot, once the property is verified and a token exists | This repo, `plugin/` | MIT |
@@ -76,5 +78,7 @@ Every third-party row below is a package installed on my own machine. The licenc
 - Run `gws --help` and find your service in the printed list. An absent service is absent, whatever a guide says.
 - Run `seo-audit` against a page you already repaired. A report that still flags it means the fix did not reach production.
 - Run `geo-crawlers` from a network that is not yours. An access map built from inside your own network hides the edge rules.
+
+What the paid row does and does not measure is its own page: [what a paid rank tracker measures](/tools/paid-tools/).
 
 The routing question — which of these to run for the symptom you actually have — is the [Tools index](/tools/).

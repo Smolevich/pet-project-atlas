@@ -1,0 +1,106 @@
+---
+title: What a paid rank tracker measures
+description: A Semrush panel on a project with no traffic, a reported position checked by hand against the live search page, and the point where the subscription stops paying for itself.
+updated: 2026-08-11
+sources:
+  - Semrush Domain Overview, project telegram-voice-bot, measured 2026-08-11
+  - Google Search, instance google.com/search?gl=ru&hl=ru, measured 2026-08-11
+---
+
+import { Image } from 'astro:assets';
+import semrushOverview from '../../../assets/screenshots/semrush-domain-overview.png';
+
+## What we are solving
+
+A paid panel hands you a table of positions. One row says position 20 for a phrase people actually type, and the product still gets nothing.
+
+The question is which of those numbers you can act on. I ran Semrush over the site of a Telegram bot I run.
+
+<figure>
+  <Image
+    src={semrushOverview}
+    alt="Semrush Domain Overview. The AI Search block reads AI Visibility 0, Mentions 0, Cited Pages 4, with all 4 cited pages under ChatGPT and 0 under AI Overview, AI Mode and Gemini. The SEO block reads Authority Score 2 flagged as lacking organic traffic, Organic Traffic 0, Paid Traffic 0, Referring domains 10, Organic Keywords 11, Paid Keywords 0, Backlinks 61. Top Cited Sources says there is no data to show."
+  />
+  <figcaption>
+    Semrush Domain Overview for the bot's site, subdomain view, worldwide, read on 2026-08-11. The domain is blacked out.
+  </figcaption>
+</figure>
+
+## Steps
+
+Read the whole panel in one pass before you read any single row.
+
+| Panel field | What it said | What it is worth |
+|---|---|---|
+| Authority Score | 2, flagged "Lacks organic traffic" | A summary of the links, not a lever of its own |
+| Organic Traffic | 0 | The outcome every position in the table is supposed to produce |
+| Paid Traffic | 0 | Confirms nothing is being bought to cover the gap |
+| Referring domains, Backlinks | 10 and 61 | Few sources, several links each. Sources are what counts |
+| Organic Keywords | 11 | The pages are indexed and matched to real phrases |
+| AI Visibility, Mentions | 0 and 0 | No answer in the tool's sample named the product |
+| Cited Pages | 4, all under ChatGPT | Something was fetched and quoted somewhere. Nothing says where |
+| Top Cited Sources | "We have no data to show" | The panel above it has no supporting detail |
+| Key Topics | "No topics found. Domain is too small or relatively new." | The tool needs a footprint it can read. There is none |
+
+The keyword table under it, worldwide, on the same day:
+
+| Keyword | Position | Monthly volume |
+|---|---|---|
+| войс бот телеграм | 20 | 90 |
+| бот который озвучивает текст | 47 | 170 |
+| войс бот телеграм | 48 | 90 |
+| бот говорит текст | 72 | 90 |
+| бот для озвучки текста | 83 | 140 |
+
+1. **Read Organic Traffic before any position** — it was 0.
+   A table of positions above a traffic of 0 describes a site that nobody reaches.
+2. **Pair the keyword count with that zero** — 11 keywords matched, the best row at position 20, traffic 0.
+   That pair is a diagnosis. The pages exist and are indexed, and nothing off-site points at them.
+3. **Notice a phrase that occupies two rows** — `войс бот телеграм` sits at position 20 and at position 48.
+   One phrase, two answers. A row is not a verdict about the site, and neither number is an observation.
+4. **Check the scope the panel is showing** — subdomain or root domain, worldwide or a single country tab.
+   The database date sits next to it. Every figure moves when any of those change.
+5. **Verify a position by hand before acting on it** — pin the country and the language, and run the query.
+
+   ```text
+   https://www.google.com/search?q=<query>&gl=ru&hl=ru
+   ```
+
+   Count the domains that come back, and look for your own among them.
+6. **Do not count on a longer result page** — I asked for `num=30` and got exactly ten.
+   Google no longer honours the parameter. Page two is now a click, not a query string.
+7. **Name the engine the row is about** — Semrush reports Google, and these queries are Russian.
+   Yandex is a second engine with no data in this panel. It cannot tell you what it is not reading.
+8. **Read who owns page one before writing anything** — for the top query it was directories and a competitor.
+
+   ```text
+   t.me  botstat.io  voicee.ru  teamlogs.ru  telegram.me
+   yagla.ru  help.cloud.just-ai.com  cybervoice.io  github.com  lumendatabase.org
+   ```
+
+   `botstat.io` and `yagla.ru` are listings, `cybervoice.io` is a competitor's product.
+   A small product gets onto that page by being listed on it, not by outranking it.
+9. **Read the AI Search block as two separate facts** — Mentions 0, and 4 cited pages, all from ChatGPT.
+   Something was quoted, and no answer named the product. The panel does not say which pages or which prompts.
+10. **Stop paying when the panel repeats a diagnosis you already have** — mine reports zeros and a page of directories.
+    The work it points at is off-site. No subscription does that work for you.
+
+## What did not work
+
+- **Acting on the reported position 20**. I searched for `войс бот телеграм` with `gl=ru` and `hl=ru`, and ten domains came back without mine. Position 20 is the second page, so the report is not contradicted. It is unverified, and either way the user sees nothing.
+- **Asking for a deeper result page to settle it**. `num=30` returned ten results. The parameter that made hand-checking cheap is gone, and every check past ten results now costs a click.
+- **Reading one panel as "the search market"**. Semrush reports Google. These phrases are Russian, and Yandex serves that demand too. Not one row in the panel is about it, and the panel does not say so.
+- **Treating Authority Score as a target**. Score 2 sits on 61 backlinks from 10 domains. The score is a summary of those links. Chasing the number means buying links, which is the one route that ends badly.
+- **Reading Cited Pages 4 as visibility**. Mentions were 0 and Top Cited Sources was empty. Four pages were cited somewhere in ChatGPT's sample, and that is the whole claim.
+- **Waiting for the tool to say what to write**. Key Topics answered "No topics found. Domain is too small or relatively new." A tool that reads an existing footprint cannot create the first one.
+- **Buying the subscription before the off-site work**. It bought me a keyword list and a competitor's name. Both were reachable by hand, and neither changed what I had to do next.
+
+## Verify
+
+- Run the query yourself in a clean profile with the country and language pinned. Count the domains and look for your own.
+- Ask for more than ten results and count what actually comes back.
+- Check the panel's scope and database date against what you are about to quote from it.
+- Run the same query on the second engine of your market by hand. No panel in this tool covers it.
+- Compare the tool's Organic Traffic against clicks in Search Console next month. An estimate of 0 is the one figure that needs no trust.
+
+The zeros above are an off-site problem, and that is a different page: [where the first external links come from](/distribution/catalogs/). Inside Telegram the index is another one again: [search inside the platform](/distribution/in-platform-visibility/). What each tool is for: [what to run and when](/tools/skills/).
