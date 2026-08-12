@@ -1,11 +1,12 @@
 ---
 title: What a paid rank tracker measures
-description: A Semrush panel on a project with no traffic, the same query pulled from Search Console three months later, and a position estimate that missed by more than twenty places.
+description: A Semrush panel on a project with no traffic, the same query pulled from Search Console three months later, and what six impressions turn out to be worth.
 updated: 2026-08-12
 sources:
   - Semrush Domain Overview, project telegram-voice-bot, measured 2026-08-11
   - Google Search, instance google.com/search?gl=ru&hl=ru, measured 2026-08-11
   - Search Console API, property telegram-voice-bot, measured 2026-08-12
+  - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-12
 ---
 
 import { Image } from 'astro:assets';
@@ -17,7 +18,7 @@ A paid panel hands you a table of positions. One row says position 20 for a phra
 
 The question is which of those numbers you can act on. I ran Semrush over the site of a Telegram bot I run.
 
-A day later I pulled the same query out of Search Console. The two positions are more than twenty places apart, and that comparison is the second half of this page.
+A day later I pulled the same query out of Search Console. The two numbers are twenty places apart and they are not the same quantity. Unpicking that is the second half of this page.
 
 What these services are for, and which of them read Yandex, is one section earlier. See [what the paid panels actually measure](/demand/how-people-search/). This page is the measurement behind that overview.
 
@@ -107,26 +108,36 @@ So I pulled the property itself through the Search Console API. Dimension `query
 | best stt models 2026 | 0 | 1 | 0% | 10.0 |
 | telegram premium voice message transcription | 0 | 1 | 0% | 9.0 |
 | moonshine vs parakeet | 0 | 1 | 0% | 11.0 |
-| войс бот телеграм | 0 | — | 0% | 43.3 |
+| войс бот телеграм | 0 | 6 | 0% | 43.3 |
 
 That is the head of the table. The whole period: 74 queries, 278 impressions, 1 click.
 
-The dash is a cell my export does not carry. Every other figure is what the API returned.
+Every figure is what the API returned. An earlier version of this table had a dash where the 6 now sits. I quoted the 43.3 without it.
 
-Semrush put `войс бот телеграм` at position 20. Search Console, over three months, records an average position of 43.3 for the same query.
+Semrush put `войс бот телеграм` at position 20. Search Console gives an average position of 43.3 for the same query over three months.
 
-The panel estimates from outside the property. Search Console counts what Google served on it. When the two disagree, the one counting your own impressions is the one to act on.
+Those are different quantities. Semrush estimates a position on one day from its own database. Search Console averages the positions of the impressions it actually served.
 
-This is one query, on one property, on one day of the panel's database. It says the estimate missed here. It does not say anything about the tool's other rows.
+For this query it served six, on three days out of eighty-nine. Two on 23 June at position 53, three on 28 July at 43.3, one on 31 July at position 24.
+
+So 43.3 is the mean of six impressions spanning positions 24 to 53. The panel's 20 is four places from the best of those days and thirty-three from the worst.
+
+Two different pages answered the query as well. `/ru` took four impressions at position 38, one article took two at position 54.
+
+An average over two pages, three days and six impressions is not a position. It is a number the API will print for any query that was shown at all.
+
+What survives is smaller and firmer. The query produced six impressions and no clicks in three months, and no reading of the panel changes that.
 
 11. **Pull your own property before acting on any row above** — Search Console API, dimension `query`, the full period.
     The panel and the property answer the same question with different instruments. Only one of them counts your impressions.
-12. **Put the two positions for one query in a single row** — 20 from the panel, 43.3 from Search Console.
-    That is the gap on the phrase the panel ranked best. A live check had already failed to find me on page one, and it settled nothing, because position 20 is page two too.
+12. **Put the two positions in one row** — 20 from the panel, 43.3 from Search Console, six impressions behind it.
+    Pull impressions with position, always. An average with fewer than a dozen impressions under it is arithmetic, not a measurement, and Search Console prints it to one decimal place regardless.
+    This page used to say the panel missed by more than twenty places. It says less: two instruments measured different things, and this row does not settle which is closer to the truth.
 13. **Read a respectable position against its clicks** — `telegram text to speech`, position 20.5, 24 impressions, 0 clicks.
     Page two is functionally zero. Two dozen people were shown the result and not one of them clicked it.
-14. **Read position 1.0 as a question about demand, not about ranking** — `stt модели`, 1 impression, 0 clicks.
-    First place on a phrase nobody types pays nothing. That is why the route now opens with demand: [the words people type](/demand/how-people-search/) and [whether they pay](/demand/will-they-pay/).
+14. **Read position 1.0 as a question about demand** — `stt модели`, 1 impression, 0 clicks, on 9 August.
+    Impressions count how often Google showed my result, not how often anybody typed the phrase. One impression is a fact about my page and says nothing at all about demand.
+    So I checked the phrase itself. Yandex Wordstat gives 56 requests, all regions, 10 July to 8 August 2026. The conclusion holds, and the evidence for it is the 56, not the 1: [the words people type](/demand/how-people-search/) and [whether they pay](/demand/will-they-pay/).
 15. **Find the one click and read what earned it** — position 49, 1 impression, 1 click.
     The only click in three months came from the bottom of page five, on `озвучка детским голосом бот телеграм`. Specificity beat position: the phrase was long, and the page matched it exactly.
 16. **Publish the totals with the zeros in them** — 74 queries, 278 impressions, 1 click.
@@ -141,8 +152,10 @@ This is one query, on one property, on one day of the panel's database. It says 
 - **Reading Cited Pages 4 as visibility**. Mentions were 0 and Top Cited Sources was empty. Four pages were cited somewhere in ChatGPT's sample, and that is the whole claim.
 - **Waiting for the tool to say what to write**. Key Topics answered "No topics found. Domain is too small or relatively new." A tool that reads an existing footprint cannot create the first one.
 - **Buying the subscription before the off-site work**. It bought me a keyword list and a competitor's name. Both were reachable by hand, and neither changed what I had to do next.
-- **Leaving the reported position unchecked against my own property**. The hand-check could not disprove position 20, so I let it stand. Search Console records 43.3 for that query, and the pull that settled it took one API call.
-- **Reading a position as the result**. `stt модели` came back at average position 1.0, with one impression and no click in three months. First place on a phrase nobody types is a number about a page nobody asked for.
+- **Leaving the reported position unchecked against my own property**. The hand-check could not disprove position 20, so I let it stand. One API call brought back what Google served on my own property, and that was the pull worth making first.
+- **Publishing 43.3 with a dash where the impressions go**. I quoted an average and left out the one field that says whether it means anything. It is six impressions on three days, positions 24 to 53, served by two different pages. With the 6 in the row, nobody would have read the number the way I wrote it.
+- **Calling a one-day panel estimate and a ninety-day property average a comparison of positions**. They are different quantities, aggregated differently, and a gap between them is what you get when both instruments are working. I published the gap as a finding about the panel.
+- **Reading one impression as a statement about demand**. `stt модели` came back at position 1.0 and I wrote that nobody types it. Search Console counts how often my result was shown, which is a fact about me. Wordstat counts the query, and it says 56 a month. Same conclusion, on the instrument that can carry it.
 - **Expecting a decent position to produce clicks on its own**. Position 20.5, 24 impressions, 0 clicks. There is no title or snippet fix on page two, and I spent an evening looking for one.
 
 ## Verify
