@@ -55,11 +55,11 @@ So the string was real and the crawler was not. You will never grep `Google-Exte
 
 `ChatGPT-User` is top of the table, and it is the row the log explains worst. That agent fires when a person pastes a URL into a chat.
 
-Four of the 341 came from my own address, from `curl` with the string set by hand. The other 337 came from 272 addresses inside OpenAI's ranges.
+Four of the 341 came from my own address, from `curl` with the string set by hand. The other 337 came from 272 addresses I have not checked against any published range.
 
-That is where the fetch originates whether I pasted the link or a stranger did. OpenAI's servers make the request either way, so the address cannot tell us apart.
+If the agent is genuine, the fetch leaves OpenAI's servers whether I pasted the link or a stranger did. The address would not tell us apart either way.
 
-What the log can say is thin. Those 337 requests are spread over every hour of the day and all 15 dated days. 38 of them fall within five minutes of a request from my own address.
+What the log can say is thin. Those 337 requests cover every hour of the day and 15 of the window's 16 dated days. 38 of them fall within five minutes of a request from my own address.
 
 Eleven per cent is weak evidence against "it was all me", and no evidence at all of who it was. Separating the two needs a window in which I do not touch the site, and I have not run one.
 
