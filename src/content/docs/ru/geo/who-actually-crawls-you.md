@@ -6,6 +6,7 @@ sources:
   - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/*.access.log.*.gz, measured 2026-08-12
   - https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - https://developers.cloudflare.com/ai-crawl-control/features/analyze-ai-traffic/
 ---
 
 ## Что решаем
@@ -185,6 +186,6 @@ AI-агенты — ChatGPT-User, OAI-SearchBot, GPTBot, PerplexityBot, Perplexi
 - Считать строки, а не вхождения. Прогнать одни и те же данные через `wc -l` и через `grep -o` и сравнить суммы.
 - Разрезолвить адреса главных агентов обратным DNS и сверить с диапазонами вендора.
 - Снять окно, в которое вы сайт не трогаете вообще. Иначе агента, которого запускает человек, честно не прочитать, и я такого окна пока не снимал.
-- Сравнить лог с аналитикой своего CDN. Всё, что закэшировал edge, для nginx невидимо.
+- Сравнить лог с аналитикой своего CDN. У Cloudflare это **AI Crawl Control**, вкладки **Crawlers** и **Metrics**. Всё, что edge закэшировал или отклонил, для nginx невидимо.
 
 Кто чем владеет и где на самом деле стоит блокировка: [AI-crawler и llms.txt](/ru/geo/llms-txt-and-crawlers/). Чем скачивание всё-таки не является: [почему AI цитирует не вас](/ru/geo/citable-pages/).

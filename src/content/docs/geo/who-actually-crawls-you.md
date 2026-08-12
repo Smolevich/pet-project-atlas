@@ -6,6 +6,7 @@ sources:
   - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/*.access.log.*.gz, measured 2026-08-12
   - https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - https://developers.cloudflare.com/ai-crawl-control/features/analyze-ai-traffic/
 ---
 
 ## What we are solving
@@ -185,6 +186,6 @@ So `llms.txt` is not a route agents travel. On this box in this window it was no
 - Count lines, not occurrences. Pipe the same data through `wc -l` and through `grep -o`, and compare the two totals.
 - Resolve the addresses of your top agents by reverse DNS, and match them against the vendor's published ranges.
 - Take a window in which you do not touch the site at all. It is the only way to read a user-triggered agent honestly, and I have not taken one yet.
-- Compare the log against your CDN's own analytics. Everything the edge cached is invisible to nginx.
+- Compare the log against your CDN's own analytics. On Cloudflare that is **AI Crawl Control**, in the **Crawlers** and **Metrics** tabs. Everything the edge cached or refused is invisible to nginx.
 
 Who owns which agent, and where a block actually lives: [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/). What a fetch is still not: [why AI answers cite someone else](/geo/citable-pages/).
