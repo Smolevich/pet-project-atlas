@@ -1,12 +1,13 @@
 ---
 title: Which market to build for
-description: Three niches and four markets pulled from Semrush on one day. What volume, intent, CPC and the ad count say when you read them together, and why the biggest number was the worst of the three.
+description: Three niches and four markets pulled from Semrush on one day, and the Russian row checked against Yandex Wordstat, where the same phrase came back eighteen times larger.
 updated: 2026-08-12
 sources:
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=us, measured 2026-08-12
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=uk, measured 2026-08-12
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=de, measured 2026-08-12
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=ru, measured 2026-08-12
+  - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-12
   - https://www.semrush.com/kb/997-semrush-data
   - https://support.google.com/publisherpolicies/answer/15766875
   - https://support.google.com/adsense/answer/15282937
@@ -15,6 +16,7 @@ sources:
 import { Image } from 'astro:assets';
 import semrushVoiceAgent from '../../../assets/screenshots/semrush-ai-voice-agent.png';
 import semrushYoutubeTranscript from '../../../assets/screenshots/semrush-youtube-transcript.png';
+import wordstatGolosovoyBot from '../../../assets/screenshots/wordstat-golosovoy-bot.png';
 
 ## What we are solving
 
@@ -93,11 +95,51 @@ The rest of the Russian row survives, with a label on it. Volume, difficulty and
 
 The Russian side does read harder: 64% against 40%. Difficulty is scored against its own database, so that pair is not strictly comparable either.
 
-Nor is it a smaller room with more space in it. The Russian branch holds 376 variations at 2,700 total volume, against 2,969 and 32,000 in English.
+Inside the panel the Russian branch also looks thinner. It holds 376 variations at 2,700 total volume, against 2,969 and 32,000 in English.
 
 The question block says the same. Russian: 51 questions, 110 volume. English: 181 questions, 1,200 volume.
 
-That is about a twelfth of the Google demand, and harder to enter. What it is not is a reading of the Russian market, most of which this panel never saw.
+This page used to read that as a market about a twelfth the size. Then I typed the same phrase into the other engine.
+
+### The same phrase, the other engine
+
+`голосовой бот` in Yandex Wordstat, all regions, 10 July to 8 August 2026: 7,034 requests.
+
+Semrush's `db=ru` reported 390 for the same phrase. The two instruments are eighteen times apart.
+
+<figure>
+  <Image
+    src={wordstatGolosovoyBot}
+    alt="Yandex Wordstat for the phrase голосовой бот. All regions selected, and desktops, smartphones and tablets all checked. The headline reads Общее число запросов «голосовой бот» за 10.07.2026 – 08.08.2026: 7 034. The table below lists голосовой бот 7 034, голосовой бот тг 1 708, бот голосовых сообщений 1 613, голосовой чат бот 964, бот голосового текста 899, голосовой бот телеграмм 783, голосовой бот телеграм 450, сделать голосового бота 421 and голосовой бот голос 414."
+  />
+  <figcaption>
+    Yandex Wordstat for `голосовой бот`, all regions, 10 July to 8 August 2026, read on 2026-08-12. Semrush reported 390 for the same phrase.
+  </figcaption>
+</figure>
+
+The tail from the same window says it again.
+
+| Phrase | Wordstat, one month |
+|---|---|
+| `голосовой бот тг` | 1,708 |
+| `бот голосовых сообщений` | 1,613 |
+| `голосовой чат бот` | 964 |
+| `бот голосового текста` | 899 |
+| `голосовой бот телеграмм` | 783 |
+| `голосовой бот телеграм` | 450 |
+| `сделать голосового бота` | 421 |
+| `голосовой бот бесплатно` | 357 |
+| `бот для расшифровки голосовых` | 197 |
+| `бот перевести голосовое в текст` | 146 |
+| `бот расшифровка голосовых телеграмм` | 146 |
+
+Seven of those rows carry more volume on their own than Semrush reported for the head phrase.
+
+So the twelfth was never a fact about the market. It was the distance between two instruments, one of which does not read the engine serving this demand.
+
+That does not put Russia back in the running either. The four-market comparison no longer exists. Three markets measured in Google, one in Yandex, and those do not share a table.
+
+This page already carried the rule that would have caught it. Name the engine next to the number, or the number compares nothing.
 
 ### Two phrasings of one idea
 
@@ -129,7 +171,7 @@ The first one carries more volume than the head phrase in the United Kingdom. Ne
 
 - **Every number here is Semrush's estimate from outside**. It is not a measurement of anyone's property. The same panel missed a real position by more than twenty places: [what a paid rank tracker measures](/tools/paid-tools/).
 - **Keyword Difficulty is scored against its own database**. So 40% and 64% are not strictly comparable across markets. Comparable within a market only.
-- **Semrush does not cover Yandex**. For Russian-language demand that is a large hole, and this table is Google-only.
+- **Semrush does not cover Yandex**. For Russian-language demand that is a large hole, and this table is Google-only. Measured on one phrase, the hole is a factor of eighteen.
 - **The Russian CPC has no auction behind it**. Google has not served ads to users in Russia since March 2022. The field is filled in all the same.
 - **The English rows come from the United States database**. The country split next to the global volume is volume only, not CPC.
 
@@ -154,6 +196,7 @@ The first one carries more volume than the head phrase in the United Kingdom. Ne
 
 - **Picking the niche by search volume**. 60,500 looked like the goldmine of the three. That click is worth $0.86, the difficulty is 70%, and the intent is Navigational. I would have entered the slowest niche for the cheapest traffic.
 - **Assuming the domestic-language market is the easier one**. The Russian phrase came back harder than the American one, 64% against 40%. That much the panel supports, inside Google.
+- **Sizing a market with the one panel that cannot see it**. This page said the Russian branch was about a twelfth of the English one, on Semrush's 390. Wordstat gives 7,034 for the same phrase in the same month. The figure I published described my instrument, and I put a caveat above it instead of deleting it.
 - **Reading a CPC without asking whether the auction exists**. I put $2.65 next to $16.18 and called it a comparison of markets. Google has not served ads in Russia since March 2022, so one of those prices has nobody paying it.
 - **Letting a filled-in field stand for a fact**. The panel had no empty cell to warn me with, and I read a populated column as a measured one. A field is filled because the model can produce a number, not because the market exists.
 - **Treating one phrasing as the whole niche**. I read `ai voice agent`, saw Informational, and nearly wrote the niche off. `voice ai agents` reads Commercial at $16.94, and it was one line further down the same screen.
@@ -167,7 +210,7 @@ The first one carries more volume than the head phrase in the United Kingdom. Ne
 - Write one row per phrase with all four fields in it: volume, intent, CPC, ads. A row missing a field is not a decision yet.
 - Re-run each phrase in its own market database and put the database name next to the number. Two numbers without databases are not a comparison.
 - Count the ads by hand on the live results page, on two separate days. One day of ads proves nothing about a budget.
-- Name the engine behind every row. For Russian-language demand check Wordstat as well: [the words people actually type](/demand/how-people-search/).
+- Name the engine behind every row. For Russian-language demand check Wordstat too, and treat that check as mandatory. On my one phrase the two engines were eighteen times apart — [the words people actually type](/demand/how-people-search/).
 - State the market you picked in one sentence, with the figure that decided it. If the sentence works without the figure, you picked by taste.
 
 In sum, the biggest number of the three was the worst niche of the three. Whether the audience behind the expensive click pays anything is the next question: [whether that audience pays for anything](/demand/will-they-pay/).

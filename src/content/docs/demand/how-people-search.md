@@ -3,6 +3,8 @@ title: The words people actually type
 description: Where real phrasings come from, how to read Yandex and Google for them, and what Semrush and its peers are actually measuring when they hand you a volume number.
 updated: 2026-08-12
 sources:
+  - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-12
+  - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=ru, measured 2026-08-12
   - https://wordstat.yandex.ru/
   - https://yandex.ru/support/direct/keywords/symbols-and-operators.html
   - https://support.google.com/google-ads/answer/7337243
@@ -56,7 +58,17 @@ That leaves one tool of the six. Topvisor checks positions in Google, Yandex, Ya
 
 Topvisor is a different instrument, though, not a cheaper Semrush. It checks the phrases you give it and bills per check. There is no ready database to browse for a market you have not entered.
 
-Database size is the wrong criterion here. A panel that does not read Yandex describes part of a Russian-language market and does not say which part. The atlas has that in measured form, on a live project: [what a paid rank tracker measures](/tools/paid-tools/).
+Database size is the wrong criterion here. A panel that does not read Yandex describes part of a Russian-language market and does not say which part.
+
+I measured that gap on one phrase, on one day. `голосовой бот`, all regions, 10 July to 8 August 2026.
+
+Wordstat returns 7,034 requests. Semrush, database `db=ru`, the same phrase read the same day, returns 390.
+
+Eighteen times apart. Neither figure is a mistake. They are two engines, and the smaller number belongs to the smaller engine.
+
+That is the price of skipping "name the engine". On the strength of the 390 this atlas called the Russian market a twelfth the size. That twelfth was a property of the panel: [which market to build for](/demand/pick-a-market/).
+
+What a panel says about your own property is a second measured case: [what a paid rank tracker measures](/tools/paid-tools/).
 
 Now the harvest itself, which no panel does for you.
 
@@ -82,6 +94,7 @@ Now the harvest itself, which no panel does for you.
 - **Naming the product in Latin script while the demand was typed in Cyrillic**. The words were right and the alphabet was wrong. Queries in the audience's script could not reach the product at all, and nothing was logged, because nothing failed.
 - **Reading the user base as proof of the market**. The geography of signups matched the Latin spelling of the name rather than the market I was building for. I spent weeks on product theories about an audience that was an artefact of one metadata field.
 - **Assuming my vocabulary was the market's**. My word for the core feature was not the word people typed. The pages existed, the demand existed, and they passed each other.
+- **Carrying a Google-only volume into a decision about a Russian market**. I took 390 for `голосовой бот` out of Semrush's `db=ru` and compared it with three English-speaking markets. Wordstat gives 7,034 for the same phrase and window. Both numbers are real, and only one is about the engine that audience uses.
 - **Taking a tool's Yandex support from a review instead of the vendor's own list**. This page said Serpstat ships Yandex databases. Serpstat's database page lists Google and Bing, and that one row was the answer to the page's own question.
 - **Reading one panel as "the search market"**. The tool reported Google. The phrases were Russian, Yandex serves that demand too, and not one row in the panel was about it. The panel does not warn you about the engine it cannot see.
 - **Waiting for a tool to say what to write**. Its topics report answered that the domain was too small or too new to have any. A service that reads an existing footprint cannot create the first one.
@@ -93,6 +106,7 @@ Now the harvest itself, which no panel does for you.
 - Run the phrase by hand on the live results page, with country and language pinned. Compare what comes back with what the panel said.
 - Search the platform from an account that has never touched the product, in the audience's language. Note whether you appear at all, and who is above you.
 - Name the engine behind every figure you write down. A number without an engine next to it is not usable in a Russian-language market.
+- Run one phrase through both engines before you trust either of them. Mine came back eighteen times apart, and that gap is the whole reason for this rule.
 - Finish with a file: one row per phrasing, its origin, and the engine it was checked in. A row with no origin is your own vocabulary wearing a disguise.
 
 One panel read across three niches and four markets is here: [which market to build for](/demand/pick-a-market/).
