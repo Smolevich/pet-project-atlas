@@ -24,26 +24,26 @@ The section numbers are a reading order. The doing order crosses them twice, and
 ### Week zero — check there is demand before anything else
 
 1. Harvest the exact phrasings people use, from support, reviews and forums — [the words people actually type](/demand/how-people-search/).
-2. Check the Russian phrasings in Yandex Wordstat, with the operators applied — [same page](/demand/how-people-search/).
+2. Check the Russian phrasings in Yandex Wordstat, with the operators applied. A bare phrase returns the category total, not demand for your wording — [same page](/demand/how-people-search/).
 3. Check the English ones in Google, and read both suggest dropdowns — [same page](/demand/how-people-search/).
 4. Search the platform your product lives in, from a fresh account — [same page](/demand/how-people-search/).
-5. Read a zero on your most obvious phrase as a finding, not a glitch — [same page](/demand/how-people-search/).
-6. Name the paid competitor on your main query, and record their price shape — [whether that audience pays](/demand/will-they-pay/).
-7. Check whether anyone bids on the query, and what the free path is — [same page](/demand/will-they-pay/).
+5. Read a zero on your most obvious phrase as a finding, not a glitch. Either nobody has this problem, or you invented the word — [same page](/demand/how-people-search/).
+6. Name the paid competitor on your main query, and record their price shape. Somebody already tested this market with their own money — [whether that audience pays](/demand/will-they-pay/).
+7. Check whether anyone bids on the query, and what the free path is. Nobody bids twice on an audience that does not spend — [same page](/demand/will-they-pay/).
 
 This stage is a day or two, and it decides whether the rest is worth doing. Everything below assumes somebody types these words and somebody pays for something.
 
 ### Week one — make the site fetchable, then hand it over
 
-8. Run `curl -sL` on your own page. Find body text in the response — [Google does not see your site](/indexing/why-google-does-not-see-you/).
-9. Read `robots.txt` on the live domain, every line of it — [same page](/indexing/why-google-does-not-see-you/).
-10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header — [same page](/indexing/why-google-does-not-see-you/).
-11. Check the canonical on a few pages points at those pages — [same page](/indexing/why-google-does-not-see-you/).
-12. Request one page from outside your network, without cookies — [same page](/indexing/why-google-does-not-see-you/).
-13. Verify a domain property in Search Console and submit the sitemap once — [submit and verify](/indexing/submit-and-verify/).
-14. Import the property into Bing Webmaster Tools — [submit and verify](/indexing/submit-and-verify/).
-15. Allow the search and user-triggered AI agents by name — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
-16. **First crossing.** Tag every outbound link and store the source on first contact — [where the user came from](/analytics/attribution/).
+8. Run `curl -sL` on your own page and find body text in the response. Text missing there is text the crawler never sees — [Google does not see your site](/indexing/why-google-does-not-see-you/).
+9. Read `robots.txt` on the live domain, every line of it. The classic blocker is a `Disallow: /` inherited from a staging config — [same page](/indexing/why-google-does-not-see-you/).
+10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header. It drops the page from the index on purpose, and no browser shows the header — [same page](/indexing/why-google-does-not-see-you/).
+11. Check the canonical on a few pages points at those pages. A canonical aimed at the home page asks search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
+12. Request one page from outside your network, without cookies. Your own network is trusted, so an edge rule blocking the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/).
+13. Verify a domain property in Search Console and submit the sitemap once. A URL-prefix property covers only the form you typed, and its report stays empty — [submit and verify](/indexing/submit-and-verify/).
+14. Import the property into Bing Webmaster Tools. Its index also feeds Copilot answers, which is a separate audience — [submit and verify](/indexing/submit-and-verify/).
+15. Allow the search and user-triggered AI agents by name. Blocked, you are absent from the answer at any quality of content — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+16. **First crossing.** Tag every outbound link and store the source on first contact. A messenger or a store passes no source unless you ask for it — [where the user came from](/analytics/attribution/).
 17. Name the single action that counts as activation — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
 Step sixteen belongs to section six and has to happen now. Attribution cannot be reconstructed, so every untagged day is a day of arrivals you will never classify.
@@ -51,23 +51,23 @@ Step sixteen belongs to section six and has to happen now. Attribution cannot be
 ### Week two — write pages that can be found and quoted
 
 18. Group the phrasings from week zero into clusters, one URL each — [what to write](/content/keyword-clusters/).
-19. Order the queue by money: transactional, then comparison, then informational — [what to write](/content/keyword-clusters/).
+19. Order the queue by money: transactional, then comparison, then informational. You run out of energy long before you run out of clusters — [what to write](/content/keyword-clusters/).
 20. Write the first page in the four-block shape — [what a page is made of](/content/page-templates/).
-21. Put the answer in the first three sentences of that page — [what a page is made of](/content/page-templates/).
-22. Add JSON-LD with `sameAs` listing your profiles and listings — [why AI answers cite someone else](/geo/citable-pages/).
+21. Put the answer in the first three sentences of that page. That block is the passage a model lifts — [what a page is made of](/content/page-templates/).
+22. Add JSON-LD with `sameAs` listing your profiles and listings. That field merges scattered mentions into one entity a model recognises — [why AI answers cite someone else](/geo/citable-pages/).
 23. Publish `llms.txt` naming only pages that are actually written — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
-24. If the product lives in a platform, put its function in the name — [search inside the platform](/distribution/in-platform-visibility/).
+24. If the product lives in a platform, put its function in the name. Platform search matches the name, not the description — [search inside the platform](/distribution/in-platform-visibility/).
 25. Take the first weekly snapshot and append it to a file — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
 ### Month two — go off-site, then read the money
 
 26. Write the listing card once: name, description, category, screenshots, link — [where the first links come from](/distribution/catalogs/).
-27. Check each venue live, then submit in small batches with tagged links — [where the first links come from](/distribution/catalogs/).
-28. Write to one listicle author whose page already ranks above you — [where the first links come from](/distribution/catalogs/).
+27. Check each venue live, then submit in small batches with tagged links. Published lists of directories go stale faster than anything else here — [where the first links come from](/distribution/catalogs/).
+28. Write to one listicle author whose page already ranks above you. One inclusion there beats several entries in directories nobody reads — [where the first links come from](/distribution/catalogs/).
 29. **Second crossing.** Re-run the citability work now that something links to you — [why AI answers cite someone else](/geo/citable-pages/).
-30. Record the cost of every action on its own event row — [what one user costs](/money/unit-economics/).
+30. Record the cost of every action on its own event row. An empty column makes every report fall back to estimated rates — [what one user costs](/money/unit-economics/).
 31. State break-even as a whole number of payers per month — [what one user costs](/money/unit-economics/).
-32. Read the series and fix the earliest large drop, not the last one — [the numbers worth reading weekly](/analytics/what-to-measure/).
+32. Read the series and fix the earliest large drop, not the last one. Tuning payment while activation is broken works on a step almost nobody reaches — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
 Step twenty-nine goes back to section three. On-page citability pays once a model has seen you named somewhere else. Month two is when that starts being true.
 
