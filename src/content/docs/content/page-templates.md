@@ -26,7 +26,7 @@ One shape does both: the answer first, then the procedure, then the failures, th
 4. **Write the block nobody else can copy** — what you tried that failed, and what it cost.
    Competitors copy each other's steps freely. Nobody copies your dead ends, because they do not have them.
 5. **Add an FAQ only for questions you were actually asked** — from support, from the query list, from comments.
-   Google stopped showing the FAQ rich result on 7 May 2026 and removed the documentation in June 2026. The markup gives nobody a rich result now.
+   Google stopped showing the FAQ rich result on 7 May 2026 and removed the documentation on 15 June 2026. The markup gives nobody a rich result now.
    The block still earns its place. A short question with a short self-contained answer is the shape an assistant extracts.
 6. **Write anchors that name the destination** — the previous page in the route, the next one, the tool.
    "Read more" tells nobody anything. Put the destination's promise into the anchor text.
