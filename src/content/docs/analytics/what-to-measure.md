@@ -52,7 +52,7 @@ Fix the earliest large drop first. Tuning payment while activation is broken is 
 - **Counting transactions instead of unique payers.** Three purchases by one person read as three customers. The same mistake makes a single test account look like traction.
 - **Trusting an external traffic estimate.** It did not cover one of the two search engines my audience used. The conclusion I drew was the opposite of the truth. One manual query in that engine would have caught it.
 - **Building the dashboard before writing the questions.** Panels that answer nothing still get read every week. I deleted most of my event tables and rebuilt the panel around cost and exhaustion.
-- **Averaging over all users instead of cohorts.** Steady signup growth kept the average flat. Retention inside each new cohort was falling.
+- **Averaging over all users instead of cohorts.** The average stayed flat while signups grew steadily. Whether any cohort was moving, that panel could not say.
 
 ## Verify
 

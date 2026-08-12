@@ -43,11 +43,11 @@ An empty column never announces itself. It turns a measured model into an estima
 - **Building the panel before writing the questions.** Panels that answer nothing still get read every week. I deleted most of my event tables and rebuilt the thing around cost and exhaustion.
 - **A cost column left nullable and empty.** For months it held nothing, so reports fell back to estimated rates. On a chart an estimate is indistinguishable from a measurement.
 - **The source parameter that arrived and was never stored.** It went into a log line and was dropped there. The links looked instrumented for weeks while nothing reached a row.
-- **Not recording the kind of input.** The field appeared late. It said people arrived with a recording already made, not speaking into the chat. Every first screen I had written addressed the other person.
+- **Not recording the kind of input.** The field appeared late. Since it exists, most arrivals carry a recording made elsewhere, not speech into the chat. That is a direction and not a figure: the counts sit in a database this atlas does not publish. Every first screen I had written addressed the other person.
 - **Reading the error log as an ops artefact.** It was where I looked when something was down. Grouped by input rather than by time, the same lines described the product's edges.
 - **Counting events instead of people.** Three actions by one person read as three users. One test account reads as traction the same way.
 - **Having no row for the people who did nothing.** They are the largest group and the harshest signal. No event table contains them, which is exactly why they never came up as a problem.
-- **Averaging across everyone instead of cohorts.** Steady signup growth kept the average flat. Retention inside each new cohort was falling.
+- **Averaging across everyone instead of cohorts.** The average stayed flat while signups grew steadily. Whether any cohort was moving, that panel could not say.
 
 ## Verify
 
@@ -57,5 +57,7 @@ An empty column never announces itself. It turns a measured model into an estima
 - Take last week's failures and group them by class of input. If they are all one class called error, the log is not instrumented yet.
 - Break one number from the weekly list down by source and by client. If it does not break down, the fields are missing from the row.
 - Run the same query a month later. A name that no longer parses means the closed list is a comment rather than a constraint.
+
+No figure appears on this page, so it carries no Sources block. It describes the shape of a row, and the shape is what transfers.
 
 The numbers this feeds are on [the numbers worth reading weekly](/analytics/what-to-measure/). What each recorded action costs you is on [what one user costs](/money/unit-economics/).
