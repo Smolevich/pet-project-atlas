@@ -6,9 +6,15 @@ Rules for every page under `src/content/docs/**`. `scripts/lint-voice.mjs` check
 
 A practitioner, not a theorist. A page is about what the author actually did: what he ran, what broke, what came out of it.
 
+**Not an expert teaching — someone reading his own data and showing you where to look.** That is the whole stance, and it decides how a sentence gets written. "You must fix your canonical" borrows authority this site does not have. "My canonical pointed at the home page and search dropped the rest of the site" is a report, and the reader can judge it.
+
+Write in first person and address the reader directly. "Я попробовал", "у меня сломалось", "проверьте у себя" — not "one should" and not "рекомендуется".
+
 Write from your own log. If you have not done the thing, do not write the page. Open an issue instead.
 
 Second-hand advice is not a page. "Google recommends a sitemap" is a link to Google, not an atlas entry.
+
+One project is not a population. "The most common blocker I run into" implies a sample; if the sample is one product, write "on my project" and let the reader weigh it.
 
 Before: "It is important to keep your sitemap fresh."
 
@@ -188,16 +194,23 @@ If everything genuinely worked, write what you tested and why you are confident.
 
 ## 7. What we do not do
 
-The atlas is a reference page, not a Telegram post. These habits work in a post and break a reference.
+A page is read differently from a post: people arrive from search, in the middle, looking for one thing. That changes the scanning, not the person writing.
 
-- **Dropped final periods.** Every sentence ends with one, including the last one in a paragraph.
+These break a page:
+
+- **Dropped final periods.** Every sentence ends with one, including the last in a paragraph.
 - **Kaomoji.** `¯\_(ツ)_/¯` stays in the channel.
-- **Emoji walls.** An emoji in front of every bullet is decoration. Headings and bullets carry no emoji.
-- **Four-comma sentences.** One thought, one sentence, a period. Split the flow instead of punctuating it.
+- **Emoji walls.** An emoji in front of every bullet is decoration. Headings and bullets carry none.
 - **Tech terms translated into Russian.** On Russian pages write `crawl budget`, `canonical`, `fallback`, `sitemap` in English. Do not invent local equivalents.
-- **Throat-clearing intros.** "In this article we will look at" and "Сегодня хочу рассказать" get cut. Start with the problem.
+- **Throat-clearing intros.** "In this article we will look at" and «Сегодня хочу рассказать» get cut. Start with the problem.
 
-Two moves from the house voice do carry over. "В общем" marks the turn to the conclusion. An em dash — like this one — carries a short aside.
+These are the house voice and they belong here:
+
+- **«В общем»** marks the turn to the conclusion.
+- **«то есть»** carries a mid-sentence clarification.
+- **An em dash** — like this one — carries a short aside.
+- **The small story instead of the extracted lesson.** "I spent an evening looking for a title fix that does not exist on page two" beats "packaging cannot be fixed below position ten". The failure blocks already work this way; the rest of the page should sound like the same person wrote it.
+- **Sentences that breathe.** A page of uniformly clipped sentences is its own register, and it is not his. The length rule caps a sentence at 20 words; it does not ask for 8.
 
 ## 8. Guest cases
 
@@ -216,3 +229,23 @@ sources:
 Name the author in the first line of the page, with a link to their project or profile. Their voice stays as they wrote it. The linter skips the voice check for these pages: ban list, page shape and length do not apply.
 
 Facts are checked exactly as everywhere else. Every number needs `updated:` and a source in `sources:`, or it comes out of the page.
+
+## 9. Explain a term the first time it appears
+
+One clause, inline, at first use on the page. Not a glossary at the end — the reader is stuck at the sentence, not at the bottom.
+
+Before: "Run the `seo-audit` skill from Tools."
+
+After: "Run the `seo-audit` skill — a set of instructions your coding agent executes, installed once from a marketplace — from Tools."
+
+A backend developer with eight years of experience read this site and listed what stopped him: skill, and what runs one; GEO; canonical; JSON-LD; `sameAs`; MCP; marketplace; cluster; activation; SERP; WAF; "the four-block shape". Every one of those was load-bearing in the sentence it appeared in.
+
+A term explained on one page is still unexplained on the next. Pages are entered from search, in the middle.
+
+## 10. No stacked signposting
+
+A reader following the route passed four tables of contents before reaching a sentence that told him to do anything: the home page, Start here, the checklist, and the section index.
+
+A section index either says something — the symptom, the order, what the pages disagree about — or it shrinks to one line and a list of links. Restating the titles of its own children is not content.
+
+The same rule inside a page: no paragraph that announces what the next paragraph will cover.
