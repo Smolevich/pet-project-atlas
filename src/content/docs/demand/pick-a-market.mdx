@@ -8,6 +8,8 @@ sources:
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=de, measured 2026-08-12
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=ru, measured 2026-08-12
   - https://www.semrush.com/kb/997-semrush-data
+  - https://support.google.com/publisherpolicies/answer/15766875
+  - https://support.google.com/adsense/answer/15282937
 ---
 
 import { Image } from 'astro:assets';
@@ -75,17 +77,27 @@ Semrush's note under the 70% asks for 126 high-authority referring domains. So t
 | United States | `ai voice agent` | 1,900 | $16.18 | 40% |
 | United Kingdom | `ai voice agent` | 260 | $9.75 | 48% |
 | Germany | `ai voice agent` | 110 | $9.91 | 40% |
-| Russia | `голосовой бот` | 390 | $2.65 | 64% |
+| Russia | `голосовой бот` | 390 | $2.65, no live auction | 64% |
 
-Markets differ by more than the language on the page. The same idea pays $16.18 a click in the United States and $2.65 in Russian.
+Markets differ by more than the language on the page. The same idea pays $16.18 a click in the United States, $9.75 in the United Kingdom and $9.91 in Germany.
 
-The Russian side is also the harder one. Its difficulty reads 64%, with a note asking for 196 referring domains to compete.
+Three databases, one engine, one day. That part of the comparison holds, and it is the part that decided the build.
+
+The fourth row is a different kind of object. Google stopped serving ads to users in Russia on 3 March 2022, and deactivated Russia-based publisher accounts in August 2024.
+
+So $2.65 is not the price of a Russian click. It is a modelled figure for a market where the auction behind it does not run.
+
+The panel says none of that. It returns the field filled in, in dollars, next to three markets where the same field means a live bid.
+
+The rest of the Russian row survives, with a label on it. Volume, difficulty and the variation counts are Google-only, and Yandex serves the larger part of that demand.
+
+The Russian side does read harder: 64% against 40%. Difficulty is scored against its own database, so that pair is not strictly comparable either.
 
 Nor is it a smaller room with more space in it. The Russian branch holds 376 variations at 2,700 total volume, against 2,969 and 32,000 in English.
 
 The question block says the same. Russian: 51 questions, 110 volume. English: 181 questions, 1,200 volume.
 
-That is about a twelfth of the addressable demand, at a sixth of the click price, and harder. The belief that a domestic-language niche is less contested does not survive this table.
+That is about a twelfth of the Google demand, and harder to enter. What it is not is a reading of the Russian market, most of which this panel never saw.
 
 ### Two phrasings of one idea
 
@@ -118,6 +130,7 @@ The first one carries more volume than the head phrase in the United Kingdom. Ne
 - **Every number here is Semrush's estimate from outside**. It is not a measurement of anyone's property. The same panel missed a real position by more than twenty places: [what a paid rank tracker measures](/tools/paid-tools/).
 - **Keyword Difficulty is scored against its own database**. So 40% and 64% are not strictly comparable across markets. Comparable within a market only.
 - **Semrush does not cover Yandex**. For Russian-language demand that is a large hole, and this table is Google-only.
+- **The Russian CPC has no auction behind it**. Google has not served ads to users in Russia since March 2022. The field is filled in all the same.
 - **The English rows come from the United States database**. The country split next to the global volume is volume only, not CPC.
 
 ### The procedure
@@ -128,17 +141,21 @@ The first one carries more volume than the head phrase in the United Kingdom. Ne
    A headline of 60,500 at $0.86 and Navigational is a crowd looking for a free tool.
 3. **Check whether anyone is bidding** — the Ads field, and the live results page.
    `ai voice agent` shows Ads 14. `youtube transcript` shows n/a, on 60,500 searches a month.
-4. **Run the same phrase through each market database separately** — switch the country, do not translate in your head.
+4. **Check that the auction behind the CPC still runs** — a price needs bidders, and bidders need a country.
+   Google has not served ads to users in Russia since March 2022. The `db=ru` panel returns a CPC anyway, in dollars, with no warning on it.
+5. **Run the same phrase through each market database separately** — switch the country, do not translate in your head.
    Write the database name next to every figure. A number without its database is not comparable to anything.
-5. **Open the variations list and sort for low difficulty** — that is where the long specific phrases are.
+6. **Open the variations list and sort for low difficulty** — that is where the long specific phrases are.
    Difficulty 9 and 10 on 590 and 1,600 volume is a different entry point from difficulty 40.
-6. **Name the market out loud, with a number in the sentence** — one market, one reason.
+7. **Name the market out loud, with a number in the sentence** — one market, one reason.
    Mine reads: build for the United States, because the click is worth $16.18 and fourteen advertisers agree.
 
 ## What did not work
 
 - **Picking the niche by search volume**. 60,500 looked like the goldmine of the three. That click is worth $0.86, the difficulty is 70%, and the intent is Navigational. I would have entered the slowest niche for the cheapest traffic.
-- **Assuming the domestic-language market is the easier one**. The Russian phrase came back harder than the American one, 64% against 40%. It also pays $2.65 against $16.18. Both halves of that assumption were wrong in the same table.
+- **Assuming the domestic-language market is the easier one**. The Russian phrase came back harder than the American one, 64% against 40%. That much the panel supports, inside Google.
+- **Reading a CPC without asking whether the auction exists**. I put $2.65 next to $16.18 and called it a comparison of markets. Google has not served ads in Russia since March 2022, so one of those prices has nobody paying it.
+- **Letting a filled-in field stand for a fact**. The panel had no empty cell to warn me with, and I read a populated column as a measured one. A field is filled because the model can produce a number, not because the market exists.
 - **Treating one phrasing as the whole niche**. I read `ai voice agent`, saw Informational, and nearly wrote the niche off. `voice ai agents` reads Commercial at $16.94, and it was one line further down the same screen.
 - **Reading CPC without the ad count**. A price with nobody paying it is a forecast. Ads 14 is fourteen live bidders, and it is the field I checked last.
 - **Comparing difficulty across databases as one scale**. I put 40% and 64% in a single row and drew a conclusion for a day. The score is relative to its own database, so that row compares nothing.
