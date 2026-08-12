@@ -75,13 +75,15 @@ Now the harvest itself, which no panel does for you.
 1. **Harvest phrasings, do not invent them** — support messages, reviews, forum threads, the search box inside your own product.
    Write down the exact words, including the clumsy ones. Your own vocabulary is the least reliable source in the room.
 2. **Open Yandex Wordstat for Russian demand** — type the problem, not the product name.
+   Wordstat is free and needs a Yandex account. **No Russian-speaking audience? Skip steps 2 to 4.** Nothing later in the route depends on them.
    Read the second column as well: it lists what the same people searched next. The vocabulary you do not have is usually in there.
 3. **Pin the phrase with operators first** — quotes limit it to that phrase, `!` fixes the word form.
    A bare phrase collects every query that contains it. That is a category total, not demand for your wording.
 4. **Read Yandex suggest as a separate source** — start typing and stop.
    The dropdown is completions people picked, not a forecast. It disagrees with Wordstat often enough to be worth reading twice.
 5. **Do the same in Google for English demand** — Keyword Planner for the ranges, then the suggest.
-   Planner reports ranges rather than counts, and widens them without an active campaign. Treat it as an order of magnitude.
+   Planner sits inside Google Ads. It needs an Ads account with billing attached before it shows you anything. That is a twenty-minute detour with a card in it, so know it before you start. The suggest dropdown needs no account at all. Skipping Planner leaves you with shapes instead of counts, which is enough to pick a direction.
+   Planner reports ranges rather than counts, and I have always seen those ranges widen without an active campaign. Treat it as an order of magnitude.
 6. **Search inside the platform where the product lives** — the store, the marketplace, Telegram.
    Write down who comes up. Competitor names there are a free list of the exact words the demand uses.
 7. **Separate demand for a solution from demand for your product** — problem queries against brand queries.
