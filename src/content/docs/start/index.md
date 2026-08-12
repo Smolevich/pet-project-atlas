@@ -6,58 +6,58 @@ sources:
   - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
 ---
 
-Seven sections, fourteen pages, and no obvious place to start. This page is the order, and nothing else.
+Seven sections, fourteen pages, and no obvious place to start. This page is the order, and under each step the reason it sits there.
 
-Every step is one line and a link. The page behind the link explains it; this one only says when.
+The same route with the reasons taken out is [the checklist](/start/checklist/) — one screen, boxes to tick, nothing to read.
 
-The flat version, for bookmarking and screenshots: [the checklist](/start/checklist/).
+The steps are written as orders, because a procedure should be. Everything around them is one project's log, and yours will say something else.
 
 ## What we are solving
 
 The project has been live for weeks and the only visitor in the logs is you. You have read enough advice to have twelve things to do and no idea which is first.
 
-Order is the whole problem. Each item below is cheap on its own; doing them out of sequence is what costs the month.
+Order is the whole problem. Each item below is cheap on its own — doing them out of sequence is what costs the month.
 
-The first item in that order is not technical. It is whether anybody searches for this, and whether those people pay for anything.
+And the first item in that order is not technical at all. It is whether anybody searches for this, and whether those people pay for anything.
 
 ## Steps
 
-The section numbers are a reading order. The doing order crosses them twice, and both crossings are marked below.
+The section numbers are a reading order. The doing order crosses them twice, and I marked both crossings below.
 
 ### Week zero — check there is demand before anything else
 
 1. Harvest the exact phrasings people use, from support, reviews and forums — [the words people actually type](/demand/how-people-search/).
-2. Check the Russian phrasings in Yandex Wordstat, with the operators applied. A bare phrase returns the category total, not demand for your wording — [same page](/demand/how-people-search/).
+2. Check the Russian phrasings in Yandex Wordstat, with the operators applied. No Russian-speaking audience? Skip to step three. A bare phrase returns the category total, not demand for your wording — [same page](/demand/how-people-search/).
 3. Check the English ones in Google, and read both suggest dropdowns — [same page](/demand/how-people-search/).
 4. Search the platform your product lives in, from a fresh account — [same page](/demand/how-people-search/).
 5. Read a zero on your most obvious phrase as a finding, not a glitch. Either nobody has this problem, or you invented the word — [same page](/demand/how-people-search/).
 6. Name the paid competitor on your main query, and record their price shape. Somebody already tested this market with their own money — [whether that audience pays](/demand/will-they-pay/).
 7. Check whether anyone bids on the query, and what the free path is. Nobody bids twice on an audience that does not spend — [same page](/demand/will-they-pay/).
 
-This stage is a day or two, and it decides whether the rest is worth doing. Everything below assumes somebody types these words and somebody pays for something.
+A day or two, all of it in a browser, and it decides whether the rest is worth doing. Everything below assumes somebody types these words and somebody pays for something.
 
 ### Week one — make the site fetchable, then hand it over
 
 8. Run `curl -sL` on your own page and find body text in the response. Text missing there is text the crawler never sees — [Google does not see your site](/indexing/why-google-does-not-see-you/).
-9. Read `robots.txt` on the live domain, every line of it. The classic blocker is a `Disallow: /` inherited from a staging config — [same page](/indexing/why-google-does-not-see-you/).
+9. Read `robots.txt` on the live domain, every line of it. One line closes the whole domain — a `Disallow: /` that came over from a staging config — [same page](/indexing/why-google-does-not-see-you/).
 10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header. It drops the page from the index on purpose, and no browser shows the header — [same page](/indexing/why-google-does-not-see-you/).
-11. Check the canonical on a few pages points at those pages. A canonical aimed at the home page asks search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
+11. Check the canonical on a few pages points at those pages. Canonical is the tag naming which URL is the real one for a page. Aimed at the home page, it asks search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
 12. Request one page from outside your network, without cookies. Your own network is trusted, so an edge rule blocking the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/).
 13. Verify a domain property in Search Console and submit the sitemap once. A URL-prefix property covers only the form you typed, and its report stays empty — [submit and verify](/indexing/submit-and-verify/).
 14. Import the property into Bing Webmaster Tools. Its index also feeds Copilot answers, which is a separate audience — [submit and verify](/indexing/submit-and-verify/).
 15. Serve `User-agent: *` and `Allow: /`, and name an agent only to block it. Blocked, you are absent from the answer at any quality of content. A named allow list expires as vendors rename things — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 16. **First crossing.** Tag every outbound link and store the source on first contact. A messenger or a store passes no source unless you ask for it — [where the user came from](/analytics/attribution/).
-17. Name the single action that counts as activation — [the numbers worth reading weekly](/analytics/what-to-measure/).
+17. Name the single action that counts as activation. Activation is the one thing a user does that means the product actually worked — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
-Step sixteen belongs to section six and has to happen now. Attribution cannot be reconstructed, so every untagged day is a day of arrivals you will never classify.
+Step sixteen belongs to section six and has to happen now. Attribution cannot be reconstructed — every untagged day is a day of arrivals you will never classify.
 
 ### Week two — write pages that can be found and quoted
 
-18. Group the phrasings from week zero into clusters, one URL each — [what to write](/content/keyword-clusters/).
-19. Order the queue by money: transactional, then comparison, then informational. You run out of energy long before you run out of clusters — [what to write](/content/keyword-clusters/).
-20. Write the first page in the four-block shape — [what a page is made of](/content/page-templates/).
+18. Group the phrasings from week zero into clusters, one URL each. A cluster is a set of wordings that want the same page — [what to write](/content/keyword-clusters/).
+19. Order the queue by money: transactional, then comparison, then informational. That is ready to buy, then still choosing, then still reading. You run out of energy long before you run out of clusters — [what to write](/content/keyword-clusters/).
+20. Write the first page in the four-block shape — [what a page is made of](/content/page-templates/). The blocks: the problem, the steps, what did not work, how to check.
 21. Put the answer in the first three sentences of that page. That block is the passage a model lifts — [what a page is made of](/content/page-templates/).
-22. Add JSON-LD with `sameAs` listing your profiles and listings. It is documented for Google's Knowledge Graph and unmeasured for AI citation — [why AI answers cite someone else](/geo/citable-pages/).
+22. Add JSON-LD with `sameAs` listing your profiles and listings. JSON-LD is a block of machine-readable facts about the page. It is documented for Google's Knowledge Graph and unmeasured for AI citation — [why AI answers cite someone else](/geo/citable-pages/).
 23. Publish `llms.txt` only if you ship developer docs, naming only pages that are actually written. My own log records 0 fetches by any AI agent in 16 days — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 24. If the product lives in a platform, put its function in the name. Platform search matches the name, not the description — [search inside the platform](/distribution/in-platform-visibility/).
 25. Take the first weekly snapshot and append it to a file — [the numbers worth reading weekly](/analytics/what-to-measure/).
@@ -76,7 +76,7 @@ Step twenty-nine goes back to section three. On-page citability pays once a mode
 
 ## What did not work
 
-These are mistakes of order. Each of them is work I did correctly, at a moment when it could not pay.
+These are mistakes of order. Every one of them is work I did correctly, at a moment when it could not pay.
 
 - **Optimising for a phrase I invented**. The word I used for the core feature was not the word people typed. Pages, links and dashboards all worked, and the demand walked past all of them.
 - **Backlinks while the site was still blocked**. I spent a week on directory submissions. The pages behind those links were carrying a `noindex` header the whole time, so search kept dropping them. The listings survived, the week did not.
@@ -90,11 +90,11 @@ These are mistakes of order. Each of them is work I did correctly, at a moment w
 
 ## Verify
 
-At the end of each stage there is one sentence you should be able to say out loud. If you cannot, stay in the stage.
+At the end of each stage there is one sentence you should be able to say out loud. If you cannot say it, stay in the stage — the next one is built on top of it.
 
 - **End of week zero**. A file of phrasings, each with its origin and the engine it was checked in. A named paid competitor, or a stated reason the market looks empty.
 - **End of week one**. URL Inspection says the URL is on Google. A link published today carries a source tag that lands in the database.
 - **End of week two**. Every cluster has exactly one owning URL. The first page answers its own title in its opening sentences, and the snapshot file has a row.
 - **End of month two**. At least one listing whose HTML contains your link, and one recorded cost on a real event row. A break-even you can say as a whole number.
 
-Symptom-first instead of stage-first, when something specific is broken: [Tools](/tools/).
+When something specific is broken and you would rather start from the symptom than from the stage: [Tools](/tools/).

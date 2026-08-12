@@ -12,26 +12,26 @@ sources:
 
 ## What we are solving
 
-A phrase can carry real demand and no money. People type it, find the free way, and leave satisfied.
+A phrase can carry real demand and no money at all. People type it, find the free way, and leave perfectly satisfied.
 
-Volume answers whether they search. It does not answer whether they buy, and those two questions have different evidence.
+Volume answers whether they search. Whether they buy is a different question, and the evidence for it sits somewhere else entirely.
 
-All of that evidence is readable before you build anything. That is the point of asking now.
+The good part is that all of that evidence is readable before you build anything. That is the whole reason to ask now, while the answer still costs an afternoon.
 
 ## Steps
 
-1. **Find the paid competitor on your main query** — run it and read who is on the page.
-   A product with a pricing page ranking for your phrase is the strongest free signal available. Somebody already tested this market with their own money.
+1. **Find the paid competitor on your main query** — run it and read who is on the results page.
+   That page is what the tools call the SERP. A product with a pricing page sitting on it was the strongest signal I got for free. Somebody already tested this market with their own money.
 2. **Record the shape of their price, not the number** — per seat, per action, per month.
    A free tier with a wall in it is a shape too. The shape says what they found people will pay for, so copy the question they answered rather than the figure.
 3. **Look at whether anyone is bidding on the query** — count the ads above the results.
    An ad means somebody pays for that click and keeps repeating the purchase. Nobody bids twice on an audience that does not spend.
 4. **Read the bid estimate next to the volume** — Keyword Planner reports bid ranges alongside its forecast.
-   A high bid on a small query is a market where one customer is worth a lot. That is usually a better place to start than a large cheap one.
+   A high bid on a small query is a market where one customer is worth a lot. I would rather start there than on a large cheap one.
 5. **Treat volume with no bidding as a warning** — a large query and an empty ad block.
-   The usual reading is an audience looking for the free way. Real people, real problem, no line item for it anywhere.
+   I read that as an audience looking for the free way. On my query that is exactly what it was. Real people, real problem, no line item for it anywhere.
 6. **Find out what the free path actually is** — the platform's own feature, an open-source script, doing it by hand.
-   Your price competes with that, not with the paid competitor's price. Check it again each quarter: platforms ship features.
+   Your price competes with that, not with the paid competitor's price. Check it again each quarter, because platforms ship features.
 7. **Ask for money before the thing exists** — a price, a payment link, a date.
    A pre-sale proves exactly one thing: this person, at this price, today. It does not prove a market and it does not prove a second person.
 8. **Record the refusals in the person's own words** — the reason somebody did not pay is the finding.
@@ -42,7 +42,7 @@ All of that evidence is readable before you build anything. That is the point of
 ## What did not work
 
 - **Treating search volume as demand for a paid product**. The phrases were real and so were the people typing them. Almost everyone who arrived wanted the free way. The pages ranking above me explained how to get the result without paying.
-- **Ranking first for a phrase with no volume behind it**. `stt модели` sat at average position 1.0 with 1 impression and 0 clicks in three months. The measurement is on [what a paid rank tracker measures](/tools/paid-tools/).
+- **Reading one impression as a statement about demand**. `stt модели` sat at average position 1.0 with 1 impression and 0 clicks in three months. I read that as a phrase nobody types. Search Console counts how often my result was shown, which is a fact about my page. The phrase itself had to be checked in Wordstat, and the row is on [what a paid rank tracker measures](/tools/paid-tools/).
 - **Reading signups as willingness to pay**. Free signups arrived, used the product and came back. Not one of them converted, and the signup count kept climbing the whole time.
 - **Missing the free alternative the platform itself shipped**. The platform I build on gives the same function to its own paying subscribers. For a large part of that audience my price competes with a feature they already have.
 - **Counting my own test purchase as revenue**. The model showed break-even reached for a day. The payer was me, through a test account.
@@ -55,8 +55,8 @@ All of that evidence is readable before you build anything. That is the point of
 - Run the query and note whether ads appear, then repeat it a week later. One day of ads proves nothing about a budget.
 - Write the free path to the same outcome in one sentence, including anything the platform ships itself.
 - Ask one real person for money at a real price and store the answer verbatim, refusal included.
-- State your break-even as a whole number of payers. If you cannot say it out loud, the price is a guess with confidence.
+- State your break-even as a whole number of payers. If you cannot say it out loud, the price is a guess with a confident face on it.
 
 Ads, CPC and intent read side by side across three niches: [which market to build for](/demand/pick-a-market/).
 
-If both questions come back positive, the next wall is technical rather than commercial. Search has to be able to read the site at all. That is [indexing](/indexing/).
+If both questions come back positive, the next wall is technical rather than commercial. Search has to be able to read the site at all, and that is [indexing](/indexing/).
