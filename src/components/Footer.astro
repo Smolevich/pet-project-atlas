@@ -4,6 +4,7 @@
 // editUrl считает сам Starlight из editLink.baseUrl — он знает реальный путь файла
 // (index.md, .mdx, локаль ru), а собранный из entry.id путь на них промахивается.
 import Default from '@astrojs/starlight/components/Footer.astro';
+import Sources from './Sources.astro';
 import { footerStringsFor } from '../footer-strings';
 
 const { editUrl, locale } = Astro.locals.starlightRoute;
@@ -17,6 +18,8 @@ const issueUrl =
   '?template=page-did-not-help.yml' +
   `&title=${encodeURIComponent(t.issueTitle(Astro.url.pathname))}`;
 ---
+
+<Sources />
 
 <Default><slot /></Default>
 

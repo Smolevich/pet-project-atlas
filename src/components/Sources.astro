@@ -1,0 +1,115 @@
+---
+// Источники страницы, под текстом и до навигации.
+//
+// Сайт обещает читателю «число с датой и источником, или никакого числа», а
+// sources: жил только во frontmatter: цифры приходили голыми. Блок стоит перед
+// стандартным футером Starlight, потому что это доказательство к статье, а не
+// служебная строка: пагинация уводит со страницы, источники должны попасться
+// раньше.
+//
+// Дата замера здесь же: updated: — это день, когда цифры сняты, а строка
+// «Last updated» у Starlight считается по git и отвечает на другой вопрос.
+import { orderSources } from '../../scripts/lib/sources.mjs';
+import { footerStringsFor } from '../footer-strings';
+
+const { entry, locale } = Astro.locals.starlightRoute;
+const data = entry.data as { sources?: string[]; updated?: Date };
+
+const sources = orderSources(data.sources);
+const updated = data.updated instanceof Date ? data.updated : undefined;
+const t = footerStringsFor(locale);
+---
+
+{
+  sources.length > 0 && (
+    <aside class="atlas-sources" aria-labelledby="atlas-sources-heading">
+      <h2 id="atlas-sources-heading">{t.sources}</h2>
+
+      {updated && (
+        <p class="atlas-sources-updated">
+          {t.figuresRead}{' '}
+          <time datetime={updated.toISOString().slice(0, 10)}>{t.formatDate(updated)}</time>.
+        </p>
+      )}
+
+      <ul>
+        {sources.map((source) =>
+          source.kind === 'url' ? (
+            <li>
+              <a href={source.href} rel="noopener">
+                <span class="atlas-source-host">{source.host}</span>
+                {source.path && <span class="atlas-source-path">{source.path}</span>}
+              </a>
+            </li>
+          ) : (
+            <li>
+              <span class="atlas-source-kind">{t.ownMeasurement}</span>
+              <span class="atlas-source-text">{source.text}</span>
+            </li>
+          ),
+        )}
+      </ul>
+    </aside>
+  )
+}
+
+<style>
+  .atlas-sources {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--sl-color-hairline-light);
+  }
+  .atlas-sources h2 {
+    margin: 0;
+    font-size: var(--sl-text-h5);
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+    color: var(--sl-color-white);
+  }
+  .atlas-sources-updated {
+    margin: 0.35rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .atlas-sources ul {
+    margin: 0.85rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--sl-text-sm);
+  }
+  .atlas-sources li {
+    /* Длинный путь ссылки не должен растягивать колонку. */
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+  }
+  .atlas-sources li + li {
+    margin-top: 0.45rem;
+  }
+  .atlas-sources a {
+    color: var(--sl-color-text-accent);
+    text-decoration: none;
+  }
+  .atlas-sources a:hover .atlas-source-host {
+    text-decoration: underline;
+  }
+  .atlas-source-path {
+    color: var(--sl-color-gray-3);
+  }
+  /* Замер отличается от публикации без чтения строки: у него метка и нет
+     ссылочного цвета. */
+  .atlas-source-kind {
+    display: inline-block;
+    margin-inline-end: 0.5em;
+    padding: 0 0.4em;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    font-size: var(--sl-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    color: var(--sl-color-gray-2);
+  }
+  .atlas-source-text {
+    color: var(--sl-color-gray-2);
+  }
+</style>
