@@ -5,7 +5,10 @@ description: Start from the symptom you actually have. Each branch names the che
 
 Start from what you can see, not from the tool you already know. Each branch below names one check and one page.
 
-What each tool is, where it came from and under what licence: [what to run and when](/tools/skills/).
+Two pages sit in this section, and the tree below routes into them.
+
+- [What to run and when](/tools/skills/) — the table of every tool named here. Third-party skills, the browser MCP, the CLI, and this repository's four plugin commands. Each with its source and its licence.
+- [What a paid rank tracker measures](/tools/paid-tools/) — one panel read on live data. What it showed, what my own Search Console showed, and why the two disagreed.
 
 ## The site is not in the index
 

@@ -125,7 +125,7 @@ Sort the agents by job before you decide anything. A search crawler, a training 
 - **Losing the citation along with the bill**. The busiest AI agent in my own log took 341 requests in 16 days — [who actually crawls you](/geo/who-actually-crawls-you/). It is `ChatGPT-User`, a human has to trigger it, and I cannot prove the human was not me. Presence in the answer still does not come back cheaply.
 - **Making `llms.txt` a required item**. This page told you to publish it and the route repeated the instruction. My own log recorded 0 fetches by any AI agent in 16 days. A file nothing reads is not a step in a checklist. It is now conditional, and the condition is developer docs.
 - **Allowing agents by name in `robots.txt`**. The route asked readers to list every search and user-triggered agent explicitly. This site has never done that: it serves `User-agent: *` and `Allow: /`. The named list is work that expires, and RFC 9309 makes a stale group override the wildcard under it.
-- **Reaching for `Google-Extended` to steer AI Overviews**. Wrong lever: AI Overviews runs on `Googlebot`, and the token covers Gemini training and Vertex AI grounding. The rule moved nothing, and the control that does cover AI Overviews now sits in Search Console.
+- **Disallowing `Google-Extended` to get out of AI Overviews**. It is a line in `robots.txt`, and it governs something else. It covers training the Gemini models, and whether Gemini pulls your pages into an answer of its own. Plain `Googlebot` crawls for AI Overviews, so the rule changed nothing. The switch you want is in Search Console: Settings → Search generative AI.
 - **Steering AI Overviews with `nosnippet`**. That was this page's advice until 3 June 2026, when Google shipped a dedicated Search Console control. The snippet directives also cost you the ordinary Search snippet, which the dedicated control does not.
 - **Trusting a vendor page that had stopped moving**. Google's own `ai-features` documentation still lists only the snippet directives. It was last updated 2025-12-10, so this page was faithfully reproducing a stale source.
 - **Writing `Disallow` for `ChatGPT-User` and calling it a block**. OpenAI documents that a user-initiated fetch may ignore robots.txt, and Perplexity says the same of its own. The rule was a request to a client already told it need not listen.
@@ -141,8 +141,9 @@ Run `geo-llmstxt` from the same place. It validates an existing file or drafts o
 
 Then confirm from outside:
 
-- Open **Security Settings** in Cloudflare and read what **Configure AI bot policies** is set to. A default you never chose is still your setting.
-- Open **Analytics** → **Events** and filter the action to Block. Agents refused there appear in no log on your own box.
+- Find out what sits in front of your origin at all. `curl -sI` your own domain and read `server`, `via` and `cf-ray`. A `cf-ray` header means Cloudflare; Vercel, Netlify and Fastly announce themselves the same way. If nothing is in front, only your firewall and your web server can refuse a crawler. The checks below move there.
+- On Cloudflare, open **Security Settings** and read what **Configure AI bot policies** is set to. A default you never chose is still your setting.
+- On Cloudflare, open **Analytics** → **Events** and filter the action to Block. Agents refused there appear in no log on your own box. Other platforms keep their own edge or firewall log. If yours has none, the request either reached your server or vanished where you cannot see.
 - Request a page with a crawler's user agent from a network that is not yours, and check for 200.
 - If you published `llms.txt`, fetch it the same way and confirm every link in it returns 200.
 - Ask an assistant to open one of your URLs. If it cannot, the block is real and the diagnosis above tells you which layer holds it.

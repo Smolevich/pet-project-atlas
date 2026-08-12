@@ -23,6 +23,21 @@ const t = footerStringsFor(locale);
 // вторая от предложения давала «г..» на каждой русской странице.
 const updatedText = updated ? t.formatDate(updated) : '';
 const updatedStop = updatedText.endsWith('.') ? '' : '.';
+
+// Одна страница цитирует до восемнадцати ссылок, и семь из них бывают с одного
+// хоста. Столбиком это читается как свалка, поэтому чужие источники сводятся
+// по хосту: имя один раз, пути под ним.
+const own = sources.filter((source) => source.kind !== 'url');
+const byHost = [
+  ...sources
+    .filter((source) => source.kind === 'url')
+    .reduce((map, source) => {
+      const list = map.get(source.host) ?? [];
+      list.push(source);
+      return map.set(source.host, list);
+    }, new Map<string, typeof sources>())
+    .entries(),
+];
 ---
 
 {
@@ -39,21 +54,27 @@ const updatedStop = updatedText.endsWith('.') ? '' : '.';
       )}
 
       <ul>
-        {sources.map((source) =>
-          source.kind === 'url' ? (
-            <li>
-              <a href={source.href} rel="noopener">
-                <span class="atlas-source-host">{source.host}</span>
-                {source.path && <span class="atlas-source-path">{source.path}</span>}
-              </a>
-            </li>
-          ) : (
-            <li>
-              <span class="atlas-source-kind">{t.ownMeasurement}</span>
-              <span class="atlas-source-text">{source.text}</span>
-            </li>
-          ),
-        )}
+        {own.map((source) => (
+          <li>
+            <span class="atlas-source-kind">{t.ownMeasurement}</span>{' '}
+            <span class="atlas-source-text">{source.text}</span>
+          </li>
+        ))}
+
+        {byHost.map(([host, items]) => (
+          <li>
+            <span class="atlas-source-host">{host}</span>
+            <ul class="atlas-source-paths">
+              {items.map((source) => (
+                <li>
+                  <a href={source.href} rel="noopener">
+                    {source.path || '/'}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
       </ul>
     </aside>
   )
@@ -98,8 +119,16 @@ const updatedStop = updatedText.endsWith('.') ? '' : '.';
   .atlas-sources a:hover .atlas-source-host {
     text-decoration: underline;
   }
-  .atlas-source-path {
-    color: var(--sl-color-gray-3);
+  .atlas-source-host {
+    color: var(--sl-color-gray-2);
+  }
+  .atlas-source-paths {
+    margin: 0.15rem 0 0;
+    padding-inline-start: 0.9rem;
+    list-style: none;
+  }
+  .atlas-source-paths li + li {
+    margin-top: 0.15rem;
   }
   /* Замер отличается от публикации без чтения строки: у него метка и нет
      ссылочного цвета. */
