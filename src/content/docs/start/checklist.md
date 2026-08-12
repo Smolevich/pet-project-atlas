@@ -28,14 +28,17 @@ If a line makes you ask why, the answer is on the page it links to. I wrote the 
 - [ ] Serve `User-agent: *` and `Allow: /`, and name an agent only to block it. A named allow list expires every time a vendor renames something — [crawlers](/geo/llms-txt-and-crawlers/)
 - [ ] Tag outbound links, one value per venue, and store the source on first contact. Untagged arrivals can never be attributed later — [attribution](/analytics/attribution/)
 - [ ] Name the single action that counts as activation. Activation is what a user does that means the product worked — [metrics](/analytics/what-to-measure/)
+- [ ] Put who, what, when, source, cost, client and outcome on every event row. Cost and source can only be written at insert time — [event rows](/analytics/product-metrics/)
 - [ ] Give each cluster exactly one URL, in a table you keep. A cluster is a set of wordings that want the same page — [clusters](/content/keyword-clusters/)
 - [ ] Write the first page in the four-block shape, answering its title up front. The blocks: problem, steps, what did not work, how to check — [page shape](/content/page-templates/)
 - [ ] Add JSON-LD — machine-readable facts about the page — with `sameAs` for your profiles and listings. Documented for Google's Knowledge Graph, unmeasured for AI citation, ten minutes either way — [citability](/geo/citable-pages/)
 - [ ] Publish `llms.txt` only if you ship developer docs, naming only pages that exist. My log records 0 fetches by AI agents in 16 days — [crawlers](/geo/llms-txt-and-crawlers/)
 - [ ] Put the product's function into its platform name, in the audience's script. Platform search matches the name, not the description — [platform](/distribution/in-platform-visibility/)
 - [ ] Write the listing card once, then submit in small tagged batches — [catalogs](/distribution/catalogs/)
+- [ ] Answer questions where the shortlists get written, and say the product is yours. Never ask for upvotes — [communities](/distribution/communities/)
 - [ ] Append a weekly snapshot to a file, same weekday every week. A number you cannot compare with itself is decoration — [metrics](/analytics/what-to-measure/)
 - [ ] Record each action's cost on its event row, then state break-even in whole payers. An empty column makes every report fall back to estimated rates — [cost](/money/unit-economics/)
+- [ ] Name a price and put the wall after the first real result. Ask one person for money — [first payer](/money/first-payer/)
 
 ## What did not work
 

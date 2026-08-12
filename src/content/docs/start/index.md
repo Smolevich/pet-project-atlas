@@ -71,6 +71,9 @@ Step sixteen belongs to section six and has to happen now. Attribution cannot be
 30. Record the cost of every action on its own event row. An empty column makes every report fall back to estimated rates — [what one user costs](/money/unit-economics/).
 31. State break-even as a whole number of payers per month — [what one user costs](/money/unit-economics/).
 32. Read the series and fix the earliest large drop, not the last one. Tuning payment while activation is broken works on a step almost nobody reaches — [the numbers worth reading weekly](/analytics/what-to-measure/).
+33. Post where the shortlists get written: answer the question and say the product is yours. Never ask for upvotes — [communities and forums](/distribution/communities/).
+34. Put who, what, when, source, cost, client and outcome on every event row. Both cost and source can only be written at insert time. This one belongs back in week one — [what an event row has to carry](/analytics/product-metrics/).
+35. Name a price, put the wall after the first real result, and ask one person for money. Nobody paying and nobody being asked look the same from the dashboard — [getting the first person to pay](/money/first-payer/).
 
 Step twenty-nine goes back to section three. On-page citability pays once a model has seen you named somewhere else. Month two is when that starts being true.
 
