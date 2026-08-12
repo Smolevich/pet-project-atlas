@@ -1,6 +1,6 @@
 # Deploy (public, on hetzner, via GitHub Actions)
 
-The Starlight static build is served by nginx on `bot-server`, behind a Cloudflare Tunnel.
+The Starlight static build is served by nginx on the host, behind a Cloudflare Tunnel.
 
 **This host has no Cloudflare Access on this site.** Unlike the private KB on the same
 box, atlas is meant to be public — no login, no bypass rule needed.
@@ -27,7 +27,7 @@ on this box (voice-ai, LovioLab-docs):
 | Secret | What it is |
 |---|---|
 | `TS_OAUTH_CLIENT_ID`, `TS_OAUTH_SECRET` | Tailscale OAuth (tag `tag:gha-runner`) |
-| `VDS_HOST`, `VDS_PORT`, `VDS_USER` | SSH connection to bot-server (Tailscale address) |
+| `VDS_HOST`, `VDS_PORT`, `VDS_USER` | SSH connection to the host over the private network |
 | `VDS_SSH_KEY`, `VDS_SSH_PASSPHRASE` | deploy private key + its passphrase |
 
 Copy the values from an existing repo on the same box (voice-ai or LovioLab-docs) into
