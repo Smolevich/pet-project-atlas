@@ -1,6 +1,6 @@
 # Pet Project Atlas
 
-You shipped a side project and nobody found it. This is the map out of that: getting indexed, getting cited by AI search, writing content, picking channels, reading the numbers, taking money.
+You shipped a side project and nobody found it. This is the map out of that: checking there is demand at all, getting indexed, getting cited by AI search, writing content, picking channels, reading the numbers, taking money.
 
 Every page is written from a real log — what was run, what broke, what came out of it. Numbers carry a date and a source, and CI fails the build when they do not.
 
@@ -8,14 +8,15 @@ Live site: **[atlas.smolevich.com](https://atlas.smolevich.com)**
 
 ## What is inside
 
-Six sections, in the order the problems actually arrive:
+Seven sections, in the order the problems actually arrive:
 
-1. **Indexing** — making the crawler see your pages, and getting them into the index.
-2. **AI search** — being found and cited by ChatGPT, Perplexity, Google AI Overviews.
-3. **Content** — what to write while nobody is searching for your product by name.
-4. **Distribution** — where the first external links come from, and search inside a platform rather than Google.
-5. **Analytics** — the handful of numbers worth watching, and how to tie a signup to a source.
-6. **Money** — what one user costs when the product calls an AI, and how many payers close the month.
+1. **Demand** — whether anyone types these words at all, and whether that audience pays for anything.
+2. **Indexing** — making the crawler see your pages, and getting them into the index.
+3. **AI search** — being found and cited by ChatGPT, Perplexity, Google AI Overviews.
+4. **Content** — what to write while nobody is searching for your product by name.
+5. **Distribution** — where the first external links come from, and search inside a platform rather than Google.
+6. **Analytics** — the handful of numbers worth watching, and how to tie a signup to a source.
+7. **Money** — what one user costs when the product calls an AI, and how many payers close the month.
 
 Three more sections hold them together. **Start here** is the route from zero to first traffic. **Tools** says which skill to run for which symptom. **Cases** will hold full write-ups, mine and guests'. Until the first one lands it states the bar a case has to clear, and how to send yours.
 

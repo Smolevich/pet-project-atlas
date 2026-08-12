@@ -6,12 +6,13 @@
  */
 export const SECTIONS = [
   { slug: 'start', label: 'Start here', ru: 'Начать здесь' },
-  { slug: 'indexing', label: '1. Indexing', ru: '1. Индексация' },
-  { slug: 'geo', label: '2. AI search', ru: '2. AI-поиск' },
-  { slug: 'content', label: '3. Content', ru: '3. Контент' },
-  { slug: 'distribution', label: '4. Distribution', ru: '4. Дистрибуция' },
-  { slug: 'analytics', label: '5. Analytics', ru: '5. Аналитика' },
-  { slug: 'money', label: '6. Money', ru: '6. Деньги' },
+  { slug: 'demand', label: '1. Demand', ru: '1. Спрос' },
+  { slug: 'indexing', label: '2. Indexing', ru: '2. Индексация' },
+  { slug: 'geo', label: '3. AI search', ru: '3. AI-поиск' },
+  { slug: 'content', label: '4. Content', ru: '4. Контент' },
+  { slug: 'distribution', label: '5. Distribution', ru: '5. Дистрибуция' },
+  { slug: 'analytics', label: '6. Analytics', ru: '6. Аналитика' },
+  { slug: 'money', label: '7. Money', ru: '7. Деньги' },
   { slug: 'tools', label: 'Tools', ru: 'Инструменты' },
   { slug: 'cases', label: 'Cases', ru: 'Кейсы' },
 ];

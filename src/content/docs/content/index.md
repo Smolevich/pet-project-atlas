@@ -1,5 +1,5 @@
 ---
-title: 3. Content
+title: 4. Content
 description: Nobody searches your product by name yet. What to write instead, and what shape to write it in.
 ---
 

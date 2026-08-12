@@ -23,10 +23,10 @@ const page = ({ url, title, description, lang = 'en', contentLang = lang }) => `
 
 test('со страницы снимаются заголовок, описание и канонический адрес', () => {
   const meta = readPageMeta(
-    page({ url: 'https://atlas.smolevich.com/geo/', title: '2. AI search', description: 'Why AI answers cite someone else' }),
+    page({ url: 'https://atlas.smolevich.com/geo/', title: '3. AI search', description: 'Why AI answers cite someone else' }),
   );
   assert.equal(meta.url, 'https://atlas.smolevich.com/geo/');
-  assert.equal(meta.title, '2. AI search');
+  assert.equal(meta.title, '3. AI search');
   assert.equal(meta.description, 'Why AI answers cite someone else');
   assert.equal(meta.siteName, 'Pet Project Atlas');
 });
@@ -41,14 +41,14 @@ test('сущности в атрибутах разворачиваются об
 
 test('русский URL с английским текстом опознаётся как непереведённый', () => {
   const meta = readPageMeta(
-    page({ url: 'https://atlas.smolevich.com/ru/geo/', title: '2. AI search', description: 'Desc', lang: 'ru', contentLang: 'en' }),
+    page({ url: 'https://atlas.smolevich.com/ru/geo/', title: '3. AI search', description: 'Desc', lang: 'ru', contentLang: 'en' }),
   );
   assert.equal(isFallbackPage(meta), true);
 });
 
 test('переведённая русская страница непереведённой не считается', () => {
   const meta = readPageMeta(
-    page({ url: 'https://atlas.smolevich.com/ru/indexing/', title: '1. Индексация', description: 'Описание', lang: 'ru' }),
+    page({ url: 'https://atlas.smolevich.com/ru/indexing/', title: '2. Индексация', description: 'Описание', lang: 'ru' }),
   );
   assert.equal(isFallbackPage(meta), false);
 });
@@ -80,12 +80,12 @@ test('группы идут в порядке маршрута, английск
     { url: 'https://atlas.smolevich.com/', title: 'Atlas', description: 'd' },
   ];
   const labels = groupPages(pages, SECTIONS).map((group) => group.label);
-  assert.deepEqual(labels, ['Home', '1. Indexing', '6. Money', 'Главная']);
+  assert.deepEqual(labels, ['Home', '2. Indexing', '7. Money', 'Главная']);
 });
 
 test('русские разделы подписаны по-русски', () => {
   const pages = [{ url: 'https://atlas.smolevich.com/ru/indexing/', title: 'Индексация', description: 'd' }];
-  assert.equal(groupPages(pages, SECTIONS)[0].label, '1. Индексация');
+  assert.equal(groupPages(pages, SECTIONS)[0].label, '2. Индексация');
 });
 
 test('пустые разделы в файл не попадают', () => {

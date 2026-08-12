@@ -1,5 +1,5 @@
 ---
-title: 4. Distribution
+title: 5. Distribution
 description: You posted the launch once and the graph went flat. Where the first external links come from, and how search works inside a platform.
 ---
 

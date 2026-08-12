@@ -1,14 +1,19 @@
 ---
-// Карта маршрута: шесть разделов слева направо, каждый — ссылка.
+// Карта маршрута: семь разделов, каждый — ссылка.
 // Две раскладки вместо одной масштабируемой: при сжатии одного широкого SVG
 // до ширины телефона подписи уходят в 6px, читать нечем.
+//
+// vbW широкой раскладки держим около 800: ровно на брейкпоинте (50rem) карта
+// рисуется почти в масштабе 1:1, и подпись не уезжает под 12px. Узкая
+// раскладка — вертикальный стек: седьмой узел добавляет высоты и ни одного
+// пикселя ширины, поэтому на 375px читаемость та же, что была на шести.
 import { mapTitleFor, routeFor } from '../sections';
 
 const route = routeFor(Astro.locals.starlightRoute?.locale);
 const mapTitle = mapTitleFor(Astro.locals.starlightRoute?.locale);
 
-const wide = { step: 130, w: 112, y: 14, h: 68, vbW: 762, vbH: 96 };
-const tall = { x: 8, w: 304, step: 76, y: 8, h: 54, vbW: 320, vbH: 456 };
+const wide = { step: 120, w: 104, y: 14, h: 68, vbW: 824, vbH: 96 };
+const tall = { x: 8, w: 304, step: 76, y: 8, h: 54, vbW: 320, vbH: 532 };
 
 const wideNodes = route.map((section, i) => ({
   ...section,
@@ -33,7 +38,7 @@ const tallNodes = route.map((section, i) => ({
   {
     wideNodes.slice(0, -1).map((node) => (
       <g class="link">
-        <line x1={node.x + wide.w + 5} y1={48} x2={node.x + wide.step - 4} y2={48} />
+        <line x1={node.x + wide.w + 3} y1={48} x2={node.x + wide.step - 4} y2={48} />
         <path
           d={`M ${node.x + wide.step - 9} 44 L ${node.x + wide.step - 4} 48 L ${node.x + wide.step - 9} 52`}
         />

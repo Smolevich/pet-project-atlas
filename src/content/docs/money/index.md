@@ -1,5 +1,5 @@
 ---
-title: 6. Money
+title: 7. Money
 description: People use it for free and you do not know what to charge. What one user costs when the product calls an AI, and how many payers close the month.
 ---
 

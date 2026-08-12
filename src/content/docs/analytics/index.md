@@ -1,5 +1,5 @@
 ---
-title: 5. Analytics
+title: 6. Analytics
 description: Signups arrive and you cannot say which channel sent them. The short list of numbers worth reading weekly, and how to record where a user came from.
 ---
 

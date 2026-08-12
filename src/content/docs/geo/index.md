@@ -1,5 +1,5 @@
 ---
-title: 2. AI search
+title: 3. AI search
 description: People ask an assistant for a tool like yours and get a competitor. Crawler access first, then pages worth quoting.
 ---
 

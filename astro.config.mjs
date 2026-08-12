@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Pet Project Atlas',
-      description: 'How to get your pet project found: search, AI search, content, distribution, analytics, money.',
+      description: 'How to get your pet project found: demand, search, AI search, content, distribution, analytics, money.',
       editLink: { baseUrl: 'https://github.com/Smolevich/pet-project-atlas/edit/main/' },
       lastUpdated: true,
       defaultLocale: 'root',

@@ -1,7 +1,8 @@
 # Pet Project Atlas — notes for agents
 
-Public reference site (Astro + Starlight): how to get a side project found — indexing, AI
-search, content, distribution, analytics, money. Live at https://atlas.smolevich.com.
+Public reference site (Astro + Starlight): how to get a side project found — demand,
+indexing, AI search, content, distribution, analytics, money. Live at
+https://atlas.smolevich.com.
 No Cloudflare Access on this host — the site is public on purpose.
 
 ## Content vs. plugin
