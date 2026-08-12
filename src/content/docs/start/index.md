@@ -4,9 +4,10 @@ description: The route from a live project nobody finds to first traffic — dem
 updated: 2026-08-12
 sources:
   - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
+  - sitemap.xml, site atlas.smolevich.com, measured 2026-08-12
 ---
 
-Seven sections, fourteen pages, and no obvious place to start. This page is the order, and under each step the reason it sits there.
+Seven sections, eighteen pages, and no obvious place to start. This page is the order, and under each step the reason it sits there.
 
 The same route with the reasons taken out is [the checklist](/start/checklist/) — one screen, boxes to tick, nothing to read.
 

@@ -5,6 +5,7 @@ updated: 2026-08-12
 sources:
   - Search Console, property atlas.smolevich.com, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/atlas.access.log, measured 2026-08-12
+  - sitemap.xml, site atlas.smolevich.com, measured 2026-08-12
 ---
 
 ## What we are solving
@@ -21,7 +22,7 @@ Everything below is what the route tells you to do, done on this site, in order.
 2. **`robots.txt` and `llms.txt` are generated at build time**, so they cannot drift from the pages.
 3. **A domain property was verified in Search Console** — Google confirmed ownership through the DNS provider, no TXT record needed.
 4. **The sitemap was submitted once**, on 12 August at 10:20 UTC. Search Console read it two seconds later and reported 56 URLs.
-5. **All 46 canonical URLs were pushed through IndexNow** — accepted by the shared endpoint, by Bing and by Yandex.
+5. **All 46 canonical URLs were pushed through IndexNow** — accepted by the shared endpoint, by Bing and by Yandex. That was the whole site at the time. Three pages shipped later the same day, in both languages, and those have not been pushed.
 
 Then I stopped and read what came back.
 
@@ -38,13 +39,20 @@ The numbers, read on 12 August 2026, two days after launch.
 
 | What | Value |
 |---|---|
-| Pages published | 58 |
-| URLs in the sitemap | 56 |
 | Impressions in Search Console | 0 |
 | Clicks | 0 |
 | Queries the site appears for | 0 |
 | Home page status | URL is unknown to Google |
 | Last crawl of the home page | never |
+
+The size of the site moved between the two readings, so it gets both. Three pages shipped later the same day, in English and in Russian.
+
+| What | First reading | Read again after those pages |
+|---|---|---|
+| Pages published | 58 | 66 |
+| URLs in the sitemap | 56 | 66 |
+
+The second column is the live `sitemap.xml` and the page count of the same build. Everything else above is the first reading and has not been taken again.
 
 Requests by search and AI agents, counted one match per line:
 

@@ -1,6 +1,6 @@
 ---
 title: The checklist
-description: Twenty items in the order that never wastes work, each one line with a link to the page that explains it.
+description: Twenty-three items in the order that never wastes work, each one line with a link to the page that explains it.
 updated: 2026-08-12
 sources:
   - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
