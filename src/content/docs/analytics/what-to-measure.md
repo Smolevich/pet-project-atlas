@@ -21,6 +21,7 @@ Each number below answers a question the others cannot. If two of your metrics a
 ## Steps
 
 1. **Impressions in Search Console** — answers whether search considers you an answer to anything at all.
+   The number is in the Performance report, opened from the property's left-hand navigation.
    Impressions move before clicks, so this is the first metric to react to new pages. Watch the count of distinct queries next to it. A rising query count means new demand found you; a flat one means the same page was shown more often.
 2. **Clicks and average position, read together** — separates a ranking problem from a packaging problem.
    Impressions with no clicks at a decent position is a title and snippet problem. Rewriting the body is the wrong fix: the reader never got that far.

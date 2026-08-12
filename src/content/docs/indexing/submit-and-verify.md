@@ -10,6 +10,7 @@ sources:
   - https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
   - https://www.bing.com/webmasters/help/webmasters-guidelines-30fba23a
   - https://www.indexnow.org/documentation
+  - https://www.indexnow.org/faq
   - https://yandex.com/support/webmaster/
 ---
 
@@ -31,6 +32,10 @@ Do this only after the site is crawlable. Submission does not repair a block —
    Bing is worth the ten minutes even if its search share looks small. Its index also feeds Copilot answers, which is a separate audience.
 4. **IndexNow: publish a key, then post changed URLs** — generate a key of 8 to 128 hex characters. Host it as `{key}.txt` in the site root.
    Send changed URLs as a JSON POST, up to 10,000 per request. One post notifies every participating engine, Bing and Yandex among them. Google does not participate.
+
+   The key file is how an engine checks you own the host, and its only content is the key. UTF-8 text at `https://example.com/{key}.txt`, reachable without a login. Put it anywhere else and every request has to carry `keyLocation` pointing at it.
+
+   The POST goes to a participating engine's `/indexnow` with `host`, `key` and `urlList` in the body. A success is `200`, and the first call often answers `202` while the key is still being verified. Both mean received and nothing more; `422` is a malformed batch and `429` is the rate limit.
 5. **IndexNow: wire it into the deploy** — send only the URLs the build actually changed.
    A hook that posts the whole sitemap on every deploy gets throttled. It also tells the engines nothing they can act on.
 6. **Yandex Webmaster: verify, add the sitemap, then stop** — worth doing if you have Russian-language pages.
@@ -48,6 +53,8 @@ Do this only after the site is crawlable. Submission does not repair a block —
 ## Verify
 
 Come back after a week and read four things, in this order.
+
+Three of them are reports inside the property, opened from the left-hand navigation. URL Inspection is the exception. It is the search bar at the top of every Search Console screen.
 
 - **Sitemaps report**: status Success, and a discovered-URL count that matches the file. That count means the file was read, not that pages were indexed.
 - **Page indexing report**: the indexed bucket, and the list of reasons for the rest. Read the reasons. A total tells you nothing you can act on.

@@ -21,6 +21,7 @@ Get the clusters wrong and you write pages that compete with each other. That co
 1. **Harvest phrasings, never invent them** — support messages, reviews, forum threads, search autocomplete.
    Write down the exact words people used, including the clumsy ones. Your own vocabulary is the least reliable source in the room.
 2. **Add the queries you already appear for** — the Performance report lists queries by impressions, not only by clicks.
+   The report opens from the property's left-hand navigation in Search Console, and the list you want is its Queries tab.
    A query with impressions and no clicks is demand you already touch and lose. That is the cheapest cluster you will ever find.
 3. **Look for the capability with no queries at all** — compare the list against what people do inside the product.
    On one project the most-used feature had zero queries in the report, because no page named it. A hole in the report is a hole in your map, not proof that demand is missing.

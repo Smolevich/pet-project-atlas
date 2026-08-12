@@ -4,6 +4,9 @@ description: Telegram, app stores and marketplaces run their own index over a ha
 updated: 2026-08-12
 sources:
   - https://core.telegram.org/bots/api#setmyname
+  - https://core.telegram.org/bots/api#getmyname
+  - https://core.telegram.org/bots/api#getme
+  - https://developer.apple.com/help/app-store-connect/create-an-app-record/view-and-edit-app-information
   - https://core.telegram.org/bots/features
   - https://developer.apple.com/app-store/search/
   - https://developer.apple.com/app-store/product-page/
@@ -39,8 +42,16 @@ Each platform matches a different set of fields. Learn the set before writing an
    Bytes, not characters. ASCII spends one byte a letter, Cyrillic in UTF-8 spends two, so the field is about 50 letters.
    Apple's own product-page guide says 100 characters. The App Store Connect reference says bytes, and that is the one submission enforces.
    Words already in the title or subtitle should not be repeated there. Competitor names in that field are a common rejection reason.
+
+   The field is version metadata in App Store Connect, not app-wide information. Open **Apps**, pick the app, then the version under its platform in the sidebar. **Keywords** sits there with Description and Promotional Text, and it is localizable per language.
+
+   Name and Subtitle are app-wide, under **App Information**, so they live on a different screen.
 5. **Read the metadata back from the platform** — `getMe` and the `getMy*` methods return what is set.
    Memory is not evidence here, and neither is the console where you typed it. The API response is.
+
+   `getMe` returns a `User` object: id, username and `first_name`, which is the bot's name. It carries no description at all, so the rest needs its own method.
+
+   `getMyName`, `getMyDescription` and `getMyShortDescription` each read back one field, and each takes `language_code`. Pass the audience's language, or you read the default and conclude you set nothing.
 6. **Search the platform as a stranger** — a fresh account, the audience's language, the phrases they would type.
    Write down who comes up. Their names are a free list of the exact words the demand uses.
 7. **Tag every external link into the platform** — a start parameter per venue.
@@ -60,7 +71,7 @@ Each platform matches a different set of fields. Learn the set before writing an
 ## Verify
 
 - Search from an account that has never used the product, in the audience's language. Note whether you appear at all, and who is above you.
-- Read the name, description and short description back over the API. Compare them to what you meant to set.
+- Read the name, description and short description back over the API. That is `getMyName`, `getMyDescription` and `getMyShortDescription`, one call each. Compare them to what you meant to set.
 - Count the characters against the platform's limits before submitting, not after a rejection.
 - After a rename, watch the language and locale mix of new signups. It should move toward the script you added.
 - Send yourself a tagged link and confirm the parameter is stored on first contact. Start again and confirm it is not overwritten.
