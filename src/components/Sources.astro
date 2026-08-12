@@ -18,6 +18,11 @@ const data = entry.data as { sources?: string[]; updated?: Date };
 const sources = orderSources(data.sources);
 const updated = data.updated instanceof Date ? data.updated : undefined;
 const t = footerStringsFor(locale);
+
+// ru-RU печатает дату как «12 августа 2026 г.» — точка у неё уже своя, и
+// вторая от предложения давала «г..» на каждой русской странице.
+const updatedText = updated ? t.formatDate(updated) : '';
+const updatedStop = updatedText.endsWith('.') ? '' : '.';
 ---
 
 {
@@ -28,7 +33,8 @@ const t = footerStringsFor(locale);
       {updated && (
         <p class="atlas-sources-updated">
           {t.figuresRead}{' '}
-          <time datetime={updated.toISOString().slice(0, 10)}>{t.formatDate(updated)}</time>.
+          <time datetime={updated.toISOString().slice(0, 10)}>{updatedText}</time>
+          {updatedStop}
         </p>
       )}
 
