@@ -57,4 +57,6 @@ All of that evidence is readable before you build anything. That is the point of
 - Ask one real person for money at a real price and store the answer verbatim, refusal included.
 - State your break-even as a whole number of payers. If you cannot say it out loud, the price is a guess with confidence.
 
+Ads, CPC and intent read side by side across three niches: [which market to build for](/demand/pick-a-market/).
+
 If both questions come back positive, the next wall is technical rather than commercial. Search has to be able to read the site at all. That is [indexing](/indexing/).

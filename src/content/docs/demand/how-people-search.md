@@ -85,4 +85,6 @@ Now the harvest itself, which no panel does for you.
 - Name the engine behind every figure you write down. A number without an engine next to it is not usable in a Russian-language market.
 - Finish with a file: one row per phrasing, its origin, and the engine it was checked in. A row with no origin is your own vocabulary wearing a disguise.
 
+One panel read across three niches and four markets is here: [which market to build for](/demand/pick-a-market/).
+
 The phrasings feed the second question: [whether that audience pays for anything](/demand/will-they-pay/). Turning the list into pages comes much later, in [what to write about when nobody searches your name](/content/keyword-clusters/).
