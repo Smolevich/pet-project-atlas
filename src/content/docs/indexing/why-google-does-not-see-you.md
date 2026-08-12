@@ -1,7 +1,7 @@
 ---
 title: Google does not see your site
 description: The site is live and search returns nothing for it. The checks that find the real blocker, in the order they have to run.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
   - https://developers.google.com/search/docs/crawling-indexing/robots/intro
   - https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt

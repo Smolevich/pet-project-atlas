@@ -1,7 +1,7 @@
 ---
 title: Google не видит сайт
 description: Сайт в проде, а поиск по нему ничего не отдаёт. Проверки, которые находят настоящий блокер, в том порядке, в котором их надо запускать.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
   - https://developers.google.com/search/docs/crawling-indexing/robots/intro
   - https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
