@@ -249,3 +249,17 @@ A reader following the route passed four tables of contents before reaching a se
 A section index either says something — the symptom, the order, what the pages disagree about — or it shrinks to one line and a list of links. Restating the titles of its own children is not content.
 
 The same rule inside a page: no paragraph that announces what the next paragraph will cover.
+
+## 11. Expand the thing you just named
+
+A step that names a mechanism owes the reader the mechanism. "The block lived at the edge" tells someone who already knows what you mean, and nobody else.
+
+The reader cannot act on a category. Name the actual control, where it lives, what it covers, and what it does not.
+
+Before: "Bot-protection rules at the edge are invisible in `robots.txt`."
+
+After: "Cloudflare has a one-click toggle called *Block AI Scrapers and Crawlers* under Security → Bots. It is a managed rule, so the list of agents it covers changes without you. It answers them with a challenge or a 403 before the request reaches your server, which is why nothing about it appears in `robots.txt` or in your own access log."
+
+Same rule for anything a reader would have to go and look up to follow the sentence: a dashboard toggle, an API method, a header, a report name, a bot family. If the expansion runs long, it earns its own paragraph under the step — not a link and a shrug.
+
+The test: could a reader who has never touched this control find it and check it, using only this page?
