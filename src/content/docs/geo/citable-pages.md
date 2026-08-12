@@ -1,10 +1,11 @@
 ---
 title: Why AI answers cite someone else
 description: An answer names a few sources and yours is not one of them. How to write a page that survives being quoted out of context.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
   - https://arxiv.org/abs/2311.09735
   - https://schema.org/sameAs
+  - https://developers.google.com/search/docs/appearance/structured-data/organization
   - https://developers.google.com/search/docs/appearance/structured-data/search-gallery
 ---
 
@@ -33,7 +34,8 @@ The same facts, arranged so a model can lift them, is the whole move.
 6. **Structure so the document segments cleanly** — heading levels without gaps, a numbered list for a process.
    Use a table when three or more options are compared. Questions make good headings, because they match the phrasing of the query.
 7. **Add JSON-LD in the head** — `Organization` or `Person` as the entity, `Article` with an author and a publication date.
-   The field that pays for itself is `sameAs`: the list of your profiles and listings. It is what merges scattered mentions into one entity the model can recognise.
+   Add `sameAs` too, listing your profiles and listings. Its documented job is entity resolution for Google's Knowledge Graph. Google's own `Organization` reference is where that is written down.
+   What it does for AI citation is unmeasured. I have found no vendor statement and no study showing an LLM pipeline reads the field. I have not measured it here either. It is ten minutes and a defensible bet, not a mechanism.
 8. **Remember the model learned about you elsewhere** — directories, discussion threads, other people's comparisons.
    On-page work pays off after the model knows you exist as a thing. Recognition first, citation second.
 
@@ -44,6 +46,7 @@ The same facts, arranged so a model can lift them, is the whole move.
 - **Keeping the conclusion for the end**. The essay shape buries the answer under the setup. The only extractable passage is then an intro that says nothing yet.
 - **Writing FAQ blocks to fill the schema**. Questions nobody asks, answered by repeating the paragraph above them. Markup does not make an empty answer quotable.
 - **Sprinkling microdata through the markup**. A template change broke it silently, and nothing warned me. JSON-LD in one block in the head survives redesigns.
+- **Selling `sameAs` as the thing that merges mentions into one entity a model recognises**. That sentence stood on this page and in the route, and it has no evidence under it. The field's documented history is Google's Knowledge Graph. Whether a language model ever reads it, I do not know, and neither did the sentence.
 - **Opening paragraphs with "It" and "However"**. Both words point at a sentence that will not travel with the quote.
 
 ## Verify
