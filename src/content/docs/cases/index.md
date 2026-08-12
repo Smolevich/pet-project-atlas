@@ -3,9 +3,9 @@ title: Cases
 description: What a case has to contain before it goes up here, how to send yours, and why the section is still empty.
 ---
 
-The section is empty. Nothing has been published here yet, and an outline would be worse than an empty page.
+One case is up: [this atlas, two days in](/cases/atlas-itself/). It is the site you are reading, measured on itself.
 
-So this page is the bar instead. It says what a case has to contain, and how to send one.
+This page is the bar the next one has to clear. It says what a case has to contain, and how to send one.
 
 ## What a case has to contain
 
@@ -30,8 +30,8 @@ Your voice stays as you wrote it. Guest pages carry `voice: guest` in frontmatte
 
 The terms are in [CONTRIBUTING](https://github.com/Smolevich/pet-project-atlas/blob/main/CONTRIBUTING.md#guest-cases): `CC BY 4.0`, your byline, a link to your project.
 
-## Why the section is empty
+## Why there is only one
 
-My own numbers are still being collected, and I would rather publish them late than round them. Writing a case before the data is in would break the first rule on this page.
+The rest of my numbers are still being collected, and I would rather publish them late than round them. Writing a case before the data is in would break the first rule on this page.
 
-Until the first one lands, the measurements live on the pages that produced them, section by section along [the route](/start/).
+Until the next one lands, the measurements live on the pages that produced them, section by section along [the route](/start/).
