@@ -82,7 +82,7 @@ Each row gets exactly one atlas link. Route by symptom:
 |---|---|
 | Not fetchable, blocked, `noindex`, wrong canonical, JS-only body | [Google does not see your site](https://atlas.smolevich.com/indexing/why-google-does-not-see-you/) |
 | Not submitted, no sitemap, stale URLs, only the home page indexed | [Submit and verify](https://atlas.smolevich.com/indexing/submit-and-verify/) |
-| AI crawler blocked, `llms.txt` missing or stale | [AI crawlers and llms.txt](https://atlas.smolevich.com/geo/llms-txt-and-crawlers/) |
+| AI crawler blocked, or a published `llms.txt` gone stale | [AI crawlers and llms.txt](https://atlas.smolevich.com/geo/llms-txt-and-crawlers/) |
 | Low citability, no JSON-LD, no `sameAs`, assistants cite competitors | [Why AI answers cite someone else](https://atlas.smolevich.com/geo/citable-pages/) |
 | No impressions, pages target phrases nobody types, pages compete | [What to write about](https://atlas.smolevich.com/content/keyword-clusters/) |
 | Thin page, no answer up top, no failures block, weak titles | [What a page is made of](https://atlas.smolevich.com/content/page-templates/) |

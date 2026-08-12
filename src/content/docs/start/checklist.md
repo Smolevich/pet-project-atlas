@@ -1,6 +1,9 @@
 ---
 title: The checklist
 description: Twenty items in the order that never wastes work, each one line with a link to the page that explains it.
+updated: 2026-08-12
+sources:
+  - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
 ---
 
 ## What we are solving
@@ -20,13 +23,13 @@ Work top to bottom. Nothing here is undone by anything below it, which is the on
 - [ ] Read `robots.txt`, then check `noindex` in the tag and the header. It drops the page from the index on purpose, and no browser shows the header — [blockers](/indexing/why-google-does-not-see-you/)
 - [ ] Point every canonical at its own page, and redirect URL variants to one form — [blockers](/indexing/why-google-does-not-see-you/)
 - [ ] Verify a domain property in Search Console, submit the sitemap once, import it into Bing. A URL-prefix property covers only the form you typed — [submit](/indexing/submit-and-verify/)
-- [ ] Allow search and user-triggered AI agents by name. Blocked, you are absent from the answer at any quality of content — [crawlers](/geo/llms-txt-and-crawlers/)
+- [ ] Serve `User-agent: *` and `Allow: /`, and name an agent only to block it. A named allow list expires every time a vendor renames something — [crawlers](/geo/llms-txt-and-crawlers/)
 - [ ] Tag outbound links, one value per venue, and store the source on first contact. Untagged arrivals can never be attributed later — [attribution](/analytics/attribution/)
 - [ ] Name the single action that counts as activation — [metrics](/analytics/what-to-measure/)
 - [ ] Give each cluster exactly one URL, in a table you keep — [clusters](/content/keyword-clusters/)
 - [ ] Write the first page in the four-block shape, answering its title up front — [page shape](/content/page-templates/)
-- [ ] Add JSON-LD with `sameAs` for your profiles and listings. That field merges scattered mentions into one entity a model recognises — [citability](/geo/citable-pages/)
-- [ ] Publish `llms.txt` naming only pages that exist — [crawlers](/geo/llms-txt-and-crawlers/)
+- [ ] Add JSON-LD with `sameAs` for your profiles and listings. Documented for Google's Knowledge Graph, unmeasured for AI citation, ten minutes either way — [citability](/geo/citable-pages/)
+- [ ] Publish `llms.txt` only if you ship developer docs, naming only pages that exist. My log records 0 fetches by AI agents in 16 days — [crawlers](/geo/llms-txt-and-crawlers/)
 - [ ] Put the product's function into its platform name, in the audience's script. Platform search matches the name, not the description — [platform](/distribution/in-platform-visibility/)
 - [ ] Write the listing card once, then submit in small tagged batches — [catalogs](/distribution/catalogs/)
 - [ ] Append a weekly snapshot to a file, same weekday every week. A number you cannot compare with itself is decoration — [metrics](/analytics/what-to-measure/)
@@ -39,6 +42,8 @@ Work top to bottom. Nothing here is undone by anything below it, which is the on
 - **Starting in the middle, at the interesting part**. Content and directories are the enjoyable half. Both are wasted while the pages carry a header that drops them.
 - **Ticking the tagging item with nothing to store the tag**. The links went out instrumented, the parameter arrived, and no column existed. The box was honestly ticked and the data was gone.
 - **Treating it as a list you finish once**. Directory status, edge rules and crawler access are all state. They change without telling you, so the top half is worth re-running each quarter.
+- **Keeping an item this site's own practice contradicted**. The list told you to allow agents by name while `atlas.smolevich.com` served a plain wildcard. When the advice and the author's own file disagree, the file is the honest one.
+- **Requiring `llms.txt` after measuring that nothing fetched it**. The item sat here for as long as the measurement did, one page away. A checklist that survives its own evidence is a habit, not a procedure.
 
 ## Verify
 

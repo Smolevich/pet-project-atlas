@@ -41,8 +41,18 @@ Sort the agents by job before you decide anything. A search crawler, a training 
 | `GoogleOther` | Google | Assorted internal fetches | Little in AI answers |
 | `CCBot` | Common Crawl | Open corpus for training | Nothing in today's answers |
 
-1. **Allow search and user-triggered agents, always** — these two decide whether you exist in an answer today.
-   The training group is a values call, not a traffic call. Saying no there costs nothing you can measure this quarter.
+1. **Allow everything by default** — the whole file for most projects is four lines.
+
+   ```text
+   User-agent: *
+   Allow: /
+
+   Sitemap: https://example.com/sitemap-index.xml
+   ```
+
+   That is what this site serves. Name an agent only when you want to block it.
+   A list of agents allowed by name is a list you have to maintain. Vendors ship new names faster than anyone re-reads the file.
+   Search and user-triggered agents decide whether you exist in an answer today. The training group is a values call, and the only case worth typing a name for.
 2. **Know which of your rules actually bind** — `robots.txt` is honoured by the crawlers, not always by the fetchers.
    OpenAI writes that because the action is initiated by a user, robots.txt rules may not apply. Perplexity says its user agent generally ignores the file, for the same reason.
    Anthropic is the exception and says its bots honour it. One `Disallow`, three vendors, three different outcomes.
@@ -53,13 +63,19 @@ Sort the agents by job before you decide anything. A search crawler, a training 
    It covers AI Overviews, AI Mode and the generative features in Discover. Google states it is not used as a ranking signal elsewhere in Search.
    `nosnippet`, `data-nosnippet` and `max-snippet` keep you out too, and take your ordinary Search snippet with them. The dedicated control does not charge that.
    It is rolling out to a subset of owners, so it may not be in your property yet.
-5. **Write `robots.txt` per agent, most specific first** — a crawler obeys the single group that matches its name best.
-   That is the rule in RFC 9309. A generous `User-agent: *` does not rescue an agent you named and blocked above it.
+5. **If you do name agents, put the most specific group first** — that is the rule in RFC 9309.
+   A crawler obeys the single group whose name matches it best. A generous `User-agent: *` does not rescue an agent you blocked above it.
+   The rule cuts both ways. One stale group silently overrides the wildcard under it, which is why a per-agent allow list is worth avoiding.
 6. **Check the layers under `robots.txt`** — the `X-Robots-Tag` header, the meta tag, and the edge.
    A CDN toggle named "block AI scrapers", a WAF rule, a rate limit: any of them answers 403. None of them appears in the file you keep editing.
 7. **Verify identity by network, not by name** — the user agent string is a claim, and anyone can send it.
    Vendors publish IP ranges and reverse DNS for their crawlers. Check those before you treat a log line as evidence of either a visit or an attack.
-8. **Publish `llms.txt` at the site root** — a markdown file that names the pages worth reading.
+8. **Publish `llms.txt` only if you ship developer docs** — it costs ten minutes, and no vendor commits to reading it.
+   My own log settles the general case. In 16 days no AI agent fetched the file once: [who actually crawls you](/geo/who-actually-crawls-you/).
+   So on a small marketing site it is a cheap bet with a measured payoff of zero. On forty pages of docs it is a reasonable one.
+   Skip it otherwise, and spend the ten minutes on `robots.txt` and the sitemap, which every agent does read.
+
+   The format, if you write one — a markdown file that names the pages worth reading.
    `robots.txt` says where not to go. `llms.txt` says what matters, in your own words.
 
    ```markdown
@@ -84,7 +100,9 @@ Sort the agents by job before you decide anything. A search crawler, a training 
 ## What did not work
 
 - **Blocking everything to save bandwidth**. That block sat at the edge, not in `robots.txt`, so it stopped the fetchers too. A reader who pasted the URL into a chat got told the page could not be opened.
-- **Losing the citation along with the bill**. The busiest AI agent in my own log took 341 requests in 16 days — [who actually crawls you](/geo/who-actually-crawls-you/). Presence in the answer does not come back that cheaply.
+- **Losing the citation along with the bill**. The busiest AI agent in my own log took 341 requests in 16 days — [who actually crawls you](/geo/who-actually-crawls-you/). It is `ChatGPT-User`, a human has to trigger it, and I cannot prove the human was not me. Presence in the answer still does not come back cheaply.
+- **Making `llms.txt` a required item**. This page told you to publish it and the route repeated the instruction. My own log recorded 0 fetches by any AI agent in 16 days. A file nothing reads is not a step in a checklist. It is now conditional, and the condition is developer docs.
+- **Allowing agents by name in `robots.txt`**. The route asked readers to list every search and user-triggered agent explicitly. This site has never done that: it serves `User-agent: *` and `Allow: /`. The named list is work that expires, and RFC 9309 makes a stale group override the wildcard under it.
 - **Reaching for `Google-Extended` to steer AI Overviews**. Wrong lever: AI Overviews runs on `Googlebot`, and the token covers Gemini training and Vertex AI grounding. The rule moved nothing, and the control that does cover AI Overviews now sits in Search Console.
 - **Steering AI Overviews with `nosnippet`**. That was this page's advice until 3 June 2026, when Google shipped a dedicated Search Console control. The snippet directives also cost you the ordinary Search snippet, which the dedicated control does not.
 - **Trusting a vendor page that had stopped moving**. Google's own `ai-features` documentation still lists only the snippet directives. It was last updated 2025-12-10, so this page was faithfully reproducing a stale source.
@@ -102,7 +120,8 @@ Run `geo-llmstxt` from the same place. It validates an existing file or drafts o
 Then confirm from outside:
 
 - Request a page with a crawler's user agent from a network that is not yours, and check for 200.
-- Fetch `/llms.txt` the same way, and confirm every link in it returns 200.
+- If you published `llms.txt`, fetch it the same way and confirm every link in it returns 200.
 - Ask an assistant to open one of your URLs. If it cannot, the block is real and the diagnosis above tells you which layer holds it.
+- Write down the minute you did that. It lands in your log as `ChatGPT-User` or `Claude-User`, from the vendor's address, indistinguishable from a stranger's visit.
 
 Access is only the gate. What gets quoted once you are through it is a separate problem: [why AI answers cite someone else](/geo/citable-pages/).

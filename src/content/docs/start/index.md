@@ -1,6 +1,9 @@
 ---
 title: Start here
 description: The route from a live project nobody finds to first traffic — demand first, then week one, week two and month two, one line per step.
+updated: 2026-08-12
+sources:
+  - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
 ---
 
 Seven sections, fourteen pages, and no obvious place to start. This page is the order, and nothing else.
@@ -42,7 +45,7 @@ This stage is a day or two, and it decides whether the rest is worth doing. Ever
 12. Request one page from outside your network, without cookies. Your own network is trusted, so an edge rule blocking the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/).
 13. Verify a domain property in Search Console and submit the sitemap once. A URL-prefix property covers only the form you typed, and its report stays empty — [submit and verify](/indexing/submit-and-verify/).
 14. Import the property into Bing Webmaster Tools. Its index also feeds Copilot answers, which is a separate audience — [submit and verify](/indexing/submit-and-verify/).
-15. Allow the search and user-triggered AI agents by name. Blocked, you are absent from the answer at any quality of content — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+15. Serve `User-agent: *` and `Allow: /`, and name an agent only to block it. Blocked, you are absent from the answer at any quality of content. A named allow list expires as vendors rename things — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 16. **First crossing.** Tag every outbound link and store the source on first contact. A messenger or a store passes no source unless you ask for it — [where the user came from](/analytics/attribution/).
 17. Name the single action that counts as activation — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
@@ -54,8 +57,8 @@ Step sixteen belongs to section six and has to happen now. Attribution cannot be
 19. Order the queue by money: transactional, then comparison, then informational. You run out of energy long before you run out of clusters — [what to write](/content/keyword-clusters/).
 20. Write the first page in the four-block shape — [what a page is made of](/content/page-templates/).
 21. Put the answer in the first three sentences of that page. That block is the passage a model lifts — [what a page is made of](/content/page-templates/).
-22. Add JSON-LD with `sameAs` listing your profiles and listings. That field merges scattered mentions into one entity a model recognises — [why AI answers cite someone else](/geo/citable-pages/).
-23. Publish `llms.txt` naming only pages that are actually written — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+22. Add JSON-LD with `sameAs` listing your profiles and listings. It is documented for Google's Knowledge Graph and unmeasured for AI citation — [why AI answers cite someone else](/geo/citable-pages/).
+23. Publish `llms.txt` only if you ship developer docs, naming only pages that are actually written. My own log records 0 fetches by any AI agent in 16 days — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 24. If the product lives in a platform, put its function in the name. Platform search matches the name, not the description — [search inside the platform](/distribution/in-platform-visibility/).
 25. Take the first weekly snapshot and append it to a file — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
@@ -81,6 +84,8 @@ These are mistakes of order. Each of them is work I did correctly, at a moment w
 - **Tagging links after the launch**. The launch day arrivals came in untagged and stayed that way. No later analysis recovers them, because there is nothing to analyse.
 - **Citability work before crawler access**. The pages scored well and no agent had fetched them. The edge was refusing them, and the writing was addressed to nobody.
 - **Cutting costs before there were payers**. A few dollars of fixed cost, optimised carefully, while the number of payers was zero. Break-even was never a cost problem.
+- **Publishing a step I had already measured as empty**. Step twenty-three said publish `llms.txt`, and the log two clicks away recorded no AI agent fetching it once. The measurement and the instruction lived on the same site for a week.
+- **Telling readers to allow agents by name**. Step fifteen did, while this site's own `robots.txt` was a wildcard the whole time. My own file was the better advice, and I never read it as advice.
 - **Following the section numbers literally**. They are a reading order, not a schedule. Read that way, attribution lands after distribution, which is exactly one section too late.
 
 ## Verify
