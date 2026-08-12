@@ -1,7 +1,7 @@
 ---
 title: What a page that ranks and gets cited is made of
 description: The answer in the first three sentences, executable steps, a failures block, an FAQ people actually asked, and a linter that keeps the shape.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
   - https://developers.google.com/search/blog/2023/08/howto-faq-changes
   - https://developers.google.com/search/docs/appearance/structured-data/faqpage
@@ -26,7 +26,7 @@ One shape does both: the answer first, then the procedure, then the failures, th
 4. **Write the block nobody else can copy** — what you tried that failed, and what it cost.
    Competitors copy each other's steps freely. Nobody copies your dead ends, because they do not have them.
 5. **Add an FAQ only for questions you were actually asked** — from support, from the query list, from comments.
-   FAQPage rich results have been limited to authoritative government and health sites since 2023. The markup will not give a pet project a rich result.
+   Google stopped showing the FAQ rich result on 7 May 2026 and removed the documentation in June 2026. The markup gives nobody a rich result now.
    The block still earns its place. A short question with a short self-contained answer is the shape an assistant extracts.
 6. **Write anchors that name the destination** — the previous page in the route, the next one, the tool.
    "Read more" tells nobody anything. Put the destination's promise into the anchor text.
@@ -43,6 +43,7 @@ One shape does both: the answer first, then the procedure, then the failures, th
 - **Matching headings loosely**. "What didn't work" and "What did not work" read the same to a human. A check sees two different strings, so the linter matches the heading text literally.
 - **Allowing an empty required block**. A heading with nothing under it passed the first version of the check. An empty block now counts as missing.
 - **Writing an FAQ for the markup**. Questions nobody asked, answered by repeating the paragraph above them. Schema does not make an empty answer worth quoting.
+- **Publishing a restriction as the current state**. This page said FAQPage was limited to government and health sites, which was true from 2023. Google retired the rich result outright in May 2026, and the sentence had simply stopped being checked.
 - **Softening a number instead of sourcing it**. "Roughly a couple of thousand visits" looks like data and is not. A number ships with a date and a source, or it does not ship.
 
 ## Verify

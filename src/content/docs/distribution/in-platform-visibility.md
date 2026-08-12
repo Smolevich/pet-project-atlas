@@ -1,12 +1,13 @@
 ---
 title: Search inside the platform, not only in Google
 description: Telegram, app stores and marketplaces run their own index over a handful of short fields. Which fields those are, and what a name in the wrong script costs.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
   - https://core.telegram.org/bots/api#setmyname
   - https://core.telegram.org/bots/features
   - https://developer.apple.com/app-store/search/
   - https://developer.apple.com/app-store/product-page/
+  - https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information/
   - https://support.google.com/googleplay/android-developer/answer/9898842
 ---
 
@@ -34,7 +35,9 @@ Each platform matches a different set of fields. Learn the set before writing an
    You do not have to choose one script. A separate name can be shown to speakers of each language.
 3. **Give each remaining field its own job** — a short description holds 120 characters, a full one 512.
    The short one sits on the profile and travels with the link when someone shares it. The long one answers "should I press start".
-4. **Spend the keyword budget without repeating yourself** — Apple's keyword field holds 100 characters, comma-separated.
+4. **Spend the keyword budget without repeating yourself** — Apple's keyword field holds 100 bytes, comma-separated.
+   Bytes, not characters. ASCII spends one byte a letter, Cyrillic in UTF-8 spends two, so the field is about 50 letters.
+   Apple's own product-page guide says 100 characters. The App Store Connect reference says bytes, and that is the one submission enforces.
    Words already in the title or subtitle should not be repeated there. Competitor names in that field are a common rejection reason.
 5. **Read the metadata back from the platform** — `getMe` and the `getMy*` methods return what is set.
    Memory is not evidence here, and neither is the console where you typed it. The API response is.
@@ -49,6 +52,7 @@ Each platform matches a different set of fields. Learn the set before writing an
 - **Reading the user base as a market signal**. The geography of signups matched the Latin spelling of the name, not the market I was building for. I spent weeks on product theories about an audience that was an artefact of a metadata field.
 - **Assuming the description would carry it**. It had been in the right language the whole time. Search does not match that field, so it changed nothing.
 - **Comparing the products instead of the names**. Competitors with the function spelled out in the audience's script were far larger, on the same public APIs. The moat was a name, not technology.
+- **Counting characters against a byte limit**. The keyword field takes 100 bytes, and a Cyrillic list spends two bytes a letter. Half the budget I thought I had was gone before I typed anything. Apple's marketing page says characters, and I read that one.
 - **Trusting my memory of the name**. Reading it back over the API disagreed with what I believed I had set. Every diagnosis before that check rested on a wrong fact.
 - **Publishing links with no start parameter**. The code did not read the parameter either, so attribution was zero rather than approximate. Months of distribution work could not be evaluated.
 - **Treating the website as the main door**. The signups arrived from inside the platform, through its own search and links shared in chats. Ranking the site was real work aimed at a channel the audience was not using.

@@ -1,7 +1,7 @@
 ---
 title: Where the user actually came from
 description: A browser sends a referrer, a bot or an app sends nothing. Tagging links, storing the source on first contact, and why the honest answer is often zero rather than approximate.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
   - https://core.telegram.org/bots/features#deep-linking
   - https://support.google.com/analytics/answer/10917952
@@ -23,8 +23,9 @@ So the honest answer is not "roughly half came from that directory". It is nothi
    Ad-hoc tagging produces four spellings of the same directory. They never merge cleanly later.
 2. **Tag every outbound link, your own channels included** — one value per venue.
    Campaign parameters on the web, a deep-link payload for a bot, a campaign link for an app. Your own posts are a channel too. Untagged, they land in direct traffic and inflate word of mouth.
-3. **Read the platform's payload rules first** — a bot deep link takes a short parameter.
-   The alphabet is restricted and the length is capped; check the current limit in the API docs. A scheme encoding venue, medium and date will not fit.
+3. **Build the source scheme to fit the deep link** — Telegram allows 64 characters of `A-Za-z0-9_-`.
+   `reddit-selfhosted-2026-08-12` is 28 of them: venue, medium and date, with room left over.
+   Hyphen and underscore are the only separators you get. Pick one, write it into the vocabulary, and never mix the two.
 4. **Read the parameter on first contact, store it server-side** — one column on the user row.
    Write it in the insert only. The client is the wrong place: it keeps what it likes, and it vanishes when the person switches device.
 5. **Never overwrite the first source** — a later visit carrying a different tag must leave the original value alone.
@@ -42,6 +43,7 @@ Attribution is not reconstructable. Every day the links stay bare is a day of ar
 
 - **Assuming the source was visible by default.** The links were bare. The handler never read the start parameter, and no column existed to hold it. Attribution was not approximate, it was zero, and months of distribution work went unjudged.
 - **Reading user geography as a market signal.** The mix followed a metadata field, not the market. The field was the alphabet the product name was written in. I built product theories on an artefact of a name.
+- **Calling the deep-link parameter too short for a scheme.** This page said a scheme would not fit. Telegram documents 64 characters, and the scheme I needed was 28. The parameter was never the obstacle; the missing column was.
 - **Writing the source on every contact.** Within weeks the whole table said "my own channel". That is where returning people click.
 - **Adding the tag but not the column.** The parameter arrived, went into a log line and was dropped. The links looked instrumented for weeks while nothing was stored.
 - **Trusting referrer in the web analytics tool.** In-app browsers and link previews strip it. Real referrals then pile up under direct traffic. The report was confidently wrong, which is worse than empty.

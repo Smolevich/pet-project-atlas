@@ -10,8 +10,11 @@ sources:
   - https://www.semrush.com/kb/997-semrush-data
   - https://ahrefs.com/big-data
   - https://www.similarweb.com/corp/ourdata/
+  - https://www.similarweb.com/corp/search/rank-tracker/
   - https://serpstat.com/features/
+  - https://serpstat.com/data/serp-databases/
   - https://topvisor.com/rank-tracker/
+  - https://topvisor.com/keyword-research/
   - https://moz.com/help/keyword-explorer
   - https://support.google.com/webmasters/answer/7042828
 ---
@@ -38,14 +41,20 @@ That is why their traffic figure never matches Search Console. Search Console co
 |---|---|
 | Semrush | Third-party SERP collection and a clickstream panel, modelled into volume and traffic |
 | Ahrefs | Own link crawler, plus a keyword database with clickstream-corrected volumes |
-| Similarweb | Panel and partner data extrapolated to whole-site traffic, not to keyword positions |
-| Serpstat | Keyword and SERP databases, sold per country database |
+| Similarweb | Panel and partner data extrapolated to whole-site traffic, plus a rank tracker for up to 200,000 keywords |
+| Serpstat | Keyword and SERP databases: Google across 230 regions, plus one Bing database for the United States |
 | Topvisor | Rank checks in the engines you pick, priced per check |
 | Moz | Link index, plus a keyword explorer with modelled volume ranges |
 
 Then the question that decides this for a Russian-market project: which of them reads Yandex.
 
-Semrush documents position tracking for Google, Bing and Baidu. Yandex appears in its traffic toolkit as a source label, not as a rank database. Topvisor checks Google, Yandex, Bing and Seznam. Serpstat ships Yandex databases alongside its Google ones.
+Semrush documents position tracking for Google, Bing and Baidu. Yandex appears in its traffic toolkit as a source label, not as a rank database.
+
+Serpstat does not read Yandex either. Its own database list is Google across 230 regions, plus one Bing database for the United States.
+
+That leaves one tool of the six. Topvisor checks positions in Google, Yandex, Yandex.com, Bing and Seznam, and takes volume from Wordstat as well as Keyword Planner.
+
+Topvisor is a different instrument, though, not a cheaper Semrush. It checks the phrases you give it and bills per check. There is no ready database to browse for a market you have not entered.
 
 Database size is the wrong criterion here. A panel that does not read Yandex describes part of a Russian-language market and does not say which part. The atlas has that in measured form, on a live project: [what a paid rank tracker measures](/tools/paid-tools/).
 
@@ -73,6 +82,7 @@ Now the harvest itself, which no panel does for you.
 - **Naming the product in Latin script while the demand was typed in Cyrillic**. The words were right and the alphabet was wrong. Queries in the audience's script could not reach the product at all, and nothing was logged, because nothing failed.
 - **Reading the user base as proof of the market**. The geography of signups matched the Latin spelling of the name rather than the market I was building for. I spent weeks on product theories about an audience that was an artefact of one metadata field.
 - **Assuming my vocabulary was the market's**. My word for the core feature was not the word people typed. The pages existed, the demand existed, and they passed each other.
+- **Taking a tool's Yandex support from a review instead of the vendor's own list**. This page said Serpstat ships Yandex databases. Serpstat's database page lists Google and Bing, and that one row was the answer to the page's own question.
 - **Reading one panel as "the search market"**. The tool reported Google. The phrases were Russian, Yandex serves that demand too, and not one row in the panel was about it. The panel does not warn you about the engine it cannot see.
 - **Waiting for a tool to say what to write**. Its topics report answered that the domain was too small or too new to have any. A service that reads an existing footprint cannot create the first one.
 - **Buying the subscription before doing this by hand**. It returned a keyword list and a competitor's name. Both were reachable in an afternoon with a browser, and neither changed what I had to do next.
