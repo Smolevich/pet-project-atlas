@@ -68,6 +68,7 @@ Sort the agents by job before you decide anything. A search crawler, a training 
    The rules are short. An H1 on the first line, a one-sentence blockquote under it, absolute links, a description after every colon.
 7. **Grep the access log for who actually came** — the agent names above, plus requests for `/llms.txt`.
    Support for the file is a convention, not a standard anyone enforces. Your log is the only honest answer about who reads it.
+   Mine is counted out here: [who actually crawls you](/geo/who-actually-crawls-you/).
 
 ## What did not work
 
