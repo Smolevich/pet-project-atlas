@@ -52,7 +52,7 @@ Thread pages get indexed on the venue's schedule, not yours. I have not measured
 - **One launch post as the plan.** The graph spiked for a day and lay flat the next. A post is an event and a channel is a habit, and I had confused the two.
 - **Spending the week on directory forms instead.** Page one for my query held a competitor and other people's lists. Filling forms touched neither of them.
 - **Publishing links with no tag.** It already happened with directory submissions. The listings went live and no arrival could be traced to any of them. A forum comment is the same link with the same hole in it.
-- **Assuming my own site was the door.** Signups arrived from inside the platform. Its own search brought them, and links people shared in chats. Ranking the site aimed at a channel the audience was not using.
+- **Assuming my own site was the door.** No signup carried a source. The share I could attribute to the site is unknown: [where the user came from](/analytics/attribution/). Ranking the site was real work aimed at a channel I never showed the audience was using.
 - **Writing this page without having run the campaign.** Nothing above is a measurement. Every step is either a published venue rule or a mechanism I can argue for. Do not read it as a result.
 
 ## Verify

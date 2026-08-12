@@ -66,7 +66,7 @@ Each platform matches a different set of fields. Learn the set before writing an
 - **Counting characters against a byte limit**. The keyword field takes 100 bytes, and a Cyrillic list spends two bytes a letter. Half the budget I thought I had was gone before I typed anything. Apple's marketing page says characters, and I read that one.
 - **Trusting my memory of the name**. Reading it back over the API disagreed with what I believed I had set. Every diagnosis before that check rested on a wrong fact.
 - **Publishing links with no start parameter**. The code did not read the parameter either, so attribution was zero rather than approximate. Months of distribution work could not be evaluated.
-- **Treating the website as the main door**. The signups arrived from inside the platform, through its own search and links shared in chats. Ranking the site was real work aimed at a channel the audience was not using.
+- **Treating the website as the main door**. No signup carried a source. The share I could attribute to the site is unknown: [where the user came from](/analytics/attribution/). Ranking it was real work aimed at a channel I never showed the audience was using.
 
 ## Verify
 
