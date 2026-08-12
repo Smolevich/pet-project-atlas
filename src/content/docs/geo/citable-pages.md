@@ -14,7 +14,9 @@ You ask an assistant the question your product answers. It names a few sources, 
 
 A search page has ten slots and a scroll. An answer has room for three or four sources, so the outcome is binary.
 
-The research that named this problem rewrote existing pages rather than adding new ones. It reported visibility gains in generated answers of up to 40%. The same facts, arranged so a model can lift them, is the whole move.
+The paper that named this problem is *GEO: Generative Engine Optimization* (Aggarwal et al., 2023). It rewrote existing pages rather than adding new ones. The reported gain is up to 40% more visibility for a source inside the generated answer, measured over GEO-bench.
+
+The same facts, arranged so a model can lift them, is the whole move.
 
 ## Steps
 
@@ -38,7 +40,7 @@ The research that named this problem rewrote existing pages rather than adding n
 ## What did not work
 
 - **Adding volume instead of a verifiable claim**. A longer page with more adjectives changed nothing. The answer kept citing the page that had the number, and that page was shorter than mine.
-- **Assuming published pages would carry the product**. On my own projects the share of signups I could attribute to the site stayed far below what I expected. The figure belongs in a case page, with a date next to it.
+- **Assuming published pages would carry the product**. On my own projects the pages went up and the signups kept arriving from somewhere else. That share belongs in a case page, with a date next to it.
 - **Keeping the conclusion for the end**. The essay shape buries the answer under the setup. The only extractable passage is then an intro that says nothing yet.
 - **Writing FAQ blocks to fill the schema**. Questions nobody asks, answered by repeating the paragraph above them. Markup does not make an empty answer quotable.
 - **Sprinkling microdata through the markup**. A template change broke it silently, and nothing warned me. JSON-LD in one block in the head survives redesigns.

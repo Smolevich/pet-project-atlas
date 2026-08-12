@@ -1,8 +1,10 @@
 ---
 title: AI crawlers and llms.txt
 description: Which AI agents visit a site, who owns them, where access is really decided, and what belongs in llms.txt.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
+  - nginx access log, dataset /var/log/nginx/access.log, measured 2026-08-12
+  - nginx access log, dataset /var/log/nginx/access.log.*.gz, measured 2026-08-12
   - https://www.rfc-editor.org/rfc/rfc9309.html
   - https://developers.openai.com/api/docs/bots
   - https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
@@ -73,7 +75,7 @@ Sort the agents by job before you decide anything. A search crawler, a training 
 ## What did not work
 
 - **Blocking everything to save bandwidth**. The training crawlers went, and the user-triggered fetchers went with them. A reader who pasted the URL into a chat got told the page could not be opened.
-- **Losing the citation along with the bill**. Bandwidth from these agents is a rounding error on a static site. Presence in the answer is not.
+- **Losing the citation along with the bill**. The busiest AI agent in my own log took 335 requests in 24 days — [who actually crawls you](/geo/who-actually-crawls-you/). Presence in the answer does not come back that cheaply.
 - **Reaching for `Google-Extended` to steer AI Overviews**. Wrong lever: AI Overviews runs on `Googlebot`, and the token covers Gemini training and Vertex AI grounding. The rule moved nothing, and the snippet directives are what actually touch Search.
 - **Editing `robots.txt` while the edge did the blocking**. The file allowed every agent by name. The bot-protection rule in front of it returned 403, and the log showed no successful fetches at all.
 - **Listing outlines in `llms.txt`**. A line in that file is a promise that the page behind it is written. Half-finished links teach a reader — human or model — to ignore the file.

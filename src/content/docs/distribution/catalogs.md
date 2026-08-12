@@ -42,7 +42,7 @@ Sort venues before you touch any of them. They cost the same hour and buy differ
 7. **Check that submissions are moderated at all** — a venue that publishes everything instantly filters nothing.
    It also passes on nothing. Low-quality directory links are named in Google's spam policies as link spam.
 8. **Aim at the listicle author, not only at the directory** — that article has a byline and a contact.
-   One inclusion in a page that already ranks beats several entries in directories nobody reads. It is harder, which is why most people skip it.
+   One inclusion in a page that already ranks beats several entries in directories nobody reads. It is harder: it needs a name, an email and a reason the author cares.
 9. **Submit in small batches and log them** — venue, date, link submitted, moderation promise, current status.
    The log records what you did. It is not a list you can trust next quarter, because directory status is state, not knowledge.
 10. **Do not pay for placement at zero revenue** — paid listings exist and some are expensive.

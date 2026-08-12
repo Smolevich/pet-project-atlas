@@ -23,7 +23,7 @@ Each number below answers a question the others cannot. If two of your metrics a
 1. **Impressions in Search Console** — answers whether search considers you an answer to anything at all.
    Impressions move before clicks, so this is the first metric to react to new pages. Watch the count of distinct queries next to it. A rising query count means new demand found you; a flat one means the same page was shown more often.
 2. **Clicks and average position, read together** — separates a ranking problem from a packaging problem.
-   Impressions with no clicks at a decent position is a title and snippet problem. Rewriting the body is the wrong fix, and it takes ten times longer.
+   Impressions with no clicks at a decent position is a title and snippet problem. Rewriting the body is the wrong fix: the reader never got that far.
    Read the position here, not in a panel. On one query an outside estimate said 20 and this report said 43.3: [what a paid rank tracker measures](/tools/paid-tools/).
 3. **Share of your pages actually in the index** — how much of your writing is eligible to rank.
    The denominator is the URLs you submitted, the numerator is the URLs reported as indexed. A page count on its own is fiction. The Page indexing report gives the shape; the URL Inspection API gives per-URL truth.
@@ -38,16 +38,16 @@ Each number below answers a question the others cannot. If two of your metrics a
 
 Two readings changed what I fixed, and neither is visible in a total.
 
-- **Break activation down by first action.** On one project the two possible first actions had clearly different return rates. That told me which path to put in front of new users. The aggregate said nothing.
-- **Count the people who produced no event at all.** They left after the first screen. They abandoned the product at a far higher rate than anyone who acted. That is a verdict on the first screen, not forgetfulness.
+- **Break activation down by first action.** On one project the two possible first actions returned at different rates. That told me which path to put in front of new users. The aggregate said nothing.
+- **Count the people who produced no event at all.** They left after the first screen. No event table contains them at all, which is why they never surface as a problem. That is a verdict on the first screen, not forgetfulness.
 
 Fix the earliest large drop first. Tuning payment while activation is broken is work on a step almost nobody reaches.
 
 ## What did not work
 
 - **Reading the graphs daily.** At these volumes the day-to-day swing is larger than any real weekly change. I shipped changes on a Tuesday dip and reverted them on Friday, more than once.
-- **Counting pageviews as traffic.** Most of the views in the report turned out to be my own founder-only panel. Excluding internal URLs and my own sessions turned a growth story into a flat line.
-- **Treating signups as activation.** The signup number looked healthy for months. A large share of those people never sent one real request. I was measuring the door, not the room.
+- **Counting pageviews as traffic.** The views in the report came from my own founder-only panel. Excluding internal URLs and my own sessions turned a growth story into a flat line.
+- **Treating signups as activation.** The signup number looked healthy for months. People signed up and never sent one real request. I was measuring the door, not the room.
 - **Counting transactions instead of unique payers.** Three purchases by one person read as three customers. The same mistake makes a single test account look like traction.
 - **Trusting an external traffic estimate.** It did not cover one of the two search engines my audience used. The conclusion I drew was the opposite of the truth. One manual query in that engine would have caught it.
 - **Building the dashboard before writing the questions.** Panels that answer nothing still get read every week. I deleted most of my event tables and rebuilt the panel around cost and exhaustion.

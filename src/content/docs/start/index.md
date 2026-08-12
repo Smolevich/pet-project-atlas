@@ -13,7 +13,7 @@ The flat version, for bookmarking and screenshots: [the checklist](/start/checkl
 
 The project has been live for weeks and the only visitor in the logs is you. You have read enough advice to have twelve things to do and no idea which is first.
 
-Order is the whole problem. Most of the work below is cheap; doing it out of sequence is what costs the month.
+Order is the whole problem. Each item below is cheap on its own; doing them out of sequence is what costs the month.
 
 The first item in that order is not technical. It is whether anybody searches for this, and whether those people pay for anything.
 

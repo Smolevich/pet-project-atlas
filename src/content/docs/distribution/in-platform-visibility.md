@@ -51,7 +51,7 @@ Each platform matches a different set of fields. Learn the set before writing an
 - **Comparing the products instead of the names**. Competitors with the function spelled out in the audience's script were far larger, on the same public APIs. The moat was a name, not technology.
 - **Trusting my memory of the name**. Reading it back over the API disagreed with what I believed I had set. Every diagnosis before that check rested on a wrong fact.
 - **Publishing links with no start parameter**. The code did not read the parameter either, so attribution was zero rather than approximate. Months of distribution work could not be evaluated.
-- **Treating the website as the main door**. The overwhelming majority of signups arrived from inside the platform. Ranking the site was real work aimed at the smaller channel.
+- **Treating the website as the main door**. The signups arrived from inside the platform, through its own search and links shared in chats. Ranking the site was real work aimed at a channel the audience was not using.
 
 ## Verify
 

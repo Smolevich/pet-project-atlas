@@ -46,8 +46,8 @@ Break-even follows from those two, expressed in payers per month. A margin perce
 
 ## What did not work
 
-- **Defaulting to the most expensive provider.** One config line cost margin, latency and the free allowance at once. Nearly every request went to the paid premium engine while a free one sat idle. The premium call was slow enough that people sat watching a placeholder. Each second of its output also burned many times the credits of the cheap path.
-- **Two independent limits on the same resource.** A credit balance, plus a separate per-day cap on one engine. The most engaged user of that month hit the daily cap with most of his credits unspent. He never came back.
+- **Defaulting to the most expensive provider.** One config line cost margin, latency and the free allowance at once. Nearly every request went to the paid premium engine while a free one sat idle. The premium call was slow enough that people sat watching a placeholder. Each second of its output also spent credits the free engine would not have spent.
+- **Two independent limits on the same resource.** A credit balance, plus a separate per-day cap on one engine. The most engaged user of that month hit the daily cap with credits still on his balance. He never came back.
 - **Reading a key's limit as money.** A limit is a spending ceiling, not a balance. It can show headroom while the account is empty. The failure then surfaces inside your product as a payment-required error.
 - **Not checking whose key it was.** A key from a local config belonged to another account. That account's credits were spent. My own account sat untouched the whole time. Establish the owner through the provider's key endpoint before a key goes anywhere near `.env`.
 - **Counting my own test purchase as revenue.** The model briefly showed break-even reached. The payer was me, through a test account.
