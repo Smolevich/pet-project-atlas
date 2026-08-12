@@ -7,6 +7,7 @@ sources:
   - https://support.google.com/google-ads/answer/1704431
   - https://support.google.com/google-ads/answer/6297
   - https://wordstat.yandex.ru/
+  - Search Console API, property telegram-voice-bot, measured 2026-08-12
 ---
 
 ## What we are solving
@@ -41,6 +42,7 @@ All of that evidence is readable before you build anything. That is the point of
 ## What did not work
 
 - **Treating search volume as demand for a paid product**. The phrases were real and so were the people typing them. Almost everyone who arrived wanted the free way. The pages ranking above me explained how to get the result without paying.
+- **Ranking first for a phrase with no volume behind it**. `stt модели` sat at average position 1.0 with 1 impression and 0 clicks in three months. The measurement is on [what a paid rank tracker measures](/tools/paid-tools/).
 - **Reading signups as willingness to pay**. Free signups arrived, used the product and came back. Not one of them converted, and the signup count kept climbing the whole time.
 - **Missing the free alternative the platform itself shipped**. The platform I build on gives the same function to its own paying subscribers. For a large part of that audience my price competes with a feature they already have.
 - **Counting my own test purchase as revenue**. The model showed break-even reached for a day. The payer was me, through a test account.

@@ -1,10 +1,11 @@
 ---
 title: What a paid rank tracker measures
-description: A Semrush panel on a project with no traffic, a reported position checked by hand against the live search page, and the point where the subscription stops paying for itself.
-updated: 2026-08-11
+description: A Semrush panel on a project with no traffic, the same query pulled from Search Console three months later, and a position estimate that missed by more than twenty places.
+updated: 2026-08-12
 sources:
   - Semrush Domain Overview, project telegram-voice-bot, measured 2026-08-11
   - Google Search, instance google.com/search?gl=ru&hl=ru, measured 2026-08-11
+  - Search Console API, property telegram-voice-bot, measured 2026-08-12
 ---
 
 import { Image } from 'astro:assets';
@@ -15,6 +16,8 @@ import semrushOverview from '../../../assets/screenshots/semrush-domain-overview
 A paid panel hands you a table of positions. One row says position 20 for a phrase people actually type, and the product still gets nothing.
 
 The question is which of those numbers you can act on. I ran Semrush over the site of a Telegram bot I run.
+
+A day later I pulled the same query out of Search Console. The two positions are more than twenty places apart, and that comparison is the second half of this page.
 
 What these services are for, and which of them read Yandex, is one section earlier. See [what the paid panels actually measure](/demand/how-people-search/). This page is the measurement behind that overview.
 
@@ -87,6 +90,48 @@ The keyword table under it, worldwide, on the same day:
 10. **Stop paying when the panel repeats a diagnosis you already have** — mine reports zeros and a page of directories.
     The work it points at is off-site. No subscription does that work for you.
 
+### The same query, counted on my own property
+
+Semrush estimates a position from the outside. Search Console counts the impressions Google actually served.
+
+So I pulled the property itself through the Search Console API. Dimension `query`, period 2026-05-12 to 2026-08-12 — three months.
+
+| Query | Clicks | Impressions | CTR | Position |
+|---|---|---|---|---|
+| озвучка детским голосом бот телеграм | 1 | 1 | 100% | 49.0 |
+| telegram text to speech | 0 | 24 | 0% | 20.5 |
+| bot voice | 0 | 12 | 0% | 41.0 |
+| smolevich | 0 | 8 | 0% | 15.4 |
+| telegram voice | 0 | 6 | 0% | 51.5 |
+| stt модели | 0 | 1 | 0% | 1.0 |
+| best stt models 2026 | 0 | 1 | 0% | 10.0 |
+| telegram premium voice message transcription | 0 | 1 | 0% | 9.0 |
+| moonshine vs parakeet | 0 | 1 | 0% | 11.0 |
+| войс бот телеграм | 0 | — | 0% | 43.3 |
+
+That is the head of the table. The whole period: 74 queries, 278 impressions, 1 click.
+
+The dash is a cell my export does not carry. Every other figure is what the API returned.
+
+Semrush put `войс бот телеграм` at position 20. Search Console, over three months, records an average position of 43.3 for the same query.
+
+The panel estimates from outside the property. Search Console counts what Google served on it. When the two disagree, the one counting your own impressions is the one to act on.
+
+This is one query, on one property, on one day of the panel's database. It says the estimate missed here. It does not say anything about the tool's other rows.
+
+11. **Pull your own property before acting on any row above** — Search Console API, dimension `query`, the full period.
+    The panel and the property answer the same question with different instruments. Only one of them counts your impressions.
+12. **Put the two positions for one query in a single row** — 20 from the panel, 43.3 from Search Console.
+    That is the gap on the phrase the panel ranked best. A live check had already failed to find me on page one, and it settled nothing, because position 20 is page two too.
+13. **Read a respectable position against its clicks** — `telegram text to speech`, position 20.5, 24 impressions, 0 clicks.
+    Page two is functionally zero. Two dozen people were shown the result and not one of them clicked it.
+14. **Read position 1.0 as a question about demand, not about ranking** — `stt модели`, 1 impression, 0 clicks.
+    First place on a phrase nobody types pays nothing. That is why the route now opens with demand: [the words people type](/demand/how-people-search/) and [whether they pay](/demand/will-they-pay/).
+15. **Find the one click and read what earned it** — position 49, 1 impression, 1 click.
+    The only click in three months came from the bottom of page five, on `озвучка детским голосом бот телеграм`. Specificity beat position: the phrase was long, and the page matched it exactly.
+16. **Publish the totals with the zeros in them** — 74 queries, 278 impressions, 1 click.
+    That is the honest shape of a small project in search. A page that hides it teaches nobody anything.
+
 ## What did not work
 
 - **Acting on the reported position 20**. I searched for `войс бот телеграм` with `gl=ru` and `hl=ru`, and ten domains came back without mine. Position 20 is the second page, so the report is not contradicted. It is unverified, and either way the user sees nothing.
@@ -96,6 +141,9 @@ The keyword table under it, worldwide, on the same day:
 - **Reading Cited Pages 4 as visibility**. Mentions were 0 and Top Cited Sources was empty. Four pages were cited somewhere in ChatGPT's sample, and that is the whole claim.
 - **Waiting for the tool to say what to write**. Key Topics answered "No topics found. Domain is too small or relatively new." A tool that reads an existing footprint cannot create the first one.
 - **Buying the subscription before the off-site work**. It bought me a keyword list and a competitor's name. Both were reachable by hand, and neither changed what I had to do next.
+- **Leaving the reported position unchecked against my own property**. The hand-check could not disprove position 20, so I let it stand. Search Console records 43.3 for that query, and the pull that settled it took one API call.
+- **Reading a position as the result**. `stt модели` came back at average position 1.0, with one impression and no click in three months. First place on a phrase nobody types is a number about a page nobody asked for.
+- **Expecting a decent position to produce clicks on its own**. Position 20.5, 24 impressions, 0 clicks. There is no title or snippet fix on page two, and I spent an evening looking for one.
 
 ## Verify
 
@@ -104,5 +152,7 @@ The keyword table under it, worldwide, on the same day:
 - Check the panel's scope and database date against what you are about to quote from it.
 - Run the same query on the second engine of your market by hand. No panel in this tool covers it.
 - Compare the tool's Organic Traffic against clicks in Search Console next month. An estimate of 0 is the one figure that needs no trust.
+- Pull the same query from your own property, over a period long enough to hold impressions. Put the two positions in one row.
+- Read impressions and clicks next to every position you quote. A position with no clicks under it is not a result yet.
 
 The zeros above are an off-site problem, and that is a different page: [where the first external links come from](/distribution/catalogs/). Inside Telegram the index is another one again: [search inside the platform](/distribution/in-platform-visibility/). What each tool is for: [what to run and when](/tools/skills/).

@@ -1,12 +1,13 @@
 ---
 title: The numbers worth reading weekly
 description: A dashboard with forty numbers hides growth in noise. The short list — impressions, clicks, index share, signups, activation, repeat use — and what each one answers.
-updated: 2026-08-10
+updated: 2026-08-12
 sources:
   - https://support.google.com/webmasters/answer/7576553
   - https://support.google.com/webmasters/answer/7440203
   - https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect
   - https://developers.google.com/search/docs/monitor-debug/search-console-start
+  - Search Console API, property telegram-voice-bot, measured 2026-08-12
 ---
 
 ## What we are solving
@@ -23,6 +24,7 @@ Each number below answers a question the others cannot. If two of your metrics a
    Impressions move before clicks, so this is the first metric to react to new pages. Watch the count of distinct queries next to it. A rising query count means new demand found you; a flat one means the same page was shown more often.
 2. **Clicks and average position, read together** — separates a ranking problem from a packaging problem.
    Impressions with no clicks at a decent position is a title and snippet problem. Rewriting the body is the wrong fix, and it takes ten times longer.
+   Read the position here, not in a panel. On one query an outside estimate said 20 and this report said 43.3: [what a paid rank tracker measures](/tools/paid-tools/).
 3. **Share of your pages actually in the index** — how much of your writing is eligible to rank.
    The denominator is the URLs you submitted, the numerator is the URLs reported as indexed. A page count on its own is fiction. The Page indexing report gives the shape; the URL Inspection API gives per-URL truth.
 4. **Signups, with your own accounts subtracted** — answers whether the traffic contains anyone who wants the thing.
