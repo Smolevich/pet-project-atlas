@@ -3,10 +3,10 @@ title: Какие числа смотреть еженедельно
 description: Дашборд на сорок чисел прячет рост в шуме. Короткий список — показы, клики, доля в индексе, регистрации, activation, повторные заходы — и на что отвечает каждое.
 updated: 2026-08-12
 sources:
-  - https://support.google.com/webmasters/answer/7576553
-  - https://support.google.com/webmasters/answer/7440203
-  - https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect
-  - https://developers.google.com/search/docs/monitor-debug/search-console-start
+  - Отчёт Performance в Search Console — https://support.google.com/webmasters/answer/7576553
+  - Отчёт Page indexing — https://support.google.com/webmasters/answer/7440203
+  - Метод URL Inspection API — https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect
+  - С чего начать в Search Console — https://developers.google.com/search/docs/monitor-debug/search-console-start
   - Search Console API, property telegram-voice-bot, measured 2026-08-12
 ---
 

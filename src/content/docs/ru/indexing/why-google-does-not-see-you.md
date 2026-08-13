@@ -3,15 +3,15 @@ title: Google не видит сайт
 description: Сайт в проде, а поиск по нему ничего не отдаёт. Проверки, которые находят настоящий блокер, в том порядке, в котором их надо запускать.
 updated: 2026-08-12
 sources:
-  - https://developers.google.com/search/docs/crawling-indexing/robots/intro
-  - https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
-  - https://developers.google.com/search/docs/crawling-indexing/block-indexing
-  - https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
-  - https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
-  - https://www.sitemaps.org/protocol.html
-  - https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
-  - https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
-  - https://developers.cloudflare.com/waf/analytics/security-events/
+  - Что может и чего не может robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/intro
+  - Как Google читает robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
+  - noindex в теге и в заголовке — https://developers.google.com/search/docs/crawling-indexing/block-indexing
+  - Как задать canonical — https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+  - Что краулер видит в JavaScript-приложении — https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
+  - Протокол sitemap и его лимиты — https://www.sitemaps.org/protocol.html
+  - Переключатель Block AI bots в Cloudflare — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+  - Что делают действия правил Cloudflare — https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
+  - Security Events, где видно блокировку — https://developers.cloudflare.com/waf/analytics/security-events/
 ---
 
 ## Что решаем

@@ -3,15 +3,15 @@ title: Отдать сайт поисковикам и проверить, чт�
 description: Search Console, Bing Webmaster Tools, IndexNow и Yandex Webmaster в рабочем порядке, и как читать отчёты через неделю.
 updated: 2026-08-10
 sources:
-  - https://support.google.com/webmasters/answer/9008080
-  - https://support.google.com/webmasters/answer/7451001
-  - https://support.google.com/webmasters/answer/7440203
-  - https://support.google.com/webmasters/answer/9012289
-  - https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-  - https://www.bing.com/webmasters/help/webmasters-guidelines-30fba23a
-  - https://www.indexnow.org/documentation
-  - https://www.indexnow.org/faq
-  - https://yandex.com/support/webmaster/
+  - Подтверждение прав на сайт — https://support.google.com/webmasters/answer/9008080
+  - Отчёт Sitemaps — https://support.google.com/webmasters/answer/7451001
+  - Отчёт Page indexing — https://support.google.com/webmasters/answer/7440203
+  - Инструмент URL Inspection — https://support.google.com/webmasters/answer/9012289
+  - Как собрать и отдать sitemap — https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+  - Рекомендации Bing Webmaster Tools — https://www.bing.com/webmasters/help/webmasters-guidelines-30fba23a
+  - IndexNow, ключ и API — https://www.indexnow.org/documentation
+  - FAQ IndexNow, какие системы участвуют — https://www.indexnow.org/faq
+  - Справка Yandex Webmaster — https://yandex.com/support/webmaster/
 ---
 
 ## Что решаем

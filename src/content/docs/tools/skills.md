@@ -3,13 +3,13 @@ title: What to run and when
 description: The audit skills, the browser driver and the CLI this atlas points at — what each one does, when it earns the time, where it came from and under what licence.
 updated: 2026-08-10
 sources:
-  - https://github.com/coreyhaines31/marketingskills
-  - https://github.com/zubair-trabzada/geo-seo-claude
-  - https://github.com/microsoft/playwright-mcp
-  - https://github.com/googleworkspace/cli
-  - https://www.semrush.com/
-  - https://skills.sh/
-  - https://github.com/Smolevich/pet-project-atlas
+  - marketingskills, source of seo-audit — https://github.com/coreyhaines31/marketingskills
+  - geo-seo-claude, source of the GEO skills — https://github.com/zubair-trabzada/geo-seo-claude
+  - Playwright MCP server — https://github.com/microsoft/playwright-mcp
+  - gws, the Workspace command line — https://github.com/googleworkspace/cli
+  - Semrush, the one paid tool here — https://www.semrush.com/
+  - The skills directory and its CLI — https://skills.sh/
+  - This repository and its plugin — https://github.com/Smolevich/pet-project-atlas
 ---
 
 ## What we are solving

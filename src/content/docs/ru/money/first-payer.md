@@ -3,7 +3,7 @@ title: Как получить первого платящего
 description: Break-even выходит маленьким целым числом платящих, и ни одного из них нет. Как выбрать цену без исследования, где ставить стену в бесплатном тарифе и чем «не платят» отличается от «не спрашивали».
 updated: 2026-08-12
 sources:
-  - https://core.telegram.org/bots/payments-stars
+  - Telegram Stars за цифровые товары — https://core.telegram.org/bots/payments-stars
 ---
 
 ## Что решаем

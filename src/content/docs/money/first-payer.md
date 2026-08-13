@@ -3,7 +3,7 @@ title: Getting the first person to pay
 description: Break-even comes out as a small whole number of payers and none of them exist. Picking a price without a study, where the wall goes in a free tier, and the difference between nobody paying and nobody being asked.
 updated: 2026-08-12
 sources:
-  - https://core.telegram.org/bots/payments-stars
+  - Telegram Stars for digital goods — https://core.telegram.org/bots/payments-stars
 ---
 
 ## What we are solving

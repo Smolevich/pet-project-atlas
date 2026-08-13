@@ -375,11 +375,11 @@ export function findNumericClaims(markdown) {
 // идентификатор. Домен, репозиторий, хэндл бота, номер счёта — что угодно,
 // по чему замер можно повторить. Именно это и не даёт записи выродиться в
 // «мои данные»: назвать область словами общего смысла нельзя.
-const PROVENANCE_SCOPES = [
+export const PROVENANCE_SCOPES = [
   'property', 'account', 'project', 'site', 'repo',
   'workspace', 'dataset', 'instance', 'channel', 'bot', 'table',
 ];
-const PROVENANCE_SCOPE_PATTERN = new RegExp(`^(?:${PROVENANCE_SCOPES.join('|')})\\s+\\S{3,}$`, 'i');
+const PROVENANCE_SCOPE_PATTERN = new RegExp(`^(${PROVENANCE_SCOPES.join('|')})\\s+(\\S{3,})$`, 'i');
 const PROVENANCE_DATE_PATTERN = /^measured (\d{4})-(\d{2})-(\d{2})$/;
 // Прибор нельзя назвать «своими данными»: это не прибор, а отказ отвечать.
 const VAGUE_INSTRUMENT = /^(?:my|our|own|personal|internal|свои|своя|мои|наши|собственн)/i;
@@ -402,26 +402,66 @@ function isHttpUrl(entry) {
 }
 
 /**
- * Строка происхождения для замера, у которого нет публичного URL:
+ * Разбирает строку происхождения для замера, у которого нет публичного URL:
  * "Search Console, property atlas.smolevich.com, measured 2026-08-10".
  * Ровно три части: прибор, область с идентификатором, дата замера.
+ *
+ * Возвращает { instrument, scope, identifier, measured } или null. Части
+ * нужны показу: хранится английская форма, а читателю её собирают на его
+ * языке.
  */
-export function isProvenanceSource(entry) {
-  if (typeof entry !== 'string') return false;
+export function parseProvenance(entry) {
+  if (typeof entry !== 'string') return null;
   const parts = entry.split(',').map((part) => part.trim());
-  if (parts.length !== 3) return false;
+  if (parts.length !== 3) return null;
 
   const [instrument, scope, measured] = parts;
-  if (instrument.length < 3 || VAGUE_INSTRUMENT.test(instrument)) return false;
-  if (!/^[\p{L}\p{N}]/u.test(instrument)) return false;
-  if (!PROVENANCE_SCOPE_PATTERN.test(scope)) return false;
+  if (instrument.length < 3 || VAGUE_INSTRUMENT.test(instrument)) return null;
+  if (!/^[\p{L}\p{N}]/u.test(instrument)) return null;
+
+  const area = scope.match(PROVENANCE_SCOPE_PATTERN);
+  if (!area) return null;
 
   const date = measured.match(PROVENANCE_DATE_PATTERN);
-  return date !== null && isRealDate(date[1], date[2], date[3]);
+  if (!date || !isRealDate(date[1], date[2], date[3])) return null;
+
+  return {
+    instrument,
+    scope: area[1].toLowerCase(),
+    identifier: area[2],
+    measured: `${date[1]}-${date[2]}-${date[3]}`,
+  };
 }
 
-/** Годный источник — http(s)-URL либо строка происхождения. */
+/** Строка происхождения ли это. */
+export function isProvenanceSource(entry) {
+  return parseProvenance(entry) !== null;
+}
+
+// Заголовок перед ссылкой: "Что там написано — https://example.com/path".
+// Разделитель — тире в пробелах: в заголовке бывает и запятая, и двоеточие, а
+// тире с пробелами по обе стороны в осмысленном заголовке почти не встречается.
+// Жадная левая часть отдаёт последнее тире, поэтому тире внутри самого
+// заголовка ничего не ломает.
+const TITLED_URL = /^(.+)\s+—\s+(\S+)$/;
+
+/**
+ * Делит запись "Заголовок — https://…" на { title, url }. Возвращает null,
+ * если разделителя нет: тогда запись читается как раньше, целиком.
+ */
+export function splitTitledSource(entry) {
+  if (typeof entry !== 'string') return null;
+  const match = entry.trim().match(TITLED_URL);
+  if (!match) return null;
+
+  const title = match[1].trim();
+  return title ? { title, url: match[2] } : null;
+}
+
+/** Годный источник — http(s)-URL (с заголовком или без) либо строка происхождения. */
 export function isValidSource(entry) {
+  const titled = splitTitledSource(entry);
+  if (titled) return isHttpUrl(titled.url);
   return isHttpUrl(entry) || isProvenanceSource(entry);
 }
 

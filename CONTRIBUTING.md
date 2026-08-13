@@ -43,12 +43,14 @@ Section landing pages are exempt from the four blocks, and only from those: an `
 
 Every number ships with a source. Put the URLs in `sources:` in frontmatter, and put the date you measured in `updated:`.
 
+Each URL carries a title in front of it, separated by an em dash with spaces. That title becomes the link text under the page, in the language of the page, and it says why the link is there rather than repeating the address.
+
 ```yaml
 ---
 title: Sitemap for a static site
 updated: 2026-08-10
 sources:
-  - https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+  - Building and submitting a sitemap — https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
 ---
 ```
 

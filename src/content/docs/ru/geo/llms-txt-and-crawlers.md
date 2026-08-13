@@ -6,23 +6,23 @@ sources:
   - Cloudflare GraphQL Analytics, site atlas.smolevich.com, measured 2026-08-13
   - nginx access log, dataset /var/log/nginx/access.log, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/access.log.*.gz, measured 2026-08-12
-  - https://www.rfc-editor.org/rfc/rfc9309.html
-  - https://developers.openai.com/api/docs/bots
-  - https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
-  - https://docs.perplexity.ai/guides/bots
-  - https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
-  - https://developers.google.com/search/docs/appearance/ai-features
-  - https://support.google.com/webmasters/answer/16908024
-  - https://blog.google/products-and-platforms/products/search/new-controls-website-owners/
-  - https://llmstxt.org/
-  - https://darkvisitors.com/
-  - https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
-  - https://developers.cloudflare.com/bots/concepts/bot/
-  - https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
-  - https://developers.cloudflare.com/ai-crawl-control/features/manage-ai-crawlers/
-  - https://developers.cloudflare.com/ai-crawl-control/features/pay-per-crawl/what-is-pay-per-crawl/
-  - https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
-  - https://developers.cloudflare.com/waf/analytics/security-events/
+  - RFC 9309, стандарт robots.txt — https://www.rfc-editor.org/rfc/rfc9309.html
+  - Краулеры OpenAI и их задачи — https://developers.openai.com/api/docs/bots
+  - Краулеры Anthropic и как их закрыть — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
+  - Краулеры Perplexity — https://docs.perplexity.ai/guides/bots
+  - Краулеры Google и их user agent — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - Google про AI-функции и сниппеты — https://developers.google.com/search/docs/appearance/ai-features
+  - Переключатель Search generative AI — https://support.google.com/webmasters/answer/16908024
+  - Анонс новых настроек для владельцев сайтов — https://blog.google/products-and-platforms/products/search/new-controls-website-owners/
+  - Спецификация llms.txt — https://llmstxt.org/
+  - Dark Visitors, справочник AI-агентов — https://darkvisitors.com/
+  - Переключатель Block AI bots в Cloudflare — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+  - Как Cloudflare делит ботов на категории — https://developers.cloudflare.com/bots/concepts/bot/
+  - Управляемый robots.txt в Cloudflare — https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
+  - Управление AI-краулерами на edge — https://developers.cloudflare.com/ai-crawl-control/features/manage-ai-crawlers/
+  - Что такое pay per crawl — https://developers.cloudflare.com/ai-crawl-control/features/pay-per-crawl/what-is-pay-per-crawl/
+  - Что делают действия правил Cloudflare — https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
+  - Security Events, где видно блокировку — https://developers.cloudflare.com/waf/analytics/security-events/
 ---
 
 ## Что решаем

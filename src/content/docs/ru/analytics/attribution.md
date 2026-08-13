@@ -3,10 +3,10 @@ title: Откуда пользователь пришёл на самом дел
 description: Браузер отдаёт referrer, бот или приложение не отдают ничего. Метки на ссылках, источник при первом контакте и почему честный ответ — ноль, а не «примерно».
 updated: 2026-08-12
 sources:
-  - https://core.telegram.org/bots/features#deep-linking
-  - https://support.google.com/analytics/answer/10917952
-  - https://developer.android.com/google/play/installreferrer/library
-  - https://developer.apple.com/help/app-store-connect/view-app-analytics/campaigns/
+  - Deep link и параметр start — https://core.telegram.org/bots/features#deep-linking
+  - Метки кампании в URL — https://support.google.com/analytics/answer/10917952
+  - Библиотека Play Install Referrer — https://developer.android.com/google/play/installreferrer/library
+  - Ссылки кампаний в App Store Connect — https://developer.apple.com/help/app-store-connect-analytics/acquisition/campaign-links/
 ---
 
 ## Что решаем

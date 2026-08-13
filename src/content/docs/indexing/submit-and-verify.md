@@ -3,15 +3,15 @@ title: Submit the site and verify it was taken
 description: Search Console, Bing Webmaster Tools, IndexNow and Yandex Webmaster in the order that works, and how to read the reports a week later.
 updated: 2026-08-10
 sources:
-  - https://support.google.com/webmasters/answer/9008080
-  - https://support.google.com/webmasters/answer/7451001
-  - https://support.google.com/webmasters/answer/7440203
-  - https://support.google.com/webmasters/answer/9012289
-  - https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-  - https://www.bing.com/webmasters/help/webmasters-guidelines-30fba23a
-  - https://www.indexnow.org/documentation
-  - https://www.indexnow.org/faq
-  - https://yandex.com/support/webmaster/
+  - Verifying site ownership — https://support.google.com/webmasters/answer/9008080
+  - Sitemaps report — https://support.google.com/webmasters/answer/7451001
+  - Page indexing report — https://support.google.com/webmasters/answer/7440203
+  - URL Inspection tool — https://support.google.com/webmasters/answer/9012289
+  - Building and submitting a sitemap — https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+  - Bing Webmaster Tools guidelines — https://www.bing.com/webmasters/help/webmasters-guidelines-30fba23a
+  - IndexNow, the key and the API — https://www.indexnow.org/documentation
+  - IndexNow FAQ, which engines take it — https://www.indexnow.org/faq
+  - Yandex Webmaster help — https://yandex.com/support/webmaster/
 ---
 
 ## What we are solving

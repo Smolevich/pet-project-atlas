@@ -3,10 +3,10 @@ title: Сообщества и форумы, и за что оттуда уда�
 description: Площадки, где пишутся чужие подборки «лучшие инструменты для X». Где терпят автора, пишущего про своё, за что удаляют пост и почему возраст аккаунта идёт раньше первого упоминания.
 updated: 2026-08-12
 sources:
-  - https://news.ycombinator.com/newsguidelines.html
-  - https://news.ycombinator.com/showhn.html
-  - https://lobste.rs/about
-  - https://developers.google.com/search/docs/essentials/spam-policies
+  - Правила Hacker News — https://news.ycombinator.com/newsguidelines.html
+  - Правила Show HN — https://news.ycombinator.com/showhn.html
+  - Правила Lobsters про самопиар — https://lobste.rs/about
+  - Спам-политики Google про ссылки на форумах — https://developers.google.com/search/docs/essentials/spam-policies
 ---
 
 ## Что решаем

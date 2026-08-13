@@ -129,10 +129,20 @@ Every number ships with a date and a source. The date goes into `updated:`. The 
 title: Sitemap for a static site
 updated: 2026-08-10
 sources:
-  - https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-  - https://example.com/notes/sitemap-rebuild-log/
+  - Building and submitting a sitemap — https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+  - What rebuilding it on every deploy changed — https://example.com/notes/sitemap-rebuild-log/
 ---
 ```
+
+### A link says what it is a link to
+
+Write the title, then an em dash with a space on each side, then the URL. The title becomes the link text on the page and the host stays beside it as a note.
+
+A few words, in the language of the page, and they answer one question: why is this link here. `/google-ads/answer/7337243` answers nothing, and that is what the reader used to get.
+
+The title is not the other page's `<title>` copied across. Read the page and say what you took from it — the same document cited on two of ours can carry two different titles.
+
+The URL alone still validates, because a half-migrated page has to build. It renders as host and path, which is the old behaviour and reads like it.
 
 A page with numbers and an empty `sources:` fails the build. So does a page with numbers and no `updated:`. Both checks also apply to guest pages.
 
@@ -140,7 +150,7 @@ A page with numbers and an empty `sources:` fails the build. So does a page with
 
 Most of the numbers here come off the author's own dashboards, and a figure from your own Search Console has no public link. There has to be a way to state one honestly, or the only way past the check is an invented URL — which is exactly what the check exists to stop.
 
-So a `sources:` entry is one of two things. Either an `http(s)` URL, or a provenance line in exactly this shape:
+So the other kind of `sources:` entry is a provenance line, in exactly this shape:
 
 ```yaml
 sources:
@@ -156,6 +166,8 @@ Three parts, separated by commas, all three required:
 3. **The date** — `measured` and an ISO date. The day you read the figure, which is often not the day you wrote the page.
 
 The point of the shape is that another person, or you in six months, can open the same panel, filter to the same scope and get the same number back. A line that does not let anyone repeat the measurement is not a source, and the linter and the build both reject it.
+
+That is the stored form and it stays English, because the linter and the content schema both check it. The page renders it in the reader's language: on a Russian page the same line comes out as «Search Console API — ресурс `telegram-voice-bot`, снято 12 августа 2026 г.».
 
 A number without a source gets deleted, not softened. "Roughly a couple of thousand visits" is worse than silence: it looks like data and is not.
 

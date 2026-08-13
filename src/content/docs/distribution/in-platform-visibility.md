@@ -3,15 +3,15 @@ title: Search inside the platform, not only in Google
 description: Telegram, app stores and marketplaces run their own index over a handful of short fields. Which fields those are, and what a name in the wrong script costs.
 updated: 2026-08-12
 sources:
-  - https://core.telegram.org/bots/api#setmyname
-  - https://core.telegram.org/bots/api#getmyname
-  - https://core.telegram.org/bots/api#getme
-  - https://developer.apple.com/help/app-store-connect/create-an-app-record/view-and-edit-app-information
-  - https://core.telegram.org/bots/features
-  - https://developer.apple.com/app-store/search/
-  - https://developer.apple.com/app-store/product-page/
-  - https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information/
-  - https://support.google.com/googleplay/android-developer/answer/9898842
+  - setMyName in the Bot API — https://core.telegram.org/bots/api#setmyname
+  - getMyName in the Bot API — https://core.telegram.org/bots/api#getmyname
+  - getMe in the Bot API — https://core.telegram.org/bots/api#getme
+  - App information in App Store Connect — https://developer.apple.com/help/app-store-connect/create-an-app-record/view-and-edit-app-information
+  - Telegram bot profile fields — https://core.telegram.org/bots/features
+  - How App Store search works — https://developer.apple.com/app-store/search/
+  - Creating an App Store product page — https://developer.apple.com/app-store/product-page/
+  - App Store Connect version metadata — https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information/
+  - Store listing metadata in Google Play — https://support.google.com/googleplay/android-developer/answer/9898842
 ---
 
 ## What we are solving

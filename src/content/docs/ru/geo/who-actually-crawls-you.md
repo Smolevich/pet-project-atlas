@@ -5,8 +5,8 @@ updated: 2026-08-12
 sources:
   - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/*.access.log.*.gz, measured 2026-08-12
-  - https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
-  - https://developers.cloudflare.com/ai-crawl-control/features/analyze-ai-traffic/
+  - Краулеры Google и их user agent — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - Как смотреть AI-трафик в Cloudflare — https://developers.cloudflare.com/ai-crawl-control/features/analyze-ai-traffic/
 ---
 
 ## Что решаем

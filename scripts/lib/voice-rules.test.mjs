@@ -14,6 +14,8 @@ import {
   REQUIRED_SECTIONS,
   isValidSource,
   findInvalidSources,
+  parseProvenance,
+  splitTitledSource,
 } from './voice-rules.mjs';
 
 test('находит запрещённую фразу и её строку', () => {
@@ -465,6 +467,69 @@ test('негодные записи в sources возвращаются отде
   assert.deepEqual(findInvalidSources({ sources: ['my own data'] }), ['my own data']);
   assert.deepEqual(findInvalidSources({ sources: [] }), []);
   assert.deepEqual(findInvalidSources({}), []);
+});
+
+// --- Группа G: у ссылки может быть заголовок ---
+
+test('ссылка с заголовком остаётся годным источником', () => {
+  assert.equal(isValidSource('Отчёт Performance — https://support.google.com/webmasters/answer/7576553'), true);
+});
+
+test('заголовок отделяется от адреса и обрезается', () => {
+  assert.deepEqual(splitTitledSource('Отчёт Performance  —  https://example.dev/a'), {
+    title: 'Отчёт Performance',
+    url: 'https://example.dev/a',
+  });
+});
+
+test('тире внутри заголовка не рвёт запись', () => {
+  // Тире — часть голоса сайта, и в заголовке оно законно. Делим по
+  // последнему разделителю, иначе адресом становится хвост заголовка.
+  assert.deepEqual(splitTitledSource('Pay per crawl — что это такое — https://example.dev/a'), {
+    title: 'Pay per crawl — что это такое',
+    url: 'https://example.dev/a',
+  });
+});
+
+test('запись без тире заголовка не получает', () => {
+  assert.equal(splitTitledSource('https://example.dev/a'), null);
+  assert.equal(splitTitledSource(PROVENANCE), null);
+});
+
+test('заголовок без годного адреса источником не считается', () => {
+  assert.equal(isValidSource('Просто мысль — не адрес'), false);
+  assert.equal(isValidSource('Почта — mailto:someone@example.com'), false);
+  assert.equal(isValidSource(' — https://example.dev/a'), false);
+});
+
+test('заголовок не превращает выдуманный замер в источник', () => {
+  // Регрессия: разбор заголовка не должен открывать обход проверки §4 —
+  // строка происхождения по-прежнему обязана быть полной.
+  assert.equal(isValidSource('Мои данные — my own data'), false);
+  assert.equal(findInvalidSources({ sources: ['Мои данные — my own data'] }).length, 1);
+});
+
+test('строка происхождения разбирается на части', () => {
+  assert.deepEqual(parseProvenance('Search Console API, property telegram-voice-bot, measured 2026-08-12'), {
+    instrument: 'Search Console API',
+    scope: 'property',
+    identifier: 'telegram-voice-bot',
+    measured: '2026-08-12',
+  });
+});
+
+test('область замера приводится к нижнему регистру, идентификатор — нет', () => {
+  assert.deepEqual(parseProvenance('psql, TABLE Usage_Events, measured 2026-01-31'), {
+    instrument: 'psql',
+    scope: 'table',
+    identifier: 'Usage_Events',
+    measured: '2026-01-31',
+  });
+});
+
+test('негодная строка происхождения частей не даёт', () => {
+  assert.equal(parseProvenance('Search Console, property atlas.smolevich.com'), null);
+  assert.equal(parseProvenance('my own data, my own data, measured 2026-08-10'), null);
 });
 
 test('alt-текст картинки не проза и под длину не проверяется', () => {

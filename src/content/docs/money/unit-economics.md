@@ -3,10 +3,10 @@ title: What one user costs when the product calls an AI
 description: Variable cost per action, fixed cost per month, and break-even expressed in payers rather than percentages. How to measure the cost of an action instead of estimating it.
 updated: 2026-08-10
 sources:
-  - https://openrouter.ai/docs/use-cases/usage-accounting
-  - https://openrouter.ai/docs/api-reference/limits
-  - https://core.telegram.org/bots/payments-stars
-  - https://core.telegram.org/bots/payments
+  - Usage and cost on the API response — https://openrouter.ai/docs/use-cases/usage-accounting
+  - Credit limits and rate limits — https://openrouter.ai/docs/api-reference/limits
+  - Telegram Stars for digital goods — https://core.telegram.org/bots/payments-stars
+  - Telegram Bot Payments API — https://core.telegram.org/bots/payments
 ---
 
 ## What we are solving

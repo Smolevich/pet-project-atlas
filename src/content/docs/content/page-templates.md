@@ -3,9 +3,9 @@ title: What a page that ranks and gets cited is made of
 description: The answer in the first three sentences, executable steps, a failures block, an FAQ people actually asked, and a linter that keeps the shape.
 updated: 2026-08-12
 sources:
-  - https://developers.google.com/search/blog/2023/08/howto-faq-changes
-  - https://developers.google.com/search/docs/appearance/structured-data/faqpage
-  - https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+  - Changes to HowTo and FAQ rich results — https://developers.google.com/search/blog/2023/08/howto-faq-changes
+  - FAQ rich result removed — https://developers.google.com/search/docs/appearance/structured-data/faqpage
+  - Google on helpful content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 ---
 
 ## What we are solving

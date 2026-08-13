@@ -3,10 +3,10 @@ title: Where the user actually came from
 description: A browser sends a referrer, a bot or an app sends nothing. Tagging links, storing the source on first contact, and why the honest answer is often zero rather than approximate.
 updated: 2026-08-12
 sources:
-  - https://core.telegram.org/bots/features#deep-linking
-  - https://support.google.com/analytics/answer/10917952
-  - https://developer.android.com/google/play/installreferrer/library
-  - https://developer.apple.com/help/app-store-connect/view-app-analytics/campaigns/
+  - Deep links and the start payload — https://core.telegram.org/bots/features#deep-linking
+  - Campaign parameters in a URL — https://support.google.com/analytics/answer/10917952
+  - Play Install Referrer library — https://developer.android.com/google/play/installreferrer/library
+  - Campaign links in App Store Connect — https://developer.apple.com/help/app-store-connect-analytics/acquisition/campaign-links/
 ---
 
 ## What we are solving

@@ -3,10 +3,10 @@ title: The numbers worth reading weekly
 description: A dashboard with forty numbers hides growth in noise. The short list — impressions, clicks, index share, signups, activation, repeat use — and what each one answers.
 updated: 2026-08-12
 sources:
-  - https://support.google.com/webmasters/answer/7576553
-  - https://support.google.com/webmasters/answer/7440203
-  - https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect
-  - https://developers.google.com/search/docs/monitor-debug/search-console-start
+  - Performance report in Search Console — https://support.google.com/webmasters/answer/7576553
+  - Page indexing report — https://support.google.com/webmasters/answer/7440203
+  - URL Inspection API method — https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect
+  - Getting started with Search Console — https://developers.google.com/search/docs/monitor-debug/search-console-start
   - Search Console API, property telegram-voice-bot, measured 2026-08-12
 ---
 

@@ -1,47 +1,72 @@
 /**
  * Записи sources: в виде, готовом к показу читателю. Чистая часть: решить,
- * ссылка это или собственный замер, и из чего собрать текст ссылки. Разметка —
- * в src/components/Sources.astro.
+ * ссылка это или собственный замер, и разобрать запись на части. Слова и
+ * разметка — в src/components/Sources.astro.
  *
  * В сеть здесь не ходят: на сборке заголовок чужой страницы взять неоткуда,
- * поэтому текстом ссылки служит хост, а путь идёт вторым планом.
+ * поэтому его пишет автор рядом со ссылкой. Без заголовка остаётся хост с
+ * путём — читаемо ровно настолько, насколько читается сам адрес.
  */
 
-import { isProvenanceSource } from './voice-rules.mjs';
+import { parseProvenance, splitTitledSource } from './voice-rules.mjs';
 
 /**
- * Одна запись sources:. URL превращается в { kind: 'url', href, host, path },
- * строка происхождения — в { kind: 'provenance', text }.
+ * Типы нужны разметке: по kind она выбирает ветку, а по наличию instrument —
+ * собрать замер по частям или показать строку как есть.
+ *
+ * @typedef {{ kind: 'url', href: string, host: string, path: string, title?: string }} UrlSource
+ * @typedef {{ kind: 'provenance', text: string, instrument: string, scope: string, identifier: string, measured: string }} MeasuredSource
+ * @typedef {{ kind: 'provenance', text: string, instrument?: undefined }} UnparsedSource
+ * @typedef {UrlSource | MeasuredSource | UnparsedSource} Source
+ */
+
+/**
+ * Одна запись sources:. URL превращается в
+ * { kind: 'url', href, host, path, title? }, строка происхождения — в
+ * { kind: 'provenance', text, instrument, scope, identifier, measured }.
  *
  * Всё, что не разобралось как http(s)-адрес, уходит в текст: у замера
  * публичной ссылки нет, и рисовать её битой хуже, чем не рисовать вовсе.
+ *
+ * @param {unknown} entry
+ * @returns {Source}
  */
 export function describeSource(entry) {
   const text = String(entry).trim();
-  if (isProvenanceSource(text)) return { kind: 'provenance', text };
+
+  const provenance = parseProvenance(text);
+  if (provenance) return { kind: 'provenance', text, ...provenance };
+
+  const titled = splitTitledSource(text);
+  const target = titled ? titled.url : text;
 
   let url;
   try {
-    url = new URL(text);
+    url = new URL(target);
   } catch {
     return { kind: 'provenance', text };
   }
   if (!/^https?:$/.test(url.protocol)) return { kind: 'provenance', text };
 
-  return {
+  /** @type {UrlSource} */
+  const described = {
     kind: 'url',
-    href: text,
+    href: target,
     host: url.host.replace(/^www\./, ''),
     // Голый слеш пути ничего не добавляет к хосту, остальной путь различает
     // соседние ссылки на один и тот же домен.
     path: `${url.pathname}${url.search}${url.hash}`.replace(/^\/$/, ''),
   };
+  return titled ? { ...described, title: titled.title } : described;
 }
 
 /**
  * Записи в порядке показа: сначала собственные замеры, потом публикации.
  * Замер — это «я это измерил сам», и он важнее чужой ссылки, поэтому стоит
  * первым. Внутри группы порядок автора сохраняется.
+ *
+ * @param {unknown} entries
+ * @returns {Source[]}
  */
 export function orderSources(entries) {
   const described = (Array.isArray(entries) ? entries : []).map(describeSource);

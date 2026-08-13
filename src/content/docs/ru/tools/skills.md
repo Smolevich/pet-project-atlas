@@ -3,13 +3,13 @@ title: Что запускать и когда
 description: 'Скиллы аудита, драйвер браузера и CLI, на которые ссылается атлас: что каждый делает, когда он окупает время, откуда взялся и под какой лицензией.'
 updated: 2026-08-10
 sources:
-  - https://github.com/coreyhaines31/marketingskills
-  - https://github.com/zubair-trabzada/geo-seo-claude
-  - https://github.com/microsoft/playwright-mcp
-  - https://github.com/googleworkspace/cli
-  - https://www.semrush.com/
-  - https://skills.sh/
-  - https://github.com/Smolevich/pet-project-atlas
+  - marketingskills, откуда взят seo-audit — https://github.com/coreyhaines31/marketingskills
+  - geo-seo-claude, откуда взяты GEO-скиллы — https://github.com/zubair-trabzada/geo-seo-claude
+  - Playwright MCP-сервер — https://github.com/microsoft/playwright-mcp
+  - gws, командная строка Workspace — https://github.com/googleworkspace/cli
+  - Semrush, единственный платный инструмент — https://www.semrush.com/
+  - Каталог скиллов и его CLI — https://skills.sh/
+  - Этот репозиторий и его плагин — https://github.com/Smolevich/pet-project-atlas
 ---
 
 ## Что решаем

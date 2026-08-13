@@ -18,6 +18,29 @@ export type FooterStrings = {
   figuresRead: string;
   /** Дата из updated: словами. UTC, иначе день уезжает на местном поясе. */
   formatDate: (date: Date) => string;
+  /** Область замера словом языка читателя: property → «ресурс». */
+  scopeWord: (scope: string) => string;
+  /** Хвост строки замера: получает уже собранную дату. */
+  measuredOn: (date: string) => string;
+};
+
+// Область замера хранится по-английски — так её проверяют линтер и схема. На
+// русской странице английское "property" рядом с русской фразой читается как
+// недоперевод, поэтому слово подменяется на показе. Значения не выдуманные:
+// «ресурс» — то, как property называет русский интерфейс Search Console.
+const RU_SCOPES: Record<string, string> = {
+  property: 'ресурс',
+  account: 'аккаунт',
+  project: 'проект',
+  site: 'сайт',
+  repo: 'репозиторий',
+  workspace: 'рабочее пространство',
+  dataset: 'набор данных',
+  // instance в атласе всегда адрес панели, которую надо открыть, — так и пишем.
+  instance: 'адрес',
+  channel: 'канал',
+  bot: 'бот',
+  table: 'таблица',
 };
 
 function dateFormatter(tag: string): (date: Date) => string {
@@ -38,6 +61,8 @@ const EN: FooterStrings = {
   ownMeasurement: 'own measurement',
   figuresRead: 'Figures on this page were read on',
   formatDate: dateFormatter('en-GB'),
+  scopeWord: (scope) => scope,
+  measuredOn: (date) => `read ${date}`,
 };
 
 const RU: FooterStrings = {
@@ -48,6 +73,8 @@ const RU: FooterStrings = {
   ownMeasurement: 'свой замер',
   figuresRead: 'Цифры на странице сняты',
   formatDate: dateFormatter('ru-RU'),
+  scopeWord: (scope) => RU_SCOPES[scope] ?? scope,
+  measuredOn: (date) => `снято ${date}`,
 };
 
 /** Корневая локаль (undefined) и любая незнакомая читают английский набор. */

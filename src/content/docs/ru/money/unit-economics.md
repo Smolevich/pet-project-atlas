@@ -3,10 +3,10 @@ title: Сколько стоит один пользователь, когда �
 description: Переменная стоимость действия, фиксированная стоимость месяца и break-even, выраженный в платящих, а не в процентах. Как стоимость действия измерять, а не прикидывать.
 updated: 2026-08-10
 sources:
-  - https://openrouter.ai/docs/use-cases/usage-accounting
-  - https://openrouter.ai/docs/api-reference/limits
-  - https://core.telegram.org/bots/payments-stars
-  - https://core.telegram.org/bots/payments
+  - Расход и цена в ответе API — https://openrouter.ai/docs/use-cases/usage-accounting
+  - Лимиты кредитов и запросов — https://openrouter.ai/docs/api-reference/limits
+  - Telegram Stars за цифровые товары — https://core.telegram.org/bots/payments-stars
+  - Bot Payments API в Telegram — https://core.telegram.org/bots/payments
 ---
 
 ## Что решаем

@@ -3,10 +3,10 @@ title: Communities and forums, and what gets a post removed
 description: The venues where the best-tool-for-X shortlists get written. Which ones tolerate a founder posting his own thing, why account age comes before the first mention, and how to answer instead of announce.
 updated: 2026-08-12
 sources:
-  - https://news.ycombinator.com/newsguidelines.html
-  - https://news.ycombinator.com/showhn.html
-  - https://lobste.rs/about
-  - https://developers.google.com/search/docs/essentials/spam-policies
+  - Hacker News guidelines — https://news.ycombinator.com/newsguidelines.html
+  - Show HN rules — https://news.ycombinator.com/showhn.html
+  - Lobsters rules on self-promotion — https://lobste.rs/about
+  - Google spam policies on forum links — https://developers.google.com/search/docs/essentials/spam-policies
 ---
 
 ## What we are solving

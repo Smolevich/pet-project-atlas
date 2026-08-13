@@ -59,8 +59,9 @@ Work one finding at a time, in the order the linter printed them. For each one o
   with a concrete claim from the author's own log. A synonym from the thesaurus is not a fix.
 - **§2 Page shape** — the four required H2 headings are matched literally, at level two, before any
   other H2. A heading with nothing under it counts as missing.
-- **§4 Numbers** — either add the date to `updated:` and the URL to `sources:`, or delete the number.
-  Never soften it into words. If you cannot find the source, the number goes.
+- **§4 Numbers** — either add the date to `updated:` and the source to `sources:`, or delete the number.
+  A URL goes in as `Title — https://…`, and the title says why that link is there. Never soften a
+  number into words. If you cannot find the source, the number goes.
 - **§5 Length** — a warning, not an error. Split the sentence. If a page throws many of these, say so:
   it usually needs cutting, not exceptions.
 

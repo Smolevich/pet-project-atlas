@@ -8,9 +8,10 @@ sources:
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=de, measured 2026-08-12
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=ru, measured 2026-08-12
   - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-12
-  - https://www.semrush.com/kb/997-semrush-data
-  - https://support.google.com/publisherpolicies/answer/15766875
-  - https://support.google.com/adsense/answer/15282937
+  - Where Semrush data comes from — https://www.semrush.com/kb/997-semrush-data
+  - What a free account and the trial give you — https://www.semrush.com/blog/what-can-i-do-with-a-free-account-from-semrush/
+  - Where Google paused monetization — https://support.google.com/publisherpolicies/answer/15766875
+  - AdSense accounts in Russia deactivated — https://support.google.com/adsense/answer/15282937
 ---
 
 import { Image } from 'astro:assets';
@@ -37,6 +38,22 @@ The rest of this page is that single pull. An estimate made from outside, and wh
 </figure>
 
 ## Steps
+
+### What this instrument is, and how to get at it
+
+Semrush is a paid panel that estimates search demand. It reports how often a phrase is typed in a month, what a click on it costs, and how hard the top of the results would be.
+
+The load-bearing word is estimates. It gets no data from Google directly. By its own documentation it buys results pages from third-party providers, reads the top hundred positions, and models the rest with its own algorithm. Volumes refresh anywhere from daily to monthly depending on how popular the phrase is.
+
+Two things follow from that. A number in the panel is a model rather than a counter, so the database and the engine belong beside it. And the keyword databases are built on Google, which is why it sees Russian demand poorly — on my phrase it disagreed with Wordstat by a factor of eighteen.
+
+So why use it. Because it puts volume, click price and advertiser count on one screen in one set of units. Assembling the same thing free from three separate places, then comparing across them, does not work.
+
+Access works like this. A free account takes an email and no card. It gives you **10 queries a day** against the domain, keyword, competitor and backlink reports, which is enough to check three or four phrases once. The full panel opens with a **seven-day trial**. That one does want a card, cancels at any point, and rolls into a paid subscription if you forget.
+
+Set a reminder for day six. Doing all the counting in one sitting is better anyway: reading every phrase on the same day is the only way the numbers stay comparable.
+
+Do not buy access through a reseller. The account is shared, the limits are shared, and you are paying somebody with no relationship to the vendor.
 
 ### Three niches, one market
 

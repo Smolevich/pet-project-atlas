@@ -3,9 +3,9 @@ title: Из чего состоит страница, которую наход�
 description: Ответ в первых трёх предложениях, выполнимые шаги, блок провалов, FAQ из вопросов, которые правда задавали, и линтер, который держит форму.
 updated: 2026-08-12
 sources:
-  - https://developers.google.com/search/blog/2023/08/howto-faq-changes
-  - https://developers.google.com/search/docs/appearance/structured-data/faqpage
-  - https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+  - Изменения в HowTo и FAQ-сниппетах — https://developers.google.com/search/blog/2023/08/howto-faq-changes
+  - FAQ-сниппет убрали из выдачи — https://developers.google.com/search/docs/appearance/structured-data/faqpage
+  - Google про полезный контент — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 ---
 
 ## Что решаем

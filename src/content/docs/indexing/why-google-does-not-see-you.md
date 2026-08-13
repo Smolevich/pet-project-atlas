@@ -3,15 +3,15 @@ title: Google does not see your site
 description: The site is live and search returns nothing for it. The checks that find the real blocker, in the order they have to run.
 updated: 2026-08-12
 sources:
-  - https://developers.google.com/search/docs/crawling-indexing/robots/intro
-  - https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
-  - https://developers.google.com/search/docs/crawling-indexing/block-indexing
-  - https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
-  - https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
-  - https://www.sitemaps.org/protocol.html
-  - https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
-  - https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
-  - https://developers.cloudflare.com/waf/analytics/security-events/
+  - What robots.txt can and cannot do — https://developers.google.com/search/docs/crawling-indexing/robots/intro
+  - How Google reads robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
+  - noindex in a tag and in a header — https://developers.google.com/search/docs/crawling-indexing/block-indexing
+  - How to set a canonical URL — https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+  - What the crawler sees in a JavaScript app — https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
+  - Sitemap protocol and its limits — https://www.sitemaps.org/protocol.html
+  - Cloudflare's Block AI bots switch — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+  - What a Cloudflare rule action does — https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
+  - Security Events, where a block shows up — https://developers.cloudflare.com/waf/analytics/security-events/
 ---
 
 ## What we are solving

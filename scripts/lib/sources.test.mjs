@@ -27,9 +27,41 @@ test('same host on two entries is told apart by the path', () => {
   assert.notEqual(first.path, second.path);
 });
 
-test('provenance line stays text, verbatim', () => {
+test('provenance line keeps its text and comes apart into parts', () => {
   const entry = 'Search Console API, property telegram-voice-bot, measured 2026-08-12';
-  assert.deepEqual(describeSource(entry), { kind: 'provenance', text: entry });
+  assert.deepEqual(describeSource(entry), {
+    kind: 'provenance',
+    text: entry,
+    instrument: 'Search Console API',
+    scope: 'property',
+    identifier: 'telegram-voice-bot',
+    measured: '2026-08-12',
+  });
+});
+
+test('a title becomes the link text and the host stays beside it', () => {
+  assert.deepEqual(describeSource('Use Keyword Planner — https://support.google.com/google-ads/answer/7337243'), {
+    kind: 'url',
+    href: 'https://support.google.com/google-ads/answer/7337243',
+    host: 'support.google.com',
+    path: '/google-ads/answer/7337243',
+    title: 'Use Keyword Planner',
+  });
+});
+
+test('a url with no title keeps working, so a half-migrated page still renders', () => {
+  const described = describeSource('https://support.google.com/google-ads/answer/7337243');
+  assert.equal(described.kind, 'url');
+  assert.equal(described.title, undefined);
+  assert.equal(`${described.host}${described.path}`, 'support.google.com/google-ads/answer/7337243');
+});
+
+test('a titled root url shows the title, not a lone slash', () => {
+  // Регрессия: «wordstat.yandex.ru» и под ним одинокий «/» — то, с чего
+  // заголовки и начались.
+  const described = describeSource('Яндекс Вордстат — https://wordstat.yandex.ru/');
+  assert.equal(described.title, 'Яндекс Вордстат');
+  assert.equal(described.path, '');
 });
 
 test('provenance line never renders as a link', () => {

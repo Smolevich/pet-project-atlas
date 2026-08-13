@@ -6,23 +6,23 @@ sources:
   - Cloudflare GraphQL Analytics, site atlas.smolevich.com, measured 2026-08-13
   - nginx access log, dataset /var/log/nginx/access.log, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/access.log.*.gz, measured 2026-08-12
-  - https://www.rfc-editor.org/rfc/rfc9309.html
-  - https://developers.openai.com/api/docs/bots
-  - https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
-  - https://docs.perplexity.ai/guides/bots
-  - https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
-  - https://developers.google.com/search/docs/appearance/ai-features
-  - https://support.google.com/webmasters/answer/16908024
-  - https://blog.google/products-and-platforms/products/search/new-controls-website-owners/
-  - https://llmstxt.org/
-  - https://darkvisitors.com/
-  - https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
-  - https://developers.cloudflare.com/bots/concepts/bot/
-  - https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
-  - https://developers.cloudflare.com/ai-crawl-control/features/manage-ai-crawlers/
-  - https://developers.cloudflare.com/ai-crawl-control/features/pay-per-crawl/what-is-pay-per-crawl/
-  - https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
-  - https://developers.cloudflare.com/waf/analytics/security-events/
+  - RFC 9309, the robots.txt standard — https://www.rfc-editor.org/rfc/rfc9309.html
+  - OpenAI crawlers and what each does — https://developers.openai.com/api/docs/bots
+  - Anthropic crawlers and how to block them — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
+  - Perplexity crawlers — https://docs.perplexity.ai/guides/bots
+  - Google's crawlers and their user agents — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - Google on AI features and snippets — https://developers.google.com/search/docs/appearance/ai-features
+  - The Search generative AI control — https://support.google.com/webmasters/answer/16908024
+  - Google announces the new owner controls — https://blog.google/products-and-platforms/products/search/new-controls-website-owners/
+  - The llms.txt specification — https://llmstxt.org/
+  - Dark Visitors, a directory of AI agents — https://darkvisitors.com/
+  - Cloudflare's Block AI bots switch — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+  - How Cloudflare classifies bots — https://developers.cloudflare.com/bots/concepts/bot/
+  - Cloudflare's managed robots.txt — https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
+  - Managing AI crawlers at the edge — https://developers.cloudflare.com/ai-crawl-control/features/manage-ai-crawlers/
+  - What pay per crawl is — https://developers.cloudflare.com/ai-crawl-control/features/pay-per-crawl/what-is-pay-per-crawl/
+  - What a Cloudflare rule action does — https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
+  - Security Events, where a block shows up — https://developers.cloudflare.com/waf/analytics/security-events/
 ---
 
 ## What we are solving

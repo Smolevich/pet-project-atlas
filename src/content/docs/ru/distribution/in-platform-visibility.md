@@ -3,15 +3,15 @@ title: Поиск внутри платформы, а не только в Googl
 description: У Telegram, магазинов приложений и маркетплейсов свой индекс по нескольким коротким полям. Какие это поля и чего стоит имя не в том алфавите.
 updated: 2026-08-12
 sources:
-  - https://core.telegram.org/bots/api#setmyname
-  - https://core.telegram.org/bots/api#getmyname
-  - https://core.telegram.org/bots/api#getme
-  - https://developer.apple.com/help/app-store-connect/create-an-app-record/view-and-edit-app-information
-  - https://core.telegram.org/bots/features
-  - https://developer.apple.com/app-store/search/
-  - https://developer.apple.com/app-store/product-page/
-  - https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information/
-  - https://support.google.com/googleplay/android-developer/answer/9898842
+  - setMyName в Bot API — https://core.telegram.org/bots/api#setmyname
+  - getMyName в Bot API — https://core.telegram.org/bots/api#getmyname
+  - getMe в Bot API — https://core.telegram.org/bots/api#getme
+  - Информация о приложении в App Store Connect — https://developer.apple.com/help/app-store-connect/create-an-app-record/view-and-edit-app-information
+  - Поля профиля Telegram-бота — https://core.telegram.org/bots/features
+  - Как работает поиск в App Store — https://developer.apple.com/app-store/search/
+  - Как собрать карточку в App Store — https://developer.apple.com/app-store/product-page/
+  - Метаданные версии в App Store Connect — https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information/
+  - Метаданные карточки в Google Play — https://support.google.com/googleplay/android-developer/answer/9898842
 ---
 
 ## Что решаем
