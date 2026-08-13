@@ -9,6 +9,13 @@ sources:
   - Voice AI bot database, table usage_events, measured 2026-08-13
   - Voice AI bot database, table user_credits, measured 2026-08-13
   - Voice AI bot database, table stars_payments, measured 2026-08-13
+  - App Store customer reviews RSS, dataset itunes.apple.com/us/rss/customerreviews/id=1276437113, measured 2026-08-13
+  - Otter plans and the per-recording limit — https://otter.ai/pricing
+  - Peter Thiel, "Competition Is for Losers" — https://www.wsj.com/articles/peter-thiel-competition-is-for-losers-1410535536
+  - Paul Graham on annoyance as a signal — https://paulgraham.com/startupideas.html
+  - Capterra terms on automated access — https://www.capterra.com/legal/terms-of-use/
+  - G2 terms on automated access — https://legal.g2.com/terms-of-use
+  - Pay-per-usage pricing in the X API — https://docs.x.com/x-api/introduction
 ---
 
 ## What we are solving
@@ -43,25 +50,55 @@ A paying customer is the most patient person in your niche. They spent money and
 
 That is where the research starts. Not "what is missing from this market" but "what is here and grates".
 
+> In the real world outside economic theory, every business is successful exactly to the extent that it does something others cannot.
+>
+> — Peter Thiel, "Competition Is for Losers", The Wall Street Journal, 12 September 2014. The same argument runs through chapter three of Zero to One.
+
+Worth keeping a second one beside it, about where the idea comes from at all.
+
+> When something annoys you, it could be because you're living in the future.
+>
+> — Paul Graham, "How to Get Startup Ideas", November 2012. For him irritation is a signal rather than a nuisance.
+
 ### Where that irritation is already written down
 
 You do not have to extract it with interviews. People have written it all already, for free, with dates on it.
 
-- **Store reviews.** Read the one and two star reviews of paid products, not the average rating. An average is marketing; two stars from a subscriber is a specification.
-- **Subject forums and Reddit.** Search for the shape of the complaint rather than the product name: `alternative to`, `switching from`, `X vs Y`, `why I left`.
-- **Social feeds, from Instagram to X.** These show you a trend rather than a single complaint: which way of doing the job is rising and which one people are tired of.
-- **Your own support, if the product already exists.** The cheapest sample there is, and usually the only unread one.
+**The App Store hands over its reviews in one command, with no account.** Find the app id first, then read the feed:
 
-The search is the same shape every time. Take the competitor's name and attach a word of annoyance to it.
-
-```
-site:reddit.com "alternative to <competitor>"
-site:reddit.com "<competitor>" (annoying OR "gave up" OR refund)
+```bash
+curl -s 'https://itunes.apple.com/search?term=otter&entity=software&country=us&limit=3'
+curl -s 'https://itunes.apple.com/us/rss/customerreviews/page=1/id=1276437113/sortby=mostrecent/json'
 ```
 
-The point is not to collect a list of grievances. The point is to find the repeating one, written by different people in different words. One complaint is a person; ten of the same complaint is a niche.
+Fifty reviews a page, around nine pages, then nothing. Every entry carries a date, a rating and the app version — the version tells you which release things started falling apart on. The country sits in the URL, and the same product complains differently in `gb`, `fr` and `de`.
 
-Being observant matters more than any tool here. The report you want does not exist, but the habit of reading other people's annoyance carefully does.
+Here is what that feed had. Otter on the Pro plan at $16.99 a month cuts a single recording off at 90 minutes. This is not a malfunction: it is written in their own price list, and four hours per recording only comes with the $30 plan.
+
+On 2 August 2026 somebody on the $99.99-a-year subscription leaves one star.
+
+> Paywalled out of seeing the last 19 minutes of an enthralling conversation.
+
+A week earlier, on 25 July, two stars from somebody else.
+
+> after several years of satisfying service, I am now forced me to move on to other providers
+
+Both were paying, both left, and one line of a price list stopped them. That is the thing you are looking for.
+
+**Count them rather than scrolling them.** I pulled that app's whole feed: 209 one and two star reviews between 16 September 2024 and 3 August 2026. Money and limits account for 118 of them. Speaker labelling accounts for 11.
+
+I had been certain the headline pain in this niche was "which of them is talking". Among paying customers it loses to money by roughly ten to one, and finding that out took ten minutes.
+
+**Forums give you links that will still resolve.** An App Store review has no permanent address — it slides onto another page as soon as newer ones arrive. So quote Discourse forums instead, where every thread has its own URL that will outlive your article.
+
+```bash
+curl -s 'https://community.openai.com/search.json?q=transcription+empty'
+curl -s 'https://hn.algolia.com/api/v1/search_by_date?query=%22otter.ai%22&tags=comment'
+```
+
+Both are open without a key and without an account, checked on 13 August 2026.
+
+**And this part stopped being free, which is where most advice is out of date.** Reddit no longer reads from a script: without OAuth the feed returns 403. Search on X is prepaid now, with no free reading at all. G2 and Capterra both banned headless browsers outright in their 2026 terms, so reading by hand is fine and automating is not.
 
 ### What "features first" actually costs
 
