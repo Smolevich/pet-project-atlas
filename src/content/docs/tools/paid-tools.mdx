@@ -14,13 +14,11 @@ import semrushOverview from '../../../assets/screenshots/semrush-domain-overview
 
 ## What we are solving
 
-A paid panel hands you a table of positions. One row says position 20 for a phrase people actually type, and the product still gets nothing.
+I ran Semrush over the site of a Telegram bot I run, expecting a list of things to fix, and what came back was a table of positions. One row said position 20 for a phrase people really do type. The product was still getting nothing out of it.
 
-The question is which of those numbers you can act on. I ran Semrush over the site of a Telegram bot I run.
+So the question I actually had was which of those numbers I could act on. A day later I pulled the same query out of my own Search Console and it came back at 43.3. It also turned out not to be the same kind of number at all, and sorting that out took the second half of this page.
 
-A day later I pulled the same query out of Search Console. The two numbers are twenty places apart and they are not the same quantity. Unpicking that is the second half of this page.
-
-What these services are for, and which of them read Yandex, is one section earlier. See [what the paid panels actually measure](/demand/how-people-search/). This page is the measurement behind that overview.
+What these services are for, and which of them read Yandex, sits one section earlier: [what the paid panels actually measure](/demand/how-people-search/).
 
 <figure>
   <Image
@@ -34,7 +32,7 @@ What these services are for, and which of them read Yandex, is one section earli
 
 ## Steps
 
-Read the whole panel in one pass before you read any single row.
+I read the whole panel in one pass before letting myself look at any single row, because a row on its own always describes a better site than I actually have.
 
 | Panel field | What it said | What it is worth |
 |---|---|---|
@@ -58,44 +56,58 @@ The keyword table under it, worldwide, on the same day:
 | бот говорит текст | 72 | 90 |
 | бот для озвучки текста | 83 | 140 |
 
-1. **Read Organic Traffic before any position** — it was 0.
-   A table of positions above a traffic of 0 describes a site that nobody reaches.
-2. **Pair the keyword count with that zero** — 11 keywords matched, the best row at position 20, traffic 0.
-   That pair is a diagnosis. The pages exist and are indexed, and nothing off-site points at them.
-3. **Notice a phrase that occupies two rows** — `войс бот телеграм` sits at position 20 and at position 48.
-   One phrase, two answers. A row is not a verdict about the site, and neither number is an observation.
-4. **Check the scope the panel is showing** — subdomain or root domain, worldwide or a single country tab.
-   The database date sits next to it. Every figure moves when any of those change.
-5. **Verify a position by hand before acting on it** — pin the country and the language, and run the query.
+### Which number I should have read first
 
-   ```text
-   https://www.google.com/search?q=<query>&gl=ru&hl=ru
-   ```
+Organic Traffic, and it was 0. A table of positions sitting on top of a traffic figure of zero describes a site nobody reaches, and I went straight to the rows anyway.
 
-   Count the domains that come back, and look for your own among them.
-6. **Do not count on a longer result page** — I asked for `num=30` and got exactly ten.
-   Google no longer honours the parameter. Page two is now a click, not a query string.
-7. **Name the engine the row is about** — Semrush reports Google, and these queries are Russian.
-   Yandex is a second engine with no data in this panel. It cannot tell you what it is not reading.
-8. **Read who owns page one before writing anything** — for the top query it was directories and a competitor.
+Then put the keyword count next to that zero: 11 keywords matched, the best row at position 20, traffic 0. The pair is the diagnosis. My pages exist, Google has them indexed and matched to phrases real people type, and nothing outside the site points at any of them.
 
-   ```text
-   t.me  botstat.io  voicee.ru  teamlogs.ru  telegram.me
-   yagla.ru  help.cloud.just-ai.com  cybervoice.io  github.com  lumendatabase.org
-   ```
+### Why the same phrase sits in two rows
 
-   `botstat.io` and `yagla.ru` are listings, `cybervoice.io` is a competitor's product.
-   A small product gets onto that page by being listed on it, not by outranking it.
-9. **Read the AI Search block as two separate facts** — Mentions 0, and 4 cited pages, all from ChatGPT.
-   Something was quoted, and no answer named the product. The panel does not say which pages or which prompts.
-10. **Stop paying when the panel repeats a diagnosis you already have** — mine reports zeros and a page of directories.
-    The work it points at is off-site. No subscription does that work for you.
+`войс бот телеграм` shows up twice in one export on one day, at position 20 and at position 48. One phrase, two answers, and I had quoted the better one.
 
-### The same query, counted on my own property
+Next to the table sits the scope — subdomain or root domain, worldwide or a single country tab — and beside that the date of the database behind it. Every figure in the panel moves when any one of those changes. I had been treating a row as a verdict about the site when it is closer to a reading taken under settings I never checked.
 
-Semrush estimates a position from the outside. Search Console counts the impressions Google actually served.
+### What I saw when I ran the query myself
 
-So I pulled the property itself through the Search Console API. Dimension `query`, period 2026-05-12 to 2026-08-12 — three months.
+Pinning the country and the language, then running the thing by hand, costs a minute:
+
+```text
+https://www.google.com/search?q=<query>&gl=ru&hl=ru
+```
+
+Ten domains came back and mine was not among them. Position 20 is the second page, so nothing was contradicted — I simply could not confirm it either. I asked for `num=30` to see further down and got exactly ten results back. Google no longer honours the parameter, so page two is a click now rather than a string in the URL.
+
+What was on page one turned out to matter more than my position on page two:
+
+```text
+t.me  botstat.io  voicee.ru  teamlogs.ru  telegram.me
+yagla.ru  help.cloud.just-ai.com  cybervoice.io  github.com  lumendatabase.org
+```
+
+`botstat.io` and `yagla.ru` are listings, `cybervoice.io` is a competitor's product. A product my size gets onto that page by being listed on it, not by outranking the directories that are already there — which is a distribution job, not a writing one.
+
+### Which engine the table is even about
+
+Semrush reports Google, and these queries are Russian. Yandex serves a share of that demand and there is not one row about it anywhere in the panel, which the panel does not tell you either. A tool cannot report on an index it does not read, and I had been reading its silence as an absence of competitors.
+
+### What the AI Search block is actually claiming
+
+Two separate facts live in that block and for a while I read them as one. Mentions 0, and Cited Pages 4, all four under ChatGPT.
+
+So something of mine was fetched and quoted somewhere inside the tool's own sample, and no answer in that sample named the product. Which pages, and on which prompts, it does not say.
+
+### What my own property says about the same query
+
+Semrush estimates a position from the outside. Search Console counts the impressions Google actually served, so I went and pulled the property itself through the Search Console API — dimension `query`, 2026-05-12 to 2026-08-12, three months.
+
+```bash
+curl -sS -X POST \
+  'https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain:example.com/searchAnalytics/query' \
+  -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"startDate":"2026-05-12","endDate":"2026-08-12","dimensions":["query"],"rowLimit":100}'
+```
 
 | Query | Clicks | Impressions | CTR | Position |
 |---|---|---|---|---|
@@ -110,62 +122,76 @@ So I pulled the property itself through the Search Console API. Dimension `query
 | moonshine vs parakeet | 0 | 1 | 0% | 11.0 |
 | войс бот телеграм | 0 | 6 | 0% | 43.3 |
 
-That is the head of the table. The whole period: 74 queries, 278 impressions, 1 click.
+That is the head of the table, and the whole period comes to 74 queries, 278 impressions, 1 click. Every figure is what the API returned. An earlier version of this table had a dash where the 6 now sits, and I quoted the 43.3 without it.
 
-Every figure is what the API returned. An earlier version of this table had a dash where the 6 now sits. I quoted the 43.3 without it.
+### What an average of six impressions is worth
 
-Semrush put `войс бот телеграм` at position 20. Search Console gives an average position of 43.3 for the same query over three months.
+Here are both readings of the one query, side by side:
 
-Those are different quantities. Semrush estimates a position on one day from its own database. Search Console averages the positions of the impressions it actually served.
+| Query | The panel said | My Search Console said | Measured |
+|---|---|---|---|
+| `войс бот телеграм` | position 20, monthly volume 90 | position 43.3, on 6 impressions and 0 clicks | 2026-08-11 panel, 2026-08-12 property |
 
-For this query it served six, on three days out of eighty-nine. Two on 23 June at position 53, three on 28 July at 43.3, one on 31 July at position 24.
+They are different quantities. Semrush estimates a position on one day out of its own database, and Search Console averages the positions of the impressions it really served. Filtering the same pull to that one query and asking for the days and the pages behind it is where the row falls apart:
 
-So 43.3 is the mean of six impressions spanning positions 24 to 53. The panel's 20 is four places from the best of those days and thirty-three from the worst.
+```bash
+curl -sS -X POST \
+  'https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain:example.com/searchAnalytics/query' \
+  -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"startDate":"2026-05-12","endDate":"2026-08-12",
+       "dimensions":["date","page"],
+       "dimensionFilterGroups":[{"filters":[
+         {"dimension":"query","operator":"equals","expression":"войс бот телеграм"}]}]}'
+```
 
-Two different pages answered the query as well. `/ru` took four impressions at position 38, one article took two at position 54.
+Six impressions, on three days out of eighty-nine: two on 23 June at position 53, three on 28 July at 43.3, one on 31 July at position 24. Two different pages answered the query as well — `/ru` took four impressions at position 38, one article took two at position 54.
 
-An average over two pages, three days and six impressions is not a position. It is a number the API will print for any query that was shown at all.
+So 43.3 is the mean of six impressions spread over positions 24 to 53 and two pages, which is a number the API will print for any query it showed at all. The panel's 20 lands four places from the best of those days and thirty-three from the worst, and I cannot say from this row which instrument was closer to the truth.
 
-What survives is smaller and firmer. The query produced six impressions and no clicks in three months, and no reading of the panel changes that.
+Pull impressions with position, always. What survives here is smaller and firmer than the comparison I first published: the query produced six impressions and no clicks in three months, and no reading of the panel changes that.
 
-11. **Pull your own property before acting on any row above** — Search Console API, dimension `query`, the full period.
-    The panel and the property answer the same question with different instruments. Only one of them counts your impressions.
-12. **Put the two positions in one row** — 20 from the panel, 43.3 from Search Console, six impressions behind it.
-    Pull impressions with position, always. An average with fewer than a dozen impressions under it is arithmetic, not a measurement, and Search Console prints it to one decimal place regardless.
-    This page used to say the panel missed by more than twenty places. It says less: two instruments measured different things, and this row does not settle which is closer to the truth.
-13. **Read a respectable position against its clicks** — `telegram text to speech`, position 20.5, 24 impressions, 0 clicks.
-    Page two is functionally zero. Two dozen people were shown the result and not one of them clicked it.
-14. **Read position 1.0 as a question about demand** — `stt модели`, 1 impression, 0 clicks, on 9 August.
-    Impressions count how often Google showed my result, not how often anybody typed the phrase. One impression is a fact about my page and says nothing at all about demand.
-    So I checked the phrase itself. Yandex Wordstat gives 56 requests, all regions, 10 July to 8 August 2026. The conclusion holds, and the evidence for it is the 56, not the 1: [the words people type](/demand/how-people-search/) and [whether they pay](/demand/will-they-pay/).
-15. **Find the one click and read what earned it** — position 49, 1 impression, 1 click.
-    The only click in three months came from the bottom of page five, on `озвучка детским голосом бот телеграм`. Specificity beat position: the phrase was long, and the page matched it exactly.
-16. **Publish the totals with the zeros in them** — 74 queries, 278 impressions, 1 click.
-    That is the honest shape of a small project in search. A page that hides it teaches nobody anything.
+### Which position brought a click and which did not
+
+`telegram text to speech` sat at position 20.5 with 24 impressions and 0 clicks. Two dozen people were shown my result on page two and not one of them clicked, which is what page two is worth on a query like this.
+
+The one click of the whole quarter came from position 49, on a single impression, on `озвучка детским голосом бот телеграм`. That is the bottom of page five. The phrase was long and specific and my page matched it exactly, and specificity beat position by a distance no title rewrite would have covered.
+
+### Is position 1.0 a fact about demand or about me
+
+`stt модели` came back at position 1.0 with 1 impression and 0 clicks, on 9 August, and I first read that as a phrase nobody types. Impressions count how often Google showed my result, not how often somebody typed the phrase — so the row is a fact about my page and says nothing about demand.
+
+I went and checked the phrase itself instead. Yandex Wordstat gives 56 requests, all regions, 10 July to 8 August 2026. The conclusion held, but the evidence for it is the 56 and not the 1: [the words people type](/demand/how-people-search/) and [whether they pay](/demand/will-they-pay/).
+
+### Whether the subscription is still worth paying for
+
+Mine reports zeros and a page of directories, and both of those I already knew. The work it points at is off-site, and no subscription does that work for me.
+
+So I publish the totals with the zeros in them: 74 queries, 278 impressions, 1 click over three months. That is the honest shape of a small project in search, and I would rather have read someone else's before I read my own.
 
 ## What did not work
 
-- **Acting on the reported position 20**. I searched for `войс бот телеграм` with `gl=ru` and `hl=ru`, and ten domains came back without mine. Position 20 is the second page, so the report is not contradicted. It is unverified, and either way the user sees nothing.
-- **Asking for a deeper result page to settle it**. `num=30` returned ten results. The parameter that made hand-checking cheap is gone, and every check past ten results now costs a click.
-- **Reading one panel as "the search market"**. Semrush reports Google. These phrases are Russian, and Yandex serves that demand too. Not one row in the panel is about it, and the panel does not say so.
-- **Treating Authority Score as a target**. Score 2 sits on 61 backlinks from 10 domains. The score is a summary of those links. Chasing the number means buying links, which is the one route that ends badly.
-- **Reading Cited Pages 4 as visibility**. Mentions were 0 and Top Cited Sources was empty. Four pages were cited somewhere in ChatGPT's sample, and that is the whole claim.
-- **Waiting for the tool to say what to write**. Key Topics answered "No topics found. Domain is too small or relatively new." A tool that reads an existing footprint cannot create the first one.
-- **Buying the subscription before the off-site work**. It bought me a keyword list and a competitor's name. Both were reachable by hand, and neither changed what I had to do next.
-- **Leaving the reported position unchecked against my own property**. The hand-check could not disprove position 20, so I let it stand. One API call brought back what Google served on my own property, and that was the pull worth making first.
+- **Acting on the reported position 20**. I searched for `войс бот телеграм` with `gl=ru` and `hl=ru`, and ten domains came back without mine. Position 20 is the second page, so the report is not contradicted — it is unverified, and either way the user sees nothing.
+- **Asking for a deeper result page to settle it**. `num=30` returned ten results. The parameter that made hand-checking cheap is gone, and every check past ten results costs me a click now.
+- **Reading one panel as "the search market"**. Semrush reports Google, my phrases are Russian, and Yandex serves that demand too. Not one row in the panel is about it, and the panel does not say so anywhere.
+- **Treating Authority Score as a target**. Score 2 sits on 61 backlinks from 10 domains, and the score is a summary of those links. Chasing the number means buying links, which is the one route that ends badly.
+- **Reading Cited Pages 4 as visibility**. Mentions were 0 and Top Cited Sources was empty. Four pages were cited somewhere in ChatGPT's sample, and that is the whole of what the panel claims.
+- **Waiting for the tool to say what to write**. Key Topics answered "No topics found. Domain is too small or relatively new." A tool that reads an existing footprint cannot create the first one for me.
+- **Buying the subscription before the off-site work**. It bought me a keyword list and a competitor's name, both of which I could have got by hand in an evening, and neither changed what I had to do next.
+- **Leaving the reported position unchecked against my own property**. The hand-check could not disprove position 20, so I let it stand. One API call brought back what Google had actually served on my own property, and that was the pull worth making first.
 - **Publishing 43.3 with a dash where the impressions go**. I quoted an average and left out the one field that says whether it means anything. It is six impressions on three days, positions 24 to 53, served by two different pages. With the 6 in the row, nobody would have read the number the way I wrote it.
-- **Calling a one-day panel estimate and a ninety-day property average a comparison of positions**. They are different quantities, aggregated differently, and a gap between them is what you get when both instruments are working. I published the gap as a finding about the panel.
-- **Reading one impression as a statement about demand**. `stt модели` came back at position 1.0 and I wrote that nobody types it. Search Console counts how often my result was shown, which is a fact about me. Wordstat counts the query, and it says 56 a month. Same conclusion, on the instrument that can carry it.
-- **Expecting a decent position to produce clicks on its own**. Position 20.5, 24 impressions, 0 clicks. There is no title or snippet fix on page two, and I spent an evening looking for one.
+- **Calling a one-day panel estimate and a ninety-day property average a comparison of positions**. They are aggregated differently, and a gap between them is what you get when both instruments are working fine. I published that gap as a finding about the panel.
+- **Reading one impression as a statement about demand**. `stt модели` came back at position 1.0 and I wrote that nobody types it. Search Console counts how often my result was shown, which is a fact about me. Wordstat counts the query itself, and it says 56 a month — same conclusion, on the instrument that can carry it.
+- **Expecting a decent position to produce clicks on its own**. Position 20.5, 24 impressions, 0 clicks. I spent an evening hunting for a title and snippet fix that does not exist on page two.
 
 ## Verify
 
-- Run the query yourself in a clean profile with the country and language pinned. Count the domains and look for your own.
+- Run the query yourself in a clean profile with the country and the language pinned, count the domains and look for your own.
 - Ask for more than ten results and count what actually comes back.
-- Check the panel's scope and database date against what you are about to quote from it.
-- Run the same query on the second engine of your market by hand. No panel in this tool covers it.
-- Compare the tool's Organic Traffic against clicks in Search Console next month. An estimate of 0 is the one figure that needs no trust.
-- Pull the same query from your own property, over a period long enough to hold impressions. Put the two positions in one row.
+- Before you quote anything out of the panel, check the scope it is showing and the date of the database behind it.
+- Run the same query by hand on the second engine of your market. No panel in this tool covers it.
+- Next month, put the tool's Organic Traffic estimate next to clicks in Search Console. An estimate of 0 is the one figure that needs no trust.
+- Pull the same query from your own property over a period long enough to hold impressions, then put both positions in one row.
 - Read impressions and clicks next to every position you quote. A position with no clicks under it is not a result yet.
 
 The zeros above are an off-site problem, and that is a different page: [where the first external links come from](/distribution/catalogs/). Inside Telegram the index is another one again: [search inside the platform](/distribution/in-platform-visibility/). What each tool is for: [what to run and when](/tools/skills/).

@@ -3,12 +3,10 @@ title: 6. Analytics
 description: Signups arrive and you cannot say which channel sent them. The short list of numbers worth reading weekly, and how to record where a user came from.
 ---
 
-Traffic has started, signups appear, and every graph moved this week. You cannot tell which of those movements is growth, and you cannot say which channel sent the people.
+Traffic has started, signups appear, every graph moved this week, and none of that tells you whether anything is growing or which channel sent the people.
 
-Three pages here. [The numbers worth reading weekly](/analytics/what-to-measure/) is the short list: impressions, clicks, index share, signups, activation, repeat use. It says what each one answers that the others do not.
+Start with [where the user actually came from](/analytics/attribution/), even though it is the second page here. Attribution is the one thing on this route that cannot be reconstructed later: somebody who arrived through an untagged link stays unclassified forever. Every day you postpone it is another day of arrivals nobody will ever be able to sort.
 
-[Where the user actually came from](/analytics/attribution/) is source tracking. Tag every link, store the answer on first contact, and ask the person once.
+The reading itself lives on [the numbers worth reading weekly](/analytics/what-to-measure/), and the list is deliberately short — impressions, clicks, index share, signups, activation, repeat use. Each of them answers something the others cannot, which is the only reason it is on the list.
 
-[What an event row has to carry](/analytics/product-metrics/) is the collection underneath both. Seven fields on a row, errors read as a product signal, and how to find the screen where people stop.
-
-Do the second one early. Attribution cannot be reconstructed later, because a person who arrived untagged stays untagged forever.
+[What an event row has to carry](/analytics/product-metrics/) sits underneath both of those. It is the seven fields that have to be written at insert time. A column nobody filled is missing for the whole period it was empty, and no join afterwards brings it back.
