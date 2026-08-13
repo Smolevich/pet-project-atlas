@@ -7,7 +7,9 @@ You can be perfectly indexed for a phrase nobody types. That was me: the pages w
 
 That is why this section stands first. Everything further along the route costs weeks — crawler access, pages, links, dashboards — and none of it pays unless somebody is already searching.
 
-Two questions live here, and a phrase passes one and fails the other easily enough. [The words people actually type](/demand/how-people-search/) asks whether anyone searches at all. [Whether that audience pays for anything](/demand/will-they-pay/) asks whether there is money behind the searching.
+Before either of them sits one more: what are you building, and how does it differ from what is already on sale. [Where a niche starts when everything is taken](/demand/pick-a-niche/) argues that the thing to look for is not an empty market but somebody else's rough edge. It also shows what skipping that step cost me.
+
+After that, two questions live here, and a phrase passes one and fails the other easily enough. [The words people actually type](/demand/how-people-search/) asks whether anyone searches at all. [Whether that audience pays for anything](/demand/will-they-pay/) asks whether there is money behind the searching.
 
 The second answer is the one that stings. Real volume, an empty ad block, and everybody leaving happy because they found the free way.
 
