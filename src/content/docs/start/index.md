@@ -7,11 +7,9 @@ sources:
   - sitemap.xml, site atlas.smolevich.com, measured 2026-08-12
 ---
 
-Seven sections, eighteen pages, and no obvious place to start. This page is the order, and under each stage the reason it sits where it does.
+Below is the order I did this in, and under each step what it costs to do it at the wrong moment. If you would rather tick boxes than read reasons, there is [the checklist](/start/checklist/) — the same route on one screen.
 
-The same route with the reasons taken out is [the checklist](/start/checklist/) — one screen, boxes to tick, nothing to read.
-
-The steps are written as orders, because a procedure should be. Everything around them is one project's log, and yours will say something else.
+One thing up front: this is my log, not a method. Your numbers will come out different; the order is the part I hope saves you a month.
 
 ## What we are solving
 
