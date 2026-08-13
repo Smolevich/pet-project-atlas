@@ -1,18 +1,25 @@
 ---
 title: This atlas, two days in
 description: The first measurement of the site you are reading — zero impressions, one content page crawled, and a home page Google says it has never heard of.
-updated: 2026-08-12
+updated: 2026-08-13
 sources:
   - Search Console, property atlas.smolevich.com, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/atlas.access.log, measured 2026-08-12
   - sitemap.xml, site atlas.smolevich.com, measured 2026-08-12
+  - Search Console, property atlas.smolevich.com, measured 2026-08-13
+  - Google Search, site atlas.smolevich.com, measured 2026-08-13
 ---
+
+import { Image } from 'astro:assets';
+import serpIndexed from '../../../assets/screenshots/serp-site-atlas-indexed.png';
 
 ## What we are solving
 
 Every guide promises results in a few weeks, and almost none of them show what the first days look like. So when your own project is silent, there is nothing to hold that silence up against.
 
 This site went live on 10 August 2026. Here is everything it has, two days later. I will keep adding to this page monthly, including the months where nothing moved.
+
+The first thing worth writing down arrived sooner than a month, so the tables below carry a second reading, taken on 13 August.
 
 ## Steps
 
@@ -28,7 +35,7 @@ Then I stopped and read what came back.
 
 ## What did not work
 
-- **Expecting the sitemap to do more than it does.** It was accepted in two seconds, which felt like progress and was not. Two days later the URL inspection tells me the home page is **unknown to Google**, never crawled. Submitted, discovered, crawled and indexed are four different states, and this site has not got past the first one.
+- **Expecting the sitemap to do more than it does.** It was accepted in two seconds, which felt like progress and was not. Two days later the URL inspection tells me the home page is **unknown to Google**, never crawled. Submitted, discovered, crawled and indexed are four different states, and this site has not got past the first one. On the third day it was through all four, and both readings sit in the table below.
 - **Reading the access log as if every line were a visitor.** The log holds 417 requests. Almost all of them are me and the two people I sent the link to.
 - **Counting bots with `grep -o`.** It counts occurrences and I read them as requests. Some agents name themselves twice on one line: `bingbot` puts its token in the string and again in the `bingbot.htm` URL it advertises, so its count comes out roughly double. On this log nobody was bitten, because `Googlebot` says its name once and the URL beside it is `bot.html`. But I had already published a doubled Bing figure on another page before I understood the difference. Count lines, not matches.
 
@@ -42,17 +49,28 @@ Then I stopped and read what came back.
 
 ## Verify
 
-The numbers, read on 12 August 2026, two days after launch.
+The numbers, read on 12 August 2026, two days after launch, and read again on 13 August, three days in.
 
-| What | Value |
-|---|---|
-| Impressions in Search Console | 0 |
-| Clicks | 0 |
-| Queries the site appears for | 0 |
-| Home page status | URL is unknown to Google |
-| Last crawl of the home page | never |
+| What | 12 August | 13 August |
+|---|---|---|
+| Impressions in Search Console | 0 | 0 |
+| Clicks | 0 | 0 |
+| Queries the site appears for | 0 | 0 |
+| Home page status | URL is unknown to Google | Submitted and indexed |
+| URL inspection verdict | NEUTRAL | PASS |
+| Last crawl of the home page | never | 2026-08-13T09:08:32Z |
 
-The size of the site moved between the two readings, so it gets both. Three pages shipped later the same day, in English and in Russian.
+The performance figures cover 10 to 13 August, and all three of them are still zero.
+
+Between the two days the home page went from a URL Google had never heard of to one it has crawled and indexed. The `site:` query returns it, and Tools, Cases and Indexing with it:
+
+<Image src={serpIndexed} alt="Google results for the query site:atlas.smolevich.com. Above the results Google offers its own promotion, Try Google Search Console. Four results follow, all on atlas.smolevich.com: the home page, Pet Project Atlas — a route out of zero traffic, dated 1 day ago; Tools, dated 7 hours ago; Cases, dated 1 day ago; and 2. Indexing, dated 1 day ago." />
+
+Google results for `site:atlas.smolevich.com`, read on 13 August 2026. The home page, Cases and Indexing carry the date 1 day ago, the Tools page 7 hours ago.
+
+So three days from launch this site is indexed and invisible at the same time. Submitted, discovered, crawled and indexed are four different states, and passing the last of them moved nothing in the performance report. What it bought me is that an impression is now possible at all, which it was not on 12 August.
+
+The size of the site moved between two readings on 12 August, so it gets both. Three pages shipped later the same day, in English and in Russian.
 
 | What | First reading | Read again after those pages |
 |---|---|---|
