@@ -117,7 +117,20 @@ Anyone can send a user agent string, and I sent myself a pile of them. A `curl` 
 
 If you ship developer docs, yes. Otherwise probably not, and the reason is not an opinion about the format.
 
-The file costs ten minutes and no vendor commits to reading it. My own log settles the general case: in 16 days no AI agent fetched it once — [who actually crawls you](/geo/who-actually-crawls-you/). On a small marketing site that is a cheap bet with a measured payoff of 0, and on forty pages of docs it is a reasonable one. Anywhere else I would rather spend the ten minutes on `robots.txt` and the sitemap, which every agent does read.
+The file costs ten minutes and no vendor commits to reading it. Here is what mine got in 16 days:
+
+| Who fetched `llms.txt` | Requests |
+|---|---|
+| my own `curl` | 44 |
+| `SiteAuditBot` (Semrush) | 1 |
+| AI agents | 0 |
+| **total** | **45** |
+
+For comparison, `robots.txt` was fetched 56 times in the same window, and those were real crawlers.
+
+Two caveats, without which that zero cannot be read. The window has a hole: logrotate keeps 14 daily archives, so 20 to 28 July did not survive. And a request the edge refuses never reaches nginx and never appears in this table — except my edge refuses nothing, which the `robots.txt` line from the same log demonstrates. The full read is in [who actually crawls you](/geo/who-actually-crawls-you/).
+
+So on a small marketing site this is a cheap bet with a measured payoff of 0, and on forty pages of docs it is a reasonable one. Anywhere else I would rather spend the ten minutes on `robots.txt` and the sitemap, which every agent does read.
 
 The format itself is short: an H1 on the first line, a one-sentence blockquote under it, absolute links, and a description after every colon. Where `robots.txt` says which paths to stay out of, this one says what is worth reading, in your own words.
 
