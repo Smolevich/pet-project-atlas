@@ -30,7 +30,7 @@ Then I stopped and read what came back.
 
 - **Expecting the sitemap to do more than it does.** It was accepted in two seconds, which felt like progress and was not. Two days later the URL inspection tells me the home page is **unknown to Google**, never crawled. Submitted, discovered, crawled and indexed are four different states, and this site has not got past the first one.
 - **Reading the access log as if every line were a visitor.** The log holds 417 requests. Almost all of them are me and the two people I sent the link to.
-- **Counting bots with `grep -o`.** My first count said six Googlebot requests and one from Perplexity. `Googlebot` appears twice inside its own user agent string — once as the token, once inside the URL it advertises — so counting occurrences and counting lines are two different questions.
+- **Counting bots with `grep -o`.** It counts occurrences and I read them as requests. Some agents name themselves twice on one line: `bingbot` puts its token in the string and again in the `bingbot.htm` URL it advertises, so its count comes out roughly double. On this log nobody was bitten, because `Googlebot` says its name once and the URL beside it is `bot.html`. But I had already published a doubled Bing figure on another page before I understood the difference. Count lines, not matches.
 
   ```bash
   grep -o 'Googlebot' /var/log/nginx/atlas.access.log | wc -l
