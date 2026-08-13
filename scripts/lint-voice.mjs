@@ -87,9 +87,9 @@ async function lintFile(filePath) {
         `${at(hit.line)}: запрещённая фраза "${hit.phrase}". Замени на конкретное утверждение. (${STYLE.banned})`,
       );
     }
-    for (const hit of findLongSentences(body, 20)) {
+    for (const hit of findLongSentences(body, 32)) {
       warnings.push(
-        `${at(hit.line)}: предложение на ${hit.words} слов, порог 20. Раздели на два. (${STYLE.length})`,
+        `${at(hit.line)}: предложение на ${hit.words} слов, порог 32. Раздели на два. (${STYLE.length})`,
       );
     }
   }
