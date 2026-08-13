@@ -203,7 +203,12 @@ const BLOCKQUOTE = /^\s*>/;
  * Пункт списка, заголовок и цитата начинают новый блок — их склейка дала бы
  * предложение-химеру. Код, таблицы и отступы по STYLE.md §5 не считаются.
  */
+// alt="..." — описание картинки для тех, кто её не видит. Оно должно быть
+// подробным, и мерить его как предложение прозы бессмысленно.
+const IMAGE_ALT = /\balt="[^"]*"/g;
+
 function paragraphUnits(markdown) {
+  markdown = markdown.replace(IMAGE_ALT, (m) => blankOut(m));
   const mask = fenceMask(markdown);
   const units = [];
   let current = null;

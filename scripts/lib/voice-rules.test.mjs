@@ -466,3 +466,13 @@ test('негодные записи в sources возвращаются отде
   assert.deepEqual(findInvalidSources({ sources: [] }), []);
   assert.deepEqual(findInvalidSources({}), []);
 });
+
+test('alt-текст картинки не проза и под длину не проверяется', () => {
+  const md = '<Image src={x} alt="' + Array.from({length: 40}, (_, i) => `слово${i}`).join(' ') + '" />';
+  assert.deepEqual(findLongSentences(md, 32), []);
+});
+
+test('текст рядом с картинкой проверяется как обычно', () => {
+  const md = '<Image src={x} alt="короткий alt" />\n\n' + Array.from({length: 35}, (_, i) => `w${i}`).join(' ') + '.';
+  assert.equal(findLongSentences(md, 32).length, 1);
+});

@@ -7,11 +7,20 @@ sources:
   - https://www.wikidata.org/wiki/Wikidata:Notability
 ---
 
+import { Image } from 'astro:assets';
+import serpRu from '../../../assets/screenshots/serp-ru-rasshifrovka.png';
+
 ## What we are solving
 
 The pages are written and the site is technically clean, and it still sits on page two for every query that matters. Page one belongs to a competitor and to other people's "best tools for X" lists.
 
 What is missing is authority off your own domain, and nothing you do on the domain closes that. The first move is a handful of places that confirm the project exists at all — the same listings a model reads long before it reads your site.
+
+Here is page one for a query my own bot answers, read on 13 August 2026:
+
+<Image src={serpRu} alt="Google results in Russian for the query бот расшифровка голосовых. The first page holds a Sberbank developer documentation page, a Teamlogs listicle titled 10 bots for converting audio and video to text, a VC.ru article, RetailCRM documentation and a Telegram Messenger page." />
+
+A bank's developer docs, somebody's listicle, a tech-media post, a CRM's help centre. Not one of them is a product like mine. The listicle in second place is the kind of page I could be inside of.
 
 ## Steps
 
