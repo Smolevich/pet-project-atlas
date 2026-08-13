@@ -1,12 +1,16 @@
 ---
 title: О чём писать, когда ваше имя никто не ищет
 description: Собрать формулировки, которыми люди правда говорят, сгруппировать их в кластеры, дать каждому кластеру одну страницу и писать в порядке, который платит.
-updated: 2026-08-10
+updated: 2026-08-13
 sources:
   - https://support.google.com/webmasters/answer/7576553
   - https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
   - https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+  - Semrush Keyword Magic Tool, instance semrush.com/analytics/keywordmagic/, measured 2026-08-13
 ---
+
+import { Image } from 'astro:assets';
+import semrushClusters from '../../../../assets/screenshots/semrush-keyword-clusters.png';
 
 ## Что решаем
 
@@ -54,6 +58,14 @@ sources:
 ### Что писать первым
 
 Транзакционные, потом сравнения, потом информационные — порядок по деньгам, а не по объёму. Маленький запрос, который кончается регистрацией, лучше большого, который кончается уходом, а энергия у вас кончится намного раньше кластеров.
+
+Этот порядок держать в голове проще, когда перед вами лежит карта. Semrush разложил 76 416 запросов вокруг `ai voice agent` по темам, и колонка слева — как раз эта разбивка:
+
+<Image src={semrushClusters} alt="Semrush Keyword Magic Tool по фразе ai voice agent, база United States. В шапке: All keywords 76 416, Total Volume 2 227 840, Average KD 39%. В колонке Topics слева — All 76.4K, AI Voice Agents 2.2K, Outbound Voice AI 265, AI Voice Agent Pricing 669, Voice AI Providers 518, Inbound Call Routing 703, Insurance Voice AI 248, Outbound Call Center Solutions 733, Voice AI News 1K, AI IVR 320, Artificial Intelligence Definition 240, Healthcare Voice Assistants 586, Education Appointment Scheduling AI 145 и AI Cold Calling 304. Таблица запросов справа открывается строкой ai voice agent с частотой 1 900 и CPC $16.18." />
+
+Semrush Keyword Magic Tool по `ai voice agent`, база United States, снято 13 августа 2026-го. У фразы, под которую я написал бы первую страницу, 1 900 поисков против 2 227 840 по всему набору. А кластеры, в которых видны деньги, лежат ниже и меньше: pricing 669, healthcare voice assistants 586, insurance 248, education appointment scheduling 145.
+
+Каждый из них тянет на отдельную страницу, и, глядя на головную фразу, я не нашёл бы ни одного.
 
 ## Что не сработало
 
