@@ -1,0 +1,79 @@
+---
+title: Per action or per month
+description: 'The two models nearly everybody picks between: pay-as-you-go and subscription. How they differ in the work they drag behind them rather than in the price list, and why on my numbers a subscription would not have held together.'
+updated: 2026-08-13
+sources:
+  - Voice AI bot database, table payment_plans, measured 2026-08-13
+  - Voice AI bot database, table usage_events, measured 2026-08-13
+  - Voice AI bot database, table credit_transactions, measured 2026-08-13
+---
+
+## What we are solving
+
+In practice there are two models: people pay per action, or people pay per month. Everything else is a variation on those.
+
+The choice looks like a line in a price list, and it actually decides what you will be doing for the next year. A subscription drags one kind of work behind it and packs drag another, and both start before your first revenue.
+
+So the thing to choose on is not which earns more in theory. It is what job your product does, and which of the two you can service on your own.
+
+## Steps
+
+### First question — is the job one-off or recurring
+
+A subscription works where the person comes back by themselves, without being reminded. Not because you retained them, but because the job arrives at them again.
+
+If the job is one-off, a subscription is churn on a delay. Somebody pays once, does not open it for a month, and cancels — and they are entirely right to.
+
+Here is what that looks like for me. 155 people got at least one successful result, and **117 of them used it on exactly one day**. Another 17 stopped at two days. Six got past five days.
+
+There is no recurring job in those numbers. A subscription would not have held together on them at all: I would have been selling access to something nobody comes back to.
+
+### What a subscription demands beyond the product
+
+People do not buy a subscription for a feature. They buy it on trust extended several months forward, and that conversation runs on your name rather than on your button.
+
+Hence the first demand: markedly more brand-led marketing. A side project without a name has a harder time selling a recurring charge than a one-off one, at identical product quality.
+
+The second demand is refunds, and it is not a detail. People forget to cancel, notice the charge, come and ask for their money back, and say they did not use it.
+
+One query against your own database settles it: charged, and not a single action in that period. They are usually right, and the decent answer is to refund. That is a separate process you have to build and then run by hand.
+
+### Why I chose pay-as-you-go
+
+Three one-off packs: Starter — 800 credits for $5, Standard — 2,000 for $12, Pro — 7,500 for $40. Credits are spent per action and do not expire on a calendar.
+
+The reason is exactly the one above: there is no recurring job visible in my audience. Somebody arrives with a recording, gets text back and goes about their day, and that is a normal scenario rather than a failure.
+
+The second reason is workload. Packs require neither name recognition nor a cancellation process: the person pays for the thing they already intend to do right now.
+
+### What pay-as-you-go does not fix
+
+It does not save you from refunds. The only genuine payment in my database was refunded **21 minutes** after the purchase, and the model had nothing to do with it.
+
+It gives you no predictable revenue: a month without purchases is simply a month without money, and there is nothing there to plan on.
+
+And it moves the entire load onto the moment of purchase. Somebody has to decide to pay exactly when they want the result, not later, and any hesitation at that moment costs you the payment.
+
+### How to decide in one evening
+
+Work out, from your own database, the share of people who came back on a second day. Count actual use rather than visits.
+
+Then the decision is simple. Almost nobody returns — charge per action. A noticeable share returns — a subscription becomes honest, and that is when brand and a cancellation process start earning their keep.
+
+Either way the price does not come out of your head: [getting the first person to pay](/money/first-payer/).
+
+## What did not work
+
+- **Treating a subscription as the more grown-up model.** It is not more grown-up, it is more expensive to run. On a one-off job it is just churn postponed by a month.
+- **Choosing the model before looking at repeat use.** The number was already in the database: 117 of 155 used it for one day. I could have known that before I thought about a price list.
+- **Assuming packs spare you refunds.** My only genuine payment came back 21 minutes later. A refund is about the product, not about the billing model.
+- **Shipping three packs without testing one.** Starter, Standard and Pro appeared at the same moment. One was ever bought, so about the other two I know nothing at all.
+
+## Verify
+
+- Compute the share of users who returned on a second day. If that number does not exist, [the event row is not carrying it](/analytics/product-metrics/).
+- Write in one sentence what the person is paying for: an action performed, or the ability to perform it all month. If it will not come out, the model is not chosen yet.
+- If you picked a subscription: write down the refund procedure before launch. You will need it, and inventing it during the first email is worse.
+- Check that the price and the unit being spent are visible before payment rather than after. A credit that spends on something unclear stops a purchase as effectively as a high price.
+
+What one action actually costs you is counted separately: [what one user costs](/money/unit-economics/).
