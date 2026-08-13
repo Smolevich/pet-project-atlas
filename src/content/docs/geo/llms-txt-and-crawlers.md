@@ -1,8 +1,9 @@
 ---
 title: AI crawlers and llms.txt
 description: Which AI agents visit a site, who owns them, where access is really decided, and what belongs in llms.txt.
-updated: 2026-08-12
+updated: 2026-08-13
 sources:
+  - Cloudflare GraphQL Analytics, site atlas.smolevich.com, measured 2026-08-13
   - nginx access log, dataset /var/log/nginx/access.log, measured 2026-08-12
   - nginx access log, dataset /var/log/nginx/access.log.*.gz, measured 2026-08-12
   - https://www.rfc-editor.org/rfc/rfc9309.html
@@ -128,7 +129,18 @@ The file costs ten minutes and no vendor commits to reading it. Here is what min
 
 For comparison, `robots.txt` was fetched 56 times in the same window, and those were real crawlers.
 
-Two caveats, without which that zero cannot be read. The window has a hole: logrotate keeps 14 daily archives, so 20 to 28 July did not survive. And a request the edge refuses never reaches nginx, so it never appears in this table at all. From the server side you cannot see that: it takes the edge's own analytics, and my Cloudflare token has no permission to read them, so I did not look. Indirectly it seems to refuse nothing — `robots.txt` was fetched 56 times from the same log, so crawlers are getting through. That is an inference rather than a check, and the zero should be read with that attached. The full read is in [who actually crawls you](/geo/who-actually-crawls-you/).
+Two caveats, without which that zero cannot be read. The window has a hole: logrotate keeps 14 daily archives, so 20 to 28 July did not survive. And a request the edge refuses never reaches nginx, so it never appears in this table at all. You cannot see that from the server side, so I went and read both sides for one day:
+
+| | Cloudflare | nginx |
+|---|---|---|
+| Requests | 668 | 672 |
+| 200 | 651 | 648 |
+| 404 | 13 | 13 |
+| **403** | **0** | **0** |
+
+The counts agree and there is not one 403 on either side, so my edge refuses nobody. The four-request gap is my nginx window running an hour wider; Cloudflare's free plan hands out this dataset a day at a time and would not let me match it exactly.
+
+That is the check to run. If the edge were refusing anyone, Cloudflare's counter would sit well above the server's, and the gap would be your answer. The full read is in [who actually crawls you](/geo/who-actually-crawls-you/).
 
 So on a small marketing site this is a cheap bet with a measured payoff of 0, and on forty pages of docs it is a reasonable one. Anywhere else I would rather spend the ten minutes on `robots.txt` and the sitemap, which every agent does read.
 
