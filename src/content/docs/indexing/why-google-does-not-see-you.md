@@ -1,5 +1,7 @@
 ---
 title: Google does not see your site
+sidebar:
+  order: 1
 description: The site is live and search returns nothing for it. The checks that find the real blocker, in the order they have to run.
 updated: 2026-08-12
 sources:

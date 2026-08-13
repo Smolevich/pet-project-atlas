@@ -1,5 +1,7 @@
 ---
 title: Who actually crawls you
+sidebar:
+  order: 3
 description: Sixteen days of nginx access logs from one small box — which agents came, how much of that traffic turned out to be mine, and why nobody fetched llms.txt.
 updated: 2026-08-12
 sources:

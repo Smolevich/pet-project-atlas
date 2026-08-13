@@ -1,5 +1,7 @@
 ---
 title: 2. Indexing
+sidebar:
+  order: 0
 description: The site is live and search returns nothing for it. Finding the blocker, then handing the site over and checking that it was taken.
 ---
 

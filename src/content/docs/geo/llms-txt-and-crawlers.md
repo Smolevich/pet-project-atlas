@@ -1,5 +1,7 @@
 ---
 title: AI crawlers and llms.txt
+sidebar:
+  order: 1
 description: Which AI agents visit a site, who owns them, where access is really decided, and what belongs in llms.txt.
 updated: 2026-08-13
 sources:

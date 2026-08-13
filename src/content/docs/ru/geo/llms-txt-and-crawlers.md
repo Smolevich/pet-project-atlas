@@ -1,5 +1,7 @@
 ---
 title: AI-crawler и llms.txt
+sidebar:
+  order: 1
 description: Какие AI-агенты приходят на сайт, кому они принадлежат, где на самом деле решается доступ и что писать в llms.txt.
 updated: 2026-08-13
 sources:

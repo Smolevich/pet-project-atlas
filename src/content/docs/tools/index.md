@@ -1,5 +1,7 @@
 ---
 title: Tools
+sidebar:
+  order: 0
 description: Start from the symptom you actually have. Each branch names the check to run and the page that explains it.
 ---
 

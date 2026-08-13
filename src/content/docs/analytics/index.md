@@ -1,5 +1,7 @@
 ---
 title: 6. Analytics
+sidebar:
+  order: 0
 description: Signups arrive and you cannot say which channel sent them. The short list of numbers worth reading weekly, and how to record where a user came from.
 ---
 

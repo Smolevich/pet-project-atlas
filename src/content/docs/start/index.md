@@ -9,6 +9,8 @@ sources:
 
 Below is the order I did this in, and under each step what it costs to do it at the wrong moment. If you would rather tick boxes than read reasons, there is [the checklist](/start/checklist/) — the same route on one screen.
 
+One thing sits ahead of step one. If you cannot yet say what you are building and how it differs from what is already on sale, start there instead: [where a niche starts when everything is taken](/demand/pick-a-niche/). Everything below assumes you have that answer.
+
 One thing up front: this is my log, not a method. Your numbers will come out different; the order is the part I hope saves you a month.
 
 ## What we are solving

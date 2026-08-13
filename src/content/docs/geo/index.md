@@ -1,5 +1,7 @@
 ---
 title: 3. AI search
+sidebar:
+  order: 0
 description: People ask an assistant for a tool like yours and get a competitor. Crawler access first, then pages worth quoting.
 ---
 

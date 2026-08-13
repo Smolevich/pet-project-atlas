@@ -1,5 +1,7 @@
 ---
 title: Submit the site and verify it was taken
+sidebar:
+  order: 2
 description: Search Console, Bing Webmaster Tools, IndexNow and Yandex Webmaster in the order that works, and how to read the reports a week later.
 updated: 2026-08-10
 sources:

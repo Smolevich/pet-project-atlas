@@ -1,5 +1,7 @@
 ---
 title: Отдать сайт поисковикам и проверить, что взяли
+sidebar:
+  order: 2
 description: Search Console, Bing Webmaster Tools, IndexNow и Yandex Webmaster в рабочем порядке, и как читать отчёты через неделю.
 updated: 2026-08-10
 sources:

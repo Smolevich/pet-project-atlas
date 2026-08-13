@@ -1,5 +1,7 @@
 ---
 title: Where a niche starts when everything is taken
+sidebar:
+  order: 1
 description: What counts as a pet project, whether it is allowed to take money, and why you look for somebody else's rough edge rather than an empty market. Plus what skipping this step cost me, in numbers.
 updated: 2026-08-13
 sources:

@@ -1,5 +1,7 @@
 ---
 title: What an event row has to carry, and where people get stuck
+sidebar:
+  order: 3
 description: The weekly numbers come from somewhere. What one event row must hold to answer questions later, why cost and source belong on it at insert time, and how to find the step where people stop.
 updated: 2026-08-13
 sources:

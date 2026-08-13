@@ -1,5 +1,7 @@
 ---
 title: Where the user actually came from
+sidebar:
+  order: 1
 description: A browser sends a referrer, a bot or an app sends nothing. Tagging links, storing the source on first contact, and why the honest answer is often zero rather than approximate.
 updated: 2026-08-12
 sources:

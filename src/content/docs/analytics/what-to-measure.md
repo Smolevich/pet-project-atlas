@@ -1,5 +1,7 @@
 ---
 title: The numbers worth reading weekly
+sidebar:
+  order: 2
 description: A dashboard with forty numbers hides growth in noise. The short list — impressions, clicks, index share, signups, activation, repeat use — and what each one answers.
 updated: 2026-08-12
 sources:

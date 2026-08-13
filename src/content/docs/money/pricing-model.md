@@ -1,5 +1,7 @@
 ---
 title: Per action or per month
+sidebar:
+  order: 2
 description: 'The two models nearly everybody picks between: pay-as-you-go and subscription. How they differ in the work they drag behind them rather than in the price list, and why on my numbers a subscription would not have held together.'
 updated: 2026-08-13
 sources:

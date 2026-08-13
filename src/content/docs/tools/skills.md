@@ -1,5 +1,7 @@
 ---
 title: What to run and when
+sidebar:
+  order: 1
 description: The audit skills, the browser driver and the CLI this atlas points at — what each one does, when it earns the time, where it came from and under what licence.
 updated: 2026-08-10
 sources:

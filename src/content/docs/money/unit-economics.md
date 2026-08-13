@@ -1,5 +1,7 @@
 ---
 title: What one user costs when the product calls an AI
+sidebar:
+  order: 1
 description: Variable cost per action, fixed cost per month, and break-even expressed in payers rather than percentages. How to measure the cost of an action instead of estimating it.
 updated: 2026-08-10
 sources:

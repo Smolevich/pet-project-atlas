@@ -1,5 +1,7 @@
 ---
 title: 1. Demand
+sidebar:
+  order: 0
 description: Before anything else — does anyone type these words, and does that audience pay for anything. Where the real phrasings come from, and what the paid panels are actually measuring.
 ---
 
