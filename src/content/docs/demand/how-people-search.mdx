@@ -5,6 +5,8 @@ updated: 2026-08-13
 sources:
   - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-12
   - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-13
+  - Google Search suggest, instance google.com, measured 2026-08-13
+  - Yandex Search suggest, instance yandex.ru, measured 2026-08-13
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=ru, measured 2026-08-12
   - https://wordstat.yandex.ru/
   - https://yandex.ru/support/direct/keywords/symbols-and-operators.html
@@ -24,6 +26,8 @@ sources:
 
 import { Image } from 'astro:assets';
 import wordstatTail from '../../../assets/screenshots/wordstat-rasshifrovka.png';
+import googleSuggest from '../../../assets/screenshots/google-suggest-telegram-voice.png';
+import yandexSuggest from '../../../assets/screenshots/yandex-suggest-rasshifrovka.png';
 
 ## What we are solving
 
@@ -93,6 +97,16 @@ Now the harvest itself, which no panel does for you.
    A bare phrase collects every query that contains it. That is a category total, not demand for your wording.
 4. **Read Yandex suggest as a separate source** — start typing and stop.
    The dropdown is what people actually picked, not a forecast. It disagrees with Wordstat often enough that I read both.
+
+   The two engines also disagree with each other, and one intent is enough to show it. Google and Yandex on the same job, read on 13 August 2026:
+
+   <Image src={googleSuggest} alt="Google suggest on the typed phrase telegram voice to. The dropdown lists telegram voice to text, telegram voice to mp3, telegram voice to text bot, telegram voice to mp3 bot, telegram voice to text free, telegram voice to text premium, telegram voice to mp3 converter, telegram voice to text n8n, telegram to voice and telegram audio to mp3." />
+
+   <Image src={yandexSuggest} alt="Yandex suggest on the typed Russian phrase бот расшифровка голосовых, meaning voice transcription bot. The dropdown lists бот расшифровка голосовых телеграмм, бот расшифровка голосовых, бот расшифровка голосовых макс, бот расшифровка голосовых тг, бот переводчик голосовых в телеграмме, телеграм бот расшифровка голосовых and бот расшифровка голосовых телеграмм бесплатно." />
+
+   Google completes to `free`, `premium` and `n8n` — someone comparing plans and wiring up automation. Yandex completes to `телеграмм`, `тг`, `бесплатно` and `макс`.
+
+   That last one is worth a stop. MAX is a separate messenger, and part of the audience is asking for transcription inside it. If you do not support it, you are looking at demand you cannot reach, and nothing but the dropdown would have told you.
 5. **Do the same in Google for English demand** — Keyword Planner for the ranges, then the suggest.
    Planner lives inside Google Ads. It needs an Ads account with billing attached or it shows you nothing at all. That is twenty minutes of fiddling with a card, and it is better to know beforehand. The suggest needs no account whatsoever. Without Planner you are left with shapes of demand rather than counts, and a direction can be picked off those.
    Planner reports ranges rather than counts, and without an active campaign I have always watched those ranges widen. Read it as an order of magnitude.

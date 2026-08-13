@@ -5,6 +5,8 @@ updated: 2026-08-13
 sources:
   - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-12
   - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-13
+  - Google Search suggest, instance google.com, measured 2026-08-13
+  - Yandex Search suggest, instance yandex.ru, measured 2026-08-13
   - Semrush Keyword Overview, instance semrush.com/analytics/keywordoverview/?db=ru, measured 2026-08-12
   - https://wordstat.yandex.ru/
   - https://yandex.ru/support/direct/keywords/symbols-and-operators.html
@@ -24,6 +26,8 @@ sources:
 
 import { Image } from 'astro:assets';
 import wordstatTail from '../../../../assets/screenshots/wordstat-rasshifrovka.png';
+import googleSuggest from '../../../../assets/screenshots/google-suggest-telegram-voice.png';
+import yandexSuggest from '../../../../assets/screenshots/yandex-suggest-rasshifrovka.png';
 
 ## Что решаем
 
@@ -93,6 +97,16 @@ Serpstat Yandex тоже не читает. В его собственном с�
    Голая фраза собирает все запросы, которые её содержат. Это итог по категории, а не спрос на вашу формулировку.
 4. **Читать подсказки Yandex как отдельный источник** — начать набирать и остановиться.
    Выпадающий список — это то, что люди действительно выбирали, а не прогноз. С Wordstat он расходится достаточно часто, чтобы смотреть оба.
+
+   А ещё подсказки двух движков расходятся между собой, и это видно на одном интенте. Вот Google и Яндекс на одну и ту же задачу, снятые 13 августа 2026-го:
+
+   <Image src={googleSuggest} alt="Подсказки Google на введённое telegram voice to: telegram voice to text, telegram voice to mp3, telegram voice to text bot, telegram voice to mp3 bot, telegram voice to text free, telegram voice to text premium, telegram voice to mp3 converter, telegram voice to text n8n, telegram to voice, telegram audio to mp3." />
+
+   <Image src={yandexSuggest} alt="Подсказки Яндекса на введённое бот расшифровка голосовых: бот расшифровка голосовых телеграмм, бот расшифровка голосовых, бот расшифровка голосовых макс, бот расшифровка голосовых тг, бот переводчик голосовых в телеграмме, телеграм бот расшифровка голосовых, бот расшифровка голосовых телеграмм бесплатно." />
+
+   Google достраивает `free`, `premium` и `n8n` — человека, который сравнивает тарифы и строит автоматизацию. Яндекс достраивает `телеграмм`, `тг`, `бесплатно` и `макс`.
+
+   На `макс` стоит остановиться. Это отдельный мессенджер, и часть аудитории спрашивает расшифровку именно в нём. Если вы его не поддерживаете, вы видите спрос, до которого не дотягиваетесь, и узнать об этом можно только отсюда.
 5. **То же самое сделать в Google под английский спрос** — Keyword Planner ради диапазонов, потом подсказки.
    Planner живёт внутри Google Ads. Ему нужен аккаунт Ads с привязанной оплатой, иначе он не покажет ничего. Это двадцать минут возни с картой, и знать об этом лучше заранее. Подсказкам аккаунт не нужен вовсе. Без Planner останутся не счётчики, а формы спроса — направление по ним выбрать можно.
    Planner отдаёт диапазоны, а не счётчики, и без активной кампании я всегда видел, как они расширяются. Читать как порядок величины.
