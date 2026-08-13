@@ -3,9 +3,9 @@ title: 2. Indexing
 description: The site is live and search returns nothing for it. Finding the blocker, then handing the site over and checking that it was taken.
 ---
 
-The site is live, the pages open in a browser, and search returns nothing for them. That is the first wall, and it is almost always one blocker rather than a mystery.
+The site is live, the pages open in a browser, and search returns nothing for them. That is the first wall, and behind it there is almost always one specific blocker rather than a mystery. Mine is usually a rule at the edge, which appears neither in `robots.txt` nor in the server log.
 
-Two pages here. [Google does not see your site](/indexing/why-google-does-not-see-you/) is the ordered diagnosis — rendering, `robots.txt`, `noindex`, canonical, sitemap, reachability.
+Two pages here. [Google does not see your site](/indexing/why-google-does-not-see-you/) is the diagnosis in order, with the commands: rendering, `robots.txt`, `noindex`, canonical, sitemap, reachability from outside.
 
 [Submit the site and verify it was taken](/indexing/submit-and-verify/) is the handover to Search Console, Bing, IndexNow and Yandex. It also covers how to read the reports a week later.
 

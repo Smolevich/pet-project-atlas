@@ -12,51 +12,79 @@ sources:
 
 ## What we are solving
 
-A phrase can carry real demand and no money at all. People type it, find the free way, and leave perfectly satisfied.
+I picked the niche by intent in the first place: I took the keywords where it reads transactional or commercial, because on the rest people read and leave instead of buying.
 
-Volume answers whether they search. Whether they buy is a different question, and the evidence for it sits somewhere else entirely.
+And then the part the guides tend to stay quiet about starts. You have to write content often, then check that the new pages got into the index at all, and that the weight of the actual keyword on them is significant. Otherwise there are no impressions even in theory. And impressions are only half of it: to turn one into a click you have to climb the results, because hardly anyone scrolls as far as page four 😀
 
-The good part is that all of that evidence is readable before you build anything. That is the whole reason to ask now, while the answer still costs an afternoon.
+So volume answers one question, whether they search. Whether they pay is a different one, and you want to look at it before you have written anything, not after.
 
 ## Steps
 
-1. **Find the paid competitor on your main query** — run it and read who is on the results page.
-   That page is what the tools call the SERP. A product with a pricing page sitting on it was the strongest signal I got for free. Somebody already tested this market with their own money.
-2. **Record the shape of their price, not the number** — per seat, per action, per month.
-   A free tier with a wall in it is a shape too. The shape says what they found people will pay for, so copy the question they answered rather than the figure.
-3. **Look at whether anyone is bidding on the query** — count the ads above the results.
-   An ad means somebody pays for that click and keeps repeating the purchase. Nobody bids twice on an audience that does not spend.
-4. **Read the bid estimate next to the volume** — Keyword Planner reports bid ranges alongside its forecast.
-   A high bid on a small query is a market where one customer is worth a lot. I would rather start there than on a large cheap one.
-5. **Treat volume with no bidding as a warning** — a large query and an empty ad block.
-   I read that as an audience looking for the free way. On my query that is exactly what it was. Real people, real problem, no line item for it anywhere.
-6. **Find out what the free path actually is** — the platform's own feature, an open-source script, doing it by hand.
-   Your price competes with that, not with the paid competitor's price. Check it again each quarter, because platforms ship features.
-7. **Ask for money before the thing exists** — a price, a payment link, a date.
-   A pre-sale proves exactly one thing: this person, at this price, today. It does not prove a market and it does not prove a second person.
-8. **Record the refusals in the person's own words** — the reason somebody did not pay is the finding.
-   "I would use the free one" and "my employer would never approve this" describe two different products. Only one of them is worth building.
-9. **Say the break-even out loud before the price** — fixed cost divided by contribution, rounded up to people.
-   If that number is larger than the number of people you have spoken to, you are not pricing. You are hoping. The arithmetic is on [what one user costs](/money/unit-economics/).
+### Who is already selling on your query
+
+I would start here, because it is the only check that costs nothing and takes a minute. Run your main query and read who is standing on the results page. A product with a pricing page in the top ten means somebody already tested this market with their own money, and you do not have to repeat their research.
+
+```
+site:example.com pricing
+```
+
+Their price is read the same way. Write down the shape rather than the number: per seat, per action, per month, a free tier with a wall inside it. You will put your own figure there anyway, and the shape tells you what people here pay for at all.
+
+Ask this before you have written anything. Afterwards it stops being a check and turns into a search for justifications.
+
+### Is anyone putting money on this query
+
+The ads above the results are people paying for a click and repeating the purchase. Nobody buys the same audience a second month running if that audience does not spend.
+
+Count them by hand: run the query and look at how many ads sit above the organic results. A panel like Semrush shows an `Ads` field, but that is its own count of ad copies in its database, not what a person sees today.
+
+Here are two live groups, read on the same day:
+
+| Group | Volume (US) | CPC | Ads |
+|---|---|---|---|
+| `ai voice agent` | 1,900 | $16.18 | 14 |
+| `youtube transcript` | 60,500 | $0.86 | none |
+
+The second one has thirty-two times the demand and no money behind it at all. Sixty thousand searches a month and not one advertiser is not a market, it is people who need a free tool.
+
+### What free path does the person have right now
+
+Your price competes with the free way, not with the competitor's price. Usually that is a feature of the platform itself, an open-source script, or doing it by hand in ten minutes.
+
+Check it on your own query, reading the suggest: if the word "free" crawls into it, you have your answer already. In my Russian group `голосовой бот` the word for free stood in the top five twice.
+
+Come back to this once a quarter, because platforms ship features and the free path appears on its own.
+
+### Ask for money before the thing exists
+
+This is the most unpleasant and the most honest check. You name a price, you give a payment link, you set a date. A pre-sale proves exactly this: this person, at this price, today. It proves neither a market nor a second person — and it is still more than most people have.
+
+Record the refusals in the person's own words, not as a paraphrase. "I would use the free one" and "my employer would never approve this" describe two completely different products, and only one of them is worth building.
+
+### Say the break-even out loud before the price
+
+Take the fixed costs, divide by the contribution from one payer, round up to whole people. You get a number like "twelve people a month".
+
+If that number is bigger than the number of people you have actually spoken to, you are not pricing, you are hoping. The arithmetic is on [what one user costs](/money/unit-economics/).
 
 ## What did not work
 
-- **Treating search volume as demand for a paid product**. The phrases were real and so were the people typing them. Almost everyone who arrived wanted the free way. The pages ranking above me explained how to get the result without paying.
-- **Reading one impression as a statement about demand**. `stt модели` sat at average position 1.0 with 1 impression and 0 clicks in three months. I read that as a phrase nobody types. Search Console counts how often my result was shown, which is a fact about my page. The phrase itself had to be checked in Wordstat, and the row is on [what a paid rank tracker measures](/tools/paid-tools/).
-- **Reading signups as willingness to pay**. Free signups arrived, used the product and came back. Not one of them converted, and the signup count kept climbing the whole time.
+- **Treating volume as demand for a paid product**. The phrases were real and so were the people typing them. Almost everyone who arrived wanted the free way. The pages ranking above me explained how to get the result without paying.
+- **Reading one impression as a statement about demand**. `stt модели` sat at average position 1.0 with 1 impression and 0 clicks in three months. I read that as a phrase nobody types. Search Console counts how often my page was shown, which is a fact about me. The phrase itself I had to go and check in Wordstat, and the row is on [what a paid rank tracker measures](/tools/paid-tools/).
+- **Reading signups as willingness to pay**. Free signups arrived, used the product and came back. Not one converted, and the signup counter kept climbing the whole time.
 - **Missing the free alternative the platform itself shipped**. The platform I build on gives the same function to its own paying subscribers. For a large part of that audience my price competes with a feature they already have.
 - **Counting my own test purchase as revenue**. The model showed break-even reached for a day. The payer was me, through a test account.
-- **Cutting a fixed cost of a few dollars while there were no payers**. The denominator was already fine. No break-even exists without a first payer, so the work belonged here, not in the billing console.
-- **Building a scenario matrix instead of asking one person**. Optimistic and pessimistic columns are opinions about a margin nobody has earned. One person refusing a real price settles it faster.
+- **Cutting a fixed cost of a couple of dollars while there were no payers**. The denominator was fine as it was. Without a first payer there is no break-even, so the work was here and not in the billing console.
+- **Building a scenario matrix instead of talking to one person**. The optimistic and pessimistic columns are opinions about a margin nobody has earned. One person refusing a real price settles it faster.
 
 ## Verify
 
-- Name the paid competitor for your main query, with a link to their pricing page. If there is none, ask why the market is empty before assuming it is yours.
-- Run the query and note whether ads appear, then repeat it a week later. One day of ads proves nothing about a budget.
-- Write the free path to the same outcome in one sentence, including anything the platform ships itself.
-- Ask one real person for money at a real price and store the answer verbatim, refusal included.
+- Name the paid competitor on your main query and link to their pricing page. If there is none, ask why the market is empty before treating it as yours.
+- Run the query and note whether ads appear, then repeat it a week later. One day of ads says nothing about a budget.
+- Write down the free path to the same outcome in one sentence, including whatever the platform ships itself.
+- Ask a real person for money at a real price and keep the answer verbatim, refusal included.
 - State your break-even as a whole number of payers. If you cannot say it out loud, the price is a guess with a confident face on it.
 
 Ads, CPC and intent read side by side across three niches: [which market to build for](/demand/pick-a-market/).
 
-If both questions come back positive, the next wall is technical rather than commercial. Search has to be able to read the site at all, and that is [indexing](/indexing/).
+If both questions came back yes, the next wall is technical rather than commercial. Search has to be able to read the site at all, and that is [indexing](/indexing/).
