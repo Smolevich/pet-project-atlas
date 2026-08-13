@@ -18,6 +18,9 @@ sources:
   - Pay-per-usage pricing in the X API — https://docs.x.com/x-api/introduction
 ---
 
+import { Image } from 'astro:assets';
+import otterPricing from '../../../assets/screenshots/otter-pricing-90min.png';
+
 ## What we are solving
 
 You have decided to push a side project. You open a niche and somebody is already sitting in it, usually more than one somebody.
@@ -73,7 +76,17 @@ curl -s 'https://itunes.apple.com/us/rss/customerreviews/page=1/id=1276437113/so
 
 Fifty reviews a page, around nine pages, then nothing. Every entry carries a date, a rating and the app version — the version tells you which release things started falling apart on. The country sits in the URL, and the same product complains differently in `gb`, `fr` and `de`.
 
-Here is what that feed had. Otter on the Pro plan at $16.99 a month cuts a single recording off at 90 minutes. This is not a malfunction: it is written in their own price list, and four hours per recording only comes with the $30 plan.
+Here is what that feed had. Otter on the Pro plan cuts a single recording off at 90 minutes. This is not a malfunction — it is written in their own price list, and four hours per recording only arrives one tier up.
+
+<figure>
+  <Image
+    src={otterPricing}
+    alt="Otter.ai pricing page, four plans side by side. Basic is Free for those who want to give it a try, and lists 300 monthly transcription minutes. Pro is $8.33 per user per month with a save 51 percent badge, lists 1200 in-app recording minutes, and under Everything in Basic, plus the first line reads Up to 90 mins per meeting. Business is $19.99 per user per month, marked Best Value, lists unlimited meetings and in-app recordings, and under Everything in Pro, plus the first line reads Up to 4 hours per meeting. Enterprise offers a demo."
+  />
+  <figcaption>
+    Otter pricing, read on 13 August 2026. Prices shown are the annual rate. The 90 minutes is a line in the price list, not a bug — and the two reviews below are people leaving over that line.
+  </figcaption>
+</figure>
 
 On 2 August 2026 somebody on the $99.99-a-year subscription leaves one star.
 
