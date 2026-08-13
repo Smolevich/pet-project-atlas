@@ -148,21 +148,17 @@ So `llms.txt` is not a route agents travel. On this box in this window it was no
    ```
 
    Here `grep` without `-o` matches whole lines, so this one counts requests already.
-7. **Compare `llms.txt` against `robots.txt` after that** — 0 fetches against 56.
-   Every AI agent in the table took `robots.txt`. Not one of them took `llms.txt`.
-   That is a narrower claim than "the file is useless". It is the claim this log supports, on one box, over 16 days.
-8. **Do not read `/` as a preference** — 280 requests, more than every other path combined.
-   A bare domain pasted into a chat and an agent choosing to start at the root produce the same line.
-   The log records the path and never the reason. Making good pages reachable from the root is still sound advice. This table is not the evidence for it.
-9. **Read a busy page as a fetch, not a citation** — the comparison post, 64 requests, plus 6 in Russian.
-   That is more than the rest of the blog together, and it is the whole of what nginx knows. A 200 means bytes went out.
-   Nothing in the file says a word of it reached an answer. Citation shows up in referrals from assistant hosts and in the answers themselves, neither of which is a log line.
-10. **Read `robots.txt` and `sitemap.xml` as protocol** — 56 and 14 requests, the entry points.
-    Nobody writes a post about a correct sitemap, and agents ask for it before they ask for any prose.
-    A crawler takes `robots.txt` at the start of every session, so a high count there is the protocol working, not interest in you.
-11. **Verify identity by network before trusting any of this** — I did not, and this window shows the cost twice.
-    Once when I read my own spoofed strings as thirteen vendors. Once when I read `Google-Extended` off a line that cannot exist.
-    Doing it properly means reverse DNS on each client address, or matching it against the ranges the vendor publishes.
+### What these rows do not prove
+
+The comparison I came for is 0 fetches of `llms.txt` against 56 of `robots.txt`. Every AI agent in the table took `robots.txt`, and not one of them took `llms.txt`. That is narrower than saying the file is useless — it is what this log supports, on one box, over 16 days.
+
+`/` took 280 requests, more than every other path combined, and I cannot read that as a preference for the home page. A bare domain pasted into a chat and an agent deciding to start at the root produce exactly the same line, because the log records the path and never the reason. Making good pages reachable from the root is still sound advice, but this table is not the evidence for it.
+
+The comparison post took 64 requests, plus 6 in Russian, which is more than the rest of the blog together and also the whole of what nginx knows about it. A 200 means bytes went out, and nothing in the file says a word of them reached an answer. Citation shows up in referrals from assistant hosts and in the answers themselves, neither of which is a log line.
+
+`robots.txt` and `sitemap.xml` took 56 and 14 requests, and I read those two rows as protocol rather than as interest in me. A crawler takes `robots.txt` at the start of every session, so a high count there means the handshake is working. Nobody writes a post about a correct sitemap, and agents still ask for it before they ask for any prose.
+
+All of this rests on identities I never verified, and the window shows the cost of that twice. Once when I read my own spoofed strings as thirteen vendors, once when I read `Google-Extended` off a line that cannot exist. Doing it properly means reverse DNS on each client address, or matching it against the ranges the vendor publishes.
 
 ## What did not work
 
@@ -179,10 +175,10 @@ So `llms.txt` is not a route agents travel. On this box in this window it was no
 ## Verify
 
 - Print your own public address and grep the log for it before you read a single total. Mine was the largest client on the box.
-- Re-run the count next month and compare the shape, not the totals. One window is a snapshot.
+- Re-run the count next month and compare the shape rather than the totals, because one window will not tell you what is normal on your own box.
 - Check `logrotate` retention before you believe your window. Mine reached further back than the file I first opened.
 - Request `/llms.txt` yourself, then find that line in the log. If it is missing, you are reading the wrong file.
-- Count status codes per agent. A wall of 403 is a block, not an absence of interest.
+- Count status codes per agent. A wall of 403 means somebody is refusing them, and in the totals that reads exactly like nobody having come.
 - Count lines, not occurrences. Pipe the same data through `wc -l` and through `grep -o`, and compare the two totals.
 - Resolve the addresses of your top agents by reverse DNS, and match them against the vendor's published ranges.
 - Take a window in which you do not touch the site at all. It is the only way to read a user-triggered agent honestly, and I have not taken one yet.

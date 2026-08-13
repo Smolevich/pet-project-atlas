@@ -11,54 +11,68 @@ sources:
 
 ## What we are solving
 
-You ask an assistant the question your product answers. It names a few sources, and none of them is you.
+You ask an assistant the question your product answers, it names a few sources, and none of them is you.
 
-A search page has ten slots and a scroll. An answer has room for three or four sources, so the outcome is binary.
+On a search page there are ten slots and a scroll, so a weak position still leaves you somewhere. An answer has room for three or four sources, and everything below that line is simply absent.
 
-The paper that named this problem is *GEO: Generative Engine Optimization* (Aggarwal et al., 2023). It rewrote existing pages rather than adding new ones. The reported gain is up to 40% more visibility for a source inside the generated answer, measured over GEO-bench.
-
-The same facts, arranged so a model can lift them, is the whole move.
+The paper that named this problem is *GEO: Generative Engine Optimization* (Aggarwal et al., 2023). What matters about it here is that it rewrote existing pages rather than adding new ones. The reported gain is up to 40% more visibility for a source inside the generated answer, measured over GEO-bench. So the work is arranging the facts you already have so that a model can lift them.
 
 ## Steps
 
-1. **Answer in the first paragraph** — the heading asks the question, the next two sentences answer it.
-   The model reads your intro and decides whether there is anything to quote. Background before the answer reads as no answer.
-2. **Make every paragraph survive extraction** — name the subject, avoid opening pronouns, keep it to a few sentences.
-   Test it by pasting one paragraph into an empty note. If you cannot tell what it is about, a model cannot either.
-3. **Put a hard fact in each passage** — a number, a date, a proper name, a version.
-   "Many teams" cannot be quoted. A measured value with the date you measured it can.
-4. **Replace vague quantifiers with figures** — "most", "often" and "significantly" carry no information.
-   Where the figure does not exist yet, go and measure it, or drop the sentence.
-5. **State one checkable thing nobody else has** — your own benchmark, your own price table, your own failure log.
-   This is the whole difference between a source and a summary. A page that only restates the field gets outranked by whichever restatement is older.
-6. **Structure so the document segments cleanly** — heading levels without gaps, a numbered list for a process.
-   Use a table when three or more options are compared. Questions make good headings, because they match the phrasing of the query.
-7. **Add JSON-LD in the head** — `Organization` or `Person` as the entity, `Article` with an author and a publication date.
-   Add `sameAs` too, listing your profiles and listings. Its documented job is entity resolution for Google's Knowledge Graph. Google's own `Organization` reference is where that is written down.
-   What it does for AI citation is unmeasured. I have found no vendor statement and no study showing an LLM pipeline reads the field. I have not measured it here either. It is ten minutes and a defensible bet, not a mechanism.
-8. **Remember the model learned about you elsewhere** — directories, discussion threads, other people's comparisons.
-   On-page work pays off after the model knows you exist as a thing. Recognition first, citation second.
+### What the model reads before it decides to quote you
+
+The heading asks the question and the next two sentences answer it. That is the whole rule, and I break it every time I start a page with context.
+
+A model reads your intro and decides whether there is anything here worth carrying into an answer. Background before the answer reads to it the same way it reads to a person who arrived from search: as no answer yet.
+
+### Whether a paragraph survives being cut out of the page
+
+An answer quotes a passage, not a document, so every paragraph has to name its own subject and stand up without the one above it. Keep it to a few sentences and do not open with a pronoun.
+
+The test takes ten seconds. Paste one paragraph into an empty note and read it. If you cannot tell what it is about, a model cannot either.
+
+Inside the paragraph there has to be something hard: a number, a date, a proper name, a version. "Many teams" cannot be quoted by anybody. A measured value with the date you measured it can, and that is also the sentence a person screenshots. Where the figure does not exist yet, go and measure it, or drop the sentence — "most", "often" and "significantly" carry nothing across into an answer.
+
+### The one checkable thing that is only yours
+
+Your own benchmark, your own price table, your own failure log. Something a reader can go and verify, that nobody else on the results page has.
+
+This is where a source and a summary part company. A page that only restates the field competes with every other restatement, and the older one usually wins that.
+
+### Cutting the document so it segments cleanly
+
+Heading levels without gaps, a numbered list where there is a process, a table once three or more options are being compared. Questions make good headings, because they are phrased the way the query is phrased.
+
+### Is JSON-LD worth the ten minutes
+
+Put it in one block in the head: `Organization` or `Person` as the entity, `Article` with an author and a publication date. Add `sameAs` with your profiles and listings.
+
+The documented job of `sameAs` is entity resolution for Google's Knowledge Graph, and Google's own `Organization` reference is where that is written down. What it does for AI citation is unmeasured. I have found no vendor statement and no study showing an LLM pipeline reads the field, and I have not measured it here either. So it is ten minutes and a defensible bet, and I would not sell it as a mechanism.
+
+### The model already learned about you somewhere else
+
+Directories, discussion threads, other people's comparisons. On-page work starts paying only after the model knows you exist as a thing, so recognition comes first and citation second.
 
 ## What did not work
 
-- **Adding volume instead of a verifiable claim**. A longer page with more adjectives changed nothing. The answer kept citing the page that had the number, and that page was shorter than mine.
-- **Assuming published pages would carry the product**. On my own projects the pages went up and the signups kept arriving from somewhere else. That share belongs in a case page, with a date next to it.
-- **Keeping the conclusion for the end**. The essay shape buries the answer under the setup. The only extractable passage is then an intro that says nothing yet.
-- **Writing FAQ blocks to fill the schema**. Questions nobody asks, answered by repeating the paragraph above them. Markup does not make an empty answer quotable.
-- **Sprinkling microdata through the markup**. A template change broke it silently, and nothing warned me. JSON-LD in one block in the head survives redesigns.
-- **Selling `sameAs` as the thing that merges mentions into one entity a model recognises**. That sentence stood on this page and in the route, and it has no evidence under it. The field's documented history is Google's Knowledge Graph. Whether a language model ever reads it, I do not know, and neither did the sentence.
-- **Opening paragraphs with "It" and "However"**. Both words point at a sentence that will not travel with the quote.
+- **Adding volume instead of a verifiable claim**. I made the page longer and the adjectives better, and nothing moved. The answer kept citing the page that had the number in it, and that page was shorter than mine.
+- **Assuming published pages would carry the product**. On my own projects the pages went up and the signups kept arriving from somewhere else. That share belongs in a case page with a date next to it, not in a claim here.
+- **Keeping the conclusion for the end**. The essay shape buries the answer under the setup, and then the only passage anything can extract is an intro that has not said anything yet.
+- **Writing FAQ blocks to fill the schema**. Questions nobody asked, answered by repeating the paragraph above them. Markup did not make an empty answer worth quoting.
+- **Sprinkling microdata through the markup**. A template change broke it silently and nothing warned me. JSON-LD in one block in the head has survived every redesign since.
+- **Selling `sameAs` as the thing that merges mentions into one entity a model recognises**. That sentence stood on this page and in the route with no evidence under it. The field's documented history is Google's Knowledge Graph, and whether a language model ever reads it I do not know — and neither did the sentence.
+- **Opening paragraphs with "It" and "However"**. Both words point back at a sentence that will not travel with the quote.
 
 ## Verify
 
-Run `geo-citability` from [Tools](/tools/). It scores passages and points at the ones that fall apart out of context. That is the check hardest to run on your own writing.
+Run `geo-citability` from [Tools](/tools/). It scores passages and points at the ones that fall apart out of context, which is the check I find hardest to run on my own writing.
 
-Then measure presence, not position:
+Then measure presence rather than position:
 
 - Ask your target question in a few assistants, several runs each. Answers are non-deterministic, so a single run is an anecdote.
-- Record two things per run: whether you are named at all, and whether you are linked as a source. Those are different levels.
-- Track the trend across runs and weeks. The delta is the signal; a snapshot is noise.
-- Watch analytics for referrals from assistant hosts. That traffic is proof of citation, not of ranking.
+- Record two things per run: whether you are named at all, and whether you are linked as a source. Those are different levels and they move separately.
+- Track the trend across runs and weeks. A snapshot tells you nothing about which way it is going.
+- Watch analytics for referrals from assistant hosts. That traffic proves somebody was cited and read, which is not the same as ranking anywhere.
 - Validate the JSON-LD with a structured data test before you trust it.
 
-If no agent shows up in your logs at all, the problem is access, not writing. Start from [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+If no agent shows up in your logs at all, the problem is access and not writing. Start from [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).

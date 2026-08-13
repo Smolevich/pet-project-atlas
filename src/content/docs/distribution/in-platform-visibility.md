@@ -16,11 +16,9 @@ sources:
 
 ## What we are solving
 
-If the product lives inside Telegram, an app store or a marketplace, that platform runs its own search. It is a separate index with its own rules, and your website has no influence on it.
+If the product lives inside Telegram, an app store or a marketplace, that platform runs its own search over its own index, and your website has no influence on it whatsoever.
 
-The fields it matches are few and short. Put the wrong words in them and the demand walks past.
-
-Nothing breaks and nothing is logged. That is what makes this failure expensive to find.
+The fields it matches are few and they are short. Put the wrong words in them and the demand walks straight past you. Nothing breaks and nothing is logged while it happens, which is what makes this failure so expensive to find.
 
 ## Steps
 
@@ -32,46 +30,66 @@ Each platform matches a different set of fields. Learn the set before writing an
 | App Store | Title, subtitle, keywords field, primary category | Description and promotional text |
 | Google Play | Title, plus other store listing metadata | — |
 
-1. **Write the name in the words the audience types, in their script** — the function, not only the brand.
-   The Bot API allows 0-64 characters for a name. An App Store title is capped at 30, a Google Play title likewise.
-2. **Use per-language metadata where it exists** — `setMyName` and `setMyDescription` take a `language_code`.
-   You do not have to choose one script. A separate name can be shown to speakers of each language.
-3. **Give each remaining field its own job** — a short description holds 120 characters, a full one 512.
-   The short one sits on the profile and travels with the link when someone shares it. The long one answers "should I press start".
-4. **Spend the keyword budget without repeating yourself** — Apple's keyword field holds 100 bytes, comma-separated.
-   Bytes, not characters. ASCII spends one byte a letter, Cyrillic in UTF-8 spends two, so the field is about 50 letters.
-   Apple's own product-page guide says 100 characters. The App Store Connect reference says bytes, and that is the one submission enforces.
-   Words already in the title or subtitle should not be repeated there. Competitor names in that field are a common rejection reason.
+### The name carries the search, so write it in their words
 
-   The field is version metadata in App Store Connect, not app-wide information. Open **Apps**, pick the app, then the version under its platform in the sidebar. **Keywords** sits there with Description and Promotional Text, and it is localizable per language.
+The function, not only the brand, and in the script your audience types in. Everything else on the profile is read after somebody has already found you.
 
-   Name and Subtitle are app-wide, under **App Information**, so they live on a different screen.
-5. **Read the metadata back from the platform** — `getMe` and the `getMy*` methods return what is set.
-   Memory is not evidence here, and neither is the console where you typed it. The API response is.
+The budgets are small, which is the whole difficulty:
 
-   `getMe` returns a `User` object: id, username and `first_name`, which is the bot's name. It carries no description at all, so the rest needs its own method.
+| Field | Limit |
+|---|---|
+| Telegram bot name | 0-64 characters |
+| App Store title | 30 characters |
+| Google Play title | 30 characters |
+| Telegram short description | 120 characters |
+| Telegram description | 512 characters |
+| App Store keywords | 100 bytes |
 
-   `getMyName`, `getMyDescription` and `getMyShortDescription` each read back one field, and each takes `language_code`. Pass the audience's language, or you read the default and conclude you set nothing.
-6. **Search the platform as a stranger** — a fresh account, the audience's language, the phrases they would type.
-   Write down who comes up. Their names are a free list of the exact words the demand uses.
-7. **Tag every external link into the platform** — a start parameter per venue.
-   Write it to the user record on first contact only. A repeat start would overwrite the original source with whatever they clicked last.
+You do not have to choose one script, either. `setMyName` and `setMyDescription` take a `language_code`, so a separate name can be shown to speakers of each language, and that is the cheapest fix on this page.
+
+The two description fields have different jobs. The short one sits on the profile and travels with the link when somebody shares it; the long one answers "should I press start".
+
+### Spending the keyword budget without repeating yourself
+
+Apple's keyword field holds 100 bytes, comma-separated. Bytes, not characters: ASCII spends one byte a letter and Cyrillic in UTF-8 spends two, so for a Russian list the field is about 50 letters.
+
+Apple's own product-page guide says 100 characters, the App Store Connect reference says bytes, and the one submission enforces is bytes. Words already in the title or subtitle do not need repeating there, and competitor names in that field are a common rejection reason.
+
+The field is version metadata, not app-wide information, which is why people cannot find it. Open **Apps**, pick the app, then the version under its platform in the sidebar — **Keywords** sits there with Description and Promotional Text, and it is localizable per language. Name and Subtitle are app-wide, under **App Information**, on a different screen entirely.
+
+### Reading the metadata back off the platform
+
+Ask the platform what is actually set, because your memory is not evidence here and neither is the console you typed it into.
+
+`getMe` returns a `User` object — id, username and `first_name`, which is the bot's name. It carries no description at all, so the rest needs its own call. `getMyName`, `getMyDescription` and `getMyShortDescription` each read back one field, and each takes `language_code`. Pass the audience's language, or you read the default and conclude you set nothing.
+
+### Searching for yourself as a stranger
+
+A fresh account, the audience's language, the phrases they would actually type. Write down who comes up: their names are a free list of the exact words the demand uses, assembled by people who already ranked for them.
+
+### Tagging every link that goes into the platform
+
+One start parameter per venue, written to the user record on first contact only. A repeat start would overwrite the original source with whatever they clicked last, and then a venue that worked and a venue that did nothing look identical.
 
 ## What did not work
 
 - **An English-only name while the demand was in another script**. Global search matches the name, so queries in the audience's alphabet could not reach the bot at all. Nothing was broken and nothing was logged.
-- **Reading the user base as a market signal**. The geography of signups matched the Latin spelling of the name, not the market I was building for. I spent weeks on product theories about an audience that was an artefact of a metadata field.
+- **Reading the user base as a market signal**. The geography of signups matched the Latin spelling of the name rather than the market I was building for. I spent weeks on product theories about an audience that was an artefact of a metadata field.
 - **Assuming the description would carry it**. It had been in the right language the whole time. Search does not match that field, so it changed nothing.
-- **Comparing the products instead of the names**. Competitors with the function spelled out in the audience's script were far larger, on the same public APIs. The moat was a name, not technology.
-- **Counting characters against a byte limit**. The keyword field takes 100 bytes, and a Cyrillic list spends two bytes a letter. Half the budget I thought I had was gone before I typed anything. Apple's marketing page says characters, and I read that one.
-- **Trusting my memory of the name**. Reading it back over the API disagreed with what I believed I had set. Every diagnosis before that check rested on a wrong fact.
-- **Publishing links with no start parameter**. The code did not read the parameter either, so attribution was zero rather than approximate. Months of distribution work could not be evaluated.
-- **Treating the website as the main door**. No signup carried a source. The share I could attribute to the site is unknown: [where the user came from](/analytics/attribution/). Ranking it was real work aimed at a channel I never showed the audience was using.
+- **Comparing the products instead of the names**. Competitors with the function spelled out in the audience's script were far larger, on the same public APIs. What they had was a name, not technology.
+- **Counting characters against a byte limit**. The keyword field takes 100 bytes and a Cyrillic list spends two bytes a letter, so half the budget I thought I had was gone before I typed anything. Apple's marketing page says characters, and that is the page I read.
+- **Trusting my memory of the name**. Reading it back over the API disagreed with what I believed I had set, and every diagnosis before that check rested on a wrong fact.
+- **Publishing links with no start parameter**. The code did not read the parameter either, so attribution was zero rather than approximate, and months of distribution work could not be evaluated at all.
+- **Treating the website as the main door**. No signup carried a source, so the share I could attribute to the site is unknown: [where the user came from](/analytics/attribution/). Ranking it was real work aimed at a channel I never showed the audience was using.
 
 ## Verify
 
 - Search from an account that has never used the product, in the audience's language. Note whether you appear at all, and who is above you.
-- Read the name, description and short description back over the API. That is `getMyName`, `getMyDescription` and `getMyShortDescription`, one call each. Compare them to what you meant to set.
+- Read the name, description and short description back over the API and compare them to what you meant to set.
+
+  ```bash
+  curl -s "https://api.telegram.org/bot$TOKEN/getMyName?language_code=ru"
+  ```
 - Count the characters against the platform's limits before submitting, not after a rejection.
 - After a rename, watch the language and locale mix of new signups. It should move toward the script you added.
 - Send yourself a tagged link and confirm the parameter is stored on first contact. Start again and confirm it is not overwritten.
