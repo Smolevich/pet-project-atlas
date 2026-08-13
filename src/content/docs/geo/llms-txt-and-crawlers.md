@@ -128,7 +128,7 @@ The file costs ten minutes and no vendor commits to reading it. Here is what min
 
 For comparison, `robots.txt` was fetched 56 times in the same window, and those were real crawlers.
 
-Two caveats, without which that zero cannot be read. The window has a hole: logrotate keeps 14 daily archives, so 20 to 28 July did not survive. And a request the edge refuses never reaches nginx and never appears in this table — except my edge refuses nothing, which the `robots.txt` line from the same log demonstrates. The full read is in [who actually crawls you](/geo/who-actually-crawls-you/).
+Two caveats, without which that zero cannot be read. The window has a hole: logrotate keeps 14 daily archives, so 20 to 28 July did not survive. And a request the edge refuses never reaches nginx, so it never appears in this table at all. From the server side you cannot see that: it takes the edge's own analytics, and my Cloudflare token has no permission to read them, so I did not look. Indirectly it seems to refuse nothing — `robots.txt` was fetched 56 times from the same log, so crawlers are getting through. That is an inference rather than a check, and the zero should be read with that attached. The full read is in [who actually crawls you](/geo/who-actually-crawls-you/).
 
 So on a small marketing site this is a cheap bet with a measured payoff of 0, and on forty pages of docs it is a reasonable one. Anywhere else I would rather spend the ten minutes on `robots.txt` and the sitemap, which every agent does read.
 
