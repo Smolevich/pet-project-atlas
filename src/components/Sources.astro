@@ -32,9 +32,11 @@ const byHost = [
   ...sources
     .filter((source) => source.kind === 'url')
     .reduce((map, source) => {
-      const list = map.get(source.host) ?? [];
+      // kind === 'url' всегда несёт host, но фильтр этого типу не доказывает.
+      const host = source.host ?? '';
+      const list = map.get(host) ?? [];
       list.push(source);
-      return map.set(source.host, list);
+      return map.set(host, list);
     }, new Map<string, typeof sources>())
     .entries(),
 ];
