@@ -9,11 +9,20 @@ sources:
   - https://developers.google.com/search/docs/appearance/structured-data/search-gallery
 ---
 
+import { Image } from 'astro:assets';
+import aiOverview from '../../../assets/screenshots/serp-ai-overview-transcribe.png';
+
 ## What we are solving
 
 You ask an assistant the question your product answers, it names a few sources, and none of them is you.
 
 On a search page there are ten slots and a scroll, so a weak position still leaves you somewhere. An answer has room for three or four sources, and everything below that line is simply absent.
+
+Here is one on a query my own bot answers:
+
+<Image src={aiOverview} alt="Google AI Overview for the query how to transcribe telegram voice message. The answer names Telegram's built-in feature and third-party bots. The sources panel on the right cites SpeakApp's blog and a Reddit thread from r/SideProject titled I made a telegram bot that transcribes voice notes." />
+
+Two sources, and one of them is a forum thread. The assistant put somebody's Reddit post next to a product blog, and my own site is in neither slot. Read on 13 August 2026.
 
 The paper that named this problem is *GEO: Generative Engine Optimization* (Aggarwal et al., 2023). What matters about it here is that it rewrote existing pages rather than adding new ones. The reported gain is up to 40% more visibility for a source inside the generated answer, measured over GEO-bench. So the work is arranging the facts you already have so that a model can lift them.
 
