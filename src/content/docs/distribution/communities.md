@@ -13,9 +13,9 @@ sources:
 
 On this site the whole subject used to be one cell in a table: discussion venues, forums, Q&A sites, community threads. That is a placeholder, not coverage.
 
-Page one for my main query held a competitor and other people's lists, and those lists get written in venues where I have never posted anything at all.
+Page one for my main query held a competitor and other people's lists. Those lists get written in venues where I have never posted anything at all.
 
-I have not run a documented campaign in any of them either. So what follows is the venues' own published rules plus the mechanism, and it carries no result of mine.
+I have not run a documented campaign in any of them either. So what follows is the venues' own published rules plus the mechanism. It carries no result of mine.
 
 ## Steps
 
@@ -23,52 +23,56 @@ The venues differ far more than a table suggests. Read the local rules before an
 
 ### The sentence in the rules that covers your case
 
-Every venue has one and it is short. Hacker News asks you not to use the site primarily for promotion, which means posting your own stuff part of the time is fine there. Lobsters puts a fraction on the same idea: self-promotion under a quarter of your stories and comments.
+Every venue has one and it is short. Hacker News asks you not to use the site primarily for promotion. So posting your own stuff part of the time is fine there.
 
-Find that sentence before you write anything, because it is also the sentence a moderator will quote at you.
+Lobsters puts a fraction on the same idea: self-promotion under a quarter of your stories and comments.
+
+Find that sentence before you write anything. It is also the sentence a moderator will quote at you.
 
 ### What a venue permits, which is not what it gets in traffic
 
-Some have a slot for your own work — Show HN is for something you made that others can try. Some tolerate a ratio. Some allow a link only inside an answer to somebody's question. Some strip links from accounts with no history.
+Some have a slot for your own work. Show HN is for something you made that others can try. Some tolerate a ratio. Some allow a link only inside an answer to somebody's question. Some strip links from accounts with no history.
 
-Four different permissions means four different posts, and sorting venues by their traffic instead gets you the same post four times.
+Four different permissions mean four different posts. Sort the venues by traffic instead, and you write the same post four times.
 
 ### The account comes before the first link
 
-Age, comment history and karma are the gate, and karma is the venue's running score for an account, earned on comments other people found useful. Lobsters treats a user as new for their first 70 days.
+A venue lets you in on account age, comment history and karma. Karma is the venue's running score for an account, earned on comments other people found useful. Lobsters treats a user as new for their first 70 days.
 
-An account registered on launch day posts its first link with no history behind it, and that is the exact signature moderation filters on. There is no way to buy that back later, which is why the account is the thing to start months early.
+An account registered on launch day posts its first link with no history behind it. That is the exact signature moderation filters on. You cannot buy the history back later, which is why you open the account months early.
 
 ### Answering instead of announcing
 
-The comment has to stand alone with the link deleted. Put the answer in the comment itself, and if your product is part of the answer, it comes after the answer, in one sentence.
+The comment has to stand alone with the link deleted. Put the answer in the comment itself. If your product is part of the answer, it comes after the answer, in one sentence.
 
-Say that it is yours in the first clause — "I built this" before the name. Undisclosed promotion is what gets a post removed and an account banned, and disclosure costs you a clause.
+Say that it is yours in the first clause — "I built this" before the name. Undisclosed promotion is what gets a post removed and an account banned. Disclosure costs you a clause.
 
-Then name the alternatives you are not selling, including the free path. A comment naming one product is an ad and the disclosure does not change that; a comment naming three tools, one of which is yours, is an answer.
+Then name the alternatives you are not selling, including the free path. A comment naming one product is an ad, and the disclosure does not change that. A comment naming three tools, one of which is yours, is an answer.
 
 ### What gets the account banned rather than the post
 
-Never ask anyone to upvote. Hacker News says plainly not to solicit upvotes, comments or submissions, coordinated voting is visible from inside the venue, and the penalty lands on the account and often on the domain.
+Never ask anyone to upvote. Hacker News says plainly not to solicit upvotes, comments or submissions. Coordinated voting is visible from inside the venue. The penalty lands on the account and often on the domain.
 
-Keep the link out of your signature and out of unrelated threads. Google's spam policies name both patterns. Forum comments with optimized links in the post or in the signature are listed there as link spam, and spammy posts on forum threads as user-generated spam.
+Keep the link out of your signature and out of unrelated threads. Google's spam policies name both patterns. Forum comments with optimized links in the post or in the signature are listed there as link spam. Spammy posts on forum threads are listed as user-generated spam.
 
 ### The thread is an asset six months later
 
-Write for the person who arrives from search half a year after the thread, not for the thread's first day. Thread traffic is one day; the thread page ranking for a query is the thing that keeps working, and it is also what an assistant can fetch later.
+Write for the person who arrives from search half a year after the thread. Do not write for the thread's first day. Thread traffic lasts one day. What keeps working is the thread page ranking for a query. An assistant can fetch that page later too.
 
-Retrieval is the step where an assistant fetches pages before it answers, through a search index or a live fetch of one URL. So your comment becomes retrievable once the page holding it is indexed, and not before. Thread pages get indexed on the venue's schedule and not on yours, and I have not measured that lag anywhere, so treat it as unknown rather than as short.
+Retrieval is the step where an assistant fetches pages before it answers. It fetches them through a search index, or through a live request for one URL. So your comment becomes retrievable once the page holding it is indexed, and not before.
+
+Thread pages get indexed on the venue's schedule and not on yours. I have not measured that lag anywhere, so treat it as unknown rather than as short.
 
 Tag the link you post, one value per venue: [where the user actually came from](/analytics/attribution/). Untagged, a venue that worked and a venue that did nothing produce the same empty report.
 
 ## What did not work
 
-- **Leaving the channel as one cell in a table.** The row named forums, Q&A sites and community threads, and stopped there. Four people read the site and two of them named this as the largest hole in it.
-- **One launch post as the plan.** The graph spiked for a day and lay flat the next. A post is an event and a channel is a habit, and I had confused the two.
-- **Spending the week on directory forms instead.** Page one for my query held a competitor and other people's lists, and filling forms touched neither of them.
-- **Publishing links with no tag.** It had already happened with directory submissions: the listings went live and no arrival could be traced to any of them. A forum comment is the same link with the same hole in it.
-- **Assuming my own site was the door.** No signup carried a source, so the share I could attribute to the site is unknown: [where the user came from](/analytics/attribution/). Ranking the site was real work aimed at a channel I never showed the audience was using.
-- **Writing this page without having run the campaign.** Nothing above is a measurement. Every step is either a published venue rule or a mechanism I can argue for, and reading it as a result would be reading it wrong.
+- **Leaving the channel as one cell in a table.** The row named forums, Q&A sites and community threads, and stopped there. Four people read the site. Two of them named that row as the largest hole in it.
+- **One launch post as the plan.** The graph spiked for a day and lay flat the next. A post is an event and a channel is a habit. I had been running the channel as a post.
+- **Spending the week on directory forms instead.** Page one for my query held a competitor and other people's lists. Filling forms touched neither the competitor nor the lists.
+- **Publishing links with no tag.** It had already happened with directory submissions. The listings went live, and no arrival could be traced to any of them. A forum comment is the same link with the same hole in it.
+- **Assuming my own site was the door.** No signup carried a source. So the share I could attribute to the site is unknown: [where the user came from](/analytics/attribution/). Ranking the site was real work. I just aimed it at a channel I never showed the audience was using.
+- **Writing this page without having run the campaign.** Nothing above is a measurement. Every step is either a published venue rule or a mechanism I can argue for. Reading it as a result would be reading it wrong.
 
 ## Verify
 
@@ -76,7 +80,7 @@ Tag the link you post, one value per venue: [where the user actually came from](
 - Read your own comment logged out, from another network. Some venues remove a post while leaving it visible to its author.
 - Search a distinctive sentence from your comment, restricted to the venue's host with `site:`. Until that returns your comment, nothing can retrieve it.
 - Check referrals carrying that venue's tag after a week, and again after a month. The month is the reading that matters.
-- Count your promotional comments against your other ones in the same venue. Lobsters draws that line at a quarter, and quieter venues are not more permissive.
+- Count your promotional comments against your other ones in the same venue. Lobsters draws that line at a quarter. Quieter venues are not more permissive.
 - Ask an assistant for tools in your category, several runs each. Note whether it names a community thread at all, and which one.
 
 The listing side of off-site work is [where the first external links come from](/distribution/catalogs/). Inside a platform the index is different again: [search inside the platform](/distribution/in-platform-visibility/).

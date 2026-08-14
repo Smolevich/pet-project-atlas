@@ -3,12 +3,14 @@ title: Where a niche starts when everything is taken
 sidebar:
   order: 1
 description: What counts as a pet project, whether it is allowed to take money, and why you look for somebody else's rough edge rather than an empty market. Plus what skipping this step cost me, in numbers.
-updated: 2026-08-13
+updated: 2026-08-14
 sources:
   - Voice AI bot database, table users, measured 2026-08-13
   - Voice AI bot database, table usage_events, measured 2026-08-13
   - Voice AI bot database, table user_credits, measured 2026-08-13
   - Voice AI bot database, table stars_payments, measured 2026-08-13
+  - Voice AI bot database, table credit_transactions, measured 2026-08-14
+  - Voice AI bot database, table feedback, measured 2026-08-14
   - App Store customer reviews RSS, dataset itunes.apple.com/us/rss/customerreviews/id=1276437113, measured 2026-08-13
   - Otter plans and the per-recording limit — https://otter.ai/pricing
   - Peter Thiel, "Competition Is for Losers" — https://www.wsj.com/articles/peter-thiel-competition-is-for-losers-1410535536
@@ -23,60 +25,60 @@ import otterPricing from '../../../assets/screenshots/otter-pricing-90min.png';
 
 ## What we are solving
 
-You have decided to push a side project. You open a niche and somebody is already sitting in it, usually more than one somebody.
+You want to push a side project. You open a niche and somebody is already working there. Usually more than one somebody.
 
-That is true, and it is not a verdict. "Taken" and "done well" are different things, and the second is considerably rarer.
+That is normal. Somebody took the niche, and that does not mean they did it well. People rarely do it well.
 
-Almost anyone can assemble a product now, and the scarcity has moved because of it. Writing the thing got cheap. Two things stayed hard: being found, and being able to say plainly how you differ.
+Almost anyone can put a product together now. Writing the code got cheap. Two other things got hard. People have to find you, and you have to explain how you are better.
 
-The second one is what gets skipped. People go and build features without answering it, and below you can see what that cost me.
+That explanation is what people skip. They sit down to build features without answering the question. Below I show on my own numbers what that cost me.
 
 ## Steps
 
-### What counts as a pet project here, and whether it may take money
+### What counts as a pet project, and whether it may take money
 
-A pet project is the thing you build outside your job and outside somebody else's plan. It is about who decides, not about a ban on revenue.
+A pet project is what you build outside your job and outside somebody else's plan. You decide what to do. That does not mean you may not take money.
 
-Money spoils nothing. If anything the reverse: people use free things happily and tell you nothing at all by doing so. One person who pays says more about the product than a hundred who signed up.
+Money spoils nothing. If anything, the reverse. People use free things happily, and that tells you nothing. One person who pays says more about the product than a hundred who signed up.
 
-So the money question sits alongside the rest of the route rather than after it. What exactly to charge for — an action or a month — is its own conversation: [the pricing model](/money/pricing-model/).
+So think about money right away, not at the end. What exactly to charge for — an action or a month — I cover separately: [the pricing model](/money/pricing-model/).
 
 ### There will be no empty niche, and emptiness is the wrong thing to look for
 
-An empty market usually means one of two things: the job does not exist, or nobody pays for it. Both are bad, and that is the first thing worth checking — [whether this audience pays for anything](/demand/will-they-pay/).
+An empty niche usually has one of two causes. Either nobody has the job. Or the job exists and nobody pays for it. Check that first — [whether this audience pays for anything](/demand/will-they-pay/).
 
-A crowded market, on the other hand, is confirmed demand. Somebody has already proved on your behalf that the job exists and that money changes hands over it.
+And if somebody is working in the niche, the demand is already there. Somebody before you proved the job is real and that money changes hands over it.
 
-From there a simple thing takes over. Every working competitor has at least one part that is done badly, and it irritates the people who are already paying.
+From there it is simple. Every working competitor has at least one thing done badly. It irritates the people who pay him, too.
 
-A paying customer is the most patient person in your niche. They spent money and they are inclined to justify the purchase, even to themselves. If they still went and wrote the review, something genuinely got to them.
+A paying customer is the most patient person of all. He spent money and does not want to admit it was wasted. If he still sat down to write a review, something really got to him.
 
-That is where the research starts. Not "what is missing from this market" but "what is here and grates".
+Start there. Do not ask what the market is missing. Ask what the market has that grates.
 
 > In the real world outside economic theory, every business is successful exactly to the extent that it does something others cannot.
 >
-> — Peter Thiel, "Competition Is for Losers", The Wall Street Journal, 12 September 2014. The same argument runs through chapter three of Zero to One.
+> — Peter Thiel, "Competition Is for Losers", The Wall Street Journal, 12 September 2014. He writes the same thing in chapter three of Zero to One.
 
-Worth keeping a second one beside it, about where the idea comes from at all.
+And a second quote, about where ideas come from.
 
 > When something annoys you, it could be because you're living in the future.
 >
-> — Paul Graham, "How to Get Startup Ideas", November 2012. For him irritation is a signal rather than a nuisance.
+> — Paul Graham, "How to Get Startup Ideas", November 2012. For him annoyance is a hint, not a nuisance.
 
-### Where that irritation is already written down
+### Where that anger is already written down in plain words
 
-You do not have to extract it with interviews. People have written it all already, for free, with dates on it.
+You do not have to run interviews. People have written it all down themselves, for free and with dates.
 
-**The App Store hands over its reviews in one command, with no account.** Find the app id first, then read the feed:
+**The App Store hands over its reviews in one command, with no account.** First you find the app id, then you read the feed:
 
 ```bash
 curl -s 'https://itunes.apple.com/search?term=otter&entity=software&country=us&limit=3'
 curl -s 'https://itunes.apple.com/us/rss/customerreviews/page=1/id=1276437113/sortby=mostrecent/json'
 ```
 
-Fifty reviews a page, around nine pages, then nothing. Every entry carries a date, a rating and the app version — the version tells you which release things started falling apart on. The country sits in the URL, and the same product complains differently in `gb`, `fr` and `de`.
+Fifty reviews to a page, around nine pages, then nothing. Every review carries a date, a rating and the app version. The version tells you which release the complaints started on. You change the country right in the address — `gb`, `fr` and `de` complain about different things.
 
-Here is what that feed had. Otter on the Pro plan cuts a single recording off at 90 minutes. This is not a malfunction — it is written in their own price list, and four hours per recording only arrives one tier up.
+Here is what I found there. Otter on the paid Pro plan cuts a recording off at 90 minutes. That is not a fault: it is written in their price list. Four hours only come one tier up.
 
 <figure>
   <Image
@@ -84,74 +86,84 @@ Here is what that feed had. Otter on the Pro plan cuts a single recording off at
     alt="Otter.ai pricing page, four plans side by side. Basic is Free for those who want to give it a try, and lists 300 monthly transcription minutes. Pro is $8.33 per user per month with a save 51 percent badge, lists 1200 in-app recording minutes, and under Everything in Basic, plus the first line reads Up to 90 mins per meeting. Business is $19.99 per user per month, marked Best Value, lists unlimited meetings and in-app recordings, and under Everything in Pro, plus the first line reads Up to 4 hours per meeting. Enterprise offers a demo."
   />
   <figcaption>
-    Otter pricing, read on 13 August 2026. Prices shown are the annual rate. The 90 minutes is a line in the price list, not a bug — and the two reviews below are people leaving over that line.
+    Otter pricing, read on 13 August 2026. The prices are annual. Ninety minutes is a line in the price list, not a bug. The two reviews below were written by people who left because of it.
   </figcaption>
 </figure>
 
-On 2 August 2026 somebody on the $99.99-a-year subscription leaves one star.
+On 2 August 2026 a person on the $99.99-a-year subscription gives one star.
 
 > Paywalled out of seeing the last 19 minutes of an enthralling conversation.
 
-A week earlier, on 25 July, two stars from somebody else.
+A week before that, on 25 July, two stars from somebody else.
 
 > after several years of satisfying service, I am now forced me to move on to other providers
 
-Both were paying, both left, and one line of a price list stopped them. That is the thing you are looking for.
+Both were paying. Both left. And one line in a price list stopped them both. That is the kind of thing you are looking for.
 
-**Count them rather than scrolling them.** I pulled that app's whole feed: 209 one and two star reviews between 16 September 2024 and 3 August 2026. Money and limits account for 118 of them. Speaker labelling accounts for 11.
+**Count them, do not scroll them.** I downloaded that app's whole feed. It came to 209 one- and two-star reviews, from 16 September 2024 to 3 August 2026. Money and limits: 118 reviews. The bot mixing up who is speaking: 11.
 
-I had been certain the headline pain in this niche was "which of them is talking". Among paying customers it loses to money by roughly ten to one, and finding that out took ten minutes.
+And I had been sure the main pain here was "which of them is talking now". Among paying users that pain loses to money ten to one. I could have found this out in ten minutes.
 
-**Forums give you links that will still resolve.** An App Store review has no permanent address — it slides onto another page as soon as newer ones arrive. So quote Discourse forums instead, where every thread has its own URL that will outlive your article.
+**Forums give you links that will not rot.** An App Store review has no permanent address. New reviews arrive and it moves to another page. So quote Discourse forums instead: every thread there has its own URL, and it will outlive your article.
 
 ```bash
 curl -s 'https://community.openai.com/search.json?q=transcription+empty'
 curl -s 'https://hn.algolia.com/api/v1/search_by_date?query=%22otter.ai%22&tags=comment'
 ```
 
-Both are open without a key and without an account, checked on 13 August 2026.
+Both work without a key and without an account. Checked on 13 August 2026.
 
-**And this part stopped being free, which is where most advice is out of date.** Reddit no longer reads from a script: without OAuth the feed returns 403. Search on X is prepaid now, with no free reading at all. G2 and Capterra both banned headless browsers outright in their 2026 terms, so reading by hand is fine and automating is not.
+**And this part stopped being free.** The advice about it is usually out of date. Reddit no longer reads from a script: without OAuth the feed returns 403. Search on X is prepaid now. G2 and Capterra banned headless browsers outright in their 2026 terms — reading by hand is fine, automating is not.
 
 ### What "features first" actually costs
 
-These are my numbers, and they are not about the thing I was afraid of.
+Now my numbers. And my own mistake in how I read them.
 
-Between 12 May and 13 August, 244 people signed up to the bot.
+Between 12 May and 14 August, 253 people signed up to the bot. **83 of them did nothing at all** — not one row in the events table.
 
-**82 of them did nothing whatsoever.** Not one row in the events table. Sixty-six of those 82 were gone less than a minute after arriving.
+For three months I read that as "there is no demand". Then I split it by date.
 
-155 people got at least one successful result. Of those, **117 used it on exactly one day** and never came back.
+Before 17 July the starting grant was not credited to new users. Somebody arrived, had zero credits, and could do nothing at all. That was my bug, not the market.
 
-Now the second story, the one people are usually warned about — they use it until the free tier runs out. Three of my users reached the end of the free allowance. One of them used the product again afterwards. None of them paid.
+| When they arrived | Total | Did nothing |
+|---|---|---|
+| before 17 July, grant not credited | 70 | 56 (80%) |
+| after 17 July, grant works | 183 | 27 (15%) |
 
-So the freemium wall turned out to be a luxury: you have to survive long enough to reach it. The lowest balance among all 244 is 16 credits against an average of 209, and that is after three months of operation.
+And the other half of the same story. The feedback button sat in the bot the whole time. In three months nine people used it. Nobody wrote to say the product did not work.
 
-No new feature would have moved any of these numbers. People left long before they would have seen one.
+So silence in your data is not a verdict on demand. Check first whether the product was even working.
 
-### How to state the difference in one line
+Now the people it did work for. 155 got a result at least once, and **117 of them used it for one day**.
 
-The difference has to sound like a sentence your competitor cannot repeat without rebuilding themselves.
+Three users reached the end of the free allowance. One tried again, nobody paid. The lowest balance is 16 credits, the average is 209.
 
-"Easier" and "faster" do not count: everybody says that about themselves and nobody can check it. A usable sentence names a specific irritation and the specific people it gets to.
+So you have to survive as far as the freemium wall, and almost none of mine did. Features would not have helped here. Fixing the grant two months earlier would have.
 
-Say it out loud before the first line of code. If it will not come out, you do not have a difference yet, and it is better to find that out now than at your three hundredth user.
+### How to name the difference in one line
+
+Say something about yourself that a competitor cannot repeat until he rebuilds himself.
+
+"Easier" and "faster" do not count. Everybody says that about themselves, and nobody can check it. A good sentence names a specific irritation and the specific people it gets to.
+
+Say it out loud before the first line of code. If it will not come out, you have no difference yet. Better to find that out now than at your three hundredth user.
 
 ## What did not work
 
-- **Looking for an empty niche.** Empty almost always means nobody pays for the job. The thing to check is not the absence of competitors but the presence of money.
-- **Building features instead of answering the difference question.** 82 people out of 244 pressed nothing at all. Not one of my features ever reached them.
-- **Expecting people to hit the free limit.** I built the economics around a wall that three people reached. They were not leaving because of it — they left much earlier, and quietly.
-- **Reading a competitor's average rating.** The average is the output of marketing. Everything useful sits in the one and two star reviews, and those are the ones to read.
-- **Treating a signup as a signal.** 244 signups looked like an audience. One day of use for 117 of them is what it actually was.
-- **Believing the difference would occur to me along the way.** It did not. It either exists before the code, or it gets written into the description afterwards and convinces nobody.
+- **Looking for an empty niche.** Empty almost always means nobody pays for the job. Look for money, not for the absence of competitors.
+- **Reading silence as an absence of demand.** 83 people out of 253 pressed nothing. For three months I took that as a verdict on the niche. For 56 of them it was my bug: zero credits.
+- **Waiting for people to hit the free limit.** I built the economics around a wall that three people reached. They left earlier than that, and quietly.
+- **Believing somebody would report the breakage.** The feedback button sat in plain sight. Nine messages in three months, and not one about the grant.
+- **Reading a competitor's average rating.** The average is the output of marketing. Everything useful sits in the one- and two-star reviews.
+- **Treating a signup as a signal.** The signups looked like an audience. Of the people the product actually worked for, 117 came exactly once.
+- **Waiting for the difference to occur to me along the way.** It did not. Either the difference exists before the code, or it gets written into the description afterwards and convinces nobody.
 
 ## Verify
 
-- Say out loud the name of one live competitor and one thing it does badly. If a second one will not come, the research has not started.
-- Find that same complaint from three different people in three different places, with dates. One complaint is a person, not a market.
-- Check that at least one of the complainers pays. A free user's grievance is worth less, because they risked nothing.
-- State the difference in one sentence without the words "easier" and "faster". A sentence your competitor can repeat word for word is not a difference.
-- Look up how many of your own users took no action at all. If that number does not exist, [the event row is not carrying it](/analytics/product-metrics/).
+- Name out loud one live competitor and one thing he does badly. If a second thing will not come, you have not started looking.
+- Find the same complaint from three different people, in three different places, with dates. One complaint is one person, not a market.
+- Check that at least one of them pays. A free user's complaint is worth less: he risked nothing.
+- State the difference in one sentence without the words "easier" and "faster". If your competitor can repeat it word for word, it is not a difference.
+- Look at how many of your users took no action at all. If you do not have that number, [the event row is not carrying it](/analytics/product-metrics/).
 
-Once you know what you are building and how it differs, the next question is which market to build it for: [which market to build for](/demand/pick-a-market/).
+You know what you are building and how you differ. The next question is which market to build it for: [which market to build for](/demand/pick-a-market/).

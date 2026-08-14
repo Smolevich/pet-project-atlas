@@ -33,19 +33,19 @@ import yandexSuggest from '../../../assets/screenshots/yandex-suggest-rasshifrov
 
 ## What we are solving
 
-I had a bot and I had my own word for what it does. I liked the word, I wrote pages around it and waited a month, and nothing happened — because people were typing something else, and half of them in another alphabet.
+I had a bot and my own word for what it does. I liked the word. I wrote pages around it and waited a month. Nothing happened. People were typing something else. Half of them were typing it in another alphabet.
 
-The nastiest part is that nobody tells you. Nothing breaks: the pages are up, the crawler takes them, the logs are clean. The queries simply land on somebody else, and you will not find out until you go and look.
+The nastiest part is that nobody tells you. Nothing breaks: the pages are up, the crawler takes them, the logs are clean. The queries simply land on somebody else. You will not find out until you go and look.
 
-So the first question is not how to rank. The first question is whether anybody types this at all.
+So do not start with how to rank. Start by checking whether anybody types this at all.
 
 ## Steps
 
 ### What the paid panels actually measure
 
-Semrush, Ahrefs, Similarweb, Serpstat, Topvisor and Moz sell one shape of answer: a number next to a phrase. Read the instrument before you read the number.
+Semrush, Ahrefs, Similarweb, Serpstat, Topvisor and Moz sell one shape of answer: a number next to a phrase. Work out what they measure with, and only then look at the number.
 
-None of these services measures your site. They estimate it from outside — their own crawlers plus purchased clickstream, a panel of anonymised sessions run through a model.
+None of these services measures your site. They estimate it from outside: their own crawlers and purchased clickstream. Clickstream is a panel of anonymised sessions run through a model.
 
 That is why their traffic figure never matches Search Console. Search Console counts events on your own property. A panel extrapolates from other people's browsers.
 
@@ -58,35 +58,35 @@ That is why their traffic figure never matches Search Console. Search Console co
 | Topvisor | Rank checks in the engines you pick, priced per check |
 | Moz | Link index, plus a keyword explorer with modelled volume ranges |
 
-Then the question that decides everything for a project aimed at the Russian market: which of them reads Yandex.
+Then the main thing. If you build for the Russian market, ask which of them reads Yandex.
 
-Semrush documents position tracking for Google, Bing and Baidu. Yandex turns up in its traffic block as a source label, not as a rank database.
+Semrush documents position tracking for Google, Bing and Baidu. Yandex sits in its traffic block as a source label. There is no Yandex rank database there.
 
 Serpstat does not read Yandex either. Its own list of databases is Google across 230 regions plus one Bing database for the United States.
 
-That leaves one of the six. Topvisor checks positions in Google, Yandex, Yandex.com, Bing and Seznam, and takes volume from Wordstat as well as Keyword Planner.
+That leaves one of the six, Topvisor. It checks positions in Google, Yandex, Yandex.com, Bing and Seznam. It takes volume from Wordstat as well as Keyword Planner.
 
-Only it is a different instrument, not a cheaper Semrush. It checks the phrases you hand it and bills per check. There is no ready database to browse through somebody else's market.
+Only it is a different instrument, not a cheaper Semrush. It checks the phrases you hand it and bills per check. You cannot browse somebody else's market through a ready database there.
 
-Database size is the wrong criterion here. A panel that does not read Yandex describes part of a Russian-language market and does not say which part.
+Picking by database size makes no sense here. A panel that does not read Yandex shows you part of a Russian-language market. It will not tell you which part.
 
 I measured that gap on one phrase, in one day. `голосовой бот`, all regions, 10 July to 8 August 2026.
 
 Wordstat returns 7,034 requests. Semrush on `db=ru`, the same phrase read the same day, returns 390.
 
-Eighteen times apart. Neither figure is a mistake: they are two engines, and the smaller number belongs to the one serving the smaller share of the demand.
+Eighteen times apart. Neither figure is a mistake. These are two different engines. The smaller number belongs to the one serving the smaller share of the demand.
 
-That is what skipping "name the engine" costs. On the strength of that 390 this atlas described the Russian market as a twelfth the size. The twelfth was a property of the panel: [which market to build for](/demand/pick-a-market/).
+That is what skipping "name the engine" costs. On the strength of that 390 I described the Russian market in this atlas as a twelfth the size. The panel made it a twelfth, not the market: [which market to build for](/demand/pick-a-market/).
 
-What a panel says about your own property is a second measured case: [what a paid rank tracker measures](/tools/paid-tools/).
+What a panel says about your own property I measured separately: [what a paid rank tracker measures](/tools/paid-tools/).
 
-One phrase down from that one, the demand is narrower and worded six ways. `бот расшифровка голосовых`, all regions, 12 July to 10 August 2026: 357 requests in the window.
+One step down the demand is narrower, and people ask for the same thing six ways. `бот расшифровка голосовых`, all regions, 12 July to 10 August 2026: 357 requests in the window.
 
 <Image src={wordstatTail} alt="Yandex Wordstat for the phrase бот расшифровка голосовых. All regions selected, desktops, smartphones and tablets all checked. The headline reads Общее число запросов «бот расшифровка голосовых» за 12.07.2026 – 10.08.2026: 357. The table below lists бот для расшифровки голосовых 201, бот расшифровка голосовых телеграмм 150, бот расшифровки голосовых сообщений 140, бот для расшифровки голосовых сообщений телеграмм 71, бот тг для расшифровки голосовых 61, бот в тг для расшифровки голосовых сообщений 16, бот расшифровка голосовых телеграмм бесплатно 13, бот расшифровка голосовых макс 12 and бот для расшифровки голосовых в телеграм 12." />
 
 Yandex Wordstat for `бот расшифровка голосовых`, all regions, 12 July to 10 August 2026, read on 13 August 2026. The largest wording in the list is 201, and the ones after it are 150, 140, 71, 61 and 16.
 
-That is what a tail looks like from the inside: six ways of asking for the same bot, and none of them big. Sitting at my desk I would have guessed at two of them, and `бот тг для расшифровки голосовых` is not one I would ever have written down.
+That is what a tail looks like from the inside. Six ways of asking for the same bot, and none of them big. Sitting at my desk I would have guessed at two of them. And `бот тг для расшифровки голосовых` I would never have written down.
 
 Now the harvest itself, which no panel does for you.
 
@@ -108,36 +108,36 @@ Now the harvest itself, which no panel does for you.
 
    Google completes to `free`, `premium` and `n8n` — someone comparing plans and wiring up automation. Yandex completes to `телеграмм`, `тг`, `бесплатно` and `макс`.
 
-   That last one is worth a stop. MAX is a separate messenger, and part of the audience is asking for transcription inside it. If you do not support it, you are looking at demand you cannot reach, and nothing but the dropdown would have told you.
+   That last one is worth a stop. MAX is a separate messenger, and part of the audience is asking for transcription inside it. If you do not support it, you are looking at demand you cannot reach. Nothing but the dropdown would have told you.
 5. **Do the same in Google for English demand** — Keyword Planner for the ranges, then the suggest.
-   Planner lives inside Google Ads. It needs an Ads account with billing attached or it shows you nothing at all. That is twenty minutes of fiddling with a card, and it is better to know beforehand. The suggest needs no account whatsoever. Without Planner you are left with shapes of demand rather than counts, and a direction can be picked off those.
-   Planner reports ranges rather than counts, and without an active campaign I have always watched those ranges widen. Read it as an order of magnitude.
+   Planner lives inside Google Ads. It needs an Ads account with billing attached or it shows you nothing at all. That is twenty minutes of fiddling with a card, and it is better to know beforehand. The suggest needs no account whatsoever. Without Planner you get no counts, but you do see the shapes of demand. You can pick a direction off those.
+   Planner reports ranges rather than counts. Without an active campaign I have always watched those ranges widen. Read them as an order of magnitude.
 6. **Search inside the platform where the product lives** — the store, the marketplace, Telegram.
    Write down who came up on top. Competitor names from there are a free list of the exact words the demand speaks in.
 7. **Separate demand for a solution from demand for your product** — problem queries against brand queries.
-   Brand queries are demand you have already earned. Problem queries are the market, and they are the only ones that can grow while nobody knows your name.
+   Brand queries are demand you have already earned. Problem queries are the market. Only they can grow while nobody knows your name.
 8. **Read a zero as a signal, not as noise** — especially on the phrase that seems most obvious to you.
-   It means one of two things. Either nobody has this problem in those words, or you invented the word and the market calls it something else. Both are findings, and both are cheaper now than after the texts.
+   It means one of two things. Either nobody has this problem in those words. Or you invented the word and the market calls it something else. Both findings are cheaper now than after the texts.
 
 ## What did not work
 
-- **Naming the product in Latin script while the demand was typed in Cyrillic**. The words were right and the alphabet was wrong. Queries in the audience's script could not reach the product at all, and nothing was logged, because nothing failed.
-- **Reading my user base as proof of the market**. The geography of signups matched the Latin spelling of the name rather than the market I was building for. I spent weeks on product theories about an audience that was an artefact of one metadata field.
+- **Naming the product in Latin script while the demand was typed in Cyrillic**. The words were right and the alphabet was wrong. Queries in the audience's script could not reach the product at all. Nothing was logged, because nothing failed.
+- **Reading my user base as proof of the market**. The geography of signups matched the Latin spelling of the name rather than the market I was building for. I spent weeks on product theories about that audience. One metadata field had created it.
 - **Assuming my vocabulary was the market's**. My word for the core feature was not the word people typed. The pages existed, the demand existed, and they passed each other.
-- **Carrying a Google-only volume into a decision about the Russian market**. I took 390 for `голосовой бот` out of Semrush's `db=ru` and compared it with three English-speaking markets. Wordstat gives 7,034 for the same phrase and window. Both numbers are real, and only one of them is about the engine that audience uses.
-- **Taking a tool's Yandex support from a review instead of the vendor's own list**. This page said Serpstat ships Yandex databases. Serpstat's own database page lists Google and Bing, and that one row was the answer to the page's main question.
-- **Reading one panel as "the search market"**. The tool reported Google. The phrases were Russian, Yandex serves that demand too, and there was not one row about it in the panel. A panel does not warn you about the engine it cannot see.
+- **Carrying a Google-only volume into a decision about the Russian market**. I took 390 for `голосовой бот` out of Semrush's `db=ru` and compared it with three English-speaking markets. Wordstat gives 7,034 for the same phrase and window. Both numbers are real. Only one of them is about the engine that audience uses.
+- **Taking a tool's Yandex support from a review instead of the vendor's own list**. This page said Serpstat ships Yandex databases. Serpstat's own database page lists Google and Bing. That one row was the answer to the page's main question.
+- **Reading one panel as "the search market"**. The tool reported Google. The phrases were Russian, and Yandex serves that demand too. There was not one row about Yandex in the panel. A panel does not warn you about the engine it cannot see.
 - **Waiting for a tool to say what to write about**. Its topics report answered that the domain was too small or too new. A service that reads an existing footprint does not create the first one.
-- **Buying the subscription before doing this by hand**. It returned a keyword list and a competitor's name. Both were reachable in an evening with a browser, and neither changed what I had to do next.
+- **Buying the subscription before doing this by hand**. It returned a keyword list and a competitor's name. I could have got both in an evening with a browser. The subscription changed nothing about my next step.
 
 ## Verify
 
 - Check your obvious phrase and a competitor's phrase in the same panel, on the same day. If yours comes back empty and theirs does not, that word is the finding.
-- Run the phrase by hand on the live results page, with country and language pinned, and compare it with what the panel said.
+- Run the phrase by hand on the live results page, with country and language pinned. Compare it with what the panel said.
 - Search the platform from an account that has never touched the product, in the audience's language. Note whether you appear at all and who is above you.
 - Name the engine next to every figure you write down. In a Russian-language market a number without an engine cannot be used.
-- Run one phrase through both engines before you trust either of them. Mine came back eighteen times apart, and that gap is the whole reason for this rule.
-- You should end up with a file: one row per phrasing, and next to it where it came from and which engine it was checked in. A row with no origin is your own vocabulary in somebody else's suit.
+- Run one phrase through both engines before you trust either of them. Mine came back eighteen times apart. That gap is the whole reason for this rule.
+- You should end up with a file: one row per phrasing. Next to it write where it came from and which engine you checked it in. A row with no origin is your own vocabulary in somebody else's suit.
 
 One panel read across three niches and four markets: [which market to build for](/demand/pick-a-market/).
 
