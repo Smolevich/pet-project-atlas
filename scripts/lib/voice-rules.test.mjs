@@ -4,6 +4,7 @@ import {
   findBannedPhrases,
   findMissingSections,
   findLongSentences,
+  sentenceRhythm,
   parseFrontmatter,
   findUnsourcedNumbers,
   findNumericClaims,
@@ -540,4 +541,21 @@ test('alt-текст картинки не проза и под длину не 
 test('текст рядом с картинкой проверяется как обычно', () => {
   const md = '<Image src={x} alt="короткий alt" />\n\n' + Array.from({length: 35}, (_, i) => `w${i}`).join(' ') + '.';
   assert.equal(findLongSentences(md, 32).length, 1);
+});
+
+test('ровные фразы одной длины дают низкий разброс', () => {
+  const md = Array.from({length: 20}, (_, i) => `Слово одно два три ${i}.`).join(' ');
+  const rhythm = sentenceRhythm(md);
+  assert.ok(rhythm.spread < 1, `разброс ${rhythm.spread} должен быть около нуля`);
+});
+
+test('короткие вперемешку с длинными дают высокий разброс', () => {
+  const short = 'Так оно вышло.';
+  const long = Array.from({length: 30}, (_, i) => `слово${i}`).join(' ') + '.';
+  const rhythm = sentenceRhythm(Array.from({length: 10}, () => `${short} ${long}`).join(' '));
+  assert.ok(rhythm.spread > 7, `разброс ${rhythm.spread} должен быть заметным`);
+});
+
+test('на коротком тексте про ритм не судим', () => {
+  assert.equal(sentenceRhythm('Одна фраза. И вторая.'), null);
 });

@@ -271,15 +271,19 @@ export function findLongSentences(markdown, maxWords = 20) {
 }
 
 /**
- * Медиана длины предложения на странице.
+ * Ритм страницы: медиана длины предложения и разброс вокруг неё.
  *
- * Порог на отдельное предложение ловит только выбросы, а тяжёлый текст бывает
- * ровным: сорок фраз подряд по восемнадцать слов читаются хуже, чем одна на
- * тридцать. Медиана видит именно это.
+ * Одной медианы мало. Замер по 33 черновикам владельца (2026-08-14): медиана 10
+ * слов, но отклонение 10.8, десятый перцентиль 4 слова, девяностый 28. То есть
+ * короткая фраза стоит рядом с длинной, и читается это как речь.
  *
- * Возвращает null, если считать не по чему.
+ * Первая версия правила требовала только низкой медианы. Сайт переписали, все
+ * фразы стали по девять слов, и владелец назвал это рваниной. Ровный текст
+ * тяжелее неровного, поэтому проверяем именно разброс.
+ *
+ * Возвращает null, если предложений слишком мало, чтобы говорить о ритме.
  */
-export function medianSentenceWords(markdown) {
+export function sentenceRhythm(markdown, minSentences = 15) {
   const lengths = [];
   for (const unit of paragraphUnits(markdown)) {
     for (const sentence of splitSentences(unit.text)) {
@@ -287,10 +291,13 @@ export function medianSentenceWords(markdown) {
       if (words >= 3) lengths.push(words);
     }
   }
-  if (lengths.length === 0) return null;
+  if (lengths.length < minSentences) return null;
   lengths.sort((a, b) => a - b);
   const mid = lengths.length >> 1;
-  return lengths.length % 2 ? lengths[mid] : (lengths[mid - 1] + lengths[mid]) / 2;
+  const median = lengths.length % 2 ? lengths[mid] : (lengths[mid - 1] + lengths[mid]) / 2;
+  const mean = lengths.reduce((sum, x) => sum + x, 0) / lengths.length;
+  const spread = Math.sqrt(lengths.reduce((sum, x) => sum + (x - mean) ** 2, 0) / lengths.length);
+  return { median, spread: Math.round(spread * 10) / 10, sentences: lengths.length };
 }
 
 const FRONTMATTER = /^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/;

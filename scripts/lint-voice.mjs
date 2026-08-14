@@ -7,7 +7,7 @@ import {
   findSectionOrderProblems,
   countRequiredSections,
   findLongSentences,
-  medianSentenceWords,
+  sentenceRhythm,
   parseFrontmatter,
   findUnsourcedNumbers,
   findNumericClaims,
@@ -88,15 +88,20 @@ async function lintFile(filePath) {
         `${at(hit.line)}: запрещённая фраза "${hit.phrase}". Замени на конкретное утверждение. (${STYLE.banned})`,
       );
     }
-    for (const hit of findLongSentences(body, 24)) {
+    for (const hit of findLongSentences(body, 36)) {
       warnings.push(
-        `${at(hit.line)}: предложение на ${hit.words} слов, порог 24. Раздели на два. (${STYLE.length})`,
+        `${at(hit.line)}: предложение на ${hit.words} слов, порог 36. Раздели на два. (${STYLE.length})`,
       );
     }
-    const median = medianSentenceWords(body);
-    if (median !== null && median > 12) {
+    const rhythm = sentenceRhythm(body);
+    if (rhythm && rhythm.median > 14) {
       warnings.push(
-        `${filePath}: медиана предложения ${median} слов, порог 12. Страница тяжёлая целиком, а не в одном месте. (${STYLE.length})`,
+        `${filePath}: медиана предложения ${rhythm.median} слов, порог 14. Страница тяжёлая целиком. (${STYLE.length})`,
+      );
+    }
+    if (rhythm && rhythm.spread < 7) {
+      warnings.push(
+        `${filePath}: разброс длины предложений ${rhythm.spread}, надо от 7. Все фразы одной длины — текст звучит рвано. (${STYLE.length})`,
       );
     }
   }
