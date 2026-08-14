@@ -7,6 +7,7 @@ import {
   findSectionOrderProblems,
   countRequiredSections,
   findLongSentences,
+  medianSentenceWords,
   parseFrontmatter,
   findUnsourcedNumbers,
   findNumericClaims,
@@ -87,9 +88,15 @@ async function lintFile(filePath) {
         `${at(hit.line)}: запрещённая фраза "${hit.phrase}". Замени на конкретное утверждение. (${STYLE.banned})`,
       );
     }
-    for (const hit of findLongSentences(body, 32)) {
+    for (const hit of findLongSentences(body, 24)) {
       warnings.push(
-        `${at(hit.line)}: предложение на ${hit.words} слов, порог 32. Раздели на два. (${STYLE.length})`,
+        `${at(hit.line)}: предложение на ${hit.words} слов, порог 24. Раздели на два. (${STYLE.length})`,
+      );
+    }
+    const median = medianSentenceWords(body);
+    if (median !== null && median > 12) {
+      warnings.push(
+        `${filePath}: медиана предложения ${median} слов, порог 12. Страница тяжёлая целиком, а не в одном месте. (${STYLE.length})`,
       );
     }
   }

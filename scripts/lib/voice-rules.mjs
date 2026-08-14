@@ -270,6 +270,29 @@ export function findLongSentences(markdown, maxWords = 20) {
   return hits.sort((a, b) => a.line - b.line);
 }
 
+/**
+ * Медиана длины предложения на странице.
+ *
+ * Порог на отдельное предложение ловит только выбросы, а тяжёлый текст бывает
+ * ровным: сорок фраз подряд по восемнадцать слов читаются хуже, чем одна на
+ * тридцать. Медиана видит именно это.
+ *
+ * Возвращает null, если считать не по чему.
+ */
+export function medianSentenceWords(markdown) {
+  const lengths = [];
+  for (const unit of paragraphUnits(markdown)) {
+    for (const sentence of splitSentences(unit.text)) {
+      const words = sentence.text.split(/\s+/).filter(Boolean).length;
+      if (words >= 3) lengths.push(words);
+    }
+  }
+  if (lengths.length === 0) return null;
+  lengths.sort((a, b) => a - b);
+  const mid = lengths.length >> 1;
+  return lengths.length % 2 ? lengths[mid] : (lengths[mid - 1] + lengths[mid]) / 2;
+}
+
 const FRONTMATTER = /^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/;
 
 /**
