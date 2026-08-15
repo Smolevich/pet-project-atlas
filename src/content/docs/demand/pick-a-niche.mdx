@@ -3,14 +3,14 @@ title: Where a niche starts when everything is taken
 sidebar:
   order: 1
 description: What counts as a pet project, whether it is allowed to take money, and why you look for somebody else's rough edge rather than an empty market. Plus what skipping this step cost me, in numbers.
-updated: 2026-08-14
+updated: 2026-08-15
 sources:
-  - Voice AI bot database, table users, measured 2026-08-13
-  - Voice AI bot database, table usage_events, measured 2026-08-13
-  - Voice AI bot database, table user_credits, measured 2026-08-13
-  - Voice AI bot database, table stars_payments, measured 2026-08-13
-  - Voice AI bot database, table credit_transactions, measured 2026-08-14
-  - Voice AI bot database, table feedback, measured 2026-08-14
+  - Voice AI bot database, table users, measured 2026-08-15
+  - Voice AI bot database, table usage_events, measured 2026-08-15
+  - Voice AI bot database, table user_credits, measured 2026-08-15
+  - Voice AI bot database, table stars_payments, measured 2026-08-15
+  - Voice AI bot database, table credit_transactions, measured 2026-08-15
+  - Voice AI bot database, table feedback, measured 2026-08-15
   - App Store customer reviews RSS, dataset itunes.apple.com/us/rss/customerreviews/id=1276437113, measured 2026-08-13
   - Otter plans and the per-recording limit — https://otter.ai/pricing
   - Peter Thiel, "Competition Is for Losers" — https://www.wsj.com/articles/peter-thiel-competition-is-for-losers-1410535536
@@ -119,24 +119,32 @@ Both work without a key and without an account. Checked on 13 August 2026.
 
 Now my numbers. And my own mistake in how I read them.
 
-Between 12 May and 14 August, 253 people signed up to the bot. **83 of them did nothing at all** — not one row in the events table.
+Between 12 May and 15 August, 258 people signed up to the bot. Here is what became of them.
 
-For three months I read that as "there is no demand". Then I split it by date.
+```mermaid
+flowchart TD
+  A["Signed up<br/>258"]
+  A --> B["Did nothing at all<br/>84"]
+  A --> C["Tried, got<br/>no result<br/>7"]
+  A --> D["Got a result<br/>167"]
+  B --> B1["arrived before 17 July,<br/>grant not credited<br/>56 of 70"]
+  B --> B2["arrived later,<br/>grant works<br/>28 of 188"]
+  D --> E["Used it for one day<br/>125"]
+  D --> F["Reached the end of<br/>the free allowance<br/>3"]
+  F --> G["Paid<br/>0"]
+```
 
-Before 17 July the starting grant was not credited to new users, so somebody arrived, had zero credits, and could do nothing at all. That was my bug, not the market.
+**84 people did nothing at all** — not one row in the events table. For three months I read that as "there is no demand", and then I split it by date.
 
-| When they arrived | Total | Did nothing |
-|---|---|---|
-| before 17 July, grant not credited | 70 | 56 (80%) |
-| after 17 July, grant works | 183 | 27 (15%) |
+Before 17 July the starting grant was not credited to new users, so somebody arrived, had zero credits, and could do nothing at all. That was my bug, not the market. Before 17 July that is how 56 people out of 70 left; after it, 28 out of 188.
 
 And the other half of the same story. The feedback button sat in the bot the whole time, in three months nine people used it, and nobody wrote to say the product did not work.
 
-So silence in your data is not a verdict on demand. Check first whether the product was even working.
+So silence in your data is not a verdict on demand — check first whether the product was even working, because a broken product and an indifferent audience look exactly the same from here.
 
-Now the people it did work for. 155 got a result at least once, and **117 of them used it for one day**.
+Now the people it did work for. 167 got a result at least once, and **125 of them used it for one day**.
 
-Three users reached the end of the free allowance. One tried again, nobody paid. The lowest balance is 16 credits, the average is 209.
+Three users reached the end of the free allowance. One tried again, nobody paid, and the lowest balance is 16 credits against an average of 209.
 
 So you have to survive as far as the freemium wall, and almost none of mine did. Features would not have helped here. Fixing the grant two months earlier would have.
 
@@ -146,16 +154,16 @@ Say something about yourself that a competitor cannot repeat until he rebuilds h
 
 "Easier" and "faster" do not count. Everybody says that about themselves, and nobody can check it. A good sentence names a specific irritation and the specific people it gets to.
 
-Say it out loud before the first line of code. If it will not come out, you have no difference yet. Better to find that out now than at your three hundredth user.
+Say it out loud before the first line of code. If it will not come out, you have no difference yet, and finding that out now is a great deal cheaper than finding it out at your three hundredth user.
 
 ## What did not work
 
 - **Looking for an empty niche.** Empty almost always means nobody pays for the job. Look for money, not for the absence of competitors.
-- **Reading silence as an absence of demand.** 83 people out of 253 pressed nothing. For three months I took that as a verdict on the niche. For 56 of them it was my bug: zero credits.
+- **Reading silence as an absence of demand.** 84 people out of 258 pressed nothing. For three months I took that as a verdict on the niche. For 56 of them it was my bug: zero credits.
 - **Waiting for people to hit the free limit.** I built the economics around a wall that three people reached. They left earlier than that, and quietly.
 - **Believing somebody would report the breakage.** The feedback button sat in plain sight. Nine messages in three months, and not one about the grant.
 - **Reading a competitor's average rating.** The average is the output of marketing. Everything useful sits in the one- and two-star reviews.
-- **Treating a signup as a signal.** The signups looked like an audience. Of the people the product actually worked for, 117 came exactly once.
+- **Treating a signup as a signal.** The signups looked like an audience. Of the people the product actually worked for, 125 came exactly once.
 - **Waiting for the difference to occur to me along the way.** It did not. Either the difference exists before the code, or it gets written into the description afterwards and convinces nobody.
 
 ## Verify

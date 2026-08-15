@@ -7,54 +7,54 @@ sources:
   - sitemap.xml, site atlas.smolevich.com, measured 2026-08-12
 ---
 
-Below is the order I did this in. Under each step I say what it costs to do that step at the wrong moment. If you would rather tick boxes than read reasons, take [the checklist](/start/checklist/) — the same route on one screen.
+Below is the order I did this in. Under each step I say what it costs to do that step at the wrong moment, and each of those costs is one I paid myself. If you would rather tick boxes than read reasons, take [the checklist](/start/checklist/) — the same route on one screen.
 
-One thing sits ahead of step one. You have to be able to say what you are building and how it differs from what is already on sale. If you cannot say it yet, start there: [where a niche starts when everything is taken](/demand/pick-a-niche/).
+One thing comes before step one. You have to be able to say what you are building and how it differs from what is already on sale. If you cannot say it yet, start there: [where a niche starts when everything is taken](/demand/pick-a-niche/).
 
-Everything below assumes you have that answer. And this is my log, not a method. Your numbers will come out different, but the order is the part I hope saves you a month.
+Everything below assumes you have that answer. And this is my log rather than a method: your numbers will come out different, but the order is the part I hope saves you a month.
 
 ## What we are solving
 
 The project has been live for weeks. The only visitor in the logs is you.
 
-You have read a lot of advice. It gave you twelve things to do and no idea which one is first.
+You have read a lot of advice. It gave you twelve things to do and no idea which one is first, and I picked the wrong one and paid for it in weeks.
 
-Order is the whole problem. Each item below is cheap on its own. Do them in the wrong order and you lose the month.
+Order is the whole problem. Each item below is cheap on its own. Do them in the wrong order and you lose the month, because the work lands before the thing it depends on and pays nothing back.
 
-The first item is not technical at all. You find out whether anybody searches for this. Then whether those people pay for anything.
+The first item is not technical. You find out whether anybody searches for this, and then whether the people who search pay for anything at all.
 
 ## Steps
 
-The section numbers are a reading order. The doing order crosses them twice. I marked both crossings below.
+The section numbers are a reading order. The doing order crosses them twice, and I marked each crossing where it falls.
 
 ### Week zero — does anybody search for this, and do they pay for anything
 
 1. Collect the exact wordings people use, from support, reviews and forums — [the words people actually type](/demand/how-people-search/).
-2. Check the Russian wordings in Yandex Wordstat, with the operators applied. Without operators you get the category total, not demand for your wording. No Russian-speaking audience? Skip to step three — [same page](/demand/how-people-search/).
+2. Check the Russian wordings in Yandex Wordstat, with the operators applied, because without operators you get the category total rather than demand for your wording. No Russian-speaking audience? Skip to step three — [same page](/demand/how-people-search/).
 3. Check the English wordings in Google. Read the suggest dropdown in both engines — [same page](/demand/how-people-search/).
 4. Search the platform your product lives in, from a fresh account — [same page](/demand/how-people-search/).
 5. Read a zero on your most obvious phrase as a finding, not a glitch. Either nobody has this problem, or you invented the word — [same page](/demand/how-people-search/).
 6. Name the paid competitor on your main query. Write down the shape of their price: per seat, per action, per month — [whether that audience pays](/demand/will-they-pay/).
 7. Count the ads sitting over the query yourself. Write down the free path a person has today — [same page](/demand/will-they-pay/).
 
-This takes a day or two, all of it in a browser. It decides whether the rest is worth doing. Everything below assumes somebody types these words and pays for something.
+This takes a day or two, all of it in a browser, and it decides whether the rest of the route is worth doing at all. Everything below assumes somebody types these words and pays for something.
 
 ### Week one — can a crawler read the site, and does anyone know it is there
 
-8. Run `curl -sL` on your own page and find the body text in the response. Missing text is text the crawler never sees — [Google does not see your site](/indexing/why-google-does-not-see-you/).
-9. Read `robots.txt` on the live domain, every line of it. One line closes the whole domain: a `Disallow: /` that came over from a staging config — [same page](/indexing/why-google-does-not-see-you/).
-10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header. It drops the page from the index on purpose. No browser shows you that header — [same page](/indexing/why-google-does-not-see-you/).
-11. Check that the canonical on a few pages points at those same pages. Canonical is the tag that names the real URL of a page. Point it at the home page and you ask search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
-12. Request one page from outside your network, without cookies. Your own network is trusted. An edge rule that blocks the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/).
-13. Verify a domain property in Search Console and submit the sitemap once. A URL-prefix property covers only the form you typed. Its report then stays empty — [submit and verify](/indexing/submit-and-verify/).
-14. Import the property into Bing Webmaster Tools. Its index also feeds Copilot answers. Those readers are a separate audience — [submit and verify](/indexing/submit-and-verify/).
-15. Serve `User-agent: *` and `Allow: /`. Name an agent only when you want to block it. This site has never named one in order to allow it. A list of allowed names expires the first time a vendor renames something — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+8. Run `curl -sL` on your own page and look for the body text in the response, because text that is missing there is text the crawler never sees — [Google does not see your site](/indexing/why-google-does-not-see-you/).
+9. Read `robots.txt` on the live domain, every line of it, because one line closes the whole domain: a `Disallow: /` that came over from a staging config — [same page](/indexing/why-google-does-not-see-you/).
+10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header. It drops the page from the index on purpose, and no browser shows you that header — [same page](/indexing/why-google-does-not-see-you/).
+11. Check that the canonical on a few pages points at those same pages. Canonical is the tag that names the real URL of a page, so point it at the home page and you have asked search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
+12. Request one page from outside your network, without cookies. Your own network is trusted, so an edge rule that blocks the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/).
+13. Verify a domain property in Search Console and submit the sitemap once. A URL-prefix property covers only the form you typed, and its report then stays empty — [submit and verify](/indexing/submit-and-verify/).
+14. Import the property into Bing Webmaster Tools. Its index also feeds Copilot answers, and those readers are a separate audience — [submit and verify](/indexing/submit-and-verify/).
+15. Serve `User-agent: *` and `Allow: /`. Name an agent only when you want to block it, because a list of allowed names expires the first time a vendor renames something. This site has never named one in order to allow it — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 16. **First crossing.** Tag every outbound link and store the source on first contact. A messenger or a store passes no source unless you ask for it — [where the user came from](/analytics/attribution/).
 17. Name the single action that counts as activation. Activation is the one thing a user does that proves the product worked — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
 Step sixteen belongs to section six, and you have to do it now. You cannot reconstruct attribution afterwards.
 
-Every untagged day is a day of arrivals nobody will ever classify. My own launch day is one of them.
+Every untagged day is a day of arrivals nobody will ever classify, however good the dashboard gets later. My own launch day is one of them.
 
 ### Week two — will the page be found, and will it be quoted
 
@@ -62,43 +62,43 @@ Every untagged day is a day of arrivals nobody will ever classify. My own launch
 19. Order the queue by money: transactional, then comparison, then informational. That is ready to buy, then still choosing, then still reading. I ran out of energy long before I ran out of clusters — [what to write](/content/keyword-clusters/).
 20. Write the first page in the four-block shape — [what a page is made of](/content/page-templates/). The blocks: the problem, the steps, what did not work, how to check.
 21. Put the answer in the first three sentences of that page. That block is the passage a model lifts — [what a page is made of](/content/page-templates/).
-22. Add JSON-LD with `sameAs` listing your profiles and listings. JSON-LD is a block of machine-readable facts about the page. Google documents it for the Knowledge Graph. For AI citation nobody has measured it — [why AI answers cite someone else](/geo/citable-pages/).
-23. Publish `llms.txt` only if you ship developer docs. Name only pages that are actually written. My own log records 0 fetches by any AI agent in 16 days — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+22. Add JSON-LD with `sameAs` listing your profiles and listings. JSON-LD is a block of machine-readable facts about the page. Google documents it for the Knowledge Graph, and for AI citation nobody has measured it — [why AI answers cite someone else](/geo/citable-pages/).
+23. Publish `llms.txt` only if you ship developer docs, and name only pages that are actually written. My own log records 0 fetches by any AI agent in 16 days — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 24. If the product lives in a platform, put its function in the name. Platform search matches the name, not the description — [search inside the platform](/distribution/in-platform-visibility/).
 25. Take the first weekly snapshot and append it to a file — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
 ### Month two — who links to you, and what does a user cost
 
 26. Write the listing card once: name, description, category, screenshots, link — [where the first links come from](/distribution/catalogs/).
-27. Check each venue is alive before you spend an evening on the batch. Published lists of directories go stale. Then submit in small batches, with tagged links — [where the first links come from](/distribution/catalogs/).
+27. Check each venue is alive before you spend an evening on the batch, because published lists of directories go stale. Then submit in small batches, with tagged links — [where the first links come from](/distribution/catalogs/).
 28. Write to one listicle author whose page already ranks above you — [where the first links come from](/distribution/catalogs/).
 29. **Second crossing.** Re-run the citability work now that something links to you — [why AI answers cite someone else](/geo/citable-pages/).
-30. Record the cost of every action on its own event row. I never had such a column at all. Every report I built reconstructed the cost from a rates table afterwards — [what one user costs](/money/unit-economics/).
+30. Record the cost of every action on its own event row. I never had such a column at all, so every report I built reconstructed the cost from a rates table afterwards — [what one user costs](/money/unit-economics/).
 31. State break-even as a whole number of payers per month — [what one user costs](/money/unit-economics/).
 32. Read the series and fix the earliest large drop, not the last one — [the numbers worth reading weekly](/analytics/what-to-measure/).
 33. Post where the shortlists get written: answer the question and say the product is yours. Never ask for upvotes — [communities and forums](/distribution/communities/).
-34. Put who, what, when, source, cost, client and outcome on every event row. Cost and source can only be written at insert time. This step belongs back in week one — [what an event row has to carry](/analytics/product-metrics/).
+34. Put who, what, when, source, cost, client and outcome on every event row. Cost and source can only be written at insert time, so this step really belongs back in week one — [what an event row has to carry](/analytics/product-metrics/).
 35. Name a price. Put the wall after the first real result, and ask one person for money. On my dashboard, nobody paying looked exactly like nobody being asked — [getting the first person to pay](/money/first-payer/).
 
-Step twenty-nine goes back to section three. On-page citability pays once a model has seen your name somewhere else. Month two is when that starts being true.
+Step twenty-nine goes back to section three. On-page citability pays once a model has seen your name somewhere else, and month two is when that starts being true.
 
 ## What did not work
 
-These are mistakes of order. I did each of them correctly, at a moment when the work could not pay.
+These are mistakes of order. I did each of them correctly, at a moment when the work could not pay, so the fix was never to do the thing better but to do it later.
 
-- **Optimising for a phrase I invented**. My word for the core feature was not the word people typed. Pages, links and dashboards all worked. The demand walked straight past them.
-- **Backlinks while the site was still blocked**. I spent a week on directory submissions. The pages behind those links carried a `noindex` header the whole time. Search dropped them about as fast as I filed them.
+- **Optimising for a phrase I invented**. My word for the core feature was not the word people typed. Pages, links and dashboards all worked, and the demand walked straight past them.
+- **Backlinks while the site was still blocked**. I spent a week on directory submissions, and the pages behind those links carried a `noindex` header the whole time. Search dropped them about as fast as I filed them.
 - **Writing before the cluster map existed**. Two of my pages ended up chasing the same intent. Search alternated between them, and both stayed flat. I merged them, added a redirect, and paid for that text twice.
-- **Tagging links after the launch**. The launch day arrivals came in untagged and stayed that way. No later analysis brings them back. There is nothing left to analyse.
-- **Citability work before crawler access**. The pages scored well. Not one agent had fetched them. The edge refused every request while I polished the opening sentences.
+- **Tagging links after the launch**. The launch day arrivals came in untagged and stayed that way. No later analysis brings them back, because there is nothing left to analyse.
+- **Citability work before crawler access**. The pages scored well and not one agent had fetched them. The edge refused every request while I polished the opening sentences.
 - **Cutting costs before there were payers**. I carefully optimised a few dollars of fixed cost, with zero payers on the other side. When nobody pays, there is no break-even to move.
-- **Publishing a step I had already measured as empty**. Step twenty-three said publish `llms.txt`. The log two clicks away recorded not one AI agent fetching it. The measurement and the instruction lived on the same site for a week.
-- **Telling readers to allow agents by name**. Step fifteen did exactly that. This site's own `robots.txt` was a wildcard the whole time. My own file was the better advice, and I never read it as advice.
+- **Publishing a step I had already measured as empty**. Step twenty-three said publish `llms.txt`. The log two clicks away recorded not one AI agent fetching it, and the measurement and the instruction lived on the same site for a week.
+- **Telling readers to allow agents by name**. Step fifteen did exactly that, while this site's own `robots.txt` was a wildcard the whole time. My own file was the better advice, and I never read it as advice.
 - **Following the section numbers literally**. They are a reading order, not a schedule. Read them as a schedule and attribution lands after distribution. That is one section too late.
 
 ## Verify
 
-At the end of each stage you should be able to say one sentence out loud. If you cannot say it, stay in the stage. The next stage is built on top of it.
+Each stage ends with one sentence you should be able to say out loud. If you cannot say it, stay in the stage, because the next stage is built straight on top of it.
 
 - **End of week zero**. A file of wordings, each with its origin and the engine it was checked in. A named paid competitor, or a stated reason the market looks empty.
 - **End of week one**. URL Inspection says the URL is on Google. A link you published today carries a source tag, and that tag lands in the database.

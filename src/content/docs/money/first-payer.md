@@ -18,21 +18,21 @@ A product nobody pays for and a product nobody has been asked to pay for look id
 
 ### Where a price comes from when there is nobody to survey
 
-Take the shape of the price from a competitor. The shape is per seat, per action, or per month. Somebody already tested that shape with their own money: [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor. That floor is on [what one user costs](/money/unit-economics/).
+Take the shape of the price from a competitor. The shape is per seat, per action, or per month, and somebody already tested that shape with their own money: [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor, and that floor is on [what one user costs](/money/unit-economics/).
 
 Price the unit your event row already records: a minute, a message, a run. If the row carries a cost per action you can price a package today, whereas a price in a unit you do not measure has nothing to check it against.
 
-A pricing study at this size is not worth running. An answer in a survey is not a purchase. You have so few people to survey that you can just ask each one for money. One real answer is worth more than a form full of survey answers.
+A pricing study at this size is not worth running, because an answer in a survey is not a purchase. You have so few people to survey that you can just ask each one for money. One real answer beats a whole form.
 
 ### Where the wall goes so that it stops something
 
-Put the wall where the product has already worked once. That is after the first real result. Before it, the person is refusing something they have not seen. Long after it, they already have what they came for. There is nothing left to buy.
+Put the wall where the product has already worked once. That is after the first real result. Before it, the person is refusing something they have not seen, and long after it they already have what they came for, so there is nothing left to buy.
 
-And the wall has to stop something. A generous free tier with an upgrade prompt collects nothing. The prompt is dismissible and the free tier keeps working. Dismissing it is the rational move. If nothing stops, nobody pays.
+And the wall has to stop something. A generous free tier with an upgrade prompt collects nothing: the prompt is dismissible, the free tier keeps working, and dismissing it is the rational move. If nothing stops, nobody pays.
 
 ### Which limit your user actually meets
 
-One resource, one limit. A balance and a separate daily cap disagree with each other. The person meets whichever fires first. That is usually not the one you priced.
+One resource, one limit. A balance and a separate daily cap disagree with each other, the person meets whichever fires first, and that is usually not the one you priced.
 
 ### Who is holding the money question right now
 
@@ -56,13 +56,13 @@ What the row itself is made of: [what an event row has to carry](/analytics/prod
 
 ### Whether the payment path works on real money
 
-Buy your own product with real money and then refund yourself. Walk the whole path, not the sandbox. Telegram requires bots selling digital goods inside its apps to use Stars. They must answer `/paysupport` and check for a successful payment update before delivering.
+Buy your own product with real money and then refund yourself. Walk the whole path, not the sandbox. Telegram requires bots selling digital goods inside its apps to use Stars, and they must answer `/paysupport` and check for a successful payment update before delivering.
 
 A checkout that fails quietly reads on a dashboard exactly like nobody wanting the thing, and the only way to tell those apart is to walk the path yourself.
 
 ### What one person says when you ask for a real price
 
-While the numbers are unreadable, ask by hand: write to your most engaged users individually. At a handful of weekly actives no funnel means anything. And one person answering a real price settles more than a month of watching the graph.
+While the numbers are unreadable, ask by hand. Write to your most engaged users individually. At a handful of weekly actives no funnel means anything, and one person answering a real price settles more than a month of watching the graph.
 
 Store the refusal in the person's own words. The finding sits in the reason rather than in the no. "I would use the free one" and "my employer would never approve this" are two different products. Only one of them is worth building.
 
@@ -74,14 +74,14 @@ Move the default engine to the cheap one before you take money — [what one use
 
 ## What did not work
 
-- **Pricing the packages before asking anybody for money.** Three packages shipped. A payment channel connected. Not one real payer. I had priced a thing nobody had yet refused.
-- **Treating the payment channel as the blocker.** One provider never came through. Connecting a second one took real time. When it finally worked, the count of payers did not move. The channel was never the thing in the way.
+- **Pricing the packages before asking anybody for money.** Three packages shipped, a payment channel connected, not one real payer. I had priced a thing nobody had yet refused.
+- **Treating the payment channel as the blocker.** One provider never came through, and connecting another took real time. When it finally worked, the count of payers did not move: the channel was never the thing in the way.
 - **Defaulting to the most expensive engine.** One config line cost margin, speed and the free allowance at once. People sat watching a placeholder while credits went out of the account.
-- **Two independent limits on the same resource.** A credit balance, plus a per-day cap on one engine. The most engaged user of that month hit the cap with credits still unspent. He never came back. My own cap stopped the person standing closest to paying. It never asked him for money.
-- **Reading free signups as willingness to pay.** They arrived, used the product and returned. None of them converted. The signup number kept climbing the whole time.
-- **Waiting for the funnel to say something.** At this volume the weekly swing beat any effect I could ship. The funnel turned out to be the wrong instrument. A direct question was the right one.
+- **Two independent limits on the same resource.** A credit balance, plus a per-day cap on one engine. The most engaged user of that month hit the cap with credits still unspent. He never came back. My own cap stopped the person standing closest to paying, and it never asked him for money.
+- **Reading free signups as willingness to pay.** They arrived, used the product and returned, and none of them converted. The signup number kept climbing the whole time.
+- **Waiting for the funnel to say something.** At this volume the weekly swing beat any effect I could ship. The funnel turned out to be the wrong instrument, and a direct question was the right one.
 - **Counting my own test purchase as revenue.** The model showed break-even reached for a day. The payer was me, through a test account.
-- **Cutting a few dollars of fixed cost while payers were zero.** The denominator was fine already. No break-even exists without a first payer. The work belonged here, not in the billing console.
+- **Cutting a few dollars of fixed cost while payers were zero.** The denominator was fine already, and no break-even exists without a first payer. The work belonged here, not in the billing console.
 
 ## Verify
 

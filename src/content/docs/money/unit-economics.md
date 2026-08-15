@@ -15,19 +15,19 @@ sources:
 
 Every action a user takes spends real money at a provider. Until I know what one action costs, any price I name is a guess with a confident face on it.
 
-Two numbers close the question. The first is the variable cost of serving one action. The second is the fixed cost of a month in which nobody shows up. Break-even follows from those two and comes out in payers per month. A margin percentage does not tell you whether to continue. "Two people a month" does.
+Two numbers close the question. The first is the variable cost of serving one action, and the second is the fixed cost of a month in which nobody shows up. Break-even follows from those costs and comes out in payers per month. A margin percentage does not tell you whether to continue. "Two people a month" does.
 
 ## Steps
 
 ### Which costs grow when somebody shows up
 
-Split the costs into two buckets once, in writing. You optimise the two in completely different ways. Fixed is the server, the domain and any plan billed whether or not anyone arrives. Variable is tokens, characters, seconds and per-call fees.
+Split the costs into two buckets once, in writing, because fixed and variable get optimised in completely different ways. Fixed is the server, the domain and any plan billed whether or not anyone arrives. Variable is tokens, characters, seconds and per-call fees.
 
-A box running three projects enters this product at its share. You have to say that share out loud. I keep it as a named constant with a comment listing the projects. When the mix changes I edit one number instead of hunting for it through a model.
+A box running three projects enters this product at its share. You have to say that share out loud. I keep it as a named constant with a comment listing the projects, so when the mix changes I edit one number instead of hunting for it through a model.
 
 ### What does one action actually cost
 
-Put the cost of a call on the same event row as the result, and put it there at once. An hour later there is nowhere left to get it from. Many APIs return usage on the response, and some return the charge itself. If yours returns only quantity, store the quantity and multiply by a rate you keep in a table.
+Put the cost of a call on the same event row as the result, and put it there at once, because an hour later there is nowhere left to get it from. Many APIs return usage on the response, and some return the charge itself. If yours returns only quantity, store the quantity and multiply by a rate you keep in a table.
 
 The column and the read off it look roughly like this — the names here are generic, your schema is your own:
 
@@ -51,7 +51,7 @@ What else belongs on that row, and why it has to be written at insert time: [wha
 
 Two engines at different prices cannot live in one model until you express the costs in the unit you sell. That unit is credits, minutes or messages — whatever the package is priced in.
 
-Compute the worst case, not the average. A user is entitled to spend an entire package on your most expensive engine. Your margin floor is the lowest margin across packages, evaluated at that engine. That number has to be acceptable, not the average across all of them.
+Compute the worst case, not the average. A user is entitled to spend an entire package on your most expensive engine. Your margin floor is the lowest margin across packages, evaluated at that engine, and that floor has to be acceptable rather than the average across all of them.
 
 ### How much of the ticket actually lands
 
@@ -78,7 +78,7 @@ Skip that and the first payer in your model is you, and nothing in the model wil
 
 ### Where the model gets its facts, and how it goes stale
 
-Pull the actuals from production, or the model ages without telling you. If the source is unreachable, use the cache but stamp the output with a date. Silent old numbers produce decisions about last quarter.
+Pull the actuals from production, or the model ages without telling you. If the source is unreachable, use the cache but stamp the output with a date, because silent old numbers produce decisions about last quarter.
 
 Keep the formulas in code rather than in spreadsheet cells. Then known inputs become unit tests, and a cell dragged with the mouse cannot rewrite the model on you without warning.
 
@@ -106,4 +106,4 @@ Make the default the cheapest engine that clears your quality bar. The default i
 - Say your break-even out loud as a whole number of payers this month. If you cannot, the model is not finished.
 - Re-run the revenue aggregation and confirm your own test purchase is absent from it.
 
-In practice the threshold at this size comes out small, and the payers come out missing. That is a demand problem rather than a cost problem. It sends you back to [distribution](/distribution/) and to activation instead of another round of savings.
+In practice the threshold at this size comes out small, and the payers come out missing. That is a demand problem rather than a cost problem, and it sends you back to [distribution](/distribution/) and to activation instead of another round of savings.

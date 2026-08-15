@@ -18,7 +18,7 @@ sources:
 
 I do not ship audit tooling with this atlas, and I am not going to. The good tools already exist. My own rewrite of one would be a worse copy that nobody maintains, me included.
 
-What I did not have was the map. Which tool answers which question, and in what order to run them. And which of them I can skip once the symptom already says where to look.
+What I did not have was the map. Which tool answers which question, in what order to run them, and which of them I can skip once the symptom already says where to look.
 
 Every third-party row below is a package sitting on my own machine. The one exception is a paid service. I read the licence column off the source repository, and for that service off what the money actually buys.
 
@@ -44,14 +44,14 @@ Every third-party row below is a package sitting on my own machine. The one exce
 
 ### Where these skills come from, and where their licence lives
 
-The skills CLI takes an owner and a repo name. Installing the third-party ones is two lines:
+The skills CLI takes an owner and a repo name, so installing the third-party ones is two lines:
 
 ```bash
 npx skills add coreyhaines31/marketingskills
 npx skills add zubair-trabzada/geo-seo-claude
 ```
 
-The licence does not come down with them. An installed `SKILL.md` carries no licence line, no author and no repository name. Provenance survives in one place only — the lock file the installer wrote:
+The licence does not come down with them. An installed `SKILL.md` carries no licence line, no author and no repository name, and provenance survives in one place only — the lock file the installer wrote:
 
 ```bash
 cat ~/.agents/.skill-lock.json
@@ -61,23 +61,23 @@ Take the repository name out of there. Then go and read the licence in the repos
 
 ### Which of them to run first when nothing is in the index
 
-`seo-audit`. It walks fetch, block and canonical in one pass. That is faster than checking seven things by hand. It is also much louder when one of them is broken.
+`seo-audit`. It walks fetch, block and canonical in one pass. That is faster than checking seven things by hand, and it is also much louder when one of them is broken.
 
 On the GEO side the order matters more than the choice. Run `geo-crawlers` before `geo-citability`, every time. Access decides whether the writing gets read at all.
 
-I once ran them the other way round. I got a cheerful citability report about a page no agent had fetched in weeks.
+I once ran them the other way round, and I got a cheerful citability report about a page no agent had fetched in weeks.
 
 ### What a composite score is actually good for
 
-`geo-audit` for the baseline, a focused skill for the fix. A composite number moves when anything moves, so on its own it tells you little.
+`geo-audit` for the baseline, a focused skill for the fix: a composite number moves when anything moves, so on its own it tells you little.
 
-Run the same audit again after the work and read the difference. That difference is the part I actually look at.
+Run the same audit again after the work and read the difference, because that difference is the part I actually look at.
 
 ### When a browser is the only way into a panel
 
-Playwright MCP earns its place where there is no API at all. A panel behind a login, a console with no export button.
+Playwright MCP earns its place where there is no API at all: a panel behind a login, a console with no export button.
 
-Drive your own profile, so the authenticated sessions are already there. A clean profile shows you a sign-in screen and nothing else.
+Drive your own profile, so the authenticated sessions are already there — a clean profile shows you a sign-in screen and nothing else.
 
 ### What gws covers, and what it does not
 
@@ -85,9 +85,9 @@ Drive your own profile, so the authenticated sessions are already there. A clean
 gws --help
 ```
 
-The list it prints comes from your own installed build. That list is the answer, not what a guide says. It covers Workspace.
+The list it prints comes from your own installed build, and that list is the answer, not what a guide says. It covers Workspace.
 
-Search Console and Analytics are not in it. The failure below is me finding that out the slow way.
+Search Console and Analytics are not in it, and the failure below is me finding that out the slow way.
 
 ### How the four /atlas: commands get installed
 
@@ -98,9 +98,9 @@ Two lines in Claude Code — add this repository as a marketplace, then install 
 /plugin install atlas
 ```
 
-Those four commands route and order the work. The auditing stays with the third-party skills above, and that is deliberate.
+Those four commands route and order the work, while the auditing stays with the third-party skills above, and that is deliberate.
 
-A wrapper only decides when to run something. That is much cheaper to keep alive than a second audit engine.
+A wrapper only decides when to run something, and that is much cheaper to keep alive than a second audit engine.
 
 ## What did not work
 

@@ -12,9 +12,9 @@ sources:
 
 The plan says which page to write. What goes inside it is a separate question, and you have to answer it for two readers at once.
 
-The first reader is a person, and the page has to win a slot in a list of ten. The second reader is a model. It lifts a chunk out of context, and it will not carry your setup along with the quote.
+One reader is a person, and your page has to win a slot in a list of ten. The other reader is a model: it lifts a chunk out of context, and it will not carry your setup along with the quote.
 
-One shape suits both. The answer first, then the procedure, then the failures, then the questions.
+The shape for them is the same. The answer first, then the procedure, then the failures, then the questions.
 
 ## Steps
 
@@ -22,25 +22,25 @@ One shape suits both. The answer first, then the procedure, then the failures, t
 
 Title the page with the reader's question. Put the primary query in the URL, not your internal name for the feature.
 
-Then answer in the first three sentences: the symptom, the answer, and the condition under which the answer holds.
+Then answer in the first three sentences: name the symptom, give the answer itself, and name the condition under which it holds, because past the third sentence a reader may well not still be with you.
 
-A reader uses that block to decide whether to keep going. A model lifts the same block as its quote. So one piece of text does two jobs for you.
+A reader uses that block to decide whether to keep going, and a model lifts the very same block as its quote, so one piece of text does two jobs for you. Nowhere else on the page will that happen.
 
 ### Steps somebody can actually run
 
-One command, one click, or one file. "Optimise your content" is not a step. If you cannot run it, either cut it or split it into the things you can run.
+One command, one click, or one file. "Optimise your content" is not a step: if you cannot run it, either cut the wording or split it into the things you really can run.
 
-Where a command exists, print the command. A one-line shell check, described in words instead, costs the reader ten minutes. That is how long it takes them to reconstruct the line.
+Where a command exists, print the command. A one-line shell check, described in words instead, costs the reader ten minutes — that is how long it takes them to reconstruct the line themselves.
 
 ### The block nobody can copy off you
 
-Write what you tried, where it broke, and what it cost. Competitors copy each other's steps freely. Nobody copies your dead ends, because they have none of their own.
+Write what you tried, where it broke, and what it cost you. Competitors copy each other's steps freely, but nobody copies your dead ends, because they have none of their own.
 
 This is the part of a page I trust when I am the reader myself. Anyone can restate a procedure. Only the person who walked into the wall knows where it is.
 
 ### The FAQ, and what it is worth now
 
-Add an FAQ only for questions you were actually asked — from support, from the query list, from comments.
+Add an FAQ only for questions you were actually asked — from support, from the query list, from comments. A question nobody asked you is one you will invent to fit an answer you already wrote, and the reader sees it.
 
 Google stopped showing the FAQ rich result on 7 May 2026 and removed the documentation on 15 June 2026. The markup gives nobody a rich result any more.
 
@@ -50,11 +50,11 @@ The block still earns its place. A short question with a short self-contained an
 
 Name the destination in the anchor text: the previous page in the route, the next page, the tool. "Read more" tells nobody anything. I still catch myself typing "read more".
 
-End with a way to check: a command, a report, a query to run. Without one, the page ends in your opinion. The reader has no way to tell whether any of it worked for them.
+End with a way to check: a command, a report, a query to run. Without one the page ends in your opinion, and the reader leaves without ever finding out whether any of what you described worked for them.
 
 ### Turning the shape into something a machine checks
 
-Put a linter in CI and let it fail the build. A style document gets read once and forgotten by the third contributor. A rule that fails the build outlives all of them.
+Put a linter in CI and let it fail the build. A style document gets read once and forgotten by the third contributor, whereas a rule that fails the build outlives all of them.
 
 ## What did not work
 
@@ -69,7 +69,7 @@ Put a linter in CI and let it fail the build. A style document gets read once an
 
 ## Verify
 
-This repository enforces its own template. It is the cheapest worked example of the last step that I can point at.
+This repository enforces its own template, and it is the cheapest worked example of the last step that I can point you at.
 
 ```bash
 npm run lint:voice
@@ -82,13 +82,13 @@ The script walks every page under `src/content/docs` and reports, per file and p
 - a number in prose while `sources:` is empty;
 - a sentence over the length threshold, as a warning that keeps the build green.
 
-Two exemptions let the check survive contact with contributors.
+Two exemptions follow. Without them the check would not survive contact with contributors: the first person whose sensible page it fails goes and switches it off in CI altogether.
 
-An index page that declares none of the four blocks is navigation, so the check skips it. Declare one block and all four become required.
+An index page that declares none of the four blocks is navigation, so the check skips it, but declare one block and the page is a procedure, and all four become required.
 
-Guest cases keep the author's voice, so the voice checks skip them. The number rule still applies there, because facts are checked the same way for everyone.
+Guest cases keep the author's voice, so the voice checks skip them, while the number rule still applies there, because facts are checked the same way for everyone.
 
-Then read the page by hand, because a linter cannot.
+Then read the page by hand. The linter matches shape and ban list, but whether the text answers its own title is something it cannot know, and only you can check that.
 
 - Read only the first three sentences. If they do not answer the title, the page is not finished.
 - Paste one middle paragraph into an empty note. If you cannot tell what it is about, a model cannot either.

@@ -17,11 +17,11 @@ Every guide tells you to publish `llms.txt`. None of them shows a log line where
 
 So I read my own. One box, several small sites, per-site nginx access logs dated 19 July to 12 August 2026.
 
-The window has a hole in it. Nothing between 20 and 28 July survived rotation. What follows is 16 days of records.
+The window has a hole in it: nothing between 20 and 28 July survived rotation, so what follows is 16 days of records.
 
 This is one operator's traffic, not a sample of the web. It is still a measurement. The advice around it does not have even that.
 
-The first thing the measurement found was me. My own address made 4,221 requests to this box in the window. 81 of those went out under a crawler's name.
+The first thing the measurement found was me. My own address made 4,221 requests to this box in the window, and 81 of those went out under a crawler's name.
 
 ## Steps
 
@@ -45,27 +45,27 @@ Read the whole period first, and a single agent after that. Requests from my own
 
 Two rows are entirely mine. ClaudeBot and Perplexity-User go to 0 once my own address comes out.
 
-An earlier version of this page blamed those rows on an unknown scanner. It said one client had sent 56 different crawler names from a single address.
+An earlier version of this page blamed those rows on an unknown scanner: it said one client had sent 56 different crawler names from a single address.
 
-The count was close. The client was me. That address sent 56 distinct `User-Agent` strings in the window, and 18 of them were crawler names. They all came from `curl` runs testing my own access rules.
+The count was close. The client was me. That address sent 56 distinct `User-Agent` strings in the window, and 18 of them were crawler names, all from `curl` runs testing my own access rules.
 
 `Google-Extended` was in that set. It has no user agent of its own. It is a control token you write in `robots.txt`, and Google's ordinary agents do the crawling.
 
-So the string was real and no crawler stood behind it. You will never grep `Google-Extended` out of your own log. Not unless you type it at yourself.
+So the string was real and no crawler stood behind it, and you will never grep `Google-Extended` out of your own log, not unless you type it at yourself.
 
 ### The largest row is the one I cannot attribute
 
-`ChatGPT-User` is top of the table, and it is the row the log explains worst. That agent fires when a person pastes a URL into a chat.
+`ChatGPT-User` is top of the table, and it is the row the log explains worst, because that agent fires when a person pastes a URL into a chat.
 
-Four of the 341 came from my own address. That was `curl` with the string set by hand. The other 337 came from 272 addresses. I never checked those addresses against a vendor's published range.
+Four of the 341 came from my own address, and that was `curl` with the string set by hand. The other 337 came from 272 addresses. I never checked those addresses against a vendor's published range.
 
 If the agent is genuine, the fetch leaves OpenAI's servers whether I pasted the link or a stranger did. The address would not tell us apart either way.
 
-What the log can say is thin. Those 337 requests cover every hour of the day and 15 of the window's 16 dated days. 38 of them fall within five minutes of a request from my own address.
+What the log can say is thin. Those 337 requests cover every hour of the day and 15 of the window's 16 dated days, and 38 of them fall within five minutes of a request from my own address.
 
-Eleven per cent is weak evidence against "it was all me". About who did come, it says nothing at all. Separating those two stories needs a window in which I do not touch the site. I have not run one.
+Eleven per cent is weak evidence against "it was all me", and about who did come, it says nothing at all. Separating those two stories needs a window in which I do not touch the site. I have not run one.
 
-Read the whole `ChatGPT-User` row that way. It is a count of fetches by an agent a human has to trigger. The log does not say who that human was.
+Read the whole `ChatGPT-User` row that way. It is a count of fetches by an agent a human has to trigger, and the log does not say who that human was.
 
 ### What they asked for
 
@@ -89,11 +89,11 @@ The AI agents, taking ChatGPT-User, OAI-SearchBot, GPTBot, PerplexityBot, Perple
 
 The one that did not was Semrush's `SiteAuditBot`, on 11 August, and it got a 200. No AI agent asked for the file at all.
 
-An earlier version of this page reported one fetch per agent and called the file a listing they glance at. That reading turned out to be a single loop of mine.
+An earlier version of this page reported one fetch per agent and called the file a listing they glance at, and that reading turned out to be a single loop of mine.
 
-Seventeen of those lines land between 18:21:12 and 18:21:15 on 7 August. One line per crawler name, all of them from my address. That is `curl` walking a list of user agents. Thirteen vendors did not arrive in four seconds.
+Seventeen of those lines land between 18:21:12 and 18:21:15 on 7 August, one line per crawler name, all of them from my address. That is `curl` walking a list of user agents. Thirteen vendors did not arrive in four seconds.
 
-So `llms.txt` is not a route agents travel. On this box in this window it was not a glance either. I kept the direction of the conclusion and dropped the number.
+So `llms.txt` is not a route agents travel, and on this box in this window it was not a glance either. I kept the direction of the conclusion and dropped the number.
 
 ### The procedure
 
@@ -120,14 +120,14 @@ So `llms.txt` is not a route agents travel. On this box in this window it was no
    curl -s https://api.ipify.org
    ```
 
-   Mine was in the log 4,221 times, under 56 different user agents. I read that as traffic for two weeks.
+   Mine was in the log 4,221 times, under 56 different user agents, and I read that as traffic for two weeks.
 4. **Subtract your address, not only your `curl`** — a browser and a spoofed agent land in the same file.
 
    ```bash
    zcat -f /var/log/nginx/example.access.log* | awk '$1 != "203.0.113.9"'
    ```
 
-   Filtering `curl` caught 26 of the 44 `llms.txt` lines that were mine. The other 18 were my own crawler names and my own browser.
+   Filtering `curl` caught 26 of the 44 `llms.txt` lines that were mine, and the other 18 were my own crawler names and my own browser.
 5. **Count the agents over the whole window** — one match per request, case-insensitive.
 
    ```bash
@@ -139,8 +139,7 @@ So `llms.txt` is not a route agents travel. On this box in this window it was no
    ```
 
    The obvious `grep -oE` version is wrong twice, and this page shipped it. Bing calls itself lowercase `bingbot`. A case-sensitive pattern returns nothing for it at all.
-   Fix the case and a second bug appears. `grep -o` prints occurrences, not lines. A bingbot request names itself twice, in the token and in the `+http://…/bingbot.htm` URL.
-   In this window that is 336 occurrences against 155 requests. `awk` takes the first match per line, which is one line, which is one request.
+   Fix the case and a second bug appears. `grep -o` prints occurrences, not lines. A bingbot request names itself twice, in the token and in the `+http://…/bingbot.htm` URL, and in this window that is 336 occurrences against 155 requests. `awk` takes the first match per line, which is one line, which is one request.
 6. **Count the paths, AI agents only, your address excluded** — field seven is the request path in the combined format.
 
    ```bash
@@ -152,15 +151,15 @@ So `llms.txt` is not a route agents travel. On this box in this window it was no
    Here `grep` without `-o` matches whole lines, so this one counts requests already.
 ### What these rows do not prove
 
-The comparison I came for is 0 fetches of `llms.txt` against 56 of `robots.txt`. Every AI agent in the table took `robots.txt`. Not one of them took `llms.txt`. That is narrower than saying the file is useless. It is what this log supports, on one box, over 16 days.
+The comparison I came for is 0 fetches of `llms.txt` against 56 of `robots.txt`. Every AI agent in the table took `robots.txt`. Not one of them took `llms.txt`. That is narrower than saying the file is useless, and it is what this log supports, on one box, over 16 days.
 
-`/` took 280 requests, more than every other path combined. I cannot read that as a preference for the home page. A bare domain pasted into a chat and an agent deciding to start at the root produce exactly the same line. The log records the path and never the reason. Keeping good pages reachable from the root is still sound advice. This table is just not the evidence for it.
+`/` took 280 requests, more than every other path combined. I cannot read that as a preference for the home page. A bare domain pasted into a chat and an agent deciding to start at the root produce exactly the same line. The log records the path and never the reason. Keeping good pages reachable from the root is still sound advice, and this table is just not the evidence for it.
 
-The comparison post took 64 requests, plus 6 in Russian. That is more than the rest of the blog together, and it is the whole of what nginx knows about it. A 200 means bytes went out. Whether a word of them reached an answer, the file does not say. Citation shows up in referrals from assistant hosts and in the answers themselves. Neither of those is a log line.
+The comparison post took 64 requests, plus 6 in Russian. That is more than the rest of the blog together, and it is the whole of what nginx knows about it. A 200 means bytes went out. Whether a word of them reached an answer, the file does not say, because citation shows up in referrals from assistant hosts and in the answers themselves. Neither of those is a log line.
 
 `robots.txt` took 56 requests and `sitemap.xml` took 14. I read those two rows as protocol rather than as interest in me. A crawler takes `robots.txt` at the start of every session, so a high count there means the handshake is working. Nobody writes a post about a correct sitemap. Agents still ask for it before they ask for any prose.
 
-All of this rests on identities I never verified. The window showed me the cost of that twice. First I read my own spoofed strings as thirteen vendors. Then I read `Google-Extended` off a line that cannot exist. Doing it properly means reverse DNS on each client address, or matching it against the ranges the vendor publishes.
+All of this rests on identities I never verified. The window showed me the cost of that twice. First I read my own spoofed strings as thirteen vendors, and then I read `Google-Extended` off a line that cannot exist. Doing it properly means reverse DNS on each client address, or matching it against the ranges the vendor publishes.
 
 ## What did not work
 

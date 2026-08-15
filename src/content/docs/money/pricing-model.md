@@ -16,15 +16,15 @@ In practice there are two models: people pay per action, or people pay per month
 
 You pick a line in a price list, and you are really picking what you will be doing all next year. A subscription drags one kind of work behind it. Packs drag another kind. Both kinds start before your first revenue.
 
-So do not choose on which earns more in theory. Choose on what job your product does, and on which of the two you can service on your own.
+So do not choose on which earns more in theory. Choose on what job your product does, and on which model you can service on your own.
 
 ## Steps
 
 ### First question — is the job one-off or recurring
 
-A subscription works where the person comes back by themselves, without being reminded. Not because you retained them, but because the job arrives at them again.
+A subscription works where the person comes back by themselves, without being reminded — not because you retained them, but because the job arrives at them again.
 
-If the job is one-off, a subscription is churn on a delay. Somebody pays once, does not open it for a month, and cancels. They are entirely right to.
+If the job is one-off, a subscription is churn on a delay: somebody pays once, does not open it for a month, and cancels. They are entirely right to.
 
 Here is what that looks like for me. 155 people got at least one successful result, and **117 of them used it on exactly one day**. Another 17 stopped at two days. Six got past five days.
 
@@ -32,19 +32,19 @@ There is no recurring job in those numbers. A subscription would not have held t
 
 ### What a subscription demands beyond the product
 
-People do not buy a subscription for a feature. They buy it on trust extended several months forward. That conversation runs on your name rather than on your button.
+People do not buy a subscription for a feature. They buy it on trust extended several months forward, and that conversation runs on your name rather than on your button.
 
 Hence the first demand: markedly more brand-led marketing. A side project without a name has a harder time selling a recurring charge than a one-off one, at identical product quality.
 
 The second demand is refunds, and it is not a detail. People forget to cancel, notice the charge, come and ask for their money back, and say they did not use it.
 
-One query against your own database settles it: charged, and not a single action in that period. They are usually right, and the decent answer is to refund. That is a separate process you have to build and then run by hand.
+One query against your own database settles it: charged, and not a single action in that period. They are usually right, and the decent answer is to refund. That is a separate process you have to build and then run by hand, month after month, for as long as the subscription exists.
 
 ### Why I chose pay-as-you-go
 
 Three one-off packs: Starter — 800 credits for $5, Standard — 2,000 for $12, Pro — 7,500 for $40. Credits are spent per action and do not expire on a calendar.
 
-The reason is exactly the one above: there is no recurring job visible in my audience. Somebody arrives with a recording, gets text back and goes about their day. That is a normal scenario rather than a failure.
+The reason is the one I just gave: there is no recurring job visible in my audience, and somebody who arrives with a recording gets text back and goes about their day. That is a normal scenario rather than a failure.
 
 The second reason is workload. Packs require neither name recognition nor a cancellation process. The person pays for the thing they already intend to do right now.
 
@@ -54,13 +54,13 @@ It does not save you from refunds. The only genuine payment in my database was r
 
 It gives you no predictable revenue. A month without purchases is simply a month without money, and there is nothing there to plan on.
 
-And it moves the entire load onto the moment of purchase. Somebody has to decide to pay exactly when they want the result, not later. Any hesitation at that moment costs you the payment.
+And it moves the entire load onto the moment of purchase. Somebody has to decide to pay exactly when they want the result, not later, and any hesitation at that moment costs you the payment.
 
 ### How to decide in one evening
 
 Work out, from your own database, the share of people who came back on a second day. Count actual use rather than visits.
 
-Then the decision is simple. Almost nobody returns — charge per action. A noticeable share returns — a subscription becomes honest. That is when brand and a cancellation process start earning their keep.
+Then the decision is simple. Almost nobody returns — charge per action. A noticeable share returns — a subscription becomes honest, and that is when brand and a cancellation process start earning their keep.
 
 Either way the price does not come out of your head: [getting the first person to pay](/money/first-payer/).
 

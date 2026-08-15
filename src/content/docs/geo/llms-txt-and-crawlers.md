@@ -29,9 +29,9 @@ sources:
 
 ## What we are solving
 
-You decide who is allowed to read the site. On most projects that decision gets made by accident, in a panel nobody opened. If a crawler never reaches you, you are not in the AI answer. How good the page is stops mattering after that.
+You decide who is allowed to read the site. On most projects that decision gets made by accident, in a panel nobody opened. And if a crawler never reaches you, you are not in the AI answer, so how good the page is stops mattering after that.
 
-The trap sits in the phrase "AI bot". Three different jobs hide behind those two words. Saying no to each job costs you a different amount.
+The trap sits in the phrase "AI bot": three different jobs hide behind those two words, and saying no to each of them costs you a different amount.
 
 ## Steps
 
@@ -62,15 +62,15 @@ Allow: /
 Sitemap: https://example.com/sitemap-index.xml
 ```
 
-That is what this site serves. I name an agent only when I want to block it. A list of agents allowed by name is a list somebody then has to maintain. Vendors ship new names faster than anyone goes back to re-read the file.
+That is what this site serves. I name an agent only when I want to block it. A list of agents allowed by name is a list somebody then has to maintain, and vendors ship new names faster than anyone goes back to re-read the file.
 
-Read what the live domain serves, not what sits in your repository. A CDN can rewrite this file on the way out.
+Read what the live domain serves, not what sits in your repository, because a CDN can rewrite this file on the way out.
 
 ```bash
 curl -sS https://example.com/robots.txt
 ```
 
-Cloudflare's managed version sits on the zone's **Security Settings** page, under the **Bot traffic** filter. It is on every plan. Turn it on and it prepends its own `Disallow` lines above yours. A Free-plan domain with no file of its own gets Cloudflare's Content Signals Policy instead.
+Cloudflare's managed version sits on the zone's **Security Settings** page, under the **Bot traffic** filter. It is on every plan. Turn it on and it prepends its own `Disallow` lines above yours, while a Free-plan domain with no file of its own gets Cloudflare's Content Signals Policy instead.
 
 Search agents, and agents a person triggered, decide whether you exist in an answer today. The training group is a values call. That is the only case where I would type a name at all.
 
@@ -78,7 +78,7 @@ Search agents, and agents a person triggered, decide whether you exist in an ans
 
 A crawler honours `robots.txt`. A fetcher does not always. The gap between them is wide enough to ruin a diagnosis.
 
-OpenAI writes that because the action is initiated by a user, robots.txt rules may not apply. Perplexity says its user agent generally ignores the file, for the same reason. Anthropic is the exception. It says its bots honour the file.
+OpenAI writes that because the action is initiated by a user, robots.txt rules may not apply, and Perplexity says its user agent generally ignores the file for the same reason. Anthropic is the exception. It says its bots honour the file.
 
 So the same `Disallow` line behaves three different ways at three vendors. Nothing in your file will tell you that. Only the vendor's documentation does.
 
@@ -86,41 +86,41 @@ So the same `Disallow` line behaves three different ways at three vendors. Nothi
 
 It is a control token. It has no user agent of its own, so you will never see it in a log. It carries no ranking signal. What it covers is training of the Gemini models and Grounding with Google Search on Vertex AI.
 
-Blocking it changes nothing in Google Search. AI Overviews is part of Search. Plain `Googlebot` does the crawling for it.
+Blocking it changes nothing in Google Search. AI Overviews is part of Search, and plain `Googlebot` does the crawling for it.
 
 ### Getting out of AI Overviews for real
 
-There is a dedicated control, in Search Console under Settings → Search generative AI. It covers AI Overviews, AI Mode and the generative features in Discover. Google states it is not used as a ranking signal elsewhere in Search.
+There is a dedicated control, in Search Console under Settings → Search generative AI. It covers AI Overviews, AI Mode and the generative features in Discover, and Google states it is not used as a ranking signal elsewhere in Search.
 
-`nosnippet`, `data-nosnippet` and `max-snippet` keep you out too. They also take your ordinary Search snippet with them. The dedicated control does not charge that. It is rolling out to a subset of owners, so it may not be in your property yet.
+`nosnippet`, `data-nosnippet` and `max-snippet` keep you out too. They also take your ordinary Search snippet with them. The dedicated control does not charge that, but it is rolling out to a subset of owners, so it may not be in your property yet.
 
 ### If you do name agents, the order of the groups decides
 
-RFC 9309 says a crawler obeys one group — the one whose name matches it best. A generous `User-agent: *` further down does not rescue an agent you blocked above it.
+RFC 9309 says a crawler obeys one group, the one whose name matches it best, so a generous `User-agent: *` further down does not rescue an agent you blocked above it.
 
 The rule cuts both ways. Here is the half that bites: one stale group silently overrides the wildcard under it. That is why I keep no per-agent allow list at all.
 
 ### Where the block actually lives
 
-Three layers sit under `robots.txt`: the `X-Robots-Tag` header, the meta tag, and the edge. None of them shows up in the file. A CDN toggle, a WAF rule or a rate limit answers 403. A WAF is a firewall that matches HTTP requests. Meanwhile you go on editing a file that nobody is reading.
+Three layers sit under `robots.txt`: the `X-Robots-Tag` header, the meta tag, and the edge. The file shows none of them, so a CDN toggle, a WAF rule or a rate limit answers 403 while you go on editing a file that nobody is reading. A WAF is a firewall that matches HTTP requests.
 
-On Cloudflare the control is called **Configure AI bot policies**, on the zone's **Security Settings** page. It is on every plan, Free included. It sorts agents into Search, Agent and Training. Each group takes Allow, Block on all pages, or Block only on pages with ads.
+On Cloudflare the control is called **Configure AI bot policies**, on the zone's **Security Settings** page. It is on every plan, Free included. It sorts agents into Search, Agent and Training, and each group takes Allow, Block on all pages, or Block only on pages with ads.
 
 Which agents land in each group is Cloudflare's own list. That list changes without you. Block is terminating. Cloudflare answers 403 from its own network and your server never sees the request.
 
-From 15 September 2026 a domain new to Cloudflare arrives with Training and Agent blocked on ad-bearing pages. The older single switch beside it, **Block AI bots**, retires the same day. Existing zones keep their settings. You can opt out of the new defaults until 15 September.
+From 15 September 2026 a domain new to Cloudflare arrives with Training and Agent blocked on ad-bearing pages, and the older single switch beside it, **Block AI bots**, retires the same day. Existing zones keep their settings. You can opt out of the new defaults until 15 September.
 
-The same panel can charge instead of refusing. Pay per crawl answers 402, and it is in closed beta.
+The same panel can charge instead of refusing: pay per crawl answers 402, and it is in closed beta.
 
 ### A name in the log is a claim, not an identity
 
-Anyone can send a user agent string, and I sent myself a pile of them. A `curl` loop of mine put vendor names into my own access log. For two weeks I read those lines back as visits. Vendors publish IP ranges and reverse DNS for their crawlers. Check a client against those before you treat its line as evidence of a visit or of an attack. What that cost me is written out in [who actually crawls you](/geo/who-actually-crawls-you/).
+Anyone can send a user agent string. I sent myself a pile of them. A `curl` loop of mine put vendor names into my own access log, and for two weeks I read those lines back as visits. Vendors publish IP ranges and reverse DNS for their crawlers, so check a client against those before you treat its line as evidence of a visit or of an attack. What that cost me is written out in [who actually crawls you](/geo/who-actually-crawls-you/).
 
 ### Is llms.txt worth writing
 
 If you ship developer docs, yes. Otherwise probably not. The reason is not an opinion about the format.
 
-The file costs ten minutes. No vendor commits to reading it. Here is what mine got in 16 days:
+The file costs ten minutes. No vendor commits to reading it, and here is what mine got in 16 days:
 
 | Who fetched `llms.txt` | Requests |
 |---|---|
@@ -131,7 +131,7 @@ The file costs ten minutes. No vendor commits to reading it. Here is what mine g
 
 For comparison: `robots.txt` was fetched 56 times in the same window. Those were real crawlers.
 
-Two caveats, without which that zero cannot be read. The window has a hole: logrotate keeps 14 daily archives, so 20 to 28 July did not survive. And a request the edge refuses never reaches nginx. It never appears in the table above at all. You cannot see that from the server side. So I went and read both sides for one day:
+Two caveats, without which that zero cannot be read. The window has a hole: logrotate keeps 14 daily archives, so 20 to 28 July did not survive. And a request the edge refuses never reaches nginx, so it never appears in the table above at all, and you cannot see that from the server side. So I went and read both sides for one day:
 
 | | Cloudflare | nginx |
 |---|---|---|
@@ -140,11 +140,11 @@ Two caveats, without which that zero cannot be read. The window has a hole: logr
 | 404 | 13 | 13 |
 | **403** | **0** | **0** |
 
-The counts agree. There is not one 403 on either side, so my edge refuses nobody. The four-request gap is my nginx window running an hour wider. Cloudflare's free plan hands out this dataset a day at a time, so I could not match the windows exactly.
+The counts agree. There is not one 403 on either side, so my edge refuses nobody. The four-request gap is my nginx window running an hour wider, and Cloudflare's free plan hands out this dataset a day at a time, so I could not match the windows exactly.
 
-That is the check to run. If the edge were refusing anyone, Cloudflare's counter would sit well above the server's. That gap would be your answer. The full read is in [who actually crawls you](/geo/who-actually-crawls-you/).
+That is the check to run. If the edge were refusing anyone, Cloudflare's counter would sit well above the server's, and that gap would be your answer. The full read is in [who actually crawls you](/geo/who-actually-crawls-you/).
 
-So on a small marketing site you are betting ten minutes against a measured payoff of 0. On forty pages of docs the bet is a reasonable one. Anywhere else I would rather spend the ten minutes on `robots.txt` and the sitemap. Every agent does read those.
+So on a small marketing site you are betting ten minutes against a measured payoff of 0, while on forty pages of docs the bet is a reasonable one. Anywhere else I would rather spend the ten minutes on `robots.txt` and the sitemap. Every agent does read those.
 
 The format itself is short: an H1 on the first line, a one-sentence blockquote under it, absolute links, and a description after every colon. `robots.txt` says which paths to stay out of. `llms.txt` says what is worth reading, in your own words.
 
@@ -164,16 +164,16 @@ The format itself is short: an H1 on the first line, a one-sentence blockquote u
 
 ### Who actually came, which only the log will tell you
 
-Support for `llms.txt` is a convention, not a standard anyone enforces. The only honest answer about your own visitors lives in the access log.
+Support for `llms.txt` is a convention, not a standard anyone enforces, so the only honest answer about your own visitors lives in the access log.
 
 ```bash
 zcat -f /var/log/nginx/example.access.log* \
   | grep -icE 'chatgpt-user|oai-searchbot|gptbot|perplexity|claude-user|claudebot|meta-externalagent'
 ```
 
-My own log is counted out in [who actually crawls you](/geo/who-actually-crawls-you/). The same page holds the limit of this method. A request the edge blocked never reaches your server. It never becomes a line here. Grep for an agent Cloudflare is refusing and you get nothing back. The log then reads as though nobody came at all.
+My own log is counted out in [who actually crawls you](/geo/who-actually-crawls-you/). The same page holds the limit of this method: a request the edge blocked never reaches your server. It never becomes a line here. Grep for an agent Cloudflare is refusing and you get nothing back, so the log reads as though nobody came at all.
 
-Those requests are counted on the other side of the block. Cloudflare counts them under **AI Crawl Control**, in the **Crawlers** and **Metrics** tabs. The block itself lands under **Analytics** → **Events**, and Free plans keep 24 hours of it.
+Those requests are counted on the other side of the block: Cloudflare counts them under **AI Crawl Control**, in the **Crawlers** and **Metrics** tabs. The block itself lands under **Analytics** → **Events**, and Free plans keep 24 hours of it.
 
 ## What did not work
 
@@ -193,7 +193,7 @@ Those requests are counted on the other side of the block. Cloudflare counts the
 
 Run `geo-crawlers` from [Tools](/tools/). It reads `robots.txt`, the meta tags and the response headers, and gives back an access map per agent. That is how you catch a rule you forgot you wrote.
 
-Run `geo-llmstxt` from the same place. It validates an existing file or drafts one from the site structure. It also flags links that lead nowhere.
+Run `geo-llmstxt` from the same place. It validates an existing file or drafts one from the site structure, and it flags links that lead nowhere.
 
 Then check from outside:
 
