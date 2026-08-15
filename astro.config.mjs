@@ -4,12 +4,42 @@ import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import { SECTIONS } from './scripts/lib/sections.mjs';
 import { isFallbackPath, readDocFiles, writtenTranslations } from './scripts/lib/locales.mjs';
+import rehypeMermaid from '@beoe/rehype-mermaid';
 
 const DOCS = new URL('./src/content/docs/', import.meta.url);
 const WRITTEN_TRANSLATIONS = writtenTranslations(readDocFiles(DOCS));
 
 export default defineConfig({
   site: 'https://atlas.smolevich.com',
+  // Схемы рисуются в сборке и уезжают в HTML готовым SVG: читателю ноль
+  // килобайт скриптов, и диаграмма видна без JavaScript. Плата — chromium в
+  // CI, он там кешируется между запусками.
+  markdown: {
+    rehypePlugins: [
+      [
+        rehypeMermaid,
+        {
+          strategy: 'inline',
+          // Цвета mermaid вшивает в SVG инлайновыми стилями, а сборка одна на
+          // обе темы. Поэтому здесь только нейтральная заготовка, а настоящие
+          // цвета навешивает CSS в atlas.css по переменным Starlight.
+          mermaidConfig: {
+            theme: 'base',
+            fontFamily: 'inherit',
+            themeVariables: {
+              primaryColor: 'transparent',
+              primaryBorderColor: '#888',
+              primaryTextColor: '#888',
+              lineColor: '#888',
+              secondaryColor: 'transparent',
+              tertiaryColor: 'transparent',
+              background: 'transparent',
+            },
+          },
+        },
+      ],
+    ],
+  },
   integrations: [
     starlight({
       title: 'Pet Project Atlas',

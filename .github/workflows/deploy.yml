@@ -22,11 +22,22 @@ jobs:
           node-version: 24
           cache: npm
 
+      # Схемы mermaid рендерятся в SVG на сборке, для этого нужен chromium.
+      # Кешируем по lock-файлу, иначе каждый запуск качает ~80 МБ.
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       # This repo takes outside contributions, so a broken build must never
       # reach the box: full preflight before anything touches the server.
       - name: Preflight
         run: |
           npm ci
+          if [ "${{ steps.playwright-cache.outputs.cache-hit }}" != "true" ]; then
+            npx playwright install --with-deps --only-shell chromium
+          fi
           npm test
           npm run lint:voice
           npm run build

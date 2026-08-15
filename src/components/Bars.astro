@@ -1,0 +1,113 @@
+---
+// Столбики для чисел, которые на странице уже названы словами.
+//
+// Не картинка и не библиотека: разметка плюс CSS-переменная на ширину. Числа
+// остаются текстом, поэтому их видно в поиске, слышно в скринридере и можно
+// скопировать. Скриншот панели так не умеет, а на сайте про данные это важнее
+// красоты.
+//
+// Ширина считается от max: если его не передали, берём наибольшее значение,
+// и самый длинный столбик занимает всю строку. Передавать max стоит там, где
+// сравниваются доли от общего — тогда пустота справа тоже что-то значит.
+interface Row {
+  label: string;
+  value: number;
+  /** Приписка справа от числа: «80%», «из 70», «сек». */
+  note?: string;
+  /** Строка, ради которой всё и нарисовано. */
+  accent?: boolean;
+}
+
+interface Props {
+  rows: Row[];
+  max?: number;
+  /** Заголовок над столбиками. Без него блок читается как случайный. */
+  title?: string;
+}
+
+const { rows, max, title } = Astro.props as Props;
+const ceiling = max ?? Math.max(...rows.map((row) => row.value), 1);
+const format = new Intl.NumberFormat('ru-RU');
+---
+
+<figure class="atlas-bars">
+  {title && <figcaption class="atlas-bars-title">{title}</figcaption>}
+  <dl>
+    {
+      rows.map((row) => (
+        <div class:list={['atlas-bars-row', row.accent && 'is-accent']}>
+          <dt>{row.label}</dt>
+          <dd>
+            <span
+              class="atlas-bars-fill"
+              style={`--fill: ${Math.max((row.value / ceiling) * 100, 0.6)}%`}
+              aria-hidden="true"
+            />
+            <span class="atlas-bars-value">
+              {format.format(row.value)}
+              {row.note && <span class="atlas-bars-note"> {row.note}</span>}
+            </span>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</figure>
+
+<style>
+  .atlas-bars {
+    margin: 1.5rem 0;
+  }
+  .atlas-bars-title {
+    margin-bottom: 0.75rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
+  .atlas-bars dl {
+    margin: 0;
+    display: grid;
+    /* Подпись по содержимому, столбик — всё остальное. На узком экране
+       колонка подписи не даёт столбику схлопнуться в точку. */
+    grid-template-columns: minmax(6rem, max-content) 1fr;
+    gap: 0.4rem 0.9rem;
+    align-items: center;
+  }
+  .atlas-bars-row {
+    display: contents;
+  }
+  .atlas-bars dt {
+    font-size: var(--sl-text-sm);
+    line-height: 1.3;
+    color: var(--sl-color-gray-2);
+  }
+  .atlas-bars dd {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+  .atlas-bars-fill {
+    display: block;
+    width: var(--fill);
+    height: 0.85rem;
+    border-radius: 0.15rem;
+    background: var(--sl-color-gray-4);
+    flex: 0 0 auto;
+  }
+  .is-accent .atlas-bars-fill {
+    background: var(--sl-color-text-accent);
+  }
+  .atlas-bars-value {
+    font-size: var(--sl-text-sm);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--sl-color-white);
+  }
+  .is-accent .atlas-bars-value {
+    font-weight: 600;
+  }
+  .atlas-bars-note {
+    color: var(--sl-color-gray-3);
+  }
+</style>

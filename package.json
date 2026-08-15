@@ -21,7 +21,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@beoe/rehype-mermaid": "^0.4.2",
     "js-yaml": "^4.3.1",
+    "playwright": "^1.62.1",
     "typescript": "^6.0.3"
   }
 }

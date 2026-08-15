@@ -1,0 +1,54 @@
+---
+// «Это же можно не делать руками».
+//
+// Половина проверок на сайте — команда плюс чтение вывода, и агент делает их
+// быстрее человека. Но список команд лежит в одном месте, в таблице
+// инструментов, а нужен он в тот момент, когда читатель дошёл до конкретной
+// проверки. Блок ставится прямо там.
+//
+// Никогда не заменяет объяснение. Читатель должен понимать, что именно
+// запускает агент, иначе он не прочитает и ответ.
+interface Props {
+  /** Команда целиком, как её набирают: `/atlas:start`. */
+  run: string;
+  /** Что агент сделает. Одна строка, глагол в начале. */
+  does: string;
+}
+
+const { run, does } = Astro.props as Props;
+const locale = Astro.locals.starlightRoute?.locale;
+const title = locale === 'ru' ? 'Отдать агенту' : 'Hand it to an agent';
+---
+
+<aside class="atlas-for-agent">
+  <p class="atlas-for-agent-title">{title}</p>
+  <p class="atlas-for-agent-body">
+    <code>{run}</code> — {does}
+  </p>
+</aside>
+
+<style>
+  .atlas-for-agent {
+    margin: 1.5rem 0;
+    padding: 0.75rem 1rem;
+    border-inline-start: 2px solid var(--sl-color-text-accent);
+    background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+  .atlas-for-agent-title {
+    margin: 0;
+    font-size: var(--sl-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sl-color-gray-3);
+  }
+  .atlas-for-agent-body {
+    margin: 0.3rem 0 0;
+    font-size: var(--sl-text-sm);
+    line-height: 1.5;
+    color: var(--sl-color-gray-2);
+  }
+  .atlas-for-agent code {
+    color: var(--sl-color-white);
+  }
+</style>

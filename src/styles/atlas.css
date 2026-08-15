@@ -14,3 +14,48 @@
   --atlas-s6: #a89020;
   --atlas-s7: #d9534f;
 }
+
+/* Схемы mermaid.
+   Рисуются в сборке, один SVG на обе темы, а цвета mermaid вшивает
+   инлайновыми стилями. Поэтому перекрашиваем сверху переменными Starlight —
+   иначе тёмный текст лёг бы на тёмный фон. */
+.beoe.mermaid {
+  margin: 1.75rem 0;
+  overflow-x: auto;
+}
+.beoe.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+.beoe.mermaid svg text,
+.beoe.mermaid svg .nodeLabel,
+.beoe.mermaid svg .edgeLabel,
+.beoe.mermaid svg .cluster-label {
+  fill: var(--sl-color-white) !important;
+  color: var(--sl-color-white) !important;
+}
+.beoe.mermaid svg .node rect,
+.beoe.mermaid svg .node polygon,
+.beoe.mermaid svg .node circle,
+.beoe.mermaid svg .node path {
+  fill: var(--sl-color-gray-6) !important;
+  stroke: var(--sl-color-gray-4) !important;
+}
+.beoe.mermaid svg .flowchart-link,
+.beoe.mermaid svg .edgePath path,
+.beoe.mermaid svg line {
+  stroke: var(--sl-color-gray-3) !important;
+}
+.beoe.mermaid svg marker path,
+.beoe.mermaid svg .arrowMarkerPath {
+  fill: var(--sl-color-gray-3) !important;
+  stroke: none !important;
+}
+/* Подпись на стрелке перекрывает линию, и её подложка обязана быть цветом
+   страницы, а не белым по умолчанию. */
+.beoe.mermaid svg .edgeLabel rect,
+.beoe.mermaid svg .labelBkg,
+.beoe.mermaid svg foreignObject div {
+  background: var(--sl-color-bg) !important;
+  fill: var(--sl-color-bg) !important;
+}
