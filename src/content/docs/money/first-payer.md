@@ -10,7 +10,7 @@ sources:
 
 ## What we are solving
 
-The money route ends at a diagnosis. Break-even comes out as a small whole number of payers. The count of payers is zero.
+The money route ends at a diagnosis. Break-even comes out as a small whole number of payers, and the count of payers is zero.
 
 A product nobody pays for and a product nobody has been asked to pay for look identical from the dashboard. Neither one shows any revenue. Both feel like a verdict. Only one of them is a verdict. Telling them apart costs one question you have not asked yet.
 
@@ -20,7 +20,7 @@ A product nobody pays for and a product nobody has been asked to pay for look id
 
 Take the shape of the price from a competitor. The shape is per seat, per action, or per month. Somebody already tested that shape with their own money: [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor. That floor is on [what one user costs](/money/unit-economics/).
 
-Price the unit your event row already records: a minute, a message, a run. If the row carries a cost per action, you can price a package today. A price in a unit you do not measure has nothing to check it against.
+Price the unit your event row already records: a minute, a message, a run. If the row carries a cost per action you can price a package today, whereas a price in a unit you do not measure has nothing to check it against.
 
 A pricing study at this size is not worth running. An answer in a survey is not a purchase. You have so few people to survey that you can just ask each one for money. One real answer is worth more than a form full of survey answers.
 
@@ -36,7 +36,7 @@ One resource, one limit. A balance and a separate daily cap disagree with each o
 
 ### Who is holding the money question right now
 
-Name the price inside the product, at the wall itself. A pricing page serves people who came looking for it. Only the person standing at the wall is holding the money question right now.
+Name the price inside the product, at the wall itself. A pricing page serves people who came looking for it, and only the person standing at the wall is holding the money question right now.
 
 ### What exactly happens between the wall and the payment
 
@@ -58,7 +58,7 @@ What the row itself is made of: [what an event row has to carry](/analytics/prod
 
 Buy your own product with real money and then refund yourself. Walk the whole path, not the sandbox. Telegram requires bots selling digital goods inside its apps to use Stars. They must answer `/paysupport` and check for a successful payment update before delivering.
 
-A checkout that fails quietly reads on a dashboard exactly like nobody wanting the thing. The only way to tell those apart is to walk the path yourself.
+A checkout that fails quietly reads on a dashboard exactly like nobody wanting the thing, and the only way to tell those apart is to walk the path yourself.
 
 ### What one person says when you ask for a real price
 
@@ -66,7 +66,7 @@ While the numbers are unreadable, ask by hand: write to your most engaged users 
 
 Store the refusal in the person's own words. The finding sits in the reason rather than in the no. "I would use the free one" and "my employer would never approve this" are two different products. Only one of them is worth building.
 
-A discount is premature until somebody has refused the full price. A discount off an unasked number tests nothing whatsoever.
+A discount is premature until somebody has refused the full price, because a discount off an unasked number tests nothing whatsoever.
 
 ### Which engine the first payer arrives on
 

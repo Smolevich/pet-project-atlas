@@ -99,7 +99,7 @@ async function lintFile(filePath) {
         `${filePath}: медиана предложения ${rhythm.median} слов, порог 14. Страница тяжёлая целиком. (${STYLE.length})`,
       );
     }
-    if (rhythm && rhythm.spread < 7) {
+    if (rhythm && rhythm.spread !== null && rhythm.spread < 7) {
       warnings.push(
         `${filePath}: разброс длины предложений ${rhythm.spread}, надо от 7. Все фразы одной длины — текст звучит рвано. (${STYLE.length})`,
       );

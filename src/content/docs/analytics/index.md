@@ -5,10 +5,10 @@ sidebar:
 description: Signups arrive and you cannot say which channel sent them. The short list of numbers worth reading weekly, and how to record where a user came from.
 ---
 
-Traffic has started, signups appear, every graph moved this week. None of that tells you whether anything is growing. None of it tells you which channel sent the people.
+Traffic has started, signups appear, every graph moved this week. None of that tells you whether anything is growing, and none of it tells you which channel sent the people.
 
-Start with [where the user actually came from](/analytics/attribution/), even though it sits second here. You cannot reconstruct attribution later, and it is the only thing on this route you cannot. Somebody arrives through an untagged link, and you will never know where they came from. Every day you postpone this adds another day of arrivals like that.
+Start with [where the user actually came from](/analytics/attribution/), even though it sits second here. You cannot reconstruct attribution later, and it is the only thing on this route you cannot: somebody arrives through an untagged link, and you will never know where they came from. Every day you postpone this adds another day of arrivals like that.
 
-The reading itself lives on [the numbers worth reading weekly](/analytics/what-to-measure/). The list there is short on purpose: impressions, clicks, index share, signups, activation, repeat use. Each number answers something the others cannot. That is the only reason it is on the list.
+The reading itself lives on [the numbers worth reading weekly](/analytics/what-to-measure/), and the list there is short on purpose: impressions, clicks, index share, signups, activation, repeat use. Each number answers something the others cannot. That is the only reason it is on the list.
 
-[What an event row has to carry](/analytics/product-metrics/) sits underneath both of those pages. It is seven fields, and you write them at insert time. A field you never wrote is missing for the whole period. No join afterwards brings it back.
+[What an event row has to carry](/analytics/product-metrics/) sits underneath attribution and underneath the weekly numbers. It is seven fields. You write them at insert time, because a field you never wrote is missing for the whole period, and no join afterwards brings it back.

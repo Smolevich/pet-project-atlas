@@ -223,10 +223,11 @@ function paragraphUnits(markdown) {
       return;
     }
     const trimmed = line.trim();
-    const startsUnit = LIST_MARKER.test(line) || HEADING_LINE.test(line) || BLOCKQUOTE.test(line);
+    const isListItem = LIST_MARKER.test(line);
+    const startsUnit = isListItem || HEADING_LINE.test(line) || BLOCKQUOTE.test(line);
     if (!current || startsUnit) {
       flush();
-      current = { text: trimmed, starts: [{ offset: 0, line: i + 1 }] };
+      current = { text: trimmed, list: isListItem, starts: [{ offset: 0, line: i + 1 }] };
       return;
     }
     current.starts.push({ offset: current.text.length + 1, line: i + 1 });
@@ -284,20 +285,31 @@ export function findLongSentences(markdown, maxWords = 20) {
  * Возвращает null, если предложений слишком мало, чтобы говорить о ритме.
  */
 export function sentenceRhythm(markdown, minSentences = 15) {
-  const lengths = [];
+  const all = [];
+  const prose = [];
   for (const unit of paragraphUnits(markdown)) {
     for (const sentence of splitSentences(unit.text)) {
       const words = sentence.text.split(/\s+/).filter(Boolean).length;
-      if (words >= 3) lengths.push(words);
+      if (words < 3) continue;
+      all.push(words);
+      if (!unit.list) prose.push(words);
     }
   }
-  if (lengths.length < minSentences) return null;
-  lengths.sort((a, b) => a - b);
-  const mid = lengths.length >> 1;
-  const median = lengths.length % 2 ? lengths[mid] : (lengths[mid - 1] + lengths[mid]) / 2;
-  const mean = lengths.reduce((sum, x) => sum + x, 0) / lengths.length;
-  const spread = Math.sqrt(lengths.reduce((sum, x) => sum + (x - mean) ** 2, 0) / lengths.length);
-  return { median, spread: Math.round(spread * 10) / 10, sentences: lengths.length };
+  if (all.length < minSentences) return null;
+  const median = (xs) => {
+    const sorted = [...xs].sort((a, b) => a - b);
+    const mid = sorted.length >> 1;
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  };
+  // Разброс считаем только по абзацам. Чек-лист и роутер по симптомам — списки,
+  // и одинаковая длина пунктов там не рванина, а параллельная форма.
+  let spread = null;
+  if (prose.length >= minSentences) {
+    const mean = prose.reduce((sum, x) => sum + x, 0) / prose.length;
+    const variance = prose.reduce((sum, x) => sum + (x - mean) ** 2, 0) / prose.length;
+    spread = Math.round(Math.sqrt(variance) * 10) / 10;
+  }
+  return { median: median(all), spread, sentences: all.length, prose: prose.length };
 }
 
 const FRONTMATTER = /^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/;

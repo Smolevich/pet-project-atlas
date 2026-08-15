@@ -12,21 +12,21 @@ import serpRu from '../../../assets/screenshots/serp-ru-rasshifrovka.png';
 
 ## What we are solving
 
-The pages are written and the site is technically clean. It still sits on page two for every query that matters. Page one belongs to a competitor and to other people's "best tools for X" lists.
+The pages are written and the site is technically clean. It still sits on page two for every query that matters, because page one belongs to a competitor and to other people's "best tools for X" lists.
 
 You are missing authority off your own domain. Nothing you do on the domain builds it.
 
-The first move is a handful of places that confirm the project exists at all. A model reads those same listings long before it reads your site.
+The first move is a handful of places that confirm the project exists at all: a model reads those same listings long before it reads your site.
 
 Here is page one for a query my own bot answers, read on 13 August 2026:
 
 <Image src={serpRu} alt="Google results in Russian for the query бот расшифровка голосовых. The first page holds a Sberbank developer documentation page, a Teamlogs listicle titled 10 bots for converting audio and video to text, a VC.ru article, RetailCRM documentation and a Telegram Messenger page." />
 
-A bank's developer docs, somebody's listicle, a tech-media post, a CRM's help centre. Not one of them is a product like mine. The listicle in second place is the kind of page I could be inside of.
+A bank's developer docs, somebody's listicle, a tech-media post, a CRM's help centre. Not one of them is a product like mine, but the listicle in second place is the kind of page I could be inside of.
 
 ## Steps
 
-Sort the venues before you touch any of them. Each one costs you the same hour and buys you something different.
+Sort the venues before you touch any of them, because each one costs you the same hour and buys you something different.
 
 | Kind | Examples | What it buys |
 |---|---|---|
@@ -38,57 +38,57 @@ Sort the venues before you touch any of them. Each one costs you the same hour a
 
 ### The card you write once, before you open any form
 
-Name, one-line description, category, long description, screenshots, contact, link. Every venue asks for the same fields in a different order.
+Name, one-line description, category, long description, screenshots, contact, link — every venue asks for the same fields in a different order.
 
-One card written in advance keeps all the entries consistent. Consistent entries are what let scattered mentions merge back into one entity later.
+One card written in advance keeps all the entries consistent, and consistent entries are what let scattered mentions merge back into one entity later.
 
-Put a tracking parameter on every link you submit, one value per venue. Write it into the card rather than into the form.
+Put a tracking parameter on every link you submit, one value per venue, and write it into the card rather than into the form.
 
-Without the parameter you end up with listings and no idea which of them sent anyone. And adding attribution afterwards means going back through every form you filled.
+Without the parameter you end up with listings and no idea which of them sent anyone, and adding attribution afterwards means going back through every form you filled.
 
 ### Is this directory alive, and does search know it
 
-Lists of "best directories" go stale faster than anything else in this field. Check each venue yourself, on the day you submit, instead of trusting the list.
+Lists of "best directories" go stale faster than anything else in this field, so check each venue yourself, on the day you submit, instead of trusting the list.
 
 Fetch the home page first. A 500, a parked page or an expired certificate ends the question before you write a word.
 
-Then read the date on the newest listing. If the freshest entry is a year old, nobody is moderating. Your submission joins a queue no human reads.
+Then read the date on the newest listing. If the freshest entry is a year old, nobody is moderating: your submission joins a queue no human reads.
 
-Search for a competitor's name restricted to that host. That shows you whether the directory's own listing pages are in the index. If they are not, a link from there is invisible to search.
+Search for a competitor's name restricted to that host. That shows you whether the directory's own listing pages are in the index — if they are not, a link from there is invisible to search.
 
-Then open one listing with JavaScript off. A card rendered client-side is an empty page to a crawler. One request tells you which kind you are dealing with:
+Then open one listing with JavaScript off. A card rendered client-side is an empty page to a crawler, and one request tells you which kind you are dealing with:
 
 ```bash
 curl -s https://directory.example/listing/competitor | grep -ci competitor
 ```
 
-Last, check that submissions are moderated at all. A venue that publishes everything instantly filters nothing and passes on nothing. Google's spam policies name low-quality directory links as link spam.
+Last, check that submissions are moderated at all. A venue that publishes everything instantly filters nothing and passes on nothing — Google's spam policies name low-quality directory links as link spam.
 
 ### The listicle author, not only the directory
 
-That article ranking above you has a byline and a contact. One inclusion in a page that already ranks beats several entries in directories nobody reads.
+That article ranking above you has a byline and a contact — one inclusion in a page that already ranks beats several entries in directories nobody reads.
 
-The honest part: writing to the author is much harder. It needs a name, an email and a reason the author cares. A form needs none of those, which is exactly why I kept filling forms.
+The honest part: writing to the author is much harder. It needs a name, an email and a reason the author cares — a form needs none of those, which is exactly why I kept filling forms.
 
 ### Submitting in small batches, and the log
 
-Venue, date, link submitted, moderation promise, current status. The log records what you did, and that is all it records.
+Venue, date, link submitted, moderation promise, current status — the log records what you did, and that is all it records.
 
 Directory status is state, not knowledge. Next quarter the log gives you a starting point, not an answer.
 
 ### Paying for placement
 
-Paid listings exist and some of them are expensive. Buy one when you know what a signup is worth to you. Before that you are guessing with money instead of guessing with time.
+Paid listings exist and some of them are expensive. Buy one when you know what a signup is worth to you, because before that you are guessing with money instead of guessing with time.
 
 ## What did not work
 
-- **Mass submission without a prepared card**. Every form got a slightly different description and a different category. The entries scattered, and nothing could merge them back into one entity.
-- **Trusting a published list of directories**. Working through one, I hit dead hosts and parked domains. And one catalog turned out to index channels rather than the thing I was submitting.
-- **Trusting my own notes from last time**. A re-check months later contradicted them in both directions. Hosts I had recorded as dead were serving again. And one venue I had submitted to had gone, so that submission had never existed as a listing.
-- **Submitting untagged links**. The listings went live and no signup could be traced to any of them. Whether the venues worked at all, I had no way to tell.
+- **Mass submission without a prepared card**. Every form got a slightly different description and a different category, so the entries scattered and nothing could merge them back into one entity.
+- **Trusting a published list of directories**. Working through one, I hit dead hosts and parked domains, and one catalog turned out to index channels rather than the thing I was submitting.
+- **Trusting my own notes from last time**. A re-check months later contradicted them in both directions. Hosts I had recorded as dead were serving again, and one venue I had submitted to had gone, so that submission had never existed as a listing.
+- **Submitting untagged links**. The listings went live and no signup could be traced to any of them, so whether the venues worked at all, I had no way to tell.
 - **Counting submissions as progress**. A form is not a listing. And a listing on a page that search does not index is not a link anyone will follow.
-- **Chasing volume in directories**. Bulk entries in low-quality catalogs are a documented spam pattern. They also eat the week you needed for one outreach email.
-- **Writing off the entity anchors as impossible**. They have their own inclusion rules and a young project often does not clear them. But the venues that do accept you eventually build the case for the ones that turned you down.
+- **Chasing volume in directories**. Bulk entries in low-quality catalogs are a documented spam pattern, and they also eat the week you needed for one outreach email.
+- **Writing off the entity anchors as impossible**. They have their own inclusion rules and a young project often does not clear them, but the venues that do accept you eventually build the case for the ones that turned you down.
 
 ## Verify
 
@@ -99,7 +99,7 @@ Paid listings exist and some of them are expensive. Buy one when you know what a
   ```
 - Search for the listing page itself. If it is not indexed, it passes nothing to you.
 - Check analytics for referrals carrying the parameter you attached to that venue.
-- Watch for your own name showing up as a query in Search Console. Brand queries are the first sign the entity exists outside your head.
-- After a few weeks, ask an assistant for tools in your category, several runs each. Directories move exactly this: whether it names you at all.
+- Watch for your own name showing up as a query in Search Console, because brand queries are the first sign the entity exists outside your head.
+- After a few weeks, ask an assistant for tools in your category, several runs each, because directories move exactly this: whether it names you at all.
 
 You build recognition off-site, and the on-page work converts it: [why AI answers cite someone else](/geo/citable-pages/). Inside a platform the rules are different again: [search inside the platform](/distribution/in-platform-visibility/).

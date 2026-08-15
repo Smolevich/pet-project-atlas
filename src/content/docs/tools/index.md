@@ -5,11 +5,11 @@ sidebar:
 description: Start from the symptom you actually have. Each branch names the check to run and the page that explains it.
 ---
 
-Start from what you can see. Not from the tool you already know.
+Start from what you can see, not from the tool you already know.
 
-[What to run and when](/tools/skills/) is one table of tools. Third-party skills, the browser MCP, the CLI, and this repository's four plugin commands. Each row carries its source and its licence.
+[What to run and when](/tools/skills/) is one table of tools: third-party skills, the browser MCP, the CLI, and this repository's four plugin commands, each row carrying its source and its licence.
 
-[What a paid rank tracker measures](/tools/paid-tools/) reads one panel on live data. I show what the panel said and what my own Search Console said. The two instruments disagreed, and I work out why.
+[What a paid rank tracker measures](/tools/paid-tools/) reads one panel on live data: what the panel said, what my own Search Console said, and why the two instruments disagreed.
 
 ## The site is not in the index
 
@@ -21,7 +21,7 @@ Search for `site:yourdomain.com` and count what comes back.
 
 ## In the index, and no clicks
 
-Open the Performance report in Search Console. Read impressions first, before anything else.
+Open the Performance report in Search Console and read impressions first, before anything else.
 
 - **Impressions with no clicks** — the title and the snippet are the problem. The body of the page is not. Start with [the numbers worth reading weekly](/analytics/what-to-measure/), then [what a page is made of](/content/page-templates/).
 - **No impressions at all** — you rank for phrases nobody types. [What to write when nobody searches your name](/content/keyword-clusters/).
@@ -32,7 +32,7 @@ Open the Performance report in Search Console. Read impressions first, before an
 
 ## Clicks, and no signups
 
-Three different things break here. From the outside they look identical.
+Three different things break here, and from the outside they look identical.
 
 - **You cannot say which page they land on** — start with the short list. [The numbers worth reading weekly](/analytics/what-to-measure/).
 - **The page promises something the product does not do** — fix the shape of the page. [What a page is made of](/content/page-templates/).
@@ -55,4 +55,4 @@ Three different things break here. From the outside they look identical.
 
 ## None of the above
 
-The symptom is unclear, or several of these are true at once. Take the route in order instead: [start here](/start/).
+The symptom is unclear, or several of these are true at once — take the route in order instead: [start here](/start/).

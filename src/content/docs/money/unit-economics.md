@@ -43,7 +43,7 @@ from events
 where created_at >= date_trunc('month', now());
 ```
 
-The thing to read there is the gap between `actions` and `priced`. I never had such a column at all, and I did not know it. Every cost I quoted was reconstructed later by joining a rates table. Rates change, the join takes today's, and the answer about May quietly drifts. On a chart a reconstruction looks exactly like a measurement.
+The thing to read there is the gap between `actions` and `priced`. I never had such a column at all, and I did not know it, so every cost I quoted was reconstructed later by joining a rates table. Rates change, the join takes today's, and the answer about May quietly drifts. On a chart a reconstruction looks exactly like a measurement.
 
 What else belongs on that row, and why it has to be written at insert time: [what an event row has to carry](/analytics/product-metrics/).
 
@@ -68,13 +68,13 @@ break-even             = ceil( fixed monthly cost / contribution per payer )
                          measured in payers per month
 ```
 
-Rounding up to whole people is not pedantry: you cannot sell to a fraction of one. Substitute your own numbers and something like "two people a month" comes out. A number like that stays in your head and can be said out loud.
+Rounding up to whole people is not pedantry: you cannot sell to a fraction of one. Substitute your own numbers and something like "two people a month" comes out — a number like that stays in your head and can be said out loud.
 
 ### Whether that payer is me
 
 Take your own accounts out as an explicit list of ids, and take them out first, before any aggregation. Count unique payers rather than transactions. Several purchases by one person are one payer, not three.
 
-Skip that and the first payer in your model is you. Nothing in the model will say so.
+Skip that and the first payer in your model is you, and nothing in the model will say so.
 
 ### Where the model gets its facts, and how it goes stale
 

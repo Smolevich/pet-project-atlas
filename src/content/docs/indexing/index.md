@@ -5,7 +5,7 @@ sidebar:
 description: The site is live and search returns nothing for it. Finding the blocker, then handing the site over and checking that it was taken.
 ---
 
-The site is live and the pages open in a browser. Search still returns nothing for them. That is the first wall. Behind it there is almost always one specific blocker, not a mystery. Mine is usually a rule at the edge. Such a rule shows up neither in `robots.txt` nor in the server log.
+The site is live and the pages open in a browser, and search still returns nothing for them. That is the first wall. Behind it there is almost always one specific blocker, not a mystery: mine is usually a rule at the edge, and such a rule shows up neither in `robots.txt` nor in the server log.
 
 Two pages here.
 

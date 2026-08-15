@@ -15,9 +15,9 @@ import serpIndexed from '../../../assets/screenshots/serp-site-atlas-indexed.png
 
 ## What we are solving
 
-Every guide promises results in a few weeks. Almost none of them show what the first days look like. So when your own project is silent, you have nothing to compare that silence with.
+Every guide promises results in a few weeks. Almost none of them show what the first days look like, so when your own project is silent you have nothing to compare that silence with.
 
-This site went live on 10 August 2026. Here is everything it has, two days later. I will keep adding to this page monthly, including the months where nothing moved.
+This site went live on 10 August 2026. Here is everything it has two days later, and I will keep adding to this page monthly, including the months where nothing moved.
 
 The first thing worth writing down arrived sooner than a month. So the tables below carry a second reading, taken on 13 August.
 
@@ -29,15 +29,15 @@ I did what the route tells you to do, on this site. In the order the route gives
 2. Generated `robots.txt` and `llms.txt` at build time. Neither of them can drift away from the pages it describes.
 3. Verified a domain property in Search Console. Google confirmed ownership through the DNS provider and never asked me for a TXT record.
 4. Submitted the sitemap once, on 12 August at 10:20 UTC. Search Console read it two seconds later and reported 56 URLs.
-5. Pushed all 46 canonical URLs through IndexNow. The shared endpoint, Bing and Yandex all accepted them. That was the whole site at the time. Three more pages shipped later the same day, in both languages. Those I have not pushed.
+5. Pushed all 46 canonical URLs through IndexNow, and the shared endpoint, Bing and Yandex all accepted them — that was the whole site at the time. Three more pages shipped later the same day, in both languages, and those I have not pushed.
 
 Then I stopped and read what came back.
 
 ## What did not work
 
-- **Expecting the sitemap to do more than it does.** It was accepted in two seconds. That felt like progress and was not. Two days later the URL inspection tells me the home page is **unknown to Google**, never crawled. Submitted, discovered, crawled and indexed are four different states, and this site has not got past submitted. On the third day it was through all four, and both readings sit in the table below.
+- **Expecting the sitemap to do more than it does.** It was accepted in two seconds. That felt like progress and was not, because two days later the URL inspection tells me the home page is **unknown to Google**, never crawled. Submitted, discovered, crawled and indexed are four different states, and this site has not got past submitted — on the third day it was through all four, and both readings sit in the table below.
 - **Reading the access log as if every line were a visitor.** The log holds 417 requests. Almost all of them are me and the two people I sent the link to.
-- **Counting bots with `grep -o`.** It counts occurrences, and I read them as requests. Some agents name themselves twice on one line. `bingbot` writes its token in the string, and again in the `bingbot.htm` URL it advertises. So its count comes out roughly double. On this log nobody was hurt, because `Googlebot` says its name once and the URL beside it is `bot.html`. But I had already published a doubled Bing figure on another page. Count lines, not matches.
+- **Counting bots with `grep -o`.** It counts occurrences, and I read them as requests. Some agents name themselves twice on one line: `bingbot` writes its token in the string, and again in the `bingbot.htm` URL it advertises, so its count comes out roughly double. On this log nobody was hurt, because `Googlebot` says its name once and the URL beside it is `bot.html`, but I had already published a doubled Bing figure on another page. Count lines, not matches.
 
   ```bash
   grep -o 'Googlebot' /var/log/nginx/atlas.access.log | wc -l
@@ -45,7 +45,7 @@ Then I stopped and read what came back.
   ```
 
   `grep -c` is the honest count. I had already published the doubled numbers on another page before I noticed.
-- **Publishing `llms.txt` because the checklist said so.** Zero AI agents fetched it here. On the older project it was zero too. Of the 45 requests that file ever got, 44 were my own `curl`.
+- **Publishing `llms.txt` because the checklist said so.** Zero AI agents fetched it here. On the older project it was zero too, and of the 45 requests that file ever got, 44 were my own `curl`.
 
 ## Verify
 
@@ -62,7 +62,7 @@ I read these numbers on 12 August 2026, two days after launch. I read them again
 
 The performance figures cover 10 to 13 August. Impressions, clicks and queries are all still zero.
 
-Between those two days the home page changed state. Google had never heard of that URL, and now it has crawled and indexed the page.
+Between those two days the home page changed state: Google had never heard of that URL, and now it has crawled and indexed the page.
 
 The `site:` query returns the home page, and Tools, Cases and Indexing with it:
 
@@ -70,18 +70,18 @@ The `site:` query returns the home page, and Tools, Cases and Indexing with it:
 
 Google results for `site:atlas.smolevich.com`, read on 13 August 2026. The home page, Cases and Indexing carry the date 1 day ago, the Tools page 7 hours ago.
 
-So three days from launch this site is indexed and invisible at the same time. Submitted, discovered, crawled and indexed are four different states. Passing indexed moved nothing in the performance report.
+So three days from launch this site is indexed and invisible at the same time: submitted, discovered, crawled and indexed are four different states, and passing indexed moved nothing in the performance report.
 
-What it bought me is one thing. An impression is now possible at all, and on 12 August it was not.
+What it bought me is one thing: an impression is now possible at all, and on 12 August it was not.
 
-The size of the site moved between two readings on 12 August, so both are here. Three pages shipped later the same day, in English and in Russian.
+The size of the site moved between two readings on 12 August, so both readings are here, and three pages shipped later the same day, in English and in Russian.
 
 | What | First reading | Read again after those pages |
 |---|---|---|
 | Pages published | 58 | 66 |
 | URLs in the sitemap | 56 | 66 |
 
-The right-hand column is the live `sitemap.xml` and the page count of the same build. Everything else above is the first reading, and I have not taken it again.
+The right-hand column is the live `sitemap.xml` and the page count of the same build — everything else above is the first reading, and I have not taken it again.
 
 Requests by search and AI agents, counted one match per line:
 
@@ -95,7 +95,7 @@ Requests by search and AI agents, counted one match per line:
 
 What Googlebot actually took: `robots.txt` three times, both sitemap files once each, and exactly one content page — `/geo/citable-pages/`.
 
-That last line is the one I keep coming back to. Google has read the map of this site three times and fetched a single page off it. Nothing here is broken. Nothing here has happened yet either.
+That last line is the one I keep coming back to: Google has read the map of this site three times and fetched a single page off it. Nothing here is broken. Nothing here has happened yet either.
 
 If your own project is two days old and quiet, this is what quiet looks like from the inside.
 

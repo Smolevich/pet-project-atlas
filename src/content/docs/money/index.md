@@ -13,7 +13,7 @@ So the arithmetic goes first. [What one user costs](/money/unit-economics/) is t
 
 The same page shows how to measure that cost instead of estimating it. I lost months to this. I thought the column was there and empty, and it never existed at all.
 
-You pick the model before you pick the price. [Per action or per month](/money/pricing-model/) is about how the two models differ. Someone who comes back on their own buys a subscription. Someone whose job is one-off buys a pack. Each model drags work behind it: a subscription drags brand and refunds.
+You pick the model before you pick the price. [Per action or per month](/money/pricing-model/) is about how the two differ: somebody who comes back on their own buys a subscription, and somebody whose job is one-off buys a pack. Each model drags work behind it: a subscription drags brand and refunds.
 
 Then comes the harder half, and two pages here disagree. The cost arithmetic keeps suggesting you shave the bills. [Getting the first person to pay](/money/first-payer/) says the bills were never the problem. Pick a number. Put the wall where it really stops somebody. Ask one person for money by hand.
 

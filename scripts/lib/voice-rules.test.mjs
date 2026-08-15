@@ -559,3 +559,10 @@ test('короткие вперемешку с длинными дают выс�
 test('на коротком тексте про ритм не судим', () => {
   assert.equal(sentenceRhythm('Одна фраза. И вторая.'), null);
 });
+
+test('пункты списка в разброс не идут — параллельный список не рванина', () => {
+  const list = Array.from({length: 20}, (_, i) => `- Пункт списка номер ${i}.`).join('\n');
+  const rhythm = sentenceRhythm(list);
+  assert.equal(rhythm.spread, null, 'по одним пунктам разброс считать нечему');
+  assert.ok(rhythm.sentences >= 15, 'сами предложения при этом посчитаны');
+});
