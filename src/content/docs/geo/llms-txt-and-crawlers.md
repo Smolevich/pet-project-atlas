@@ -118,7 +118,19 @@ Anyone can send a user agent string. I sent myself a pile of them. A `curl` loop
 
 ### Is llms.txt worth writing
 
-If you ship developer docs, yes. Otherwise probably not. The reason is not an opinion about the format.
+The short answer turns on one thing: do you have documentation where an agent would struggle to find the right page on its own.
+
+```mermaid
+flowchart TD
+  A{"What are you<br/>shipping?"}
+  A -->|"Documentation or a reference,<br/>dozens of pages"| B{"Does the sitemap make clear<br/>which pages matter?"}
+  A -->|"A landing page, a product,<br/>a blog of a few pages"| C["Do not write it"]
+  B -->|"No, there are many pages<br/>and they look alike"| D["Write llms.txt"]
+  B -->|"Yes, the structure is obvious"| C
+  C --> E["Spend the same ten minutes<br/>on robots.txt<br/>and the sitemap"]
+```
+
+So `llms.txt` solves exactly one problem: saying in words which of your pages to read first. If you have five pages and they are already in plain sight, there is no problem to solve.
 
 The file costs ten minutes. No vendor commits to reading it, and here is what mine got in 16 days:
 

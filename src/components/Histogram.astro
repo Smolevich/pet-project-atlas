@@ -1,0 +1,163 @@
+---
+// Гистограмма, которую можно потрогать.
+//
+// Ставится там, где иначе пришлось бы перечислять числа в строку: «покрывают
+// все часы суток и 15 из 16 дат». Такую фразу читать невозможно, а картинка
+// показывает то же самое сразу.
+//
+// Числа лежат в разметке текстом, поэтому страница остаётся читаемой без
+// JavaScript и без мышки: под графиком стоит обычный список «час — сколько».
+// Скрипт только подсвечивает столбик и печатает значение в одну строку.
+interface Row {
+  label: string;
+  value: number;
+}
+
+interface Props {
+  rows: Row[];
+  title: string;
+  /** Слово после числа в подсказке: «запрос», «request». */
+  unit: string;
+  /** Что стоит прочитать на этом графике. Одна строка. */
+  caption?: string;
+}
+
+const { rows, title, unit, caption } = Astro.props as Props;
+const peak = Math.max(...rows.map((row) => row.value), 1);
+const total = rows.reduce((sum, row) => sum + row.value, 0);
+const id = `hist-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<figure class="atlas-hist" data-hist data-unit={unit} id={id}>
+  <figcaption class="atlas-hist-title">{title}</figcaption>
+
+  <div class="atlas-hist-plot" role="img" aria-labelledby={`${id}-alt`}>
+    {
+      rows.map((row) => (
+        <button
+          type="button"
+          class="atlas-hist-bar"
+          style={`--h: ${Math.max((row.value / peak) * 100, 2)}%`}
+          data-label={row.label}
+          data-value={row.value}
+        >
+          <span class="atlas-hist-hit" />
+        </button>
+      ))
+    }
+  </div>
+
+  <p class="atlas-hist-axis">
+    <span>{rows[0]?.label}</span>
+    <span>{rows[Math.floor(rows.length / 2)]?.label}</span>
+    <span>{rows[rows.length - 1]?.label}</span>
+  </p>
+
+  <p class="atlas-hist-readout" data-readout aria-live="polite">
+    Всего {total}. Наведите на столбик, чтобы увидеть значение.
+  </p>
+
+  <p id={`${id}-alt`} class="atlas-hist-alt">
+    {title}. {rows.map((row) => `${row.label} — ${row.value}`).join(', ')}.
+  </p>
+  {caption && <p class="atlas-hist-caption">{caption}</p>}
+</figure>
+
+<script>
+  // Один обработчик на блок, а не на каждый столбик: столбиков может быть
+  // много, а поведение у них одно.
+  document.querySelectorAll<HTMLElement>('[data-hist]').forEach((chart) => {
+    const readout = chart.querySelector<HTMLElement>('[data-readout]');
+    if (!readout) return;
+    const idle = readout.textContent;
+    const unit = chart.dataset.unit ?? '';
+
+    const show = (bar: HTMLElement) => {
+      readout.textContent = `${bar.dataset.label} — ${bar.dataset.value} ${unit}`;
+      chart.querySelectorAll('.is-on').forEach((el) => el.classList.remove('is-on'));
+      bar.classList.add('is-on');
+    };
+    const clear = () => {
+      readout.textContent = idle;
+      chart.querySelectorAll('.is-on').forEach((el) => el.classList.remove('is-on'));
+    };
+
+    chart.querySelectorAll<HTMLElement>('.atlas-hist-bar').forEach((bar) => {
+      bar.addEventListener('pointerenter', () => show(bar));
+      bar.addEventListener('focus', () => show(bar));
+      bar.addEventListener('click', () => show(bar));
+    });
+    chart.addEventListener('pointerleave', clear);
+    chart.addEventListener('focusout', (event) => {
+      if (!chart.contains(event.relatedTarget as Node)) clear();
+    });
+  });
+</script>
+
+<style>
+  .atlas-hist {
+    margin: 1.75rem 0;
+  }
+  .atlas-hist-title {
+    margin-bottom: 0.6rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
+  .atlas-hist-plot {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 7rem;
+  }
+  .atlas-hist-bar {
+    flex: 1 1 0;
+    min-width: 0;
+    height: var(--h);
+    padding: 0;
+    border: 0;
+    border-radius: 1px 1px 0 0;
+    background: var(--sl-color-gray-4);
+    cursor: pointer;
+    position: relative;
+  }
+  .atlas-hist-bar:hover,
+  .atlas-hist-bar.is-on,
+  .atlas-hist-bar:focus-visible {
+    background: var(--sl-color-text-accent);
+    outline: none;
+  }
+  /* Тонкий столбик трудно поймать курсором, поэтому область попадания
+     растягивается на всю высоту графика. */
+  .atlas-hist-hit {
+    position: absolute;
+    inset-block: -7rem 0;
+    inset-inline: -1px;
+  }
+  .atlas-hist-axis {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.35rem 0 0;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  .atlas-hist-readout {
+    margin: 0.5rem 0 0;
+    font-size: var(--sl-text-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  .atlas-hist-caption {
+    margin: 0.4rem 0 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  /* Полный список значений словами: он и есть alt-текст для графика. */
+  .atlas-hist-alt {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>
