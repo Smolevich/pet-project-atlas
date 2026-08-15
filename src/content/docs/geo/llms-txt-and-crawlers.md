@@ -102,7 +102,7 @@ The rule cuts both ways. Here is the half that bites: one stale group silently o
 
 ### Where the block actually lives
 
-Three layers sit under `robots.txt`: the `X-Robots-Tag` header, the meta tag, and the edge. The file shows none of them, so a CDN toggle, a WAF rule or a rate limit answers 403 while you go on editing a file that nobody is reading. A WAF is a firewall that matches HTTP requests.
+Three layers sit under `robots.txt`: the `X-Robots-Tag` header, the meta tag, and the edge. The file shows none of them, and a CDN toggle, a WAF rule or a rate limit answers 403 while you go on editing a file that nobody is reading. A WAF is a firewall that matches HTTP requests.
 
 On Cloudflare the control is called **Configure AI bot policies**, on the zone's **Security Settings** page. It is on every plan, Free included. It sorts agents into Search, Agent and Training, and each group takes Allow, Block on all pages, or Block only on pages with ads.
 

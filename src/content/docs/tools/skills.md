@@ -16,11 +16,11 @@ sources:
 
 ## What we are solving
 
-I do not ship audit tooling with this atlas, and I am not going to. The good tools already exist. My own rewrite of one would be a worse copy that nobody maintains, me included.
+I do not ship audit tooling with this atlas, and I am not going to. The good tools already exist, and my own rewrite of one would be a worse copy that nobody maintains, me included.
 
 What I did not have was the map. Which tool answers which question, in what order to run them, and which of them I can skip once the symptom already says where to look.
 
-Every third-party row below is a package sitting on my own machine. The one exception is a paid service. I read the licence column off the source repository, and for that service off what the money actually buys.
+Every third-party row below is a package sitting on my own machine. The one exception is a paid service: I read the licence column off the source repository, and for that service off what the money actually buys.
 
 ## Steps
 
@@ -61,7 +61,7 @@ Take the repository name out of there. Then go and read the licence in the repos
 
 ### Which of them to run first when nothing is in the index
 
-`seo-audit`. It walks fetch, block and canonical in one pass. That is faster than checking seven things by hand, and it is also much louder when one of them is broken.
+`seo-audit`. It walks fetch, block and canonical in one pass, which is faster than checking seven things by hand, and much louder when one of them is broken.
 
 On the GEO side the order matters more than the choice. Run `geo-crawlers` before `geo-citability`, every time. Access decides whether the writing gets read at all.
 
@@ -87,7 +87,7 @@ gws --help
 
 The list it prints comes from your own installed build, and that list is the answer, not what a guide says. It covers Workspace.
 
-Search Console and Analytics are not in it, and the failure below is me finding that out the slow way.
+Search Console and Analytics are not in it. The failure below is me finding that out the slow way.
 
 ### How the four /atlas: commands get installed
 
@@ -100,7 +100,7 @@ Two lines in Claude Code — add this repository as a marketplace, then install 
 
 Those four commands route and order the work, while the auditing stays with the third-party skills above, and that is deliberate.
 
-A wrapper only decides when to run something, and that is much cheaper to keep alive than a second audit engine.
+A wrapper only decides when to run something. That is much cheaper to keep alive than a second audit engine.
 
 ## What did not work
 
