@@ -5,6 +5,7 @@ import {
   findMissingSections,
   findLongSentences,
   sentenceRhythm,
+  antithesisDensity,
   parseFrontmatter,
   findUnsourcedNumbers,
   findNumericClaims,
@@ -565,4 +566,15 @@ test('пункты списка в разброс не идут — паралл
   const rhythm = sentenceRhythm(list);
   assert.equal(rhythm.spread, null, 'по одним пунктам разброс считать нечему');
   assert.ok(rhythm.sentences >= 15, 'сами предложения при этом посчитаны');
+});
+
+test('плотность «а не» считается на тысячу слов', () => {
+  const filler = Array.from({ length: 500 }, (_, i) => `слово${i}`).join(' ');
+  assert.equal(antithesisDensity(`${filler} а не ещё`).hits, 1);
+  assert.equal(antithesisDensity('коротко, а не длинно'), null, 'на коротком тексте не судим');
+});
+
+test('«а не» внутри слова не считается', () => {
+  const filler = Array.from({ length: 300 }, (_, i) => `w${i}`).join(' ');
+  assert.equal(antithesisDensity(`${filler} панель`).hits, 0);
 });

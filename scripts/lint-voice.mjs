@@ -8,6 +8,7 @@ import {
   countRequiredSections,
   findLongSentences,
   sentenceRhythm,
+  antithesisDensity,
   parseFrontmatter,
   findUnsourcedNumbers,
   findNumericClaims,
@@ -97,6 +98,12 @@ async function lintFile(filePath) {
     if (rhythm && rhythm.median > 14) {
       warnings.push(
         `${filePath}: медиана предложения ${rhythm.median} слов, порог 14. Страница тяжёлая целиком. (${STYLE.length})`,
+      );
+    }
+    const antithesis = antithesisDensity(body);
+    if (antithesis && antithesis.per1000 > 5) {
+      warnings.push(
+        `${filePath}: «а не» ${antithesis.hits} раз, ${antithesis.per1000} на тысячу слов при норме 2-3. Страница звучит как список противопоставлений. (${STYLE.length})`,
       );
     }
     if (rhythm && rhythm.spread !== null && rhythm.spread < 7) {

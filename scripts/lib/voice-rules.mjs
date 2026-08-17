@@ -312,6 +312,25 @@ export function sentenceRhythm(markdown, minSentences = 15) {
   return { median: median(all), spread, sentences: all.length, prose: prose.length };
 }
 
+/**
+ * Плотность оборота «X, а не Y» — моего главного тика.
+ *
+ * Замер 2026-08-17: у владельца в 33 черновиках 2.27 вхождения на тысячу слов,
+ * у сайта было 7.77, а на худшей странице 9.3. Противопоставление само по себе
+ * нормальное, плохо, когда за ним тянутся по умолчанию: страница начинает
+ * звучать как список антитез.
+ *
+ * Порог 5 — вдвое выше авторской нормы, поэтому ловит только заросшие страницы.
+ * Возвращает null, если текста мало и плотность считать не по чему.
+ */
+export function antithesisDensity(markdown, minWords = 200) {
+  const text = markdown.replace(/```[\s\S]*?```/g, ' ');
+  const words = text.split(/\s+/).filter(Boolean).length;
+  if (words < minWords) return null;
+  const hits = (text.toLowerCase().match(/(?:^|[^\p{L}])а не(?![\p{L}])/gu) ?? []).length;
+  return { hits, words, per1000: Math.round((hits / words) * 10000) / 10 };
+}
+
 const FRONTMATTER = /^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/;
 
 /**
