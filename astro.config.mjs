@@ -25,7 +25,13 @@ export default defineConfig({
           // цвета навешивает CSS в atlas.css по переменным Starlight.
           mermaidConfig: {
             theme: 'base',
-            fontFamily: 'inherit',
+            // Ширину узла mermaid считает при рендере, шрифтом, который найдёт
+            // в chromium. `inherit` там разрешался в один шрифт, а на сайте
+            // текст рисовался другим — и подписи не влезали в фигуру, вторая
+            // строка обрезалась целиком. Поэтому шрифт назван явно и тот же
+            // самый навязан в CSS: метрики совпадают, обрезать нечего.
+            fontFamily: 'Arial, Helvetica, sans-serif',
+            flowchart: { htmlLabels: true, padding: 12, nodeSpacing: 45, rankSpacing: 55 },
             themeVariables: {
               primaryColor: 'transparent',
               primaryBorderColor: '#888',

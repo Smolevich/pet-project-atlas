@@ -123,11 +123,11 @@ The short answer turns on one thing: do you have documentation where an agent wo
 ```mermaid
 flowchart TD
   A{"What are you<br/>shipping?"}
-  A -->|"Documentation or a reference,<br/>dozens of pages"| B{"Does the sitemap make clear<br/>which pages matter?"}
-  A -->|"A landing page, a product,<br/>a blog of a few pages"| C["Do not write it"]
-  B -->|"No, there are many pages<br/>and they look alike"| D["Write llms.txt"]
-  B -->|"Yes, the structure is obvious"| C
-  C --> E["Spend the same ten minutes<br/>on robots.txt<br/>and the sitemap"]
+  A -->|"documentation"| B{"Does the sitemap say<br/>what to read first?"}
+  A -->|"a landing page or product"| C["Do not write it"]
+  B -->|"no"| D["Write llms.txt"]
+  B -->|"yes"| C
+  C --> E["Same ten minutes —<br/>into robots.txt and sitemap"]
 ```
 
 So `llms.txt` solves exactly one problem: saying in words which of your pages to read first. If you have five pages and they are already in plain sight, there is no problem to solve.
