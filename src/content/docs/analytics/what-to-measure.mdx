@@ -12,6 +12,10 @@ sources:
   - Search Console API, property telegram-voice-bot, measured 2026-08-12
 ---
 
+import ForAgent from '../../../components/ForAgent.astro';
+
+<ForAgent run="/atlas:report" does="pulls the weekly slice from Search Console and your product data, works out the delta and names one action" />
+
 ## What we are solving
 
 My dashboard had forty numbers on it and every one of them moved last week. That sounds like a lot of information. It was none of it: at these volumes most of the movement means the volume is small, not that the project is alive.

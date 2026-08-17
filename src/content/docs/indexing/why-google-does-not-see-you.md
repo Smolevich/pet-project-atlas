@@ -24,6 +24,23 @@ Indexing fails from the top down. First a crawler has to fetch the page, then cr
 
 A rewritten `title` on a `noindex` page changes nothing. So the checks below run in order: stop at the first one that fails, because while the page is blocked you cannot measure anything else on it.
 
+```mermaid
+flowchart TD
+  A["The page is not in search"] --> B{"Does curl return<br/>the page text?"}
+  B -->|"no"| B1["Client-side rendering.<br/>A crawler sees an empty shell"]
+  B -->|"yes"| C{"Does robots.txt<br/>allow it?"}
+  C -->|"no"| C1["A Disallow arrived<br/>with a staging config"]
+  C -->|"yes"| D{"noindex in a tag<br/>or in a header?"}
+  D -->|"present"| D1["The page is being<br/>dropped on purpose"]
+  D -->|"absent"| E{"Does canonical<br/>point at itself?"}
+  E -->|"no"| E1["You are asking search<br/>to fold it into another page"]
+  E -->|"yes"| F{"Is the sitemap live<br/>and submitted?"}
+  F -->|"no"| F1["Search does not know<br/>about the new URLs"]
+  F -->|"yes"| G{"Is the site reachable<br/>from outside your network?"}
+  G -->|"no"| G1["The edge is blocking,<br/>invisible from inside"]
+  G -->|"yes"| H["Technically clean.<br/>Now it is a demand question"]
+```
+
 ## Steps
 
 ### Does the crawler get any text at all
