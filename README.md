@@ -1,5 +1,11 @@
 # Pet Project Atlas
 
+[![CI](https://github.com/Smolevich/pet-project-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/Smolevich/pet-project-atlas/actions/workflows/ci.yml)
+[![Deploy](https://github.com/Smolevich/pet-project-atlas/actions/workflows/deploy.yml/badge.svg)](https://github.com/Smolevich/pet-project-atlas/actions/workflows/deploy.yml)
+[![Security](https://github.com/Smolevich/pet-project-atlas/actions/workflows/security.yml/badge.svg)](https://github.com/Smolevich/pet-project-atlas/actions/workflows/security.yml)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-2f6f4f)](LICENSE)
+[![Content: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-2f6f4f)](LICENSE-CONTENT)
+
 You shipped a side project and nobody found it. This is the map out of that: checking there is demand at all, getting indexed, getting cited by AI search, writing content, picking channels, reading the numbers, taking money.
 
 Every page is written from a real log — what was run, what broke, what came out of it. Numbers carry a date and a source, and CI fails the build when they do not.
