@@ -115,7 +115,7 @@ The other three do their own work, but none of it is auditing: `/atlas:content-p
 ## What did not work
 
 - **Reaching for `gws` to pull Search Console numbers**. Its help offers an `<api>:<version>` form for unlisted APIs. I tried `searchconsole:v1` and `analyticsdata:v1beta`; both came back as unknown services. Those numbers come out of their own APIs, or the console by hand.
-- **Looking for the licence inside the installed skill**. The folders under `~/.agents/skills/` hold a `SKILL.md` and its scripts. No licence, no author, no repository name. So I gave up on the folders and opened the lock file instead.
+- **Looking for the licence inside the installed skill**. The licence column above had to be filled from somewhere, so I went digging through the installed folders. They hold a `SKILL.md` and scripts: no licence, no author, no repository name. The terms live in the source repository, whose name survives only in the lock file.
 - **Treating an audit score as the work**. A composite number moves when anything moves. What actually changed my behaviour was one line of a report. The agent that got a 403. The passage nobody could quote.
 - **Running citability checks while the crawler was blocked**. The report scored my prose happily. No agent had read the page in weeks. I was grading a document nobody had fetched.
 - **Driving a clean browser profile for panels behind a login**. Every run started at a sign-in screen. The profile with the live session is the only one that reaches the panel.
