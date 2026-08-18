@@ -3,7 +3,7 @@ title: What to run and when
 sidebar:
   order: 1
 description: The audit skills, the browser driver and the CLI this atlas points at — what each one does, when it earns the time, where it came from and under what licence.
-updated: 2026-08-10
+updated: 2026-08-18
 sources:
   - marketingskills, source of seo-audit — https://github.com/coreyhaines31/marketingskills
   - geo-seo-claude, source of the GEO skills — https://github.com/zubair-trabzada/geo-seo-claude
@@ -18,7 +18,7 @@ sources:
 
 I do not ship audit tooling with this atlas, and I am not going to. The good tools already exist, and my own rewrite of one would be a worse copy that nobody maintains, me included.
 
-What I did not have was the map. Which tool answers which question, in what order to run them, and which of them I can skip once the symptom already says where to look.
+What I did not have was the map. Which tool answers which question, in what order to run them, and which of them I can skip once the symptom already says where to look. The map I did end up writing myself — the `/atlas:` commands at the bottom of the table. None of them is an audit. `/atlas:start` calls the third-party audits and lays their findings out along the route. The rest do the work no audit covers: a content plan, a weekly slice of numbers, a draft read against the style guide.
 
 Every third-party row below is a package sitting on my own machine. The one exception is a paid service: I read the licence column off the source repository, and for that service off what the money actually buys.
 
@@ -47,9 +47,11 @@ Every third-party row below is a package sitting on my own machine. The one exce
 The skills CLI takes an owner and a repo name, so installing the third-party ones is two lines:
 
 ```bash
-npx skills add coreyhaines31/marketingskills
-npx skills add zubair-trabzada/geo-seo-claude
+npx skills add -g coreyhaines31/marketingskills
+npx skills add -g zubair-trabzada/geo-seo-claude
 ```
+
+The `-g` flag is not optional here. Without it the installer puts the skill into the current project, and one directory over it is gone, while you audit sites from all over the place. The package itself lands in `~/.agents/skills/`, and `~/.claude/skills/` gets a symlink, so installed skills have to be looked for in both directories at once.
 
 The licence does not come down with them. An installed `SKILL.md` carries no licence line, no author and no repository name, and provenance survives in one place only — the lock file the installer wrote:
 
@@ -98,14 +100,16 @@ Two lines in Claude Code — add this repository as a marketplace, then install 
 /plugin install atlas
 ```
 
-Those four commands route and order the work, while the auditing stays with the third-party skills above, and that is deliberate.
+The auditing stays with the third-party skills above, and that is deliberate. `/atlas:start` checks nothing itself: it decides which third-party skill to run and in what order to read what they return.
 
-A wrapper only decides when to run something. That is much cheaper to keep alive than a second audit engine.
+`/atlas:report` has a higher bar than the rest: it calls the Search Console API directly, and that door does not open on a login alone. It needs a Google Cloud project with the API enabled, an OAuth token scoped to `webmasters.readonly`, and a quota project — without the last one Search Console answers 403. The skill checks all of it before the first request and says what is missing.
+
+The other three do their own work, but none of it is auditing: `/atlas:content-plan` builds clusters, `/atlas:report` calls the Search Console API, `/atlas:voice` reads a draft against `STYLE.md`. That is cheaper to keep alive than a second audit engine.
 
 ## What did not work
 
 - **Reaching for `gws` to pull Search Console numbers**. Its help offers an `<api>:<version>` form for unlisted APIs. I tried `searchconsole:v1` and `analyticsdata:v1beta`, and both came back as unknown services. Those numbers come out of their own APIs, or out of the console by hand.
-- **Looking for the licence inside the installed skill**. The folders under `~/.claude/skills/` hold a `SKILL.md` and its scripts. No licence, no author, no repository name. So I gave up on the folders and opened the lock file instead.
+- **Looking for the licence inside the installed skill**. The folders under `~/.agents/skills/` hold a `SKILL.md` and its scripts. No licence, no author, no repository name. So I gave up on the folders and opened the lock file instead.
 - **Treating an audit score as the work**. A composite number moves when anything moves. What actually changed my behaviour was one line of a report. The agent that got a 403. The passage nobody could quote.
 - **Running citability checks while the crawler was blocked**. The report scored my prose happily. No agent had read the page in weeks. I was grading a document nobody had fetched.
 - **Driving a clean browser profile for panels behind a login**. Every run started at a sign-in screen. The profile with the live session is the only one that reaches the panel.

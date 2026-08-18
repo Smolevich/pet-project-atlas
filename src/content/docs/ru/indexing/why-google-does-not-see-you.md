@@ -3,7 +3,7 @@ title: Google не видит сайт
 sidebar:
   order: 1
 description: Сайт в проде, а поиск по нему ничего не отдаёт. Проверки, которые находят настоящий блокер, в том порядке, в котором их надо запускать.
-updated: 2026-08-12
+updated: 2026-08-18
 sources:
   - Что может и чего не может robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/intro
   - Как Google читает robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt

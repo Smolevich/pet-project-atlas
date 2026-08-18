@@ -69,4 +69,4 @@ No experience to write from? Open an issue instead — [what did not help](https
 
 Two licenses, split by directory. Code is [MIT](LICENSE). Content under `src/content/docs/**` is [CC BY 4.0](LICENSE-CONTENT) — copy it, translate it, republish it, and link back to https://atlas.smolevich.com.
 
-Maintained by Stanislav Shupilkin ([@Smolevich](https://github.com/Smolevich), smolevich90@gmail.com).
+Maintained by [@Smolevich](https://github.com/Smolevich).

@@ -6,6 +6,9 @@
 // инструментов, а нужен он в тот момент, когда читатель дошёл до конкретной
 // проверки. Блок ставится прямо там.
 //
+// Ссылка на установку обязательна: команды нет в Claude Code из коробки, и
+// читатель, который наберёт её первой, получит «unknown command» и уйдёт.
+//
 // Никогда не заменяет объяснение. Читатель должен понимать, что именно
 // запускает агент, иначе он не прочитает и ответ.
 interface Props {
@@ -17,13 +20,24 @@ interface Props {
 
 const { run, does } = Astro.props as Props;
 const locale = Astro.locals.starlightRoute?.locale;
-const title = locale === 'ru' ? 'Отдать агенту' : 'Hand it to an agent';
+const isRu = locale === 'ru';
+const title = isRu ? 'Отдать агенту' : 'Hand it to an agent';
+const installHref = isRu
+  ? '/ru/tools/skills/#как-подключаются-четыре-команды-atlas'
+  : '/tools/skills/#how-the-four-atlas-commands-get-installed';
+const installLead = isRu
+  ? 'В Claude Code этой команды нет из коробки —'
+  : 'The command is not in Claude Code out of the box —';
+const installLink = isRu ? 'как поставить плагин' : 'how to install the plugin';
 ---
 
 <aside class="atlas-for-agent">
   <p class="atlas-for-agent-title">{title}</p>
   <p class="atlas-for-agent-body">
     <code>{run}</code> — {does}
+  </p>
+  <p class="atlas-for-agent-install">
+    {installLead} <a href={installHref}>{installLink}</a>.
   </p>
 </aside>
 
@@ -47,6 +61,11 @@ const title = locale === 'ru' ? 'Отдать агенту' : 'Hand it to an age
     font-size: var(--sl-text-sm);
     line-height: 1.5;
     color: var(--sl-color-gray-2);
+  }
+  .atlas-for-agent-install {
+    margin: 0.3rem 0 0;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
   }
   .atlas-for-agent code {
     color: var(--sl-color-white);

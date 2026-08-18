@@ -3,7 +3,7 @@
   "name": "pet-project-atlas",
   "description": "Commands from the Pet Project Atlas: routing, content planning, weekly reporting and voice.",
   "owner": {
-    "name": "Stanislav Shupilkin"
+    "name": "Smolevich"
   },
   "plugins": [
     {

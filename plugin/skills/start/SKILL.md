@@ -30,17 +30,20 @@ The audits below need a page to fetch.
 ## 2. Check the audits are installed
 
 ```bash
-ls ~/.claude/skills/
+ls ~/.agents/skills/ ~/.claude/skills/ ./.claude/skills/ 2>/dev/null
 ```
 
-`seo-audit` and `geo-audit` both have to be there.
+`seo-audit` and `geo-audit` have to appear in at least one of those. Three paths, not one: the installer
+keeps packages in `~/.agents/skills/` and symlinks them into the agent directory, and it installs into
+the current project unless it was told `-g`. A skill missing from the home directory may still be
+installed.
 
-If either is missing, **say so and stop**. Do not substitute your own checks — a hand-rolled audit is a
-worse audit that looks like a real one. Print the install lines and point at the tools page:
+If either is missing everywhere, **say so and stop**. Do not substitute your own checks — a hand-rolled
+audit is a worse audit that looks like a real one. Print the install lines and point at the tools page:
 
 ```bash
-npx skills add coreyhaines31/marketingskills
-npx skills add zubair-trabzada/geo-seo-claude
+npx skills add -g coreyhaines31/marketingskills
+npx skills add -g zubair-trabzada/geo-seo-claude
 ```
 
 What each tool is and where it comes from: <https://atlas.smolevich.com/tools/skills/>.

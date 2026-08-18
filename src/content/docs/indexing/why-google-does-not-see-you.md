@@ -3,7 +3,7 @@ title: Google does not see your site
 sidebar:
   order: 1
 description: The site is live and search returns nothing for it. The checks that find the real blocker, in the order they have to run.
-updated: 2026-08-12
+updated: 2026-08-18
 sources:
   - What robots.txt can and cannot do — https://developers.google.com/search/docs/crawling-indexing/robots/intro
   - How Google reads robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
@@ -61,7 +61,7 @@ Pull the file from the live domain and read all of it — not from memory, and n
 curl -s https://example.com/robots.txt
 ```
 
-The classic one is a `Disallow: /` that rode in from a staging config with the deploy. Another failure is quieter: Google stops reading the file past 500 kibibytes, a generated robots can truncate silently somewhere in the middle, and everything below the cut does not exist for Google.
+Most often it is a `Disallow: /`: on a draft domain that line belonged there, and it rode into production with the rest of the config. The other failure is quieter: Google reads only the first 500 KB of the file, a generated robots.txt can truncate silently in the middle, and everything below the cut does not exist for Google.
 
 ### Are you asking search to drop the page yourself
 
@@ -85,9 +85,9 @@ Every page should carry a canonical pointing at itself or at the real original:
 curl -sL https://example.com/page | grep -i 'rel="canonical"'
 ```
 
-Some templates hardcode the home page as the canonical across every page, and that way you are asking search to discard the rest of the site yourself.
+A bad template sets the canonical to the home page on every page at once. That is a request to search: drop everything except the home page.
 
-Then count how many different addresses answer with the same page: trailing slash, `www`, `http`, `index.html`, tracking parameters — all of them have to redirect to a single form:
+Then count how many addresses lead to the same page. Trailing slash, `www`, `http`, `index.html`, tracking tags — each one is another address. All of them have to redirect to one:
 
 ```
 for u in http://example.com/page https://www.example.com/page https://example.com/page/ https://example.com/page/index.html; do
