@@ -1,0 +1,28 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Разбор чужих action'ов стареет без единой правки в репозитории:
+    # уязвимость находят в том, что уже вмержено и год как не менялось.
+    - cron: '17 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  workflows:
+    name: Audit workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      # Всё, что может украсть секреты деплоя, живёт в самих workflow-файлах:
+      # подстановка ${{ }} в run, чужой action по подвижному тегу, лишние
+      # права GITHUB_TOKEN, секреты в job'е, где выполняется чужой код.
+      - name: Audit workflows with zizmor
+        run: pipx run zizmor==1.29.0 --offline --min-severity medium .github/workflows/
