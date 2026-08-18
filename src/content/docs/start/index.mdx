@@ -1,6 +1,6 @@
 ---
 title: Start here
-description: The route from a live project nobody finds to first traffic — demand first, then week one, week two and month two, one line per step.
+description: The route from a live project nobody finds to first traffic — demand first, then crawler access, then pages, and only at the end links and money. One line per step.
 updated: 2026-08-12
 sources:
   - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
@@ -31,7 +31,7 @@ The first item is not technical. You find out whether anybody searches for this,
 
 The section numbers are a reading order. The doing order crosses them twice, and I marked each crossing where it falls.
 
-### Week zero — does anybody search for this, and do they pay for anything
+### First — does anybody search for this, and do they pay for anything
 
 1. Collect the exact wordings people use, from support, reviews and forums — [the words people actually type](/demand/how-people-search/).
 2. Check the Russian wordings in Yandex Wordstat, with the operators applied, because without operators you get the category total rather than demand for your wording. No Russian-speaking audience? Skip to step three — [same page](/demand/how-people-search/).
@@ -43,7 +43,7 @@ The section numbers are a reading order. The doing order crosses them twice, and
 
 This takes a day or two, all of it in a browser, and it decides whether the rest of the route is worth doing at all. Everything below assumes somebody types these words and pays for something.
 
-### Week one — can a crawler read the site, and does anyone know it is there
+### Once there is a live domain — can a crawler read the site, and does anyone know it is there
 
 8. Run `curl -sL` on your own page and look for the body text in the response, because text that is missing there is text the crawler never sees — [Google does not see your site](/indexing/why-google-does-not-see-you/).
 9. Read `robots.txt` on the live domain, every line of it, because one line closes the whole domain: a `Disallow: /` that came over from a staging config — [same page](/indexing/why-google-does-not-see-you/).
@@ -60,9 +60,9 @@ Step sixteen belongs to section six, and you have to do it now. You cannot recon
 
 Every untagged day is a day of arrivals nobody will ever classify, however good the dashboard gets later. My own launch day is one of them.
 
-### Week two — will the page be found, and will it be quoted
+### Once the crawler is let in — will the page be found, and will it be quoted
 
-18. Group the wordings from week zero into clusters, one URL each. A cluster is a set of wordings that want the same page — [what to write](/content/keyword-clusters/).
+18. Group the wordings you collected into clusters, one URL each. A cluster is a set of wordings that want the same page — [what to write](/content/keyword-clusters/).
 19. Order the queue by money: transactional, then comparison, then informational. That is ready to buy, then still choosing, then still reading. I ran out of energy long before I ran out of clusters — [what to write](/content/keyword-clusters/).
 20. Write the first page in the four-block shape — [what a page is made of](/content/page-templates/). The blocks: the problem, the steps, what did not work, how to check.
 21. Put the answer in the first three sentences of that page. That block is the passage a model lifts — [what a page is made of](/content/page-templates/).
@@ -71,7 +71,7 @@ Every untagged day is a day of arrivals nobody will ever classify, however good 
 24. If the product lives in a platform, put its function in the name. Platform search matches the name, not the description — [search inside the platform](/distribution/in-platform-visibility/).
 25. Take the first weekly snapshot and append it to a file — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
-### Month two — who links to you, and what does a user cost
+### Once there is something worth linking to — who links to you, and what does a user cost
 
 26. Write the listing card once: name, description, category, screenshots, link — [where the first links come from](/distribution/catalogs/).
 27. Check each venue is alive before you spend an evening on the batch, because published lists of directories go stale. Then submit in small batches, with tagged links — [where the first links come from](/distribution/catalogs/).
@@ -81,10 +81,10 @@ Every untagged day is a day of arrivals nobody will ever classify, however good 
 31. State break-even as a whole number of payers per month — [what one user costs](/money/unit-economics/).
 32. Read the series and fix the earliest large drop, not the last one — [the numbers worth reading weekly](/analytics/what-to-measure/).
 33. Post where the shortlists get written: answer the question and say the product is yours. Never ask for upvotes — [communities and forums](/distribution/communities/).
-34. Put who, what, when, source, cost, client and outcome on every event row. Cost and source can only be written at insert time, so this step really belongs back in week one — [what an event row has to carry](/analytics/product-metrics/).
+34. Put who, what, when, source, cost, client and outcome on every event row. Cost and source can only be written at insert time, so it really belongs next to step sixteen — [what an event row has to carry](/analytics/product-metrics/).
 35. Name a price. Put the wall after the first real result, and ask one person for money. On my dashboard, nobody paying looked exactly like nobody being asked — [getting the first person to pay](/money/first-payer/).
 
-Step twenty-nine goes back to section three. On-page citability pays once a model has seen your name somewhere else, and month two is when that starts being true.
+Step twenty-nine goes back to section three. On-page citability pays once a model has seen your name somewhere else, and by this point that starts being true.
 
 ## What did not work
 
@@ -104,9 +104,9 @@ These are mistakes of order. I did each of them correctly, at a moment when the 
 
 Each stage ends with one sentence you should be able to say out loud. If you cannot say it, stay in the stage, because the next stage is built straight on top of it.
 
-- **End of week zero**. A file of wordings, each with its origin and the engine it was checked in. A named paid competitor, or a stated reason the market looks empty.
-- **End of week one**. URL Inspection says the URL is on Google. A link you published today carries a source tag, and that tag lands in the database.
-- **End of week two**. Every cluster has exactly one owning URL. The first page answers its own title in its opening sentences. The snapshot file has a row in it.
-- **End of month two**. At least one listing whose HTML contains your link. One recorded cost on a real event row. A break-even you can say as a whole number.
+- **Demand**. A file of wordings, each with its origin and the engine it was checked in. A named paid competitor, or a stated reason the market looks empty.
+- **Access**. URL Inspection says the URL is on Google. A link you published today carries a source tag, and that tag lands in the database.
+- **Pages**. Every cluster has exactly one owning URL. The first page answers its own title in its opening sentences. The snapshot file has a row in it.
+- **Links and money**. At least one listing whose HTML contains your link. One recorded cost on a real event row. A break-even you can say as a whole number.
 
 When something specific is broken, start from the symptom instead of the stage: [Tools](/tools/).
