@@ -183,7 +183,9 @@ So `llms.txt` is not a route agents travel, and on this box in this window it wa
      | sort | uniq -c | sort -rn
    ```
 
-   The `awk` matters here, rather than the familiar `grep -oE` this page once shipped. `grep` prints occurrences instead of lines, and a single bingbot request names itself twice — in the token and in the `+http://…/bingbot.htm` URL. In this window that comes out as 336 occurrences against 155 requests, so the count doubles. `awk` takes the first match per line, and one line means one request again.
+   The `awk` matters here, not the `grep -oE` this page once shipped. `grep` prints occurrences instead of lines, and a single bingbot request names itself twice: in the token and in the `+http://…/bingbot.htm` URL.
+
+In this window that is 336 occurrences against 155 requests. `awk` takes the first match per line, so one line means one request again.
 6. **Count the paths, AI agents only, your address excluded** — field seven is the request path in the combined format.
 
    ```bash
@@ -195,25 +197,25 @@ So `llms.txt` is not a route agents travel, and on this box in this window it wa
    Here `grep` without `-o` matches whole lines, so this one counts requests already.
 ### What these rows do not prove
 
-The comparison I came for is 0 fetches of `llms.txt` against 56 of `robots.txt`. Every AI agent in the table took `robots.txt`. Not one of them took `llms.txt`. That is narrower than saying the file is useless, and it is what this log supports, on one box, over 16 days.
+The comparison I came for is 0 fetches of `llms.txt` against 56 of `robots.txt`. Every AI agent in the table took `robots.txt` and none took `llms.txt`. That is narrower than calling the file useless, and it is what this log supports: one box, 16 days.
 
-`/` took 280 requests, more than every other path combined. I cannot read that as a preference for the home page. A bare domain pasted into a chat and an agent deciding to start at the root produce exactly the same line. The log records the path and never the reason. Keeping good pages reachable from the root is still sound advice, and this table is just not the evidence for it.
+`/` took 280 requests, more than every other path combined, and I cannot read that as a preference for the home page. A bare domain pasted into a chat and an agent starting at the root produce the same line, because the log records the path and never the reason. Keeping good pages reachable from the root is still sound advice; this table is not the evidence for it.
 
-The comparison post took 64 requests, plus 6 in Russian. That is more than the rest of the blog together, and it is the whole of what nginx knows about it. A 200 means bytes went out. Whether a word of them reached an answer, the file does not say, because citation shows up in referrals from assistant hosts and in the answers themselves. Neither of those is a log line.
+The comparison post took 64 requests, plus 6 in Russian — more than the rest of the blog together, and the whole of what nginx knows about it. A 200 means bytes went out. Whether a word of them reached an answer shows up in referrals from assistant hosts and in the answers themselves, neither of which is a log line.
 
-`robots.txt` took 56 requests and `sitemap.xml` took 14. I read those two rows as protocol rather than as interest in me. A crawler takes `robots.txt` at the start of every session, so a high count there means the handshake is working. Nobody writes a post about a correct sitemap. Agents still ask for it before they ask for any prose.
+`robots.txt` took 56 requests and `sitemap.xml` took 14. Those two rows are protocol, not interest in me: a crawler takes `robots.txt` at the start of every session, so a high count means the handshake works. Nobody writes posts about a correct sitemap, and agents still ask for it before any prose.
 
-All of this rests on identities I never verified. The window showed me the cost of that twice. First I read my own spoofed strings as thirteen vendors, and then I read `Google-Extended` off a line that cannot exist. Doing it properly means reverse DNS on each client address, or matching it against the ranges the vendor publishes.
+All of this rests on identities I never verified, and the window showed the cost twice: I read my own spoofed strings as thirteen vendors, then read `Google-Extended` off a line that cannot exist. Doing it properly means reverse DNS on each client address, or matching the ranges the vendor publishes.
 
 ## What did not work
 
-- **Counting my own traffic as an agent's**. My address is in this log 4,221 times, and 81 of those are under a crawler name. I published the totals with all of it inside. Then I blamed the strange rows on an unknown scanner. The scanner was my own `curl` loop. Finding that took one call to `api.ipify.org`.
-- **The `llms.txt` finding, first time round**. This page reported about one fetch per agent and built a conclusion on the shape of it. Seventeen of those lines are four seconds of a loop I ran on 7 August. The real count of AI-agent fetches in 16 days is 0.
-- **Reading the live log and stopping there**. My first pass used a file that started that same morning. It showed 0 requests to `llms.txt`. The number was right by accident and the reasoning was wrong. The archives held 45, and 44 of those were mine.
-- **Publishing a command that did not produce the table**. The `grep -oE` version printed here was case-sensitive, so it never matched `bingbot`. Made case-insensitive, it counted occurrences instead of requests, which doubled the bingbot row. A reader running the published command got neither the table nor an error.
+- **Counting my own traffic as an agent's**. My address is in this log 4,221 times, 81 of them under a crawler name, and I published the totals with all of it inside. I blamed the strange rows on an unknown scanner; the scanner was my own `curl` loop, and finding that took one call to `api.ipify.org`.
+- **The `llms.txt` finding, first time round**. This page reported about one fetch per agent and built a conclusion on that shape. Seventeen of those lines are four seconds of a loop I ran on 7 August, and the real count over 16 days is 0.
+- **Reading the live log and stopping there**. My first pass used a file that started that morning and showed 0 requests to `llms.txt` — right by accident, wrong by reasoning. The archives held 45, and 44 of those were mine.
+- **Publishing a command that did not produce the table**. The `grep -oE` version printed here was case-sensitive and never matched `bingbot`; made case-insensitive it counted occurrences instead of requests and doubled that row. A reader running it got neither the table nor an error.
 - **Counting calendar days instead of days on disk**. This page first said 24 days between the same two dates. `logrotate` keeps 14 dailies here, and nine of those days had already gone when I counted them.
-- **Attributing the totals to a single site**. These counts come from every per-site log on the box. 340 of the 341 `ChatGPT-User` requests belong to one of those sites. The split is inference from the paths, not a field in the log.
-- **Taking a name in the log as an identity**. Every agent in the tables above is an unverified `User-Agent` string. Mine were plainly fake. I still could not tell you which of the rest are somebody else's scanner.
+- **Attributing the totals to a single site**. These counts come from every per-site log on the box, and 340 of the 341 `ChatGPT-User` requests belong to one site. The split is inferred from paths, not read from a field.
+- **Taking a name in the log as an identity**. Every agent above is an unverified `User-Agent` string, and mine were plainly fake. Which of the rest are somebody else's scanner, I still cannot say.
 - **Counting nginx as the total**. A request that Cloudflare served from cache never reaches the box. These figures are a floor, not a total.
 - **Pulling the Cloudflare-side numbers for comparison**. The API call failed on token permissions, so the comparison is not in this page. Whatever the edge absorbed is missing from every table above.
 

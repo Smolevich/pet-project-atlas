@@ -15,7 +15,7 @@ sources:
 
 Every action a user takes spends real money at a provider. Until I know what one action costs, any price I name is a guess with a confident face on it.
 
-Two numbers close the question. The first is the variable cost of serving one action, and the second is the fixed cost of a month in which nobody shows up. Break-even follows from those costs and comes out in payers per month. A margin percentage does not tell you whether to continue. "Two people a month" does.
+Two numbers close the question: the variable cost of one action, and the fixed cost of a month with nobody in it. Break-even follows from them, in payers per month. A margin percentage does not say whether to continue. "Two people a month" does.
 
 ## Steps
 
@@ -23,11 +23,11 @@ Two numbers close the question. The first is the variable cost of serving one ac
 
 Split the costs into two buckets once, in writing, because fixed and variable get optimised in completely different ways. Fixed is the server, the domain and any plan billed whether or not anyone arrives. Variable is tokens, characters, seconds and per-call fees.
 
-A box running three projects enters this product at its share. You have to say that share out loud. I keep it as a named constant with a comment listing the projects, so when the mix changes I edit one number instead of hunting for it through a model.
+A box running three projects enters this product at its share. Say that share out loud. I keep it as a named constant, with a comment listing the projects, so a change in the mix is one edit.
 
 ### What does one action actually cost
 
-Put the cost of a call on the same event row as the result, and put it there at once, because an hour later there is nowhere left to get it from. Many APIs return usage on the response, and some return the charge itself. If yours returns only quantity, store the quantity and multiply by a rate you keep in a table.
+Put the cost of a call on the same row as the result, at once, because an hour later there is nowhere left to get it from. Many APIs return usage on the response, some the charge itself. If yours returns only quantity, store that and multiply by a rate.
 
 The column and the read off it look roughly like this — the names here are generic, your schema is your own:
 
@@ -43,7 +43,7 @@ from events
 where created_at >= date_trunc('month', now());
 ```
 
-The thing to read there is the gap between `actions` and `priced`. I never had such a column at all, and I did not know it, so every cost I quoted was reconstructed later by joining a rates table. Rates change, the join takes today's, and the answer about May quietly drifts. On a chart a reconstruction looks exactly like a measurement.
+Read the gap between `actions` and `priced`. I never had such a column and did not know it. Every cost I quoted was reconstructed later, by joining a rates table. Rates change, the join takes today's, and the answer about May drifts. On a chart that looks exactly like a measurement.
 
 What else belongs on that row, and why it has to be written at insert time: [what an event row has to carry](/analytics/product-metrics/).
 
@@ -51,7 +51,7 @@ What else belongs on that row, and why it has to be written at insert time: [wha
 
 Two engines at different prices cannot live in one model until you express the costs in the unit you sell. That unit is credits, minutes or messages — whatever the package is priced in.
 
-Compute the worst case, not the average. A user is entitled to spend an entire package on your most expensive engine. Your margin floor is the lowest margin across packages, evaluated at that engine, and that floor has to be acceptable rather than the average across all of them.
+Compute the worst case. A user may spend an entire package on your most expensive engine, so your margin floor is the lowest margin across packages evaluated at that engine. The floor is what has to be acceptable.
 
 ### How much of the ticket actually lands
 
@@ -84,16 +84,16 @@ Keep the formulas in code rather than in spreadsheet cells. Then known inputs be
 
 ### Which engine nearly everyone actually gets
 
-Make the default the cheapest engine that clears your quality bar. The default is what nearly everyone gets. Your real cost structure is described by the default path, not by the option list in settings. The expensive engine belongs behind a deliberate choice.
+Make the default the cheapest engine that clears your quality bar. The default is what nearly everyone gets. Your cost structure is the default path, not the option list. The expensive engine belongs behind a deliberate choice.
 
 ## What did not work
 
-- **Defaulting to the most expensive provider.** One config line cost margin, latency and the free allowance at once. Nearly every request went to the paid premium engine while a free one sat idle. It answered slowly enough that people sat watching a placeholder. Each second of that output spent credits the free engine would not have spent.
+- **Defaulting to the most expensive provider.** One config line cost margin, latency and the free allowance at once. Nearly every request went to the paid engine while a free one sat idle. It was slow enough that people watched a placeholder, and every second spent credits.
 - **Two independent limits on the same resource.** A credit balance, plus a separate per-day cap on one engine. The most engaged user of that month hit the daily cap with credits still on his balance. He never came back.
-- **Reading a key's limit as money.** A key's limit shows a spending ceiling rather than a balance. It happily shows headroom while the account is empty. I learned that inside my own product rather than in the provider's panel — as a payment-required error.
-- **Not checking whose key it was.** A key from a local config belonged to another account. That account's credits were the ones going out while mine sat untouched. Establish the owner through the provider's key endpoint before a key goes anywhere near `.env`.
+- **Reading a key's limit as money.** A limit is a spending ceiling, not a balance, and it will show you headroom while the account behind it is empty. I learned that inside my own product, as a payment-required error.
+- **Not checking whose key it was.** A key from a local config belonged to another account, and that account's credits were the ones going out while mine sat untouched. Establish the owner through the provider's key endpoint, before `.env`.
 - **Counting my own test purchase as revenue.** The model briefly showed break-even reached. The payer was me, through a test account. My purchase went into the aggregation like anybody else's.
-- **Cutting a fixed cost of a few dollars while there were no payers.** The denominator was already fine. The denominator was what I kept shrinking. No break-even is reachable without a first payer. The work belonged on demand, not in the billing console.
+- **Cutting a fixed cost of a few dollars while there were no payers.** The denominator was already fine, and the denominator was what I kept shrinking. No break-even is reachable without a first payer, so the work belonged on demand.
 - **Keeping rates in a sheet the product never read.** The pricing tables in production were empty. The code ran on a hard-coded fallback. I changed the price several times and nothing reached a user.
 - **Building a scenario matrix instead of measuring.** Optimistic and pessimistic columns argued about a margin nobody had earned yet. One recorded cost per action ended the argument.
 
