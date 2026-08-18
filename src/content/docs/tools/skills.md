@@ -104,7 +104,11 @@ Two lines in Claude Code — add this repository as a marketplace, then install 
 
 The auditing stays with the third-party skills above, and that is deliberate. `/atlas:start` checks nothing itself: it decides which third-party skill to run and in what order to read what they return.
 
-`/atlas:report` has a higher bar: it calls the Search Console API directly, and that door does not open on a login alone. It needs a Google Cloud project with the API enabled, a token scoped to `webmasters.readonly`, and a quota project — without the last one Search Console answers 403. The skill checks before the first request and says what is missing.
+`/atlas:report` takes one of two routes into Search Console, and says which before it pulls anything.
+
+The cheap one is the browser you are already logged into: Playwright MCP opens the Performance report in your own profile, with no Cloud project and no token. The other is the REST API, which costs a project with the API enabled, a token scoped to `webmasters.readonly` and a quota project. Without the last one Search Console answers 403.
+
+Take the browser for a report you run by hand on a Monday. Take the API when it has to run unattended.
 
 The other three do their own work, but none of it is auditing: `/atlas:content-plan` builds clusters, `/atlas:report` calls the Search Console API, `/atlas:voice` reads a draft against `STYLE.md`. That is cheaper to keep alive than a second audit engine.
 

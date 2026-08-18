@@ -5,6 +5,7 @@ user-invocable: true
 allowed-tools:
   - Read
   - Write
+  - mcp__playwright__*
   - Bash(curl *)
   - Bash(gcloud auth *)
   - Bash(jq *)
@@ -36,7 +37,22 @@ Say exactly which one failed and what the author has to do. **Do not continue wi
 1. **A verified Search Console property** for the domain. A domain property is `sc-domain:example.com`;
    a URL-prefix property is the full origin. The value must be URL-encoded in the path
    (`sc-domain%3Aexample.com`).
-2. **An OAuth access token** with `https://www.googleapis.com/auth/webmasters.readonly`, and
+2. **A way into Search Console.** There are two, and the browser one is cheaper. Pick whichever the
+   author already has, and only fail this check when neither is available.
+
+   **A — the browser they are already logged into.** A browser tool driving their real profile
+   (Playwright MCP, for one) opens the Performance report with the session that already exists: no
+   Cloud project, no token, no scopes. Set the property, set the date range, read the six numbers off
+   the screen or take the CSV export. This is the right route for a report somebody runs by hand
+   every week. It cannot be scheduled, it needs a live login, and a chromium in a clean profile shows
+   the sign-in page and nothing else.
+
+   **B — the REST API.** Scriptable, repeatable, cron-able, and it costs the setup in points 3 and 4.
+   Take this route when the report has to run unattended.
+
+   Say which route you are on before pulling anything, because the numbers are the same and the
+   failure modes are not.
+3. **For route B only: an OAuth access token** with `https://www.googleapis.com/auth/webmasters.readonly`, and
    `https://www.googleapis.com/auth/analytics.readonly` as well if GA4 is in scope. The author's own
    credentials, not a service account they do not control.
 
@@ -47,7 +63,7 @@ Say exactly which one failed and what the author has to do. **Do not continue wi
    ```
 
    Any OAuth flow that yields a token with those scopes is fine. This is the one that is installed here.
-3. **A quota project the caller is allowed to use.** Application Default Credentials carry no quota
+4. **For route B only: a quota project the caller is allowed to use.** Application Default Credentials carry no quota
    project, and Search Console rejects the call without one:
 
    ```
@@ -69,11 +85,11 @@ Say exactly which one failed and what the author has to do. **Do not continue wi
    ```
 
    Both of these are permission problems, not empty data. Report them as such and stop.
-4. **A GA4 property id**, if metrics 4 to 6 come from GA4 rather than the product's own database. The
+5. **A GA4 property id**, if metrics 4 to 6 come from GA4 rather than the product's own database. The
    numeric id, not the measurement id.
-5. **The product's own source for signups, activation and repeat use** — a database, a query, an export.
+6. **The product's own source for signups, activation and repeat use** — a database, a query, an export.
    Ask which one. Search Console cannot answer any of metrics 4 to 6.
-6. **The name of the single action that counts as activation.** If the author cannot name one action,
+7. **The name of the single action that counts as activation.** If the author cannot name one action,
    the metric does not exist yet. Say that, and report metrics 1 to 4 only.
 
 Missing prerequisites are the expected outcome the first time. A report that quietly comes back empty
