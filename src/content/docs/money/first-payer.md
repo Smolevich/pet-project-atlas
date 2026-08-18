@@ -18,7 +18,7 @@ A product nobody pays for and a product nobody has been asked to pay for look id
 
 ### Where a price comes from when there is nobody to survey
 
-Take the shape of the price from a competitor — per seat, per action, per month — because somebody already tested it with their own money: [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor: [what one user costs](/money/unit-economics/).
+Take the shape of the price from a competitor: per seat, per action, per month. Somebody already tested that shape with their own money — [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor: [what one user costs](/money/unit-economics/).
 
 Price the unit your event row already records: a minute, a message, a run. If the row carries a cost per action you can price a package today, whereas a price in a unit you do not measure has nothing to check it against.
 
