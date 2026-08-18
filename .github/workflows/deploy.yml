@@ -77,7 +77,7 @@ jobs:
           name: site
 
       - name: Connect to the tailnet
-        uses: tailscale/github-action@05c58255396c88c609919d571a8b117099c69020 # v2
+        uses: tailscale/github-action@4e4c49acaa9818630ce0bd7a564372c17e33fb4d # v2
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
