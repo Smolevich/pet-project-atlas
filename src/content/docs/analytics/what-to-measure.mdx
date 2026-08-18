@@ -20,7 +20,7 @@ import ForAgent from '../../../components/ForAgent.astro';
 
 My dashboard had forty numbers on it and every one of them moved last week. That sounds like a lot of information. It was none of it: at these volumes most of the movement means the volume is small, not that the project is alive.
 
-What works is a short list you read on a fixed day of the week, and getting onto it is hard. A number has to answer what none of the others answer. If two answer the same question, one is decoration.
+What works is a short list you read on a fixed day of the week. Getting onto that list is hard. A number has to answer something none of the others answer, and if two numbers answer the same question, one of them is decoration and can go.
 
 ## Steps
 
@@ -28,17 +28,17 @@ What works is a short list you read on a fixed day of the week, and getting onto
 
 Read impressions, in the Performance report. It opens from the property's left-hand navigation in Search Console. Impressions move before clicks do, so a page you published on Monday shows up here first and nowhere else for a while.
 
-Read the count of distinct queries next to them. The pair says what neither says alone. A rising query count means new demand found you. A flat count with impressions climbing means the same page was shown more often, which is a different event.
+Read the count of distinct queries next to them, because the pair says something neither number says alone. A rising query count means new demand found you. A flat query count with impressions climbing means the same page was shown more often, and that is a different event entirely.
 
 ### Is this a ranking problem or a packaging problem
 
-Read clicks and average position only as a pair. Impressions with no clicks at a decent position is a title and snippet problem. Rewriting the body is the wrong afternoon: nobody got that far to be disappointed.
+Read clicks and average position only as a pair. Impressions with no clicks at a decent position is a title and snippet problem. Rewriting the body is then the wrong afternoon of work, because the reader never got as far as the body to be disappointed by it.
 
 Read the position here and not in a panel. On one of my queries an outside estimate said 20 while this report said 43.3. Where that gap comes from is written out in [what a paid rank tracker measures](/tools/paid-tools/).
 
 ### How much of what I wrote can even rank
 
-Count the share of your pages actually in the index: submitted URLs as the denominator, indexed ones as the numerator. A count of indexed pages alone is fiction, because it never says out of how many.
+Count the share of your pages actually in the index. The denominator is the URLs you submitted. The numerator is the URLs the report says are indexed. A count of indexed pages on its own is fiction: it never says out of how many.
 
 The Page indexing report gives you the shape of the problem. The URL Inspection API gives per-URL truth, and you go there when the question is no longer about the site but about one page.
 
@@ -70,7 +70,7 @@ Keep the series. A number with nothing to compare itself against a month ago is 
 
 Two readings changed what I actually worked on, and neither of them is visible in any total.
 
-The first was breaking activation down by first action. On one project the two possible first actions came back at different rates, which told me what to put in front of new users. The aggregate had said nothing for months.
+The first was breaking activation down by first action. On one project the two possible first actions came back at different rates, and that told me which of the two paths to put in front of new users. The aggregate had been saying nothing for months.
 
 The second was counting the people who produced no event at all. They left after the first screen, so no event table contains them, and that is exactly why they never surface as a problem. Their absence is a verdict on the first screen.
 
@@ -78,11 +78,11 @@ Then fix the earliest large drop, not the most interesting one, because tuning p
 
 ## What did not work
 
-- **Reading the graphs every day.** At these volumes two days swing further apart than a real week of change. I shipped a fix on a Tuesday dip and reverted it on Friday more than once, and neither had anything to do with the numbers that moved.
-- **Counting pageviews as traffic.** The views in the report were mine: a founder-only panel I open several times a day lives in the same property as the public pages. Excluding the internal URLs and my own sessions turned the growth story into a flat line.
+- **Reading the graphs every day.** At these volumes two days can swing further apart than a real week of change. I shipped a fix on a Tuesday dip and reverted it on Friday, more than once, and neither the fix nor the revert had anything to do with the numbers that moved.
+- **Counting pageviews as traffic.** The views in the report were mine. A founder-only panel I open several times a day sits in the same property as the public pages. Once I excluded the internal URLs and my own sessions, my growth story turned into a flat line.
 - **Treating signups as activation.** The signup number looked healthy for months. People registered and never sent one real request — I had instrumented the door and left the room dark.
 - **Counting transactions instead of unique payers.** Three purchases by one person read as three customers on my chart, and my own test account read the same way.
-- **Trusting an external traffic estimate.** It did not cover one of the two engines my audience uses, so my conclusion was the reverse of the truth. One query typed by hand would have caught it, and I did not type it for weeks.
+- **Trusting an external traffic estimate.** It did not cover one of the two search engines my audience actually uses, so the conclusion I drew from it was the reverse of the truth. One query typed by hand into that engine would have caught it, and I did not type it for weeks.
 - **Building the dashboard before writing the questions.** I read panels that answered nothing, every week, and did not notice for a long time. In the end I deleted most of my event tables and rebuilt the panel around cost and exhaustion.
 - **Averaging over all users instead of cohorts.** The average sat flat while signups grew, which I read as stability, and that panel could not tell me whether any single cohort was moving.
 
