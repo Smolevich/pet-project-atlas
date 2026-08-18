@@ -49,6 +49,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Pet Project Atlas',
+      logo: { src: './src/assets/atlas-mark.png', alt: 'Pet Project Atlas' },
+      favicon: '/favicon.png',
+      head: [
+        { tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' } },
+      ],
       description: 'How to get your pet project found: demand, search, AI search, content, distribution, analytics, money.',
       editLink: { baseUrl: 'https://github.com/Smolevich/pet-project-atlas/edit/main/' },
       lastUpdated: true,

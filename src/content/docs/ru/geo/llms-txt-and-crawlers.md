@@ -6,8 +6,7 @@ description: Какие AI-агенты приходят на сайт, кому
 updated: 2026-08-13
 sources:
   - Cloudflare GraphQL Analytics, site atlas.smolevich.com, measured 2026-08-13
-  - nginx access log, dataset /var/log/nginx/access.log, measured 2026-08-12
-  - nginx access log, dataset /var/log/nginx/access.log.*.gz, measured 2026-08-12
+  - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
   - RFC 9309, стандарт robots.txt — https://www.rfc-editor.org/rfc/rfc9309.html
   - Краулеры OpenAI и их задачи — https://developers.openai.com/api/docs/bots
   - Краулеры Anthropic и как их закрыть — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler

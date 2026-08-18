@@ -3,7 +3,7 @@ title: Чек-лист
 description: Двадцать три пункта в порядке, при котором работа не пропадает впустую, каждый — одна строка со ссылкой на страницу с объяснением.
 updated: 2026-08-12
 sources:
-  - nginx access log, dataset /var/log/nginx/*.access.log, measured 2026-08-12
+  - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
 ---
 
 ## Что решаем

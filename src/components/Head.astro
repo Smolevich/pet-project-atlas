@@ -42,8 +42,25 @@ if (site && typeof canonical === 'string') {
 
 // `<` внутри JSON закрыл бы <script> раньше времени, если он попадёт в описание.
 const json = graph && JSON.stringify(graph).replaceAll('<', '\\u003c');
+
+// Карточка для соцсетей. Без og:image ссылка на атлас разворачивается голым
+// текстом, а расходится он ровно ссылками — в телеграме, в X, в личных
+// сообщениях. Картинка одна на весь сайт: своя на каждую страницу требует
+// рендера на сборке, а выигрыш там уже небольшой.
+const ogImage = site ? new URL('/og.png', site).href : null;
 ---
 
 <Default />
+
+{ogImage && (
+  <>
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Pet Project Atlas — a route out of zero traffic" />
+    {/* twitter:card Starlight ставит сам, второй такой же тег лишний. */}
+    <meta name="twitter:image" content={ogImage} />
+  </>
+)}
 
 {json && <script type="application/ld+json" set:html={json} />}

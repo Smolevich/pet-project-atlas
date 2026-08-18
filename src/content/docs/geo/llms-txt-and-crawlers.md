@@ -6,8 +6,7 @@ description: Which AI agents visit a site, who owns them, where access is really
 updated: 2026-08-13
 sources:
   - Cloudflare GraphQL Analytics, site atlas.smolevich.com, measured 2026-08-13
-  - nginx access log, dataset /var/log/nginx/access.log, measured 2026-08-12
-  - nginx access log, dataset /var/log/nginx/access.log.*.gz, measured 2026-08-12
+  - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
   - RFC 9309, the robots.txt standard — https://www.rfc-editor.org/rfc/rfc9309.html
   - OpenAI crawlers and what each does — https://developers.openai.com/api/docs/bots
   - Anthropic crawlers and how to block them — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
