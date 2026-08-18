@@ -5,7 +5,7 @@ sidebar:
 description: People ask an assistant for a tool like yours and get a competitor. Crawler access first, then pages worth quoting.
 ---
 
-Someone describes your problem to an assistant and gets a shortlist. You are not on it. A search page has ten slots and a scroll below them, so even from a weak position a reader can still find you there. An assistant's answer has room for a few sources, and if you are not one of them, you are simply absent.
+Someone describes your problem to an assistant and gets a shortlist without you on it. A search page has ten slots and a scroll below them, so a weak position can still be found. An assistant's answer has room for a few sources, and outside them you are absent.
 
 Three pages, in this order.
 

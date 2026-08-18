@@ -190,6 +190,10 @@ Numbers are digits, not words. Zero is a result worth publishing: "0 clicks in t
 
 A paragraph is at most 3 sentences. A sentence is at most 20 words.
 
+A block — one bullet, or one paragraph — is at most 55 words in a list and 65 in prose. Past
+that the reader is no longer holding the whole of it. Five sentences in a block is fine when
+the block is short: a clipped run of them is the voice, not bloat.
+
 The threshold is soft. The linter prints a warning and the build stays green.
 
 A sentence is counted as one sentence whether it sits on one line or is wrapped across four. Hard wrapping is allowed and changes nothing.

@@ -7,6 +7,7 @@ import {
   findSectionOrderProblems,
   countRequiredSections,
   findLongSentences,
+  findBloatedBlocks,
   sentenceRhythm,
   antithesisDensity,
   parseFrontmatter,
@@ -92,6 +93,12 @@ async function lintFile(filePath) {
     for (const hit of findLongSentences(body, 36)) {
       warnings.push(
         `${at(hit.line)}: предложение на ${hit.words} слов, порог 36. Раздели на два. (${STYLE.length})`,
+      );
+    }
+    for (const hit of findBloatedBlocks(body)) {
+      const what = hit.list ? 'пункт' : 'абзац';
+      warnings.push(
+        `${at(hit.line)}: ${what} на ${hit.words} слов и ${hit.sentences} предложений, порог ${hit.maxWords} слов и 5 предложений. Разбух — режь. (${STYLE.length})`,
       );
     }
     const rhythm = sentenceRhythm(body);

@@ -272,6 +272,35 @@ export function findLongSentences(markdown, maxWords = 20) {
 }
 
 /**
+ * Блоки, которые разрослись: пункт списка или абзац, который читатель уже не
+ * держит в голове целиком.
+ *
+ * Пороги сняты с самого сайта после чистки 2026-08-18: медианный блок — 27
+ * слов и два предложения, девяностый перцентиль — 41 слово. Правило ловит не
+ * длинное, а разбухшее, поэтому стоит заметно выше девяностого: 55 слов для
+ * пункта, 65 для абзаца, и пять предложений в любом из них.
+ *
+ * Заголовки, таблицы и код сюда не попадают — их считает paragraphUnits.
+ */
+export function findBloatedBlocks(markdown, limits = {}) {
+  const { bulletWords = 55, paraWords = 65, sentences = 5 } = limits;
+  const hits = [];
+  for (const unit of paragraphUnits(markdown)) {
+    if (HEADING_LINE.test(unit.text)) continue;
+    const words = unit.text.split(/\s+/).filter(Boolean).length;
+    const count = splitSentences(unit.text).length;
+    const maxWords = unit.list ? bulletWords : paraWords;
+    // Пять коротких фраз подряд — это голос, а не разбухание: рубленый
+    // перечень в «Что не сработало» короче любого абзаца. Счёт предложений
+    // включается только там, где блок и так длинный.
+    if (words > maxWords || (count >= sentences && words >= 40)) {
+      hits.push({ line: unit.starts[0].line, words, sentences: count, list: unit.list, maxWords });
+    }
+  }
+  return hits.sort((a, b) => a.line - b.line);
+}
+
+/**
  * Ритм страницы: медиана длины предложения и разброс вокруг неё.
  *
  * Одной медианы мало. Замер по 33 черновикам владельца (2026-08-14): медиана 10

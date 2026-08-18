@@ -199,7 +199,7 @@ In this window that is 336 occurrences against 155 requests. `awk` takes the fir
 
 The comparison I came for is 0 fetches of `llms.txt` against 56 of `robots.txt`. Every AI agent in the table took `robots.txt` and none took `llms.txt`. That is narrower than calling the file useless, and it is what this log supports: one box, 16 days.
 
-`/` took 280 requests, more than every other path combined, and I cannot read that as a preference for the home page. A bare domain pasted into a chat and an agent starting at the root produce the same line, because the log records the path and never the reason. Keeping good pages reachable from the root is still sound advice; this table is not the evidence for it.
+`/` took 280 requests, more than every other path combined, and that is not a preference for the home page. A bare domain pasted into a chat and an agent starting at the root produce the same line: the log records the path, never the reason. Keeping good pages reachable from the root is sound advice, but not from this table.
 
 The comparison post took 64 requests, plus 6 in Russian — more than the rest of the blog together, and the whole of what nginx knows about it. A 200 means bytes went out. Whether a word of them reached an answer shows up in referrals from assistant hosts and in the answers themselves, neither of which is a log line.
 
@@ -209,7 +209,7 @@ All of this rests on identities I never verified, and the window showed the cost
 
 ## What did not work
 
-- **Counting my own traffic as an agent's**. My address is in this log 4,221 times, 81 of them under a crawler name, and I published the totals with all of it inside. I blamed the strange rows on an unknown scanner; the scanner was my own `curl` loop, and finding that took one call to `api.ipify.org`.
+- **Counting my own traffic as an agent's**. My address is in this log 4,221 times, 81 of them under a crawler name, and I published the totals with all of it inside. I blamed the strange rows on an unknown scanner. It was my own `curl` loop, and one call to `api.ipify.org` said so.
 - **The `llms.txt` finding, first time round**. This page reported about one fetch per agent and built a conclusion on that shape. Seventeen of those lines are four seconds of a loop I ran on 7 August, and the real count over 16 days is 0.
 - **Reading the live log and stopping there**. My first pass used a file that started that morning and showed 0 requests to `llms.txt` — right by accident, wrong by reasoning. The archives held 45, and 44 of those were mine.
 - **Publishing a command that did not produce the table**. The `grep -oE` version printed here was case-sensitive and never matched `bingbot`; made case-insensitive it counted occurrences instead of requests and doubled that row. A reader running it got neither the table nor an error.

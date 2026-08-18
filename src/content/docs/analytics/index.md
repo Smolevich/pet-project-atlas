@@ -7,7 +7,7 @@ description: Signups arrive and you cannot say which channel sent them. The shor
 
 Traffic has started, signups appear, every graph moved this week. None of that tells you whether anything is growing, and none of it tells you which channel sent the people.
 
-Start with [where the user actually came from](/analytics/attribution/), even though it sits second here. You cannot reconstruct attribution later, and it is the only thing on this route you cannot: somebody arrives through an untagged link, and you will never know where they came from. Every day you postpone this adds another day of arrivals like that.
+Start with [where the user actually came from](/analytics/attribution/), even though it sits second here. Attribution is the one thing on this route you cannot reconstruct later. Every day you postpone it adds another day of arrivals nobody can place.
 
 The reading itself lives on [the numbers worth reading weekly](/analytics/what-to-measure/), and the list there is short on purpose: impressions, clicks, index share, signups, activation, repeat use. Each number answers something the others cannot. That is the only reason it is on the list.
 

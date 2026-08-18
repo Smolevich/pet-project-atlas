@@ -76,7 +76,7 @@ curl -s 'https://itunes.apple.com/search?term=otter&entity=software&country=us&l
 curl -s 'https://itunes.apple.com/us/rss/customerreviews/page=1/id=1276437113/sortby=mostrecent/json'
 ```
 
-Fifty reviews to a page, around nine pages, then nothing. Every review carries a date, a rating and the app version, and the version tells you which release the complaints started on. You change the country right in the address — `gb`, `fr` and `de` complain about different things.
+Fifty reviews to a page, around nine pages, then nothing. Every review carries a date, a rating and the app version, and the version says which release the complaints started on. Change the country right in the address: `gb`, `fr` and `de` complain about different things.
 
 Here is what I found there. Otter on the paid Pro plan cuts a recording off at 90 minutes, and that is not a fault: it is written in their price list. Four hours only come one tier up.
 
@@ -113,7 +113,7 @@ curl -s 'https://hn.algolia.com/api/v1/search_by_date?query=%22otter.ai%22&tags=
 
 Both work without a key and without an account. Checked on 13 August 2026.
 
-**And this part stopped being free.** The advice about it is usually out of date. Reddit no longer reads from a script: without OAuth the feed returns 403. Search on X is prepaid now. G2 and Capterra banned headless browsers outright in their 2026 terms — reading by hand is fine, automating is not.
+**And this part stopped being free.** The advice about it is usually out of date. Reddit no longer reads from a script: without OAuth the feed returns 403. Search on X is prepaid. G2 and Capterra banned headless browsers in their 2026 terms — by hand is fine, automated is not.
 
 ### What "features first" actually costs
 
@@ -136,7 +136,7 @@ flowchart TD
 
 **84 people did nothing at all** — not one row in the events table. For three months I read that as "there is no demand", and then I split it by date.
 
-Before 17 July the starting grant was not credited to new users, so somebody arrived, had zero credits, and could do nothing at all. That was my bug, not the market. Before 17 July that is how 56 people out of 70 left; after it, 28 out of 188.
+Before 17 July the starting grant was not credited, so people arrived with zero credits and could do nothing. That was my bug, not the market: 56 of 70 left that way, against 28 of 188 afterwards.
 
 And the other half of the same story. The feedback button sat in the bot the whole time, in three months nine people used it, and nobody wrote to say the product did not work.
 

@@ -14,7 +14,7 @@ sources:
 
 In practice there are two models: people pay per action, or people pay per month. Everything else is a variation on those.
 
-You pick a line in a price list, and you are really picking what you will be doing all next year. A subscription drags one kind of work behind it. Packs drag another kind. Both kinds start before your first revenue.
+You pick a line in a price list and you are really picking what you will be doing all next year. A subscription drags one kind of work behind it, packs another, and both kinds start before your first revenue.
 
 So do not choose on which earns more in theory. Choose on what job your product does, and on which model you can service on your own.
 
@@ -26,7 +26,7 @@ A subscription works where the person comes back by themselves, without being re
 
 If the job is one-off, a subscription is churn on a delay: somebody pays once, does not open it for a month, and cancels. They are entirely right to.
 
-Here is what that looks like for me. 155 people got at least one successful result, and **117 of them used it on exactly one day**. Another 17 stopped at two days. Six got past five days.
+Here is what that looks like for me. Of 155 people who got at least one successful result, **117 used it on exactly one day**, another 17 stopped at two, and six got past five.
 
 There is no recurring job in those numbers. A subscription would not have held together on them at all: I would have been selling access to something nobody comes back to.
 
@@ -38,7 +38,7 @@ Hence the first demand: markedly more brand-led marketing. A side project withou
 
 The second demand is refunds, and it is not a detail. People forget to cancel, notice the charge, come and ask for their money back, and say they did not use it.
 
-One query against your own database settles it: charged, and not a single action in that period. They are usually right, and the decent answer is to refund. That is a separate process you have to build and then run by hand, month after month, for as long as the subscription exists.
+One query against your own database settles it: charged, and not a single action in that period. They are usually right, and the decent answer is a refund — a separate process you build once and then run by hand, month after month.
 
 ### Why I chose pay-as-you-go
 

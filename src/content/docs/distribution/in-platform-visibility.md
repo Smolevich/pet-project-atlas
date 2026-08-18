@@ -88,13 +88,13 @@ A repeat start overwrites the original source with whatever they clicked last, s
 ## What did not work
 
 - **An English-only name while the demand was in another script**. Global search matches the name, so queries in the audience's alphabet could not reach the bot at all — nothing broke, and nothing was logged.
-- **Reading the user base as a market signal**. The geography of signups matched the Latin spelling of the name, not the market I was building for, so I spent weeks on product theories about that audience. The audience was an artefact of one metadata field.
+- **Reading the user base as a market signal**. The geography of signups matched the Latin spelling of the name, not the market I was building for. I spent weeks on product theories about an audience one metadata field had created.
 - **Assuming the description would carry it**. It had been in the right language the whole time, but search does not match that field, so it changed nothing.
 - **Comparing the products instead of the names**. Competitors with the function spelled out in the audience's script were far larger, and they ran on the same public APIs. What they had was a name, not technology.
-- **Counting characters against a byte limit**. The keyword field takes 100 bytes and a Cyrillic list spends two bytes a letter, so half the budget I thought I had was gone before I typed anything. Apple's marketing page says characters, and that is the page I read.
+- **Counting characters against a byte limit**. The keyword field takes 100 bytes and Cyrillic spends two bytes a letter, so half my budget was gone before I typed anything. Apple's marketing page says characters, and that is the page I read.
 - **Trusting my memory of the name**. Reading it back over the API disagreed with what I believed I had set, and every diagnosis before that check rested on a wrong fact.
 - **Publishing links with no start parameter**. The code did not read the parameter either, so attribution was zero rather than approximate, and months of distribution work could not be evaluated at all.
-- **Treating the website as the main door**. No signup carried a source. So the share I could attribute to the site is unknown: [where the user came from](/analytics/attribution/). Ranking it was real work, and I just aimed it at a channel I never showed the audience was using.
+- **Treating the website as the main door**. No signup carried a source, so the share attributable to the site is unknown: [where the user came from](/analytics/attribution/). Ranking it was real work aimed at a channel I never showed the audience was using.
 
 ## Verify
 

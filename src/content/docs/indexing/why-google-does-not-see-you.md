@@ -51,7 +51,7 @@ The first thing I check is what the server hands over before any JavaScript runs
 curl -sL https://example.com/page | grep -i "a sentence you can see on the page"
 ```
 
-If grep says nothing and the browser shows the text, the browser is drawing it: such an app answers with a near-empty `<body>`, and the crawler gets a page with nothing to index. You fix that with server rendering or a prerender step at build time. A tag will not fix it.
+If grep says nothing and the browser shows the text, the browser is drawing it. Such an app answers with a near-empty `<body>`, and the crawler gets nothing to index. The fix is server rendering or a prerender step at build time. No tag will do it.
 
 ### What is actually in your robots.txt
 
@@ -61,7 +61,7 @@ Pull the file from the live domain and read all of it — not from memory, and n
 curl -s https://example.com/robots.txt
 ```
 
-Most often it is a `Disallow: /`: on a draft domain that line belonged there, and it rode into production with the rest of the config. The other failure is quieter: Google reads only the first 500 KB of the file, a generated robots.txt can truncate silently in the middle, and everything below the cut does not exist for Google.
+Most often it is a `Disallow: /`. On a draft domain that line belonged there, and it rode into production with the rest of the config. The other failure is quieter: Google reads only the first 500 KB, a generated robots.txt can truncate mid-file, and everything below the cut does not exist.
 
 ### Are you asking search to drop the page yourself
 
@@ -73,7 +73,7 @@ curl -sI https://example.com/page | grep -i x-robots-tag
 
 `curl -sI` sends a HEAD request and prints the headers alone, and in a browser the same thing is under Network, the document request, Response Headers.
 
-That header can come from the framework, the web server or the CDN. Those are three different files, and you will have to open each one. There is also a per-agent form — `X-Robots-Tag: googlebot: noindex` — and it looks like an ordinary line of config, so the eye slides right past it.
+That header can come from the framework, the web server or the CDN — three different files, and you will open each one. There is also a per-agent form, `X-Robots-Tag: googlebot: noindex`, which looks like an ordinary line of config and slips past the eye.
 
 Search fetches a `noindex` page and reads it honestly enough. Then it drops the page on purpose.
 
@@ -118,7 +118,7 @@ ssh other-box 'curl -sI https://example.com/page'
 
 Access control, basic auth and edge bot rules answer with a login page or a 403. None of that is visible in `robots.txt`.
 
-The edge rule has a name and a screen it lives on: on Cloudflare it is **Configure AI bot policies**, on the zone's **Security Settings** page, on every plan. Cloudflare refuses a matching agent with a 403 from its own network, and that request never reaches your server.
+The edge rule has a name and a screen. On Cloudflare it is **Configure AI bot policies**, under **Security Settings**, on every plan. A matching agent gets a 403 from Cloudflare's own network, and the request never reaches your server.
 
 So the refusal is not in your server log either: you can see it only in Cloudflare's **Analytics** → **Events**. The whole mechanism is on [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 
@@ -127,8 +127,8 @@ So the refusal is not in your server log either: you can see it only in Cloudfla
 - **Waiting for the index to catch up**. The crawler does come back, reads the same rule and leaves again. Patience does not edit a header.
 - **Re-submitting one URL in the inspection tool**. The re-fetch uses the same `robots.txt`, the same header, the same empty body. The verdict comes back identical. The daily quota is gone.
 - **Trusting a third-party crawler as proof of access**. The report says what someone else's bot could fetch from its own address, and whether search decided to keep the page is a different question.
-- **Checking only from my own laptop**. I had a logged-in session, a warm service worker and a home network the edge already trusts, and together they hid the failure completely. The edge is the CDN sitting in front of your origin: Cloudflare, Fastly, a cloud load balancer. It answers some requests itself, and those never reach your server.
-- **Editing `robots.txt` when the block lived at the edge**. Bot-protection and WAF rules are invisible in that file, and the file was clean the whole time. Look for Cloudflare's **Configure AI bot policies** under **Security Settings**, and any WAF custom rule beside it — this is the most common hidden blocker I run into.
+- **Checking only from my own laptop**. A logged-in session, a warm service worker and a home network the edge already trusts hid the failure completely. The edge is the CDN in front of your origin — Cloudflare, Fastly, a cloud load balancer — and it answers some requests itself.
+- **Editing `robots.txt` when the block lived at the edge**. Bot-protection and WAF rules are invisible in that file, and mine was clean the whole time. Look under **Security Settings** for **Configure AI bot policies** and any WAF custom rule beside it.
 - **Rewriting titles and descriptions first**. On a page that is not in the index, on-page work produces nothing you can measure.
 
 ## Verify
@@ -148,6 +148,6 @@ To see roughly how many pages reached the index at all, ask the search box:
 site:example.com
 ```
 
-Read the wording in Search Console literally. "Discovered — currently not indexed" means the URL is known and was not fetched, while "Crawled — currently not indexed" means it was fetched and judged not worth keeping. Those are two different bugs, and you fix them differently.
+Read the wording in Search Console literally. "Discovered — currently not indexed" means known and not fetched. "Crawled — currently not indexed" means fetched and judged not worth keeping. Two different bugs, two different fixes.
 
 Once one page is in, hand over the rest: [submit and verify](/indexing/submit-and-verify/).

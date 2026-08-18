@@ -1,22 +1,23 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  findBannedPhrases,
-  findMissingSections,
-  findLongSentences,
-  sentenceRhythm,
-  antithesisDensity,
-  parseFrontmatter,
-  findUnsourcedNumbers,
-  findNumericClaims,
-  findSectionOrderProblems,
-  countRequiredSections,
   BANNED_PHRASES,
   BANNED_STEMS,
   REQUIRED_SECTIONS,
-  isValidSource,
+  antithesisDensity,
+  countRequiredSections,
+  findBannedPhrases,
+  findBloatedBlocks,
   findInvalidSources,
+  findLongSentences,
+  findMissingSections,
+  findNumericClaims,
+  findSectionOrderProblems,
+  findUnsourcedNumbers,
+  isValidSource,
+  parseFrontmatter,
   parseProvenance,
+  sentenceRhythm,
   splitTitledSource,
 } from './voice-rules.mjs';
 
@@ -577,4 +578,21 @@ test('плотность «а не» считается на тысячу сло
 test('«а не» внутри слова не считается', () => {
   const filler = Array.from({ length: 300 }, (_, i) => `w${i}`).join(' ');
   assert.equal(antithesisDensity(`${filler} панель`).hits, 0);
+});
+
+test('раздутый пункт списка ловится по словам', () => {
+  const long = `- ${'слово '.repeat(60)}`;
+  assert.equal(findBloatedBlocks(long).length, 1);
+});
+
+test('короткий рубленый перечень раздутым не считается', () => {
+  // Пять коротких фраз подряд — это голос страницы, а не разбухание.
+  const staccato = '- **Ошибка**. Отчёт хвалил. Агент не пришёл. Логи пустые. Я ставил оценку.';
+  assert.deepEqual(findBloatedBlocks(staccato), []);
+});
+
+test('абзацу дают больше слов, чем пункту', () => {
+  const words = 'слово '.repeat(60);
+  assert.equal(findBloatedBlocks(words).length, 0);
+  assert.equal(findBloatedBlocks(`- ${words}`).length, 1);
 });

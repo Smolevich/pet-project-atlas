@@ -26,7 +26,7 @@ Here is one on a query my own bot answers:
 
 Two sources, and one of them is a forum thread: the assistant put somebody's Reddit post next to a product blog. My own site is in neither slot. Read on 13 August 2026.
 
-The paper that named this problem is *GEO: Generative Engine Optimization* (Aggarwal et al., 2023). The authors rewrote existing pages and added no new ones, and they report up to 40% more visibility for a source inside the generated answer, measured over GEO-bench. So the work is one thing: arranging the facts you already have so that a model can lift them.
+The paper that named this problem is *GEO: Generative Engine Optimization* (Aggarwal et al., 2023). The authors rewrote existing pages, added none, and report up to 40% more visibility for a source inside the generated answer on GEO-bench. The work is one thing: arranging facts you already have so a model can lift them.
 
 ## Steps
 
@@ -42,7 +42,9 @@ An assistant quotes a passage, not a document, so every paragraph has to name it
 
 The test takes ten seconds. Paste one paragraph into an empty note and read it, and if you cannot tell what it is about, a model cannot either.
 
-Inside the paragraph there has to be something hard: a number, a date, a proper name, a version. "Many teams" cannot be quoted by anybody. A measured value with the date you measured it can, and that is also the sentence a person screenshots. Where the figure does not exist yet, go and measure it, or drop the sentence — "most", "often" and "significantly" carry nothing across into an answer.
+Inside the paragraph there has to be something hard: a number, a date, a proper name, a version. "Many teams" cannot be quoted. A measured value with its date can, and that is the sentence a person screenshots.
+
+Where the figure does not exist yet, measure it or drop the sentence. "Most", "often" and "significantly" carry nothing into an answer.
 
 ### The one checkable thing that is only yours
 
@@ -58,7 +60,7 @@ Heading levels without gaps. A numbered list where there is a process. A table o
 
 Put it in one block in the head: `Organization` or `Person` as the entity, `Article` with an author and a publication date, and `sameAs` with your profiles and listings.
 
-One job of `sameAs` is documented: it helps Google resolve entities for its Knowledge Graph, and Google's own `Organization` reference is where that is written down. What it does for AI citation, nobody has measured. I have found no vendor statement and no study showing an LLM pipeline reads the field, and I have not measured it here either. So it is ten minutes and a defensible bet. I would not sell it as a mechanism.
+One job of `sameAs` is documented: it helps Google resolve entities for its Knowledge Graph, in Google's own `Organization` reference. What it does for AI citation, nobody has measured — no vendor statement, no study, no measurement of mine. So it is ten minutes and a defensible bet, not a mechanism.
 
 ### The model already learned about you somewhere else
 
@@ -66,12 +68,12 @@ Directories, discussion threads, other people's comparisons. On-page work starts
 
 ## What did not work
 
-- **Adding volume instead of a verifiable claim**. I made the page longer and the adjectives better. Nothing moved. The answer kept citing the page that had the number in it, and that page was shorter than mine.
-- **Assuming published pages would carry the product**. On my own projects the pages went up and the signups kept arriving from somewhere else. I will give the exact share on a case page, with the date I measured it, but I do not have that number here.
+- **Adding volume instead of a verifiable claim**. I made the page longer and the adjectives better, and nothing moved. The answer kept citing the page with the number in it, which was shorter than mine.
+- **Assuming published pages would carry the product**. The pages went up and the signups kept arriving from somewhere else. The exact share belongs on a case page, with its measurement date; I do not have it here.
 - **Keeping the conclusion for the end**. The essay shape buries the answer under the setup, so the only passage anything can extract is the intro, and the intro has not said anything yet.
 - **Writing FAQ blocks to fill the schema**. Questions nobody asked, answered by repeating the paragraph above them. Markup did not make an empty answer worth quoting.
 - **Sprinkling microdata through the markup**. A template change broke it silently and nothing warned me, while JSON-LD in one block in the head has survived every redesign since.
-- **Selling `sameAs` as the thing that merges mentions into one entity a model recognises**. That sentence stood on this page and in the route with no evidence under it. The field has one documented use: Google's Knowledge Graph. Whether a language model ever reads it, I do not know. Neither did the sentence.
+- **Selling `sameAs` as the thing that merges mentions into one entity a model recognises**. That sentence stood here and in the route with no evidence under it. The field has one documented use, Google's Knowledge Graph. Whether a language model reads it, I do not know — and neither did the sentence.
 - **Opening paragraphs with "It" and "However"**. Both words point back at a sentence that will not travel with the quote.
 
 ## Verify

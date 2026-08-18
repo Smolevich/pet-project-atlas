@@ -60,8 +60,8 @@ Put a linter in CI and let it fail the build. A style document gets read once an
 
 - **The three-paragraph run-up**. Context, then background, then the point. Readers left before the point. And the only passage anyone could lift was an intro that asserted nothing.
 - **A style guide with nothing enforcing it**. The rules were written down and everyone agreed with them. The pages drifted anyway, because nothing objected at the moment of writing.
-- **Making every rule an error**. Sentence length as a hard failure blocks a legitimate page over one comma. Here the ban list, the four required blocks and unsourced numbers fail the build. Length only warns.
-- **Matching headings loosely**. "What didn't work" and "What did not work" read the same to a human. A check sees two different strings. So the linter matches the heading text literally.
+- **Making every rule an error**. Sentence length as a hard failure blocks a legitimate page over one comma. Here the ban list, the four required blocks and unsourced numbers fail the build; length only warns.
+- **Matching headings loosely**. "What didn't work" and "What did not work" read the same to a human, and as two different strings to a check. The linter matches the heading text literally.
 - **Allowing an empty required block**. A heading with nothing under it passed the first version of the check. An empty block now counts as missing.
 - **Writing an FAQ for the markup**. Questions nobody asked, answered by repeating the paragraph above them. Schema did not make an empty answer worth quoting.
 - **Publishing a restriction as the current state**. This page said FAQPage was limited to government and health sites. That had been true since 2023. Google retired the rich result outright in May 2026, and the sentence had simply stopped being checked.

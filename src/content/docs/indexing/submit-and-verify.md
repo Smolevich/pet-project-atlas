@@ -28,7 +28,7 @@ Only start this once the site is crawlable, because submission does not repair a
 
 ### Which property to create in Search Console
 
-Create a domain property on the bare domain and put the TXT record in DNS. A domain property covers every subdomain and both protocols at once, while a URL-prefix property covers exactly the form of the address you typed in. That is how someone ends up staring at an empty report for weeks. The site was living on the neighbouring form the whole time.
+Create a domain property on the bare domain and put the TXT record in DNS. It covers every subdomain and both protocols, while a URL-prefix property covers exactly the form you typed. That is how people stare at an empty report for weeks while the site lives on the neighbouring form.
 
 ### Submit the sitemap once and leave it alone
 
@@ -38,11 +38,11 @@ Keep URL Inspection for a handful of new or repaired pages. It is not an indexin
 
 ### Bing: ten minutes and an import from Search Console
 
-Bing Webmaster Tools has an import. It carries verification and the sitemap over in one step, and though Bing's share of search is small, ten minutes is still worth spending. The Bing index also feeds Copilot answers — a separate audience you would otherwise never see.
+Bing Webmaster Tools has an import that carries verification and the sitemap over in one step. Bing's share of search is small, but ten minutes is worth it: that index also feeds Copilot answers, a separate audience.
 
 ### IndexNow: a key in the root, then the changed URLs
 
-First make a key of 8 to 128 hex characters and place it in the site root as `{key}.txt`. That file is how an engine checks you own the host, and the only thing inside it is the key itself — UTF-8 text, reachable without a login:
+Make a key of 8 to 128 hex characters and place it in the site root as `{key}.txt`. That is how an engine checks you own the host. Inside it is the key and nothing else — UTF-8 text, reachable without a login:
 
 ```
 curl -s https://example.com/{key}.txt

@@ -12,13 +12,13 @@ sources:
 
 The money route ends at a diagnosis. Break-even comes out as a small whole number of payers, and the count of payers is zero.
 
-A product nobody pays for and a product nobody has been asked to pay for look identical from the dashboard. Neither one shows any revenue. Both feel like a verdict. Only one of them is a verdict. Telling them apart costs one question you have not asked yet.
+A product nobody pays for and a product nobody has been asked to pay for look identical from the dashboard: no revenue either way, and both feel like a verdict. Only one is. Telling them apart costs one question you have not asked.
 
 ## Steps
 
 ### Where a price comes from when there is nobody to survey
 
-Take the shape of the price from a competitor. The shape is per seat, per action, or per month, and somebody already tested that shape with their own money: [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor, and that floor is on [what one user costs](/money/unit-economics/).
+Take the shape of the price from a competitor — per seat, per action, per month — because somebody already tested it with their own money: [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor: [what one user costs](/money/unit-economics/).
 
 Price the unit your event row already records: a minute, a message, a run. If the row carries a cost per action you can price a package today, whereas a price in a unit you do not measure has nothing to check it against.
 
@@ -26,7 +26,7 @@ A pricing study at this size is not worth running, because an answer in a survey
 
 ### Where the wall goes so that it stops something
 
-Put the wall where the product has already worked once. That is after the first real result. Before it, the person is refusing something they have not seen, and long after it they already have what they came for, so there is nothing left to buy.
+Put the wall where the product has already worked once, right after the first real result. Before it, the person is refusing something they have not seen; long after it, they already have what they came for.
 
 And the wall has to stop something. A generous free tier with an upgrade prompt collects nothing: the prompt is dismissible, the free tier keeps working, and dismissing it is the rational move. If nothing stops, nobody pays.
 
@@ -40,7 +40,7 @@ Name the price inside the product, at the wall itself. A pricing page serves peo
 
 ### What exactly happens between the wall and the payment
 
-Give every step from wall to payment its own row: saw the price, opened checkout, started paying, completed, failed. Without those rows, "nobody pays" is one fact with nothing to discuss. With them it is five facts. Exactly one of the five is a pricing problem.
+Give every step from wall to payment its own row: saw the price, opened checkout, started paying, completed, failed. Without them "nobody pays" is one fact with nothing to discuss. With them it is five, and exactly one is a pricing problem.
 
 ```sql
 -- generic names; the point is that each step is visible separately
@@ -64,7 +64,7 @@ A checkout that fails quietly reads on a dashboard exactly like nobody wanting t
 
 While the numbers are unreadable, ask by hand. Write to your most engaged users individually. At a handful of weekly actives no funnel means anything, and one person answering a real price settles more than a month of watching the graph.
 
-Store the refusal in the person's own words. The finding sits in the reason rather than in the no. "I would use the free one" and "my employer would never approve this" are two different products. Only one of them is worth building.
+Store the refusal in the person's own words, because the finding sits in the reason rather than the no. "I would use the free one" and "my employer would never approve this" are two different products.
 
 A discount is premature until somebody has refused the full price, because a discount off an unasked number tests nothing whatsoever.
 
@@ -77,7 +77,7 @@ Move the default engine to the cheap one before you take money — [what one use
 - **Pricing the packages before asking anybody for money.** Three packages shipped, a payment channel connected, not one real payer. I had priced a thing nobody had yet refused.
 - **Treating the payment channel as the blocker.** One provider never came through, and connecting another took real time. When it finally worked, the count of payers did not move: the channel was never the thing in the way.
 - **Defaulting to the most expensive engine.** One config line cost margin, speed and the free allowance at once. People sat watching a placeholder while credits went out of the account.
-- **Two independent limits on the same resource.** A credit balance, plus a per-day cap on one engine. The most engaged user of that month hit the cap with credits still unspent. He never came back. My own cap stopped the person standing closest to paying, and it never asked him for money.
+- **Two independent limits on the same resource.** A credit balance plus a per-day cap on one engine. The most engaged user of that month hit the cap with credits still unspent and never came back. My own cap stopped the person closest to paying, without ever asking him for money.
 - **Reading free signups as willingness to pay.** They arrived, used the product and returned, and none of them converted. The signup number kept climbing the whole time.
 - **Waiting for the funnel to say something.** At this volume the weekly swing beat any effect I could ship. The funnel turned out to be the wrong instrument, and a direct question was the right one.
 - **Counting my own test purchase as revenue.** The model showed break-even reached for a day. The payer was me, through a test account.

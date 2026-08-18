@@ -9,7 +9,7 @@ sources:
 
 import ForAgent from '../../../components/ForAgent.astro';
 
-Below is the order I did this in. Under each step I say what it costs to do that step at the wrong moment, and each of those costs is one I paid myself. If you would rather tick boxes than read reasons, take [the checklist](/start/checklist/) — the same route on one screen.
+Below is the order I did this in, and under each step what it costs to do that step at the wrong moment. Each of those costs is one I paid. If you would rather tick boxes than read reasons, take [the checklist](/start/checklist/).
 
 One thing comes before step one. You have to be able to say what you are building and how it differs from what is already on sale. If you cannot say it yet, start there: [where a niche starts when everything is taken](/demand/pick-a-niche/).
 
@@ -48,11 +48,11 @@ This takes a day or two, all of it in a browser, and it decides whether the rest
 8. Run `curl -sL` on your own page and look for the body text in the response, because text that is missing there is text the crawler never sees — [Google does not see your site](/indexing/why-google-does-not-see-you/).
 9. Read `robots.txt` on the live domain, every line of it, because one line closes the whole domain: a `Disallow: /` that came over from a staging config — [same page](/indexing/why-google-does-not-see-you/).
 10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header. It drops the page from the index on purpose, and no browser shows you that header — [same page](/indexing/why-google-does-not-see-you/).
-11. Check that the canonical on a few pages points at those same pages. Canonical is the tag that names the real URL of a page, so point it at the home page and you have asked search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
+11. Check that the canonical on a few pages points at those pages. It names the real URL, so aiming it at the home page asks search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
 12. Request one page from outside your network, without cookies. Your own network is trusted, so an edge rule that blocks the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/).
 13. Verify a domain property in Search Console and submit the sitemap once. A URL-prefix property covers only the form you typed, and its report then stays empty — [submit and verify](/indexing/submit-and-verify/).
 14. Import the property into Bing Webmaster Tools. Its index also feeds Copilot answers, and those readers are a separate audience — [submit and verify](/indexing/submit-and-verify/).
-15. Serve `User-agent: *` and `Allow: /`. Name an agent only when you want to block it, because a list of allowed names expires the first time a vendor renames something. This site has never named one in order to allow it — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+15. Serve `User-agent: *` and `Allow: /`, and name an agent only to block it: an allow-list expires the first time a vendor renames something. This site has never named one to allow it — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
 16. **First crossing.** Tag every outbound link and store the source on first contact. A messenger or a store passes no source unless you ask for it — [where the user came from](/analytics/attribution/).
 17. Name the single action that counts as activation. Activation is the one thing a user does that proves the product worked — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
@@ -92,7 +92,7 @@ These are mistakes of order. I did each of them correctly, at a moment when the 
 
 - **Optimising for a phrase I invented**. My word for the core feature was not the word people typed. Pages, links and dashboards all worked, and the demand walked straight past them.
 - **Backlinks while the site was still blocked**. I spent a week on directory submissions, and the pages behind those links carried a `noindex` header the whole time. Search dropped them about as fast as I filed them.
-- **Writing before the cluster map existed**. Two of my pages ended up chasing the same intent. Search alternated between them, and both stayed flat. I merged them, added a redirect, and paid for that text twice.
+- **Writing before the cluster map existed**. Two of my pages chased the same intent, search alternated between them, and both stayed flat. I merged them, added a redirect, and paid for that text twice.
 - **Tagging links after the launch**. The launch day arrivals came in untagged and stayed that way. No later analysis brings them back, because there is nothing left to analyse.
 - **Citability work before crawler access**. The pages scored well and not one agent had fetched them. The edge refused every request while I polished the opening sentences.
 - **Cutting costs before there were payers**. I carefully optimised a few dollars of fixed cost, with zero payers on the other side. When nobody pays, there is no break-even to move.

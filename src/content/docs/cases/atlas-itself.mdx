@@ -29,15 +29,17 @@ I did what the route tells you to do, on this site. In the order the route gives
 2. Generated `robots.txt` and `llms.txt` at build time. Neither of them can drift away from the pages it describes.
 3. Verified a domain property in Search Console. Google confirmed ownership through the DNS provider and never asked me for a TXT record.
 4. Submitted the sitemap once, on 12 August at 10:20 UTC. Search Console read it two seconds later and reported 56 URLs.
-5. Pushed all 46 canonical URLs through IndexNow, and the shared endpoint, Bing and Yandex all accepted them — that was the whole site at the time. Three more pages shipped later the same day, in both languages, and those I have not pushed.
+5. Pushed all 46 canonical URLs through IndexNow — the whole site at the time — and the shared endpoint, Bing and Yandex accepted them. Three more pages shipped later that day, in both languages, and those I have not pushed.
 
 Then I stopped and read what came back.
 
 ## What did not work
 
-- **Expecting the sitemap to do more than it does.** It was accepted in two seconds. That felt like progress and was not, because two days later the URL inspection tells me the home page is **unknown to Google**, never crawled. Submitted, discovered, crawled and indexed are four different states, and this site has not got past submitted — on the third day it was through all four, and both readings sit in the table below.
+- **Expecting the sitemap to do more than it does.** It was accepted in two seconds, which felt like progress. Two days later URL inspection called the home page **unknown to Google**. Submitted, discovered, crawled and indexed are four states, and both readings sit in the table below.
 - **Reading the access log as if every line were a visitor.** The log holds 417 requests. Almost all of them are me and the two people I sent the link to.
-- **Counting bots with `grep -o`.** It counts occurrences, and I read them as requests. Some agents name themselves twice on one line: `bingbot` writes its token in the string, and again in the `bingbot.htm` URL it advertises, so its count comes out roughly double. On this log nobody was hurt, because `Googlebot` says its name once and the URL beside it is `bot.html`, but I had already published a doubled Bing figure on another page. Count lines, not matches.
+- **Counting bots with `grep -o`.** It counts occurrences and I read them as requests. Some agents name themselves twice on one line: `bingbot` writes its token in the string and again in the `bingbot.htm` URL, so its count doubles.
+
+This log survived it, because `Googlebot` says its name once beside a `bot.html` URL — but I had already published a doubled Bing figure elsewhere. Count lines, not matches.
 
   ```bash
   grep -o 'Googlebot' /var/log/nginx/atlas.access.log | wc -l

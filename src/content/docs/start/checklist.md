@@ -31,7 +31,7 @@ If a line makes you ask why, the answer is on the page it links to. I wrote the 
 - [ ] Put who, what, when, source, cost, client and outcome on every event row. Cost and source can only be written at insert time — [event rows](/analytics/product-metrics/)
 - [ ] Give each cluster exactly one URL, in a table you keep. A cluster is a set of wordings that want the same page — [clusters](/content/keyword-clusters/)
 - [ ] Write the first page in the four-block shape, answering its title up front. The blocks: problem, steps, what did not work, how to check — [page shape](/content/page-templates/)
-- [ ] Add JSON-LD with `sameAs` for your profiles and listings. JSON-LD is a block of machine-readable facts about the page. Google documents it for the Knowledge Graph. For AI citation nobody has measured it — [citability](/geo/citable-pages/)
+- [ ] Add JSON-LD with `sameAs` for your profiles and listings — a block of machine-readable facts about the page. Google documents it for the Knowledge Graph; for AI citation nobody has measured it — [citability](/geo/citable-pages/)
 - [ ] Publish `llms.txt` only if you ship developer docs. Name only pages that exist. My log records 0 fetches by AI agents in 16 days — [crawlers](/geo/llms-txt-and-crawlers/)
 - [ ] Put the product's function into its platform name, in the audience's script. Platform search matches the name, not the description — [platform](/distribution/in-platform-visibility/)
 - [ ] Write the listing card once, then submit in small tagged batches — [catalogs](/distribution/catalogs/)
@@ -43,9 +43,9 @@ If a line makes you ask why, the answer is on the page it links to. I wrote the 
 ## What did not work
 
 - **Ticking a box from memory**. Every item here is something I believed was already true. Half of them were not. Each check took a minute.
-- **Starting at the indexing checks**. This list used to start there. Starting there quietly assumes the demand already exists. Everything below the first block is aimed at words somebody has to be typing.
+- **Starting at the indexing checks**. This list used to, and that quietly assumes the demand exists. Everything below the first block is aimed at words somebody has to be typing.
 - **Starting in the middle, at the interesting part**. Content and directories are the enjoyable half. Both are wasted while the pages carry a header that drops them out of the index.
-- **Ticking the tagging item with nothing to store the tag**. My links went out instrumented, and the parameter arrived on every visit. No column was waiting for it. I ticked the box honestly, and the data was gone anyway.
+- **Ticking the tagging item with nothing to store the tag**. My links went out instrumented and the parameter arrived on every visit, with no column waiting for it. I ticked the box honestly, and the data was gone anyway.
 - **Treating it as a list you finish once**. Directory status, edge rules and crawler access are all state. State changes without telling you. I re-run the top half each quarter.
 - **Keeping an item this site's own practice contradicted**. The list told you to allow agents by name. `atlas.smolevich.com` was serving a plain wildcard the whole time. My own file was right and the list was wrong.
 - **Requiring `llms.txt` after measuring that nothing fetched it**. The measurement sat one page away. The item sat here for exactly as long. And I kept ticking it.

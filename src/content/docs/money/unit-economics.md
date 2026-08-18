@@ -43,7 +43,7 @@ from events
 where created_at >= date_trunc('month', now());
 ```
 
-Read the gap between `actions` and `priced`. I never had such a column and did not know it. Every cost I quoted was reconstructed later, by joining a rates table. Rates change, the join takes today's, and the answer about May drifts. On a chart that looks exactly like a measurement.
+Read the gap between `actions` and `priced`. I never had such a column and did not know it, so every cost I quoted was reconstructed later by joining a rates table. Rates change, the join takes today's, and the answer about May drifts. On a chart that looks exactly like a measurement.
 
 What else belongs on that row, and why it has to be written at insert time: [what an event row has to carry](/analytics/product-metrics/).
 

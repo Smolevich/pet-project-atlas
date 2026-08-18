@@ -9,7 +9,7 @@ You can be perfectly indexed for a phrase nobody types. That was me: the pages w
 
 That is why this section stands first. Everything further along the route costs weeks — crawler access, pages, links, dashboards — and none of it pays you back unless somebody is already searching.
 
-One question comes before all of that. What are you building, and how does it differ from what is already on sale? [Where a niche starts when everything is taken](/demand/pick-a-niche/) answers it: look for somebody else's rough edge, not for an empty market, and that page also counts what skipping the step cost me.
+One question comes before all of that: what are you building, and how does it differ from what is already on sale? [Where a niche starts when everything is taken](/demand/pick-a-niche/) answers it — look for somebody else's rough edge, not an empty market — and counts what skipping the step cost me.
 
 Then two more questions live here, and a phrase passes one of them and fails the other easily enough. [The words people actually type](/demand/how-people-search/) asks whether anyone searches at all. [Whether that audience pays for anything](/demand/will-they-pay/) asks whether there is money behind the searching.
 
