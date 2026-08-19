@@ -61,7 +61,11 @@ const measuredText = (measured: string) => t.measuredOn(t.formatDate(new Date(`$
             <li>
               <span class="atlas-source-kind">{t.ownMeasurement}</span>{' '}
               <span class="atlas-source-text">
-                {source.instrument ? (
+                {source.instrument && !source.scope ? (
+                  <>
+                    {source.instrument}, {measuredText(source.measured)}
+                  </>
+                ) : source.instrument ? (
                   <>
                     {source.instrument} —{' '}
                     {source.identifiers && source.identifiers.length > 1

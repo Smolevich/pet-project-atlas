@@ -159,13 +159,22 @@ sources:
   - psql, dataset signup_events, measured 2026-01-31
 ```
 
-Three parts, separated by commas, all three required:
+Three parts, separated by commas:
 
 1. **The instrument** — the named tool or panel you read the number off. "Search Console", "Plausible", "Stripe", "psql". Not "my own data": that is not an instrument, it is a refusal to answer.
-2. **The scope** — one of `property`, `account`, `project`, `site`, `repo`, `workspace`, `dataset`, `instance`, `channel`, `bot`, `table`, followed by a single identifier: a domain, a repository, a bot handle, a table name. One token, so the scope cannot be described in words of general meaning.
+2. **The scope** — one of `property`, `account`, `project`, `site`, `repo`, `workspace`, `dataset`, `instance`, `channel`, `bot`, `table`, followed by a single identifier: a domain, a repository, a bot handle. One token, so the scope cannot be described in words of general meaning.
 3. **The date** — `measured` and an ISO date. The day you read the figure, which is often not the day you wrote the page.
 
 The point of the shape is that another person, or you in six months, can open the same panel, filter to the same scope and get the same number back. A line that does not let anyone repeat the measurement is not a source, and the linter and the build both reject it.
+
+**Drop the scope when the reader cannot open it anyway.** Your own production database is the case:
+
+```yaml
+sources:
+  - Voice AI bot database, measured 2026-08-15
+```
+
+Naming the tables there published a schema and bought the reader nothing — nobody outside can run the query, and six near-identical lines said less than one. Keep the scope wherever it points at something a reader can actually open: a Wordstat query, a Search Console property, a public sitemap.
 
 That is the stored form and it stays English, because the linter and the content schema both check it. The page renders it in the reader's language: on a Russian page the same line comes out as «Search Console API — ресурс `telegram-voice-bot`, снято 12 августа 2026 г.».
 

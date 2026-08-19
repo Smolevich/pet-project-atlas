@@ -120,3 +120,11 @@ test('разные даты не склеиваются', () => {
   );
   assert.equal(grouped.length, 2);
 });
+
+test('замер без области разбирается: прибор и дата', () => {
+  const [source] = orderSources(['Voice AI bot database, measured 2026-08-15']);
+  assert.equal(source.kind, 'provenance');
+  assert.equal(source.instrument, 'Voice AI bot database');
+  assert.equal(source.scope, null);
+  assert.equal(source.measured, '2026-08-15');
+});
