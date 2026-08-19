@@ -15,13 +15,13 @@
 // текст ссылки — заголовок, различают записи заголовки, а имя хоста осталось
 // подписью справа. Группировка при этом только уводила заголовок на уровень
 // вниз, под ярлык, который сам ничего не сообщает.
-import { orderSources } from '../../scripts/lib/sources.mjs';
+import { groupOwnMeasurements, orderSources } from '../../scripts/lib/sources.mjs';
 import { footerStringsFor } from '../footer-strings';
 
 const { entry, locale } = Astro.locals.starlightRoute;
 const data = entry.data as { sources?: string[]; updated?: Date };
 
-const sources = orderSources(data.sources);
+const sources = groupOwnMeasurements(orderSources(data.sources));
 const updated = data.updated instanceof Date ? data.updated : undefined;
 const t = footerStringsFor(locale);
 
@@ -63,8 +63,17 @@ const measuredText = (measured: string) => t.measuredOn(t.formatDate(new Date(`$
               <span class="atlas-source-text">
                 {source.instrument ? (
                   <>
-                    {source.instrument} — {t.scopeWord(source.scope)}{' '}
-                    <code>{source.identifier}</code>, {measuredText(source.measured)}
+                    {source.instrument} —{' '}
+                    {source.identifiers && source.identifiers.length > 1
+                      ? t.scopeWordPlural(source.scope)
+                      : t.scopeWord(source.scope)}{' '}
+                    {(source.identifiers ?? [source.identifier]).map((id, i) => (
+                      <>
+                        {i > 0 && ', '}
+                        <code>{id}</code>
+                      </>
+                    ))}
+                    , {measuredText(source.measured)}
                   </>
                 ) : (
                   source.text

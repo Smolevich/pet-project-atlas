@@ -1,7 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { describeSource, orderSources } from './sources.mjs';
+import {
+  describeSource,
+  groupOwnMeasurements,
+  orderSources,
+} from './sources.mjs';
 
 test('url source keeps the href and splits host from path', () => {
   assert.deepEqual(describeSource('https://llmstxt.org/spec#format'), {
@@ -93,4 +97,26 @@ test('author order survives inside a group', () => {
 test('a page with no sources produces no entries', () => {
   assert.deepEqual(orderSources(undefined), []);
   assert.deepEqual(orderSources([]), []);
+});
+
+test('замеры одной базы за один день склеиваются в строку', () => {
+  const grouped = groupOwnMeasurements(
+    orderSources([
+      'Voice AI bot database, table users, measured 2026-08-15',
+      'Voice AI bot database, table usage_events, measured 2026-08-15',
+      'Заголовок — https://example.com/a',
+    ]),
+  );
+  assert.equal(grouped.length, 2);
+  assert.deepEqual(grouped[0].identifiers, ['users', 'usage_events']);
+});
+
+test('разные даты не склеиваются', () => {
+  const grouped = groupOwnMeasurements(
+    orderSources([
+      'Voice AI bot database, table users, measured 2026-08-15',
+      'Voice AI bot database, table users, measured 2026-08-16',
+    ]),
+  );
+  assert.equal(grouped.length, 2);
 });

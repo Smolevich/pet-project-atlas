@@ -20,6 +20,8 @@ export type FooterStrings = {
   formatDate: (date: Date) => string;
   /** Область замера словом языка читателя: property → «ресурс». */
   scopeWord: (scope: string) => string;
+  /** То же во множественном: шесть таблиц одной базы — одна строка, не шесть. */
+  scopeWordPlural: (scope: string) => string;
   /** Хвост строки замера: получает уже собранную дату. */
   measuredOn: (date: string) => string;
 };
@@ -43,6 +45,22 @@ const RU_SCOPES: Record<string, string> = {
   table: 'таблица',
 };
 
+// Шесть таблиц одной базы, снятые в один день, — это одна строка источника, а
+// не шесть одинаковых. Для неё нужно множественное число.
+const RU_SCOPES_PLURAL: Record<string, string> = {
+  property: 'ресурсы',
+  account: 'аккаунты',
+  project: 'проекты',
+  site: 'сайты',
+  repo: 'репозитории',
+  workspace: 'рабочие пространства',
+  dataset: 'наборы данных',
+  instance: 'адреса',
+  channel: 'каналы',
+  bot: 'боты',
+  table: 'таблицы',
+};
+
 function dateFormatter(tag: string): (date: Date) => string {
   const formatter = new Intl.DateTimeFormat(tag, {
     day: 'numeric',
@@ -62,6 +80,7 @@ const EN: FooterStrings = {
   figuresRead: 'Figures on this page were read on',
   formatDate: dateFormatter('en-GB'),
   scopeWord: (scope) => scope,
+  scopeWordPlural: (scope) => `${scope}s`,
   measuredOn: (date) => `read ${date}`,
 };
 
@@ -74,6 +93,7 @@ const RU: FooterStrings = {
   figuresRead: 'Цифры на странице сняты',
   formatDate: dateFormatter('ru-RU'),
   scopeWord: (scope) => RU_SCOPES[scope] ?? scope,
+  scopeWordPlural: (scope) => RU_SCOPES_PLURAL[scope] ?? RU_SCOPES[scope] ?? scope,
   measuredOn: (date) => `снято ${date}`,
 };
 

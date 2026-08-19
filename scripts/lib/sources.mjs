@@ -75,3 +75,31 @@ export function orderSources(entries) {
     ...described.filter((source) => source.kind === 'url'),
   ];
 }
+
+/**
+ * Склеивает свои замеры, у которых совпадают инструмент, область и дата.
+ *
+ * Шесть таблиц одной базы за один день стояли шестью почти одинаковыми
+ * строками: различался только идентификатор, а читалось это как свалка.
+ * Во frontmatter они остаются по одной — так их проверяет линтер и так видно,
+ * что именно снято, — а склейка живёт на показе.
+ */
+export function groupOwnMeasurements(sources) {
+  const out = [];
+  const seen = new Map();
+  for (const source of sources) {
+    if (source.kind !== 'provenance' || !source.instrument) {
+      out.push(source);
+      continue;
+    }
+    const key = `${source.instrument}|${source.scope}|${source.measured}`;
+    const at = seen.get(key);
+    if (at === undefined) {
+      seen.set(key, out.length);
+      out.push({ ...source, identifiers: [source.identifier] });
+    } else {
+      out[at].identifiers.push(source.identifier);
+    }
+  }
+  return out;
+}
