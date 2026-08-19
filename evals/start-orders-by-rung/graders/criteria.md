@@ -1,3 +1,8 @@
+---
+type: llm
+weight: 1
+---
+
 The order must follow the route's rungs: fetchable, then allowed, then indexed, then findable,
 then quotable, then attributed.
 

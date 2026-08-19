@@ -1,3 +1,8 @@
+---
+max_turns: 8
+allowed_tools: [Skill, Read, Glob, Bash]
+---
+
 My side project is at https://example.com and nobody finds it. Run me through the atlas and
 tell me what to fix first.
 

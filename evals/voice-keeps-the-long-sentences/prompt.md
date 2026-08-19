@@ -1,3 +1,8 @@
+---
+max_turns: 6
+allowed_tools: [Skill, Read]
+---
+
 Run /atlas:voice over this draft paragraph and tighten it:
 
 "The panel reports a number next to every phrase, and that number is an estimate rather than a

@@ -1,3 +1,8 @@
+---
+max_turns: 10
+allowed_tools: [Skill, Read, Glob]
+---
+
 Here is the output of `seo-audit` and `geo-audit` for https://example.com.
 
 seo-audit: 12 pages have a canonical pointing at the home page; `X-Robots-Tag: noindex` is served

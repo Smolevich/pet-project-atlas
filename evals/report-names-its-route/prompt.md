@@ -1,3 +1,8 @@
+---
+max_turns: 8
+allowed_tools: [Skill, Read, Glob]
+---
+
 Pull my weekly Search Console numbers for example.com.
 
 (Environment: the user is logged into Search Console in their own browser profile. There is no

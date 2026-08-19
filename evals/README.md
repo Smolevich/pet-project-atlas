@@ -13,9 +13,26 @@ claude plugin eval ./plugin
 claude plugin eval ./plugin --case start-stops-without-audits
 ```
 
-**They do not run in CI.** The command is in early access and not enabled on this account, and
-each run costs model time and hits the network. When access lands, the cases are already here.
+## Getting the command to run
 
-Each case is a directory: `prompt.md` is what the user says, `graders/*.md` is what the answer
-has to satisfy. The cases below encode failures that already happened, not hypotheticals — that
-is the same rule the pages follow.
+`plugin eval` is early access, rolled out per organization. Where the rollout has not reached —
+and that includes CI runners — it is enabled with an environment variable:
+
+```bash
+CLAUDE_CODE_WALNUT_SPIRE=1 claude plugin eval .
+```
+
+Set it in the shell, or in `~/.claude/settings.json` under `env`. Not in this repository's
+`.claude/settings.json`: a committed value normally leaves the command gated off anyway.
+
+Run from the repository root, not from `plugin/` — cases are discovered under the target you
+name, and they live here.
+
+**Not in CI.** Every run costs model time and hits the network, so this stays a deliberate
+command.
+
+## Shape of a case
+
+A directory with `prompt.md` (frontmatter: `max_turns`, `allowed_tools`) and `graders/*.md`
+(frontmatter: `type`, `weight`). The cases below encode failures that already happened, not
+hypotheticals — the same rule the pages follow.

@@ -1,3 +1,8 @@
+---
+type: llm
+weight: 1
+---
+
 The rewrite must be shorter in words than the original.
 
 It must **not** be turned into a run of uniformly short sentences. At least one sentence stays

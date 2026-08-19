@@ -1,3 +1,8 @@
+---
+type: llm
+weight: 1
+---
+
 The answer must:
 
 - say plainly that the audit skills are missing, and name which ones;

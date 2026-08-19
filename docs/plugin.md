@@ -50,5 +50,6 @@ checks when the audits are missing, ordering findings by score instead of by run
 demanding a Cloud project when a logged-in browser was right there, and `/atlas:voice` tightening
 a paragraph into a run of nine-word sentences.
 
-They need `claude plugin eval`, which is in early access and not enabled on this account. See
-[evals/README.md](../evals/README.md).
+They need `claude plugin eval`, which is early access and rolled out per organization. Where the
+rollout has not arrived, `CLAUDE_CODE_WALNUT_SPIRE=1` turns it on; run it from the repository
+root. See [evals/README.md](../evals/README.md).
