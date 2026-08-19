@@ -10,6 +10,8 @@ sources:
   - Voice AI bot database, table credit_transactions, measured 2026-08-13
 ---
 
+import Histogram from '../../../components/Histogram.astro';
+
 ## What we are solving
 
 In practice there are two models: people pay per action, or people pay per month. Everything else is a variation on those.
@@ -27,6 +29,19 @@ A subscription works where the person comes back by themselves, without being re
 If the job is one-off, a subscription is churn on a delay: somebody pays once, does not open it for a month, and cancels. They are entirely right to.
 
 Here is what that looks like for me. Of 155 people who got at least one successful result, **117 used it on exactly one day**, another 17 stopped at two, and six got past five.
+
+<Histogram
+  title="Days of use among the 155 people who got a result"
+  unit="people"
+  caption="Measured 13 August 2026 on the Voice AI database. Three quarters of them fit inside one day, which leaves a subscription nothing to sell."
+  rows={[
+    { label: '1 day', value: 117 },
+    { label: '2 days', value: 17 },
+    { label: '3–5 days', value: 15 },
+    { label: '6+ days', value: 6 },
+  ]}
+/>
+
 
 There is no recurring job in those numbers. A subscription would not have held together on them at all: I would have been selling access to something nobody comes back to.
 

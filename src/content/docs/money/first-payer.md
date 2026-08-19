@@ -14,6 +14,19 @@ The money route ends at a diagnosis. Break-even comes out as a small whole numbe
 
 A product nobody pays for and a product nobody has been asked to pay for look identical from the dashboard: no revenue either way, and both feel like a verdict. Only one is. Telling them apart costs one question you have not asked.
 
+```mermaid
+flowchart TD
+  A{"Is there<br/>a price?"} -->|"no"| A1["That is «never asked»,<br/>not «nobody pays»"]
+  A -->|"yes"| B{"Wall after the<br/>first result?"}
+  B -->|"before it"| B1["They refuse<br/>something unseen"]
+  B -->|"after"| C{"Steps to payment<br/>on their own rows?"}
+  C -->|"no"| C1["One fact<br/>instead of five"]
+  C -->|"yes"| D{"Refusal in<br/>their words?"}
+  D -->|"no"| D1["Only a bare «no» left"]
+  D -->|"yes"| E["Something to work with"]
+```
+
+
 ## Steps
 
 ### Where a price comes from when there is nobody to survey

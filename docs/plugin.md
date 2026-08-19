@@ -35,12 +35,20 @@ that explains why it matters.
 
 All three are covered by `scripts/check-plugin.test.mjs`, which runs in `npm test`.
 
-## What is not tested
+## What third-party skills do behind your back
 
-Structure is tested; behaviour is not. Nothing checks that `/atlas:start` actually stops
-when an audit is missing, or that it stops instead of inventing its own checks.
+`npm run check:skills` compares the tools table against the source repositories on GitHub: the
+repo still exists and is not archived, the licence matches the column, and the folder each skill
+lives in has not been renamed. It runs weekly in the Security workflow, because that is how this
+class of breakage arrives — quietly, between two of your commits.
 
-`claude plugin eval` is the tool for that — cases under `evals/`, graders, a no-plugin
-baseline arm — but it is in early access and not enabled on this account, so there are no
-cases yet. Until then, behaviour is verified by running the command by hand and reading
-what it did.
+## Behaviour
+
+Structure is tested; behaviour is not, and the two fail differently. Four cases sit under
+`evals/`, each one written from a failure that already happened: `/atlas:start` inventing its own
+checks when the audits are missing, ordering findings by score instead of by rung, `/atlas:report`
+demanding a Cloud project when a logged-in browser was right there, and `/atlas:voice` tightening
+a paragraph into a run of nine-word sentences.
+
+They need `claude plugin eval`, which is in early access and not enabled on this account. See
+[evals/README.md](../evals/README.md).

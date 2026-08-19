@@ -17,6 +17,19 @@ Every action a user takes spends real money at a provider. Until I know what one
 
 Two numbers close the question: the variable cost of serving one action, and the fixed cost of a month in which nobody shows up. Break-even follows from those costs and comes out in payers per month. A margin percentage does not tell you whether to continue. "Two people a month" does.
 
+```mermaid
+flowchart TD
+  A{"Cost on the<br/>event row?"} -->|"no"| A1["A later join serves<br/>an estimate as a measurement"]
+  A -->|"yes"| B["Worst case: a package<br/>on the priciest engine"]
+  B --> C{"Margin still<br/>positive there?"}
+  C -->|"no"| C1["Wrong price,<br/>or wrong default"]
+  C -->|"yes"| D["Break-even:<br/>fixed ÷ margin"]
+  D --> E{"Seen that many<br/>payers yet?"}
+  E -->|"no"| E1["The problem is demand,<br/>not costs"]
+  E -->|"yes"| E2["Count it and scale it"]
+```
+
+
 ## Steps
 
 ### Which costs grow when somebody shows up
