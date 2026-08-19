@@ -26,3 +26,19 @@ jobs:
       # права GITHUB_TOKEN, секреты в job'е, где выполняется чужой код.
       - name: Audit workflows with zizmor
         run: pipx run zizmor==1.29.0 --offline --min-severity medium .github/workflows/
+
+  skill-sources:
+    name: Check third-party skills still exist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      # Плагин стоит на чужих скиллах, и меняются они молча: репозиторий
+      # переезжает, папку переименовывают, лицензия становится другой.
+      # Ходит в сеть, поэтому проверка отдельной джобой.
+      - name: Compare the tools table with the source repositories
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/check-skill-sources.mjs

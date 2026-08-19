@@ -188,7 +188,13 @@ Numbers are digits, not words. Zero is a result worth publishing: "0 clicks in t
 
 ## 5. Length
 
-A paragraph is at most 3 sentences. A sentence is at most 20 words.
+A paragraph is at most 3 sentences. A sentence is at most 20 words, and the linter only starts
+warning at 45.
+
+That ceiling is measured, not invented. Across 323 posts on the author's own channel — 3,321
+sentences — the median runs 12 words, the ninety-fifth percentile 35, and the longest 95. Roughly
+one sentence in seven is 25 words or more. A page of uniformly short sentences is not this voice;
+the long ones are what the short ones land against.
 
 A block — one bullet, or one paragraph — is at most 55 words in a list and 65 in prose. Past
 that the reader is no longer holding the whole of it. Five sentences in a block is fine when

@@ -90,9 +90,13 @@ async function lintFile(filePath) {
         `${at(hit.line)}: запрещённая фраза "${hit.phrase}". Замени на конкретное утверждение. (${STYLE.banned})`,
       );
     }
-    for (const hit of findLongSentences(body, 36)) {
+    // Потолок снят с канала владельца, а не придуман: 323 поста, 3321
+    // предложение, медиана 12 слов, p95 — 35, максимум 95. Порог 36 отрезал
+    // 4.4% его собственных фраз, то есть запрещал ровно тот хвост, по
+    // которому голос и узнаётся. За 45 уходит 1.9%.
+    for (const hit of findLongSentences(body, 45)) {
       warnings.push(
-        `${at(hit.line)}: предложение на ${hit.words} слов, порог 36. Раздели на два. (${STYLE.length})`,
+        `${at(hit.line)}: предложение на ${hit.words} слов, порог 45. Раздели на два. (${STYLE.length})`,
       );
     }
     for (const hit of findBloatedBlocks(body)) {
