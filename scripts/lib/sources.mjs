@@ -18,6 +18,8 @@ import { parseProvenance, splitTitledSource } from './voice-rules.mjs';
  * @typedef {{ kind: 'provenance', text: string, instrument: string, scope: string, identifier: string, measured: string }} MeasuredSource
  * @typedef {{ kind: 'provenance', text: string, instrument?: undefined }} UnparsedSource
  * @typedef {UrlSource | MeasuredSource | UnparsedSource} Source
+ * @typedef {MeasuredSource & { identifiers: string[] }} GroupedSource
+ * @typedef {UrlSource | UnparsedSource | GroupedSource} ShownSource
  */
 
 /**
@@ -83,8 +85,12 @@ export function orderSources(entries) {
  * строками: различался только идентификатор, а читалось это как свалка.
  * Во frontmatter они остаются по одной — так их проверяет линтер и так видно,
  * что именно снято, — а склейка живёт на показе.
+ *
+ * @param {Source[]} sources
+ * @returns {ShownSource[]}
  */
 export function groupOwnMeasurements(sources) {
+  /** @type {ShownSource[]} */
   const out = [];
   const seen = new Map();
   for (const source of sources) {
@@ -98,7 +104,10 @@ export function groupOwnMeasurements(sources) {
       seen.set(key, out.length);
       out.push({ ...source, identifiers: [source.identifier] });
     } else {
-      out[at].identifiers.push(source.identifier);
+      // По ключу в seen лежит только запись, прошедшая ветку выше, то есть
+      // уже склеенная — у неё identifiers есть.
+      const grouped = /** @type {GroupedSource} */ (out[at]);
+      grouped.identifiers.push(source.identifier);
     }
   }
   return out;

@@ -71,7 +71,7 @@ const measuredText = (measured: string) => t.measuredOn(t.formatDate(new Date(`$
                     {source.identifiers && source.identifiers.length > 1
                       ? t.scopeWordPlural(source.scope)
                       : t.scopeWord(source.scope)}{' '}
-                    {(source.identifiers ?? [source.identifier]).map((id, i) => (
+                    {source.identifiers.map((id, i) => (
                       <>
                         {i > 0 && ', '}
                         <code>{id}</code>
