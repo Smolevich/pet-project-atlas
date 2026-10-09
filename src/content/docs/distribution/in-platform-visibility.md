@@ -1,7 +1,7 @@
 ---
 title: Search inside the platform, not only in Google
 description: Telegram, app stores and marketplaces run their own index over a handful of short fields. Which fields those are, and what a name in the wrong script costs.
-updated: 2026-08-12
+updated: 2026-10-09
 sources:
   - setMyName in the Bot API — https://core.telegram.org/bots/api#setmyname
   - getMyName in the Bot API — https://core.telegram.org/bots/api#getmyname
@@ -12,6 +12,8 @@ sources:
   - Creating an App Store product page — https://developer.apple.com/app-store/product-page/
   - App Store Connect version metadata — https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information/
   - Store listing metadata in Google Play — https://support.google.com/googleplay/android-developer/answer/9898842
+  - psql, measured 2026-08-25
+  - Apify Console Insights, project apify-actors, measured 2026-10-09
 ---
 
 ## What we are solving
@@ -94,7 +96,8 @@ A repeat start overwrites the original source with whatever they clicked last, s
 - **Counting characters against a byte limit**. The keyword field takes 100 bytes and Cyrillic spends two bytes a letter, so half my budget was gone before I typed anything. Apple's marketing page says characters, and that is the page I read.
 - **Trusting my memory of the name**. Reading it back over the API disagreed with what I believed I had set, and every diagnosis before that check rested on a wrong fact.
 - **Publishing links with no start parameter**. The code did not read the parameter either, so attribution was zero rather than approximate, and months of distribution work could not be evaluated at all.
-- **Treating the website as the main door**. No signup carried a source, so the share attributable to the site is unknown: [where the user came from](/analytics/attribution/). Ranking it was real work aimed at a channel I never showed the audience was using.
+- **Treating the website as the main door**. Once the source column existed, 88% of new users arrived on a bare `/start` and the site sent about 10%. A bare start means Telegram search, a catalog or a forward. I had been ranking the smaller door: [where the user came from](/analytics/attribution/).
+- **Reading a marketplace's run counter as demand**. My five Apify Store actors each logged 39 to 53 successful runs in 30 days. The monetization screen for 1–9 October showed one paying user per actor and $0.23 in total, and 7 of 106 page visitors ran one. Judge a catalog by its revenue.
 
 ## Verify
 

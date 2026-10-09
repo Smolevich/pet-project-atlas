@@ -3,7 +3,7 @@ title: Google does not see your site
 sidebar:
   order: 1
 description: The site is live and search returns nothing for it. The checks that find the real blocker, in the order they have to run.
-updated: 2026-08-18
+updated: 2026-10-09
 sources:
   - What robots.txt can and cannot do — https://developers.google.com/search/docs/crawling-indexing/robots/intro
   - How Google reads robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
@@ -129,6 +129,7 @@ So the refusal is not in your server log either: you can see it only in Cloudfla
 - **Trusting a third-party crawler as proof of access**. The report says what someone else's bot could fetch from its own address, and whether search decided to keep the page is a different question.
 - **Checking only from my own laptop**. A logged-in session, a warm service worker and a home network the edge already trusts hid the failure between them. The edge is the CDN in front of your origin — Cloudflare, Fastly, a load balancer — and it answers some requests before they reach you.
 - **Editing `robots.txt` when the block lived at the edge**. Bot-protection and WAF rules are invisible in that file, and the file was clean the whole time. Look for Cloudflare's **Configure AI bot policies** under **Security Settings**, and any WAF custom rule beside it — this is the most common hidden blocker I run into.
+- **A catch-all 404 rule on a client-routed site**. On my other site, `/* /404.html 404` in the redirects file also caught routes with no file in the build. The Russian home page answered 404 from the sitemap, and the browser hid it. Now every route is prerendered and the sitemap check runs after deploys.
 - **Rewriting titles and descriptions first**. On a page that is not in the index, on-page work produces nothing you can measure.
 
 ## Verify
