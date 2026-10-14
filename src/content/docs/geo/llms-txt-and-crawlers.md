@@ -113,7 +113,7 @@ The same panel can charge instead of refusing: pay per crawl answers 402, and it
 
 ### A name in the log is a claim, not an identity
 
-Anyone can send a user agent string, and I sent myself a pile of them: a `curl` loop put vendor names into my own access log, and for two weeks I read them back as visits.
+Anyone can send a user agent string. I sent myself a pile of them: a `curl` loop put vendor names into my own access log, and for two weeks I read them back as visits.
 
 Vendors publish IP ranges and reverse DNS for their crawlers, so check a client against those before a log line becomes evidence. What that cost me is in [who actually crawls you](/geo/who-actually-crawls-you/).
 
@@ -202,7 +202,7 @@ Those requests are counted on the other side of the block: Cloudflare counts the
 - **Writing `Disallow` for `ChatGPT-User` and calling it a block**. OpenAI documents that a user-initiated fetch may ignore robots.txt, and Perplexity says the same. I was politely asking a client whose vendor had told it not to listen.
 - **Editing `robots.txt` while the edge did the blocking**. The file allowed every agent by name, the bot-protection rule in front of it returned 403, and the log showed no successful fetches. That rule is invisible everywhere except the CDN's own security events.
 - **Listing outlines in `llms.txt`**. A line there promises the page behind it is written. A link to a page you never wrote teaches the reader — human or model — to ignore the whole file.
-- **Treating `robots.txt` as enforcement**. It is a request: a well-behaved crawler honours it, a scraper ignores it, and then only the edge stops it — or nothing does.
+- **Treating `robots.txt` as enforcement**. It is a request, not a lock. A well-behaved crawler honours it. A scraper does not, and only the edge can stop one.
 
 ## Verify
 

@@ -503,23 +503,30 @@ function isHttpUrl(entry) {
 export function parseProvenance(entry) {
   if (typeof entry !== 'string') return null;
   const parts = entry.split(',').map((part) => part.trim());
-  if (parts.length !== 3) return null;
+  // Три части — прибор, область, дата. Две — прибор и дата: так пишется
+  // замер по своей боевой базе, куда читателю всё равно не попасть. Область
+  // там называла таблицы, то есть публиковала схему данных и не давала
+  // взамен ничего проверяемого.
+  if (parts.length !== 3 && parts.length !== 2) return null;
 
-  const [instrument, scope, measured] = parts;
+  const instrument = parts[0];
   if (instrument.length < 3 || VAGUE_INSTRUMENT.test(instrument)) return null;
   if (!/^[\p{L}\p{N}]/u.test(instrument)) return null;
 
-  const area = scope.match(PROVENANCE_SCOPE_PATTERN);
-  if (!area) return null;
-
-  const date = measured.match(PROVENANCE_DATE_PATTERN);
+  const date = parts[parts.length - 1].match(PROVENANCE_DATE_PATTERN);
   if (!date || !isRealDate(date[1], date[2], date[3])) return null;
+  const measured = `${date[1]}-${date[2]}-${date[3]}`;
+
+  if (parts.length === 2) return { instrument, scope: null, identifier: null, measured };
+
+  const area = parts[1].match(PROVENANCE_SCOPE_PATTERN);
+  if (!area) return null;
 
   return {
     instrument,
     scope: area[1].toLowerCase(),
     identifier: area[2],
-    measured: `${date[1]}-${date[2]}-${date[3]}`,
+    measured,
   };
 }
 

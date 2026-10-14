@@ -5,12 +5,7 @@ sidebar:
 description: Что такое пет-проект, можно ли в нём брать деньги и почему искать надо не пустой рынок, а чужую недоделку. И сколько мне стоило пропустить этот шаг.
 updated: 2026-08-15
 sources:
-  - Voice AI bot database, table users, measured 2026-08-15
-  - Voice AI bot database, table usage_events, measured 2026-08-15
-  - Voice AI bot database, table user_credits, measured 2026-08-15
-  - Voice AI bot database, table stars_payments, measured 2026-08-15
-  - Voice AI bot database, table credit_transactions, measured 2026-08-15
-  - Voice AI bot database, table feedback, measured 2026-08-15
+  - Voice AI bot database, measured 2026-08-15
   - App Store customer reviews RSS, dataset itunes.apple.com/us/rss/customerreviews/id=1276437113, measured 2026-08-13
   - Тарифы Otter и лимит на одну запись — https://otter.ai/pricing
   - Питер Тиль, «Competition Is for Losers» — https://www.wsj.com/articles/peter-thiel-competition-is-for-losers-1410535536
@@ -133,12 +128,12 @@ curl -s 'https://hn.algolia.com/api/v1/search_by_date?query=%22otter.ai%22&tags=
 flowchart TD
   A["Пришли в бота<br/>258"]
   A --> B["Не сделали ничего<br/>84"]
-  A --> C["Попробовали,<br/>результата не получили<br/>7"]
+  A --> C["Попробовали без<br/>результата — 7"]
   A --> D["Получили результат<br/>167"]
-  B --> B1["пришли до 17 июля,<br/>грант не начислялся<br/>56 из 70"]
-  B --> B2["пришли позже,<br/>грант работает<br/>28 из 188"]
+  B --> B1["до 17 июля, без гранта<br/>56 из 70"]
+  B --> B2["позже, грант работает<br/>28 из 188"]
   D --> E["Пользовались один день<br/>125"]
-  D --> F["Дошли до конца<br/>бесплатного лимита<br/>3"]
+  D --> F["Дошли до конца<br/>лимита — 3"]
   F --> G["Заплатили<br/>0"]
 ```
 

@@ -82,3 +82,19 @@
   margin: 0 !important;
   white-space: normal !important;
 }
+
+/* Переключатель языка на телефоне.
+ *
+ * Starlight прячет всю правую группу хедера ниже 50rem (sl-hidden md:sl-flex),
+ * и вместе с темой и соцсетями уезжает выбор языка — на телефоне русскую
+ * версию не найти вовсе. Возвращаем только его: тема и так следует за
+ * системной, а иконки в узкий хедер не влезают. */
+@media (max-width: 49.999rem) {
+  .header .right-group {
+    display: flex;
+  }
+  .header .right-group .social-icons,
+  .header .right-group starlight-theme-select {
+    display: none;
+  }
+}

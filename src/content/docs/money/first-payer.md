@@ -1,7 +1,7 @@
 ---
 title: Getting the first person to pay
 sidebar:
-  order: 3
+  order: 4
 description: Break-even comes out as a small whole number of payers and none of them exist. Picking a price without a study, where the wall goes in a free tier, and the difference between nobody paying and nobody being asked.
 updated: 2026-08-12
 sources:
@@ -14,11 +14,24 @@ The money route ends at a diagnosis. Break-even comes out as a small whole numbe
 
 A product nobody pays for and a product nobody has been asked to pay for look identical from the dashboard: no revenue either way, and both feel like a verdict. Only one is. Telling them apart costs one question you have not asked.
 
+```mermaid
+flowchart TD
+  A{"Is there<br/>a price?"} -->|"no"| A1["That is «never asked»,<br/>not «nobody pays»"]
+  A -->|"yes"| B{"Wall after the<br/>first result?"}
+  B -->|"before it"| B1["They refuse<br/>something unseen"]
+  B -->|"after"| C{"Steps to payment<br/>on their own rows?"}
+  C -->|"no"| C1["One fact<br/>instead of five"]
+  C -->|"yes"| D{"Refusal in<br/>their words?"}
+  D -->|"no"| D1["Only a bare «no» left"]
+  D -->|"yes"| E["Something to work with"]
+```
+
+
 ## Steps
 
 ### Where a price comes from when there is nobody to survey
 
-Take the shape of the price from a competitor — per seat, per action, per month — because somebody already tested it with their own money: [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor: [what one user costs](/money/unit-economics/).
+Take the shape of the price from a competitor: per seat, per action, per month. Somebody already tested that shape with their own money — [whether that audience pays](/demand/will-they-pay/). Your number then has to clear the worst-case margin floor: [what one user costs](/money/unit-economics/).
 
 Price the unit your event row already records: a minute, a message, a run. If the row carries a cost per action you can price a package today, whereas a price in a unit you do not measure has nothing to check it against.
 

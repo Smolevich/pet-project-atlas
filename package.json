@@ -11,19 +11,20 @@
     "lint:voice": "node scripts/lint-voice.mjs src/content/docs",
     "check:links": "node scripts/check-links.mjs dist",
     "check:types": "astro check",
-    "test": "node --test \"scripts/**/*.test.mjs\""
+    "test": "node --test \"scripts/**/*.test.mjs\"",
+    "check:skills": "node scripts/check-skill-sources.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/starlight": "^0.41.3",
     "astro": "^7.2.2",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@beoe/rehype-mermaid": "^0.4.2",
-    "js-yaml": "^4.3.1",
-    "playwright": "^1.62.1",
+    "js-yaml": "^4.3.2",
+    "playwright": "^1.63.0",
     "typescript": "^6.0.3"
   }
 }

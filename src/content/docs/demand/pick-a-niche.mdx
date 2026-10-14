@@ -5,12 +5,7 @@ sidebar:
 description: What counts as a pet project, whether it is allowed to take money, and why you look for somebody else's rough edge rather than an empty market. Plus what skipping this step cost me, in numbers.
 updated: 2026-08-15
 sources:
-  - Voice AI bot database, table users, measured 2026-08-15
-  - Voice AI bot database, table usage_events, measured 2026-08-15
-  - Voice AI bot database, table user_credits, measured 2026-08-15
-  - Voice AI bot database, table stars_payments, measured 2026-08-15
-  - Voice AI bot database, table credit_transactions, measured 2026-08-15
-  - Voice AI bot database, table feedback, measured 2026-08-15
+  - Voice AI bot database, measured 2026-08-15
   - App Store customer reviews RSS, dataset itunes.apple.com/us/rss/customerreviews/id=1276437113, measured 2026-08-13
   - Otter plans and the per-recording limit — https://otter.ai/pricing
   - Peter Thiel, "Competition Is for Losers" — https://www.wsj.com/articles/peter-thiel-competition-is-for-losers-1410535536
@@ -125,12 +120,12 @@ Between 12 May and 15 August, 258 people signed up to the bot. Here is what beca
 flowchart TD
   A["Signed up<br/>258"]
   A --> B["Did nothing at all<br/>84"]
-  A --> C["Tried, got<br/>no result<br/>7"]
+  A --> C["Tried, no result<br/>7"]
   A --> D["Got a result<br/>167"]
-  B --> B1["arrived before 17 July,<br/>grant not credited<br/>56 of 70"]
-  B --> B2["arrived later,<br/>grant works<br/>28 of 188"]
+  B --> B1["before 17 July, no grant<br/>56 of 70"]
+  B --> B2["later, grant works<br/>28 of 188"]
   D --> E["Used it for one day<br/>125"]
-  D --> F["Reached the end of<br/>the free allowance<br/>3"]
+  D --> F["Reached the free<br/>allowance end — 3"]
   F --> G["Paid<br/>0"]
 ```
 

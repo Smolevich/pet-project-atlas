@@ -5,7 +5,7 @@ sidebar:
 description: Недельные числа откуда-то берутся. Что должно лежать в одной строке события, почему стоимость и источник пишутся в момент вставки и как найти шаг, на котором люди останавливаются.
 updated: 2026-08-13
 sources:
-  - Voice AI bot database, table usage_events, measured 2026-08-13
+  - Voice AI bot database, measured 2026-08-13
 ---
 
 ## Что решаем

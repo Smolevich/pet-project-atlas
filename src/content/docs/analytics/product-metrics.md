@@ -5,7 +5,7 @@ sidebar:
 description: The weekly numbers come from somewhere. What one event row must hold to answer questions later, why cost and source belong on it at insert time, and how to find the step where people stop.
 updated: 2026-08-13
 sources:
-  - Voice AI bot database, table usage_events, measured 2026-08-13
+  - Voice AI bot database, measured 2026-08-13
 ---
 
 ## What we are solving

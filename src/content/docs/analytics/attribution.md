@@ -13,11 +13,11 @@ sources:
 
 ## What we are solving
 
-Signups arrive and you cannot say which link sent them. On the web that is a reporting problem, and a report can be cleaned up later. Inside a bot or an app there is nothing to clean: the data is not there.
+Signups arrive and you cannot say which link sent them — on the web that is only a reporting problem, because you can usually clean a report up later. Inside a bot or a mobile app there is nothing to clean: the data is simply not there.
 
-A browser sends a referrer on its own, so the worst the web gives you is a messy report. A messenger and an app store send nothing: ask for the tag in the link and store it the moment somebody arrives.
+A browser sends a referrer on its own. The worst you get on the web is a messy report. A messenger and an app store send you nothing, so you have to ask for the tag in the link and store it yourself the moment somebody arrives.
 
-So the honest answer is not "roughly half came from that directory" but "I do not know". No analysis after the fact makes something out of nothing.
+So the honest answer is not "roughly half of them came from that directory" but "I do not know", because no amount of analysis after the fact makes something out of nothing.
 
 ## Steps
 
@@ -29,7 +29,7 @@ Tagging as you go does not work. Inside a month you have `reddit`, `Reddit`, `re
 
 ### What counts as a channel, including the ones you own
 
-Tag every outbound link, including your own channel, newsletter and pinned post. On the web the tag lives in campaign parameters, in a bot in the deep-link payload, in a store in a campaign link.
+You put a tag on every outbound link. Your own channel, your own newsletter and your own pinned post get one too. On the web the tag lives in campaign parameters, in a bot it lives in the deep-link payload, and in an app store it lives in a campaign link.
 
 Skipping your own posts is the easiest shortcut and it costs the most. Untagged, they land in direct traffic. Then you open direct traffic and read word of mouth there that never happened.
 
@@ -41,11 +41,11 @@ It does, and this page used to claim otherwise. Telegram documents 64 characters
 https://t.me/my_bot?start=reddit-selfhosted-2026-08-12
 ```
 
-That payload takes 28 characters, with venue, medium and date already in it and room left over. You get two separators, a hyphen and an underscore: pick one, write the choice into the vocabulary, and never mix them. A parser that has to guess will guess wrong.
+That payload takes 28 characters. Venue, medium and date are already in it, and there is room left over. You get two separators: a hyphen and an underscore, so pick one, write the choice into the same vocabulary, and never mix hyphens with underscores. A parser that has to guess will eventually guess wrong.
 
 ### Where the source goes so that nothing overwrites it
 
-Keep the source in one column on the user row. Write it server-side, in the insert and nowhere else. The client keeps what it likes and vanishes the moment the person opens the product on another device.
+Keep the source in one column on the user row. You write it server-side, in the insert and nowhere else, because the client keeps what it likes and vanishes the moment the person opens the product on another device.
 
 ```sql
 create table users (
@@ -66,7 +66,7 @@ values ($1, $2, $3)
 on conflict (id) do nothing;
 ```
 
-`do nothing` is the whole point: somebody returns with a different tag, hits the conflict, and the original value survives. Last touch is almost always your own link, because returning people come back through your channel and overwrite the answer you needed.
+`do nothing` is the whole point. Somebody comes back carrying a different tag, hits the conflict, and leaves the original value alone, and that is what you want. Last touch is almost always your own link, because returning people come back through your channel, and they overwrite exactly the answer you needed.
 
 ### What to record for the arrivals that carry no tag at all
 
@@ -80,13 +80,13 @@ Ask the person yourself, once, after they have got something out of the product:
 
 This is not a nicety. Word of mouth carries no tag, no technical method on this page can see it, and a self-report is the only place it will ever appear.
 
-You cannot reconstruct attribution afterwards. That is why this page sits early in the route. Every day the links stay bare is a day of arrivals you will never sort by source.
+You cannot reconstruct attribution afterwards. That is why this page sits early in the route rather than late: every day the links stay bare is a day of arrivals you will never sort by source.
 
 ## What did not work
 
-- **Assuming the source was visible by default.** My links were bare, the handler never read the start parameter, and no column was waiting for it. Attribution was not approximate but zero, and months of distribution work went unjudged.
+- **Assuming the source was visible by default.** My links were bare, the handler never read the start parameter, and there was no column waiting to hold it either. My attribution was not approximate but zero, and months of distribution work went unjudged.
 - **Reading user geography as a market signal.** The mix was following a metadata field rather than a market. That field turned out to be the alphabet my product name is written in, so I built product theories on an artefact of a name.
-- **Calling the deep-link parameter too short for a scheme.** This page said a structured value would not fit. Telegram documents 64 characters and my scheme came to 28: the obstacle was the missing column.
+- **Calling the deep-link parameter too short for a scheme.** This page said a structured value would not fit. Telegram documents 64 characters, the scheme I needed came to 28, and the obstacle was never the parameter — it was the missing column.
 - **Writing the source on every contact.** Within a few weeks my whole table said "my own channel". Returning people click exactly there.
 - **Adding the tag but not the column.** The parameter arrived and went into a log line, where it stayed and was rotated away. My links looked instrumented for weeks. Nothing was being stored.
 - **Trusting referrer in the web analytics tool.** In-app browsers and link previews strip it, so the real referrals pile up under direct traffic. My report was confidently wrong, which is worse than empty.
