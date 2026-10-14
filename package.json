@@ -18,13 +18,13 @@
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/starlight": "^0.41.3",
     "astro": "^7.2.2",
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@beoe/rehype-mermaid": "^0.4.2",
     "js-yaml": "^4.3.2",
-    "playwright": "^1.62.1",
+    "playwright": "^1.63.0",
     "typescript": "^6.0.3"
   }
 }
