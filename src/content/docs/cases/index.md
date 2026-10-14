@@ -1,9 +1,9 @@
 ---
 title: Cases
-description: What a case has to contain before it goes up here, how to send yours, and why there is still only one.
+description: What a case has to contain before it goes up here, how to send yours, and why there are still only two.
 ---
 
-One case is up: [this atlas, two days in](/cases/atlas-itself/). It is the site you are reading, measured on itself.
+Two cases are up. [This atlas, two days in](/cases/atlas-itself/) is the site you are reading, measured on itself. [One week, three search strategies and a control group](/cases/voice-seo-week/) is my voice bot's site.
 
 This page is the bar the next case has to clear, and it holds the form to send one in.
 
@@ -30,7 +30,7 @@ Your voice stays as you wrote it: guest pages carry `voice: guest` in frontmatte
 
 The terms are in [CONTRIBUTING](https://github.com/Smolevich/pet-project-atlas/blob/main/CONTRIBUTING.md#guest-cases): `CC BY 4.0`, your byline, a link to your project.
 
-## Why there is only one
+## Why there are only two
 
 The rest of my numbers are still coming in. I would rather publish them a month late than round them off into something that reads well, because a case written before the data arrives breaks the first rule on this page.
 
