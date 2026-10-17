@@ -227,7 +227,7 @@ All of this rests on identities I never verified, and the window showed the cost
 - Request `/llms.txt` yourself, then find that line in the log. If it is missing, you are reading the wrong file.
 - Count status codes per agent. A wall of 403 means somebody is refusing them. In the totals that reads exactly like nobody having come.
 - Count lines, not occurrences. Pipe the same data through `wc -l` and through `grep -o`, and compare the two totals.
-- Resolve the addresses of your top agents by reverse DNS, and match them against the vendor's published ranges.
+- Resolve the addresses of your top agents by reverse DNS, and match them against the vendor's published ranges. Behind Cloudflare it has already done that for you: [real crawler or fake one](/geo/real-or-fake-crawlers/).
 - Take a window in which you do not touch the site at all. It is the only way to read a user-triggered agent honestly. I have not taken one yet.
 - Compare the log against your CDN's own analytics. On Cloudflare that is **AI Crawl Control**, in the **Crawlers** and **Metrics** tabs. Everything the edge cached or refused is invisible to nginx.
 
