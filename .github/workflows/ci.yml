@@ -37,3 +37,8 @@ jobs:
       - run: npm run build
       # Ссылки проверяются по собранному сайту, поэтому только после build.
       - run: npm run check:links
+      # Конфиг уезжает на сервер как есть: синтаксическую ошибку ловим до мержа.
+      - name: nginx -t
+        run: |
+          docker run --rm -v "$PWD/nginx-atlas.conf:/etc/nginx/conf.d/atlas.conf:ro" \
+            nginx:stable nginx -t
