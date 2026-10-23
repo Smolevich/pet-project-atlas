@@ -3,7 +3,7 @@ title: Настоящий краулер или подделка
 sidebar:
   order: 4
 description: Имя бота в User-Agent ничего не доказывает. Как Cloudflare подтверждает краулер, что видно на бесплатном тарифе, запрос GraphQL, который отделяет настоящих от подделок, и одно правило WAF — с цифрами за тридцать дней по моей зоне.
-updated: 2026-10-18
+updated: 2026-10-24
 sources:
   - Cloudflare GraphQL Analytics, site voice.smolevich.com, measured 2026-10-18
   - Cloudflare GraphQL Analytics, site smolevich.com, measured 2026-10-17
@@ -22,6 +22,11 @@ sources:
   - Адрес GraphQL Analytics — https://developers.cloudflare.com/analytics/graphql-api/
   - Насколько глубоко хранятся adaptive-данные — https://developers.cloudflare.com/analytics/graphql-api/limits/
   - Почему Perplexity больше не подтверждённый бот — https://blog.cloudflare.com/perplexity-is-using-stealth-undeclared-crawlers-to-evade-website-no-crawl-directives/
+  - Cloudflare GraphQL firewall events, site smolevich.com, measured 2026-10-24
+  - Опубликованные исходящие адреса Anthropic — https://platform.claude.com/docs/en/api/ip-addresses
+  - Список краулеров Anthropic bots.json — https://claude.com/crawling/bots.json
+  - Кто анонсирует части 160.79.104.0/21, RIPEstat — https://stat.ripe.net/160.79.104.0/21
+  - Чей блок 160.79.104.0/21, ARIN — https://search.arin.net/rdap/?query=160.79.104.0
 ---
 
 ## Что решаем
@@ -151,6 +156,46 @@ PerplexityBot я в правило не включил нарочно. Под э
 Сканеры на этом сайте именем бота не прикрываются. На пути с `.env` пришло 39 запросов и на `wp-*` ещё 3, и ни один не назвался ботом. У всех запросов к `.env` была обычная строка браузера.
 
 В общем, на этом сайте правило выше заблокировало бы 8 запросов за месяц. Шесть из них — запрос скрипта Cloudflare под именем Googlebot, и это вполне может быть собственный рендерер Google. По всей зоне то же правило бьёт по тысячам.
+
+### 8. Случай: настоящий Claude тоже попал под правило
+
+Правило — как охранник на входе. Кто говорит «я бот», того охранник сверяет со своим списком настоящих ботов. Claude, когда открывает страницу по просьбе человека в чате claude.ai, в этом списке не значился, и охранник не пустил и его. Мы дописали охраннику одну строку: Claude с адресов самой Anthropic пропускать.
+
+```mermaid
+flowchart TD
+  A["Пришёл запрос"] --> B{"1. Назвался ИИ-ботом?"}
+  B -- нет --> P1["Проходи: обычный посетитель"]
+  B -- да --> C{"2. Cloudflare знает его как настоящего бота?"}
+  C -- да --> P2["Проходи: он в списке проверенных"]
+  C -- нет --> D{"3. Это Claude-User с адреса Anthropic?"}
+  D -- да --> P3["Проходи: настоящий Claude из claude.ai"]
+  D -- нет --> S["Стоп: Managed Challenge, бот её не пройдёт"]
+```
+
+Правило зоны smolevich.com отправляет запрос на Managed Challenge, если в User-Agent имя ИИ-бота и выполняется `not cf.client.bot`. Claude-User — это агент, которым claude.ai открывает страницу по просьбе пользователя. Он приходит с 160.79.106.x, и проверенным ботом Cloudflare его не считает. 22 и 23 октября 2026 правило зачелленджило его 10 раз.
+
+Исправили 23 октября. Одно условие:
+
+```txt
+and not (http.user_agent contains "Claude-User"
+         and ip.src in {160.79.104.0/21})
+```
+
+`160.79.104.0/21` — ровно тот диапазон, который Anthropic публикует как свои исходящие адреса, а ARIN записывает блок на Anthropic, PBC. Список краулеров Anthropic `bots.json` тут не помогает: в нём 216.73.216.0/22 и отдельные адреса, 160.79.x там нет.
+
+Почему подсеть, а не ASN. По RIPEstat этот /21 анонсируют три сети: 160.79.106.0/24 — AS396982 (Google Cloud), 160.79.104.0/23 — AS399358 (Anthropic), 160.79.108.0/22 — AS16509 (Amazon). Claude-User ходит из части Google Cloud, но с того же AS396982 идут и подделки, так что исключение по ASN пропустило бы их вместе с настоящим Claude.
+
+Подделку видно и по подписи в конце User-Agent, если присмотреться. Настоящий заканчивает User-Agent на `+claude-user@anthropic.com`. Поддельный из Google Cloud писал `+claudebot@anthropic.com`.
+
+Неделя 17–23 октября, по выборке событий файрвола:
+
+| Что остановило правило | Запросов |
+|---|---|
+| Все срабатывания | 1 042 |
+| Поддельные боты из Google Cloud, искали `/.env`, `/.env.local`, `/.gitlab-ci.yml` | 911 |
+| Настоящий Claude-User, все до правки | 10 |
+
+После правки Claude-User с этих адресов получал ответы 200.
 
 ## Что не сработало
 

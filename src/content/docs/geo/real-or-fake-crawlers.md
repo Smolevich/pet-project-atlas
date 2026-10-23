@@ -3,7 +3,7 @@ title: Real crawler or fake one
 sidebar:
   order: 4
 description: A bot name in the User-Agent proves nothing. How Cloudflare confirms a crawler, what the free plan shows, a GraphQL query that splits real from fake, and one WAF rule — with thirty days of numbers from my own zone.
-updated: 2026-10-18
+updated: 2026-10-24
 sources:
   - Cloudflare GraphQL Analytics, site voice.smolevich.com, measured 2026-10-18
   - Cloudflare GraphQL Analytics, site smolevich.com, measured 2026-10-17
@@ -22,6 +22,11 @@ sources:
   - The GraphQL Analytics endpoint — https://developers.cloudflare.com/analytics/graphql-api/
   - How far back adaptive datasets go — https://developers.cloudflare.com/analytics/graphql-api/limits/
   - Why Perplexity is no longer a verified bot — https://blog.cloudflare.com/perplexity-is-using-stealth-undeclared-crawlers-to-evade-website-no-crawl-directives/
+  - Cloudflare GraphQL firewall events, site smolevich.com, measured 2026-10-24
+  - Anthropic's published outbound IP addresses — https://platform.claude.com/docs/en/api/ip-addresses
+  - Anthropic's crawler list bots.json — https://claude.com/crawling/bots.json
+  - Who announces each part of 160.79.104.0/21, RIPEstat — https://stat.ripe.net/160.79.104.0/21
+  - Who owns 160.79.104.0/21, ARIN — https://search.arin.net/rdap/?query=160.79.104.0
 ---
 
 ## What we are solving
@@ -151,6 +156,48 @@ Where the 149 went:
 The scanners on this site do not bother with a bot name. 39 requests went to `.env` paths and 3 to `wp-*`, and none of them named a bot. The `.env` ones all carried an ordinary browser string.
 
 So on this site the rule above would block 8 requests in a month. Six of them were a Googlebot-named fetch of Cloudflare's script, which may well be Google's own renderer. On the whole zone the same rule targets thousands.
+
+### 8. Case: the real Claude got caught too
+
+Think of the rule as a guard at the door. Anyone who says "I am a bot" gets checked against the guard's list of real bots. Claude opening a page for someone in a claude.ai chat was not on that list, so the guard stopped it too. We added one line for the guard: Claude from Anthropic's own addresses may pass.
+
+```mermaid
+flowchart TD
+  A["A request comes in"] --> B{"1. Does it call itself an AI bot?"}
+  B -- no --> P1["Pass: an ordinary visitor"]
+  B -- yes --> C{"2. Does Cloudflare know it as a real bot?"}
+  C -- yes --> P2["Pass: on the verified list"]
+  C -- no --> D{"3. Is it Claude-User from an Anthropic address?"}
+  D -- yes --> P3["Pass: the real Claude from claude.ai"]
+  D -- no --> S["Stop: Managed Challenge, a bot cannot solve it"]
+```
+
+The rule on smolevich.com sends a request to Managed Challenge when its User-Agent names an AI bot and `not cf.client.bot` holds. Claude-User is the agent claude.ai uses to fetch a page for a user. It arrives from 160.79.106.x, and Cloudflare does not count it as a verified bot. On 22 and 23 October 2026 the rule challenged it 10 times.
+
+The fix, added on 23 October, is one more clause:
+
+```txt
+and not (http.user_agent contains "Claude-User"
+         and ip.src in {160.79.104.0/21})
+```
+
+`160.79.104.0/21` is exactly the range Anthropic publishes as its outbound addresses, and ARIN lists the block as Anthropic, PBC. 
+
+Anthropic's crawler list `bots.json` does not help here. It holds 216.73.216.0/22 and single addresses, and no 160.79.x.
+
+Why a subnet and not an ASN. RIPEstat shows the /21 announced by three networks: 160.79.106.0/24 by AS396982 (Google Cloud), 160.79.104.0/23 by AS399358 (Anthropic) and 160.79.108.0/22 by AS16509 (Amazon). Claude-User comes from the Google Cloud part. The fakes come from AS396982 too, so an exception by ASN would let them in.
+
+The fakes also give themselves away in the signature. The real one ends its User-Agent with `+claude-user@anthropic.com`. The fake from Google Cloud wrote `+claudebot@anthropic.com`.
+
+The week of 17–23 October, from sampled firewall events:
+
+| What the rule stopped | Requests |
+|---|---|
+| All matches | 1,042 |
+| Fake bots from Google Cloud, after `/.env`, `/.env.local`, `/.gitlab-ci.yml` | 911 |
+| The real Claude-User, all before the fix | 10 |
+
+After the fix, Claude-User from those addresses got 200 responses.
 
 ## What did not work
 
