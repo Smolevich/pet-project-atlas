@@ -3,12 +3,14 @@ title: Что измеряет платный трекер позиций
 sidebar:
   order: 2
 description: Панель Semrush на проекте без трафика, тот же запрос, вынутый из Search Console, и сколько на самом деле стоят шесть показов.
-updated: 2026-08-12
+updated: 2026-10-09
 sources:
   - Semrush Domain Overview, project telegram-voice-bot, measured 2026-08-11
   - Google Search, instance google.com/search?gl=ru&hl=ru, measured 2026-08-11
   - Search Console API, property telegram-voice-bot, measured 2026-08-12
   - Yandex Wordstat, instance wordstat.yandex.ru, measured 2026-08-12
+  - Semrush Domain Overview via Apify actor pro100chok/semrush-scraper, project telegram-voice-bot, measured 2026-10-09
+  - Search Console API, property telegram-voice-bot, measured 2026-10-09
 ---
 
 import { Image } from 'astro:assets';
@@ -219,6 +221,7 @@ curl -sS -X POST \
 - **Назвать сравнением позиций оценку за один день и среднее за девяносто дней по property**. Панель и property собирают число по-разному, и разрыв между ними получается ровно тогда, когда оба прибора исправны. А я опубликовал этот разрыв как находку про панель.
 - **Прочитать один показ как утверждение про спрос**. `stt модели` вернулся с позицией 1.0, и я написал, что фразу никто не набирает. Search Console считает, сколько раз показали меня, — это факт обо мне. Вордстат считает сам запрос, там 56 в месяц: тот же вывод, но на приборе, который его выдерживает.
 - **Ждать, что приличная позиция сама даст клики**. Позиция 20.5, 24 показа, 0 кликов. Я потратил вечер на поиски починки через title и сниппет, которой на второй странице не существует.
+- **Смотреть на растущий сайт через панель**. 9 октября Semrush дал поддомену бота 0 трафика и 0 ключей, а Search Console с 29 сентября показывала рост показов с 28 до 121+ в день, позиции 9–14. Ссылки и Authority Score совпали с корневым доменом до цифры. Рост молодого сайта смотрите в Search Console.
 
 ## Проверить
 
