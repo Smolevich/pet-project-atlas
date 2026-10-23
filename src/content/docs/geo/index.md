@@ -7,7 +7,7 @@ description: People ask an assistant for a tool like yours and get a competitor.
 
 Someone describes your problem to an assistant and gets a shortlist without you on it. A search page has ten slots and a scroll below them, so a weak position can still be found. An assistant's answer has room for a few sources, and outside them you are absent.
 
-Four pages, in this order.
+Five pages, in this order.
 
 [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/) is about access. Which agents exist, who owns them, where a block actually lives — it is often not in `robots.txt` at all — and what belongs in `llms.txt`.
 
@@ -16,5 +16,7 @@ Four pages, in this order.
 [Who actually crawls you](/geo/who-actually-crawls-you/) is my own logs. Which agents came, what they fetched, and how rarely anybody asked for `llms.txt`. I read my own log first, and only after that did I believe what other people write about access and about getting quoted.
 
 [Real crawler or fake one](/geo/real-or-fake-crawlers/) checks the names in that log: Cloudflare confirms a crawler by the address it came from, and the page shows how to read that mark on the free plan and block everyone else with one rule.
+
+[GEO claims that held up](/geo/fact-checked-claims/) is the reading list. I checked every claim in a GEO playbook against its primary source, and the page keeps only the ones that held, each with its link.
 
 Start with access. If you never let a crawler in, it will not see the page, and then it does not matter how well the page is written.
