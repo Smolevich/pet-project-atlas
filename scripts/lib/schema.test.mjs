@@ -18,12 +18,17 @@ const typed = (graph, type) => graph['@graph'].find((node) => node['@type'] === 
 
 test('профили автора — только настоящие адреса, без выдуманных сетей', () => {
   assert.deepEqual(AUTHOR.sameAs, [
-    'https://github.com/Smolevich',
     'https://www.linkedin.com/in/stanislav-shupilkin-59482bb4/',
+    'https://github.com/Smolevich',
+    'https://smolevich.com',
     'https://t.me/naturalists_notes_st',
     'https://getmentor.dev/mentor/stanislav-shupilkin-5321',
     'https://skills.sh/smolevich',
   ]);
+});
+
+test('автор привязан к студии LaVioLab по её @id', () => {
+  assert.deepEqual(personNode(SITE).affiliation, { '@id': 'https://laviolab.com/#organization' });
 });
 
 test('автор — один узел на весь сайт, ссылаться на него можно по @id', () => {

@@ -20,9 +20,14 @@ const CONTEXT = 'https://schema.org';
 export const AUTHOR = {
   name: 'Stanislav Shupilkin',
   url: 'https://smolevich.com',
+  // Узел laviolab.com/#stanislav в sameAs не кладём: там только адреса профилей,
+  // а свойства «тот же человек, что узел X» у schema.org нет. Связь идёт через
+  // студию, которую он основал, — она и указывает на #stanislav как на основателя.
+  affiliation: { '@id': 'https://laviolab.com/#organization' },
   sameAs: [
-    'https://github.com/Smolevich',
     'https://www.linkedin.com/in/stanislav-shupilkin-59482bb4/',
+    'https://github.com/Smolevich',
+    'https://smolevich.com',
     'https://t.me/naturalists_notes_st',
     'https://getmentor.dev/mentor/stanislav-shupilkin-5321',
     'https://skills.sh/smolevich',
