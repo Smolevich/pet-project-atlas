@@ -1,0 +1,64 @@
+---
+// Не страница атласа, а юридическая справка к плагину: каталог Claude просит
+// ссылку на неё. Лежит вне src/content/docs, чтобы не попасть в маршрут и под
+// линтер голоса с его четырьмя обязательными блоками.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Privacy',
+    description: 'LaVioLab Atlas, the Claude Code plugin, collects no data. What it runs and where it connects.',
+  }}
+>
+  <p>
+    <strong>LaVioLab Atlas collects no data.</strong> The plugin has no server, no telemetry and no
+    analytics. Nothing you run through it is sent to LaVioLab or to the author, Stanislav Shupilkin.
+  </p>
+
+  <h2 id="what-the-plugin-is">What the plugin is</h2>
+  <p>
+    LaVioLab Atlas (<code>laviolab-atlas</code>) is a set of instructions for Claude Code: three skills,
+    <code>start</code>, <code>content-plan</code> and <code>report</code>. It ships no scripts, binaries,
+    MCP servers or hooks. It runs on your machine, inside your own Claude Code session, and only when you
+    call one of its commands.
+  </p>
+
+  <h2 id="where-it-connects">Where it connects</h2>
+  <ul>
+    <li>
+      <strong>The sites you ask it to check.</strong> <code>start</code> and <code>content-plan</code>
+      fetch the public pages you name.
+    </li>
+    <li>
+      <strong>Google, only if you choose the API route of <code>report</code>.</strong> It reads an
+      access token from your own local <code>gcloud</code> login and sends it only to
+      <code>searchconsole.googleapis.com</code> and, if you use GA4,
+      <code>analyticsdata.googleapis.com</code>. The token is not stored and not sent anywhere else. The
+      other route uses a browser you have already connected and are logged into.
+    </li>
+  </ul>
+  <p>
+    <code>start</code> never installs anything. When the third-party audits it relies on are missing, it
+    prints the install commands and leaves the decision to you.
+  </p>
+
+  <h2 id="what-anthropic-sees">What Claude and Anthropic see</h2>
+  <p>
+    The plugin runs inside Claude Code, so what you type and what the commands read passes through your
+    Claude session under Anthropic's own terms and privacy policy. The plugin adds no destination of its
+    own on top of that.
+  </p>
+
+  <h2 id="this-site">This site</h2>
+  <p>
+    atlas.smolevich.com is a static site. It sets no cookies of its own and has no accounts or forms.
+  </p>
+
+  <h2 id="contact">Contact</h2>
+  <p>
+    Questions: <a href="https://github.com/Smolevich/pet-project-atlas/issues">open an issue</a> in the
+    repository. Source code: <a href="https://github.com/Smolevich/pet-project-atlas">github.com/Smolevich/pet-project-atlas</a>.
+  </p>
+  <p>Last updated 30 October 2026.</p>
+</StarlightPage>

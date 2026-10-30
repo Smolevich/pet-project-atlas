@@ -1,22 +1,23 @@
 # The plugin
 
-`plugin/` ships four commands to a reader's Claude Code:
-`/atlas:start`, `/atlas:content-plan`, `/atlas:report`, `/atlas:voice`.
+`plugin/` is **LaVioLab Atlas** (`laviolab-atlas`) and ships three commands to a reader's Claude Code:
+`/laviolab-atlas:start`, `/laviolab-atlas:content-plan`, `/laviolab-atlas:report`.
+
+`/voice` is not in the plugin. It only works inside this repository, so it is a project
+skill in `.claude/skills/voice/` and anyone who clones the repo gets it as `/voice`.
 
 They install as a plugin marketplace:
 
 ```text
-/plugin marketplace add Smolevich/pet-project-atlas
-/plugin install atlas
+/plugin install laviolab-atlas --marketplace Smolevich/pet-project-atlas
 ```
 
 ## The rule the skills exist under
 
 **No audit engine of our own.** `seo-audit` and the `geo-*` skills are written and
 maintained by other people; a second copy here would be a worse copy nobody maintains.
-`/atlas:start` calls them and orders their findings along the route. The other three do
-work no audit covers: a content plan, a weekly slice of numbers, a draft read against
-`STYLE.md`.
+`/laviolab-atlas:start` calls them and orders their findings along the route. The other two do
+work no audit covers: a content plan and a weekly slice of numbers.
 
 A skill never restates a page's argument. It runs something and links back to the page
 that explains why it matters.
@@ -44,12 +45,12 @@ class of breakage arrives — quietly, between two of your commits.
 
 ## Behaviour
 
-Structure is tested; behaviour is not, and the two fail differently. Four cases sit under
-`evals/`, each one written from a failure that already happened: `/atlas:start` inventing its own
-checks when the audits are missing, ordering findings by score instead of by rung, `/atlas:report`
-demanding a Cloud project when a logged-in browser was right there, and `/atlas:voice` tightening
-a paragraph into a run of nine-word sentences.
+Structure is tested; behaviour is not, and the two fail differently. Three cases sit under
+`plugin/evals/`, each one written from a failure that already happened: `/laviolab-atlas:start`
+inventing its own checks when the audits are missing, ordering findings by score instead of by
+rung, and `/laviolab-atlas:report` demanding a Cloud project when a logged-in browser was right
+there.
 
 They need `claude plugin eval`, which is early access and rolled out per organization. Where the
-rollout has not arrived, `CLAUDE_CODE_WALNUT_SPIRE=1` turns it on; run it from the repository
-root. See [evals/README.md](../evals/README.md).
+rollout has not arrived, `CLAUDE_CODE_WALNUT_SPIRE=1` turns it on. See
+[plugin/evals/README.md](../plugin/evals/README.md).

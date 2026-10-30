@@ -1,15 +1,15 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "pet-project-atlas",
-  "description": "Commands from the Pet Project Atlas: routing, content planning, weekly reporting and voice.",
+  "description": "LaVioLab Atlas: route a side project through search, AI search, content and analytics.",
   "owner": {
-    "name": "Smolevich"
+    "name": "Stanislav Shupilkin / LaVioLab"
   },
   "plugins": [
     {
-      "name": "atlas",
+      "name": "laviolab-atlas",
       "source": "./plugin",
-      "description": "Pet Project Atlas commands."
+      "description": "LaVioLab Atlas commands: start, content-plan, report."
     }
   ]
 }

@@ -7,3 +7,6 @@ dist/
 
 # Рабочие доки: спека и план живут вне репо, см. ~/pet-projects/pet-project-atlas-notes/
 docs/superpowers/
+
+# Прогоны claude plugin eval: дорогие, локальные, в репо не нужны.
+plugin/evals/results/

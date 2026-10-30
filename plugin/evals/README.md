@@ -19,14 +19,17 @@ claude plugin eval ./plugin --case start-stops-without-audits
 and that includes CI runners — it is enabled with an environment variable:
 
 ```bash
-CLAUDE_CODE_WALNUT_SPIRE=1 claude plugin eval .
+CLAUDE_CODE_WALNUT_SPIRE=1 claude plugin eval ./plugin --allow-tools Bash
 ```
 
 Set it in the shell, or in `~/.claude/settings.json` under `env`. Not in this repository's
 `.claude/settings.json`: a committed value normally leaves the command gated off anyway.
 
-Run from the repository root, not from `plugin/` — cases are discovered under the target you
-name, and they live here.
+Name `./plugin` as the target, not the repository root. Pointed at the root, the command resolves
+no plugin and silently runs every case against bare Claude Code, so every score is the baseline.
+The cases live inside the plugin folder for the same reason: `--eval-dir` refuses a path outside
+the plugin. `--allow-tools Bash` is the grant `start-stops-without-audits` needs to show that the
+skill does not install anything on its own.
 
 **Not in CI.** Every run costs model time and hits the network, so this stays a deliberate
 command.

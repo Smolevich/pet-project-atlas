@@ -42,13 +42,12 @@ Three more sections hold them together. **Start here** is the route from zero to
 The repo also ships a thin Claude Code plugin, so the atlas answers from inside your editor:
 
 ```
-/plugin marketplace add Smolevich/pet-project-atlas
-/plugin install atlas
+/plugin install laviolab-atlas --marketplace Smolevich/pet-project-atlas
 ```
 
-That gives you four commands. `/atlas:start` walks a live URL through the route and calls the audit skills at the right points. `/atlas:content-plan` turns a project description and a query export into clusters. `/atlas:report` cuts a weekly slice of Search Console and Analytics. `/atlas:voice` brings a draft in line with `STYLE.md` before the linter sees it.
+That gives you three commands. `/laviolab-atlas:start` walks a live URL through the route and calls the audit skills at the right points. `/laviolab-atlas:content-plan` turns a project description and a query export into clusters. `/laviolab-atlas:report` cuts a weekly slice of Search Console and Analytics. A fourth skill, `/voice`, brings a draft in line with `STYLE.md` before the linter sees it; it lives in [`.claude/skills/`](.claude/skills/) and works only inside this repository.
 
-The skills live in [`plugin/`](plugin/). [Tools](https://atlas.smolevich.com/tools/skills/) says which one to run for which symptom.
+The plugin is **LaVioLab Atlas** and lives in [`plugin/`](plugin/), with its own [README](plugin/README.md) and [privacy note](https://atlas.smolevich.com/privacy/). [Tools](https://atlas.smolevich.com/tools/skills/) says which one to run for which symptom.
 
 ## Run the site locally
 

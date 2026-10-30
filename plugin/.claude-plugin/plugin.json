@@ -1,13 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "atlas",
-  "description": "Route a pet project through search, AI search, content, distribution and analytics.",
-  "version": "0.1.0",
+  "name": "laviolab-atlas",
+  "displayName": "LaVioLab Atlas",
+  "description": "Get a side project found: run existing SEO and AI-search audits and order them into one plan, plan content by query clusters, and pull a weekly Search Console slice. By LaVioLab.",
+  "version": "0.2.0",
   "author": {
-    "name": "Smolevich"
+    "name": "Stanislav Shupilkin / LaVioLab",
+    "url": "https://atlas.smolevich.com"
   },
   "homepage": "https://atlas.smolevich.com",
   "repository": "https://github.com/Smolevich/pet-project-atlas",
   "license": "MIT",
-  "keywords": ["seo", "geo", "indexing", "analytics", "content"]
+  "keywords": ["seo", "geo", "ai-search", "indexing", "search-console", "content-plan", "analytics"]
 }
