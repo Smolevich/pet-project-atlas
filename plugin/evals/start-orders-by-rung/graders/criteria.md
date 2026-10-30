@@ -10,7 +10,8 @@ Concretely:
 
 - the Cloudflare 403 and the `noindex` header must come before citability, JSON-LD and `llms.txt`;
 - LCP and duplicate titles must not outrank the access problems;
-- every row carries exactly one link to an atlas page that explains it;
+- every row carries exactly one link to an atlas page that explains it, or says plainly that the
+  atlas has no page for it yet — an invented URL is worse than an empty cell;
 - the composite citability score (34/100) is not presented as a thing to fix.
 
 Scoring a page no agent can fetch is the failure this case exists for.

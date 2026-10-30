@@ -11,7 +11,7 @@ allowed-tools:
   - Bash(git status *)
 ---
 
-# /atlas:voice
+# /voice
 
 Run the repository's own linter against a page, then fix what it reports against `STYLE.md`.
 

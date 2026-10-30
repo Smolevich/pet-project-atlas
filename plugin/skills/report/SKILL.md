@@ -12,7 +12,7 @@ allowed-tools:
   - Bash(date *)
 ---
 
-# /atlas:report
+# /laviolab-atlas:report
 
 Collects the six numbers defined on <https://atlas.smolevich.com/analytics/what-to-measure/>, compares
 them with the previous period, and ends with three conclusions and one action.
@@ -206,7 +206,7 @@ Common readings:
 
 - Impressions up, clicks flat, position decent → title and snippet, not the body.
 - Impressions flat, queries flat → nothing new was found; that is a content plan problem, so run
-  `/atlas:content-plan`.
+  `/laviolab-atlas:content-plan`.
 - Index share falling → go to <https://atlas.smolevich.com/indexing/submit-and-verify/>.
 - Signups up, activation flat → the first screen, not the traffic.
 

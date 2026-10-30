@@ -9,7 +9,7 @@ allowed-tools:
   - WebFetch
 ---
 
-# /atlas:start
+# /laviolab-atlas:start
 
 **This skill runs no checks of its own.** It calls audit skills that already exist and orders their
 output against the atlas route. Every finding below comes from `seo-audit` or `geo-audit`. If you find
@@ -39,12 +39,22 @@ the current project unless it was told `-g`. A skill missing from the home direc
 installed.
 
 If either is missing everywhere, **say so and stop**. Do not substitute your own checks — a hand-rolled
-audit is a worse audit that looks like a real one. Print the install lines and point at the tools page:
+audit is a worse audit that looks like a real one. **Do not install them yourself either**, not even when
+a tool would let you: they are third-party code, and putting it on the user's machine is the user's
+decision. Print the install lines for the user to run, say who maintains each package, and point at the
+tools page:
 
 ```bash
 npx skills add -g coreyhaines31/marketingskills
 npx skills add -g zubair-trabzada/geo-seo-claude
 ```
+
+`seo-audit` comes from `coreyhaines31/marketingskills`, `geo-audit` from `zubair-trabzada/geo-seo-claude`.
+Neither is part of this plugin. Once the user has installed them, they run this command again.
+
+That is the whole answer when an audit is missing. End it there: no questions about the site, no
+"meanwhile" tip, no list, no route. The closing line about tagging links in section 6 belongs to a
+finished run, not to this one.
 
 What each tool is and where it comes from: <https://atlas.smolevich.com/tools/skills/>.
 
@@ -65,8 +75,11 @@ nothing to do. Keep the individual findings.
 
 Order by this rule, top down. The first rung that is broken outranks everything below it:
 
-1. **Fetchable** — the page returns body text to a plain client.
-2. **Allowed** — `robots.txt`, `noindex`, `X-Robots-Tag`, edge rules.
+1. **Fetchable** — the page returns body text to a plain client. Any crawler, search or AI, that gets
+   a 4xx, a 5xx, a challenge page or an empty body is on this rung, whatever produced it: a CDN or
+   WAF rule answering 403 to `ChatGPT-User` is a fetch failure, not a directive.
+2. **Allowed** — the page is fetched but tells the crawler to stay out: `robots.txt`, `noindex`,
+   `X-Robots-Tag`.
 3. **Indexed** — submitted, discovered, in the index.
 4. **Findable** — the pages answer phrases people actually type.
 5. **Quotable** — an assistant can lift a passage and attribute it.
@@ -96,7 +109,8 @@ Each row gets exactly one atlas link. Route by symptom:
 | It works and costs more than it earns | [What one user costs](https://atlas.smolevich.com/money/unit-economics/) |
 
 A finding with no page in this table still goes in the list, marked as having no atlas page yet. Do not
-invent a URL to fill the column.
+invent a URL to fill the column. It keeps its rung: a slow page is still **Findable** and sits above every
+**Quotable** row, not at the bottom because the link column is empty.
 
 Output one markdown table: rank, finding, the audit line it came from, the page.
 

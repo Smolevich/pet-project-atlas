@@ -78,6 +78,46 @@ test('атлас не обещает команду, которой нет в п
   }
 });
 
+test('после переименования плагина атлас не обещает команду под старым именем', async () => {
+  // Тест выше ищет только по текущему префиксу, поэтому `/atlas:start` после
+  // переименования в laviolab-atlas проходил его молча.
+  const manifest = await json(path.join(PLUGIN_DIR, '.claude-plugin/plugin.json'));
+  const skills = (await skillNames()).join('|');
+  const files = [...(await walkDocs()), path.join(ROOT, 'README.md'), path.join(PLUGIN_DIR, 'README.md')];
+
+  for (const file of files) {
+    const text = await readFile(file, 'utf8');
+    for (const [match, prefix] of text.matchAll(new RegExp(`/([a-z-]+):(?:${skills})\\b`, 'g'))) {
+      assert.equal(prefix, manifest.name, `${path.relative(ROOT, file)}: «${match}» — плагин называется ${manifest.name}`);
+    }
+  }
+});
+
+test('строка установки ставит плагин под его настоящим именем', async () => {
+  const manifest = await json(path.join(PLUGIN_DIR, '.claude-plugin/plugin.json'));
+  const files = [...(await walkDocs()), path.join(ROOT, 'README.md'), path.join(PLUGIN_DIR, 'README.md')];
+
+  for (const file of files) {
+    const text = await readFile(file, 'utf8');
+    for (const [line, name] of text.matchAll(/^\/plugin install ([a-z0-9-]+).*$/gm)) {
+      assert.equal(name, manifest.name, `${path.relative(ROOT, file)}: «${line}» ставит не тот плагин`);
+    }
+  }
+});
+
+test('скилл, который работает только в этом репозитории, в плагин не входит', async () => {
+  // /voice читает STYLE.md и линтер этого репо: у читателя плагина их нет.
+  assert.ok(!(await skillNames()).includes('voice'));
+});
+
+test('в папке плагина есть всё, без чего каталог не примет его', async () => {
+  const readme = await readFile(path.join(PLUGIN_DIR, 'README.md'), 'utf8');
+  const words = readme.replace(/```[\s\S]*?```/g, '').split(/\s+/).filter(Boolean);
+  assert.ok(words.length >= 40, 'README короче 40 слов вне блоков кода — каталог блокирует подачу');
+  await readFile(path.join(PLUGIN_DIR, 'LICENSE'), 'utf8');
+  await readFile(path.join(PLUGIN_DIR, '.claude-plugin/icon.png'));
+});
+
 test('страница инструментов ставит скиллы глобально', async () => {
   // Установщик по умолчанию кладёт скилл в текущий проект: без -g читатель
   // ставит его в одну папку, а запускает из другой.

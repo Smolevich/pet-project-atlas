@@ -10,7 +10,7 @@ allowed-tools:
   - WebFetch
 ---
 
-# /atlas:content-plan
+# /laviolab-atlas:content-plan
 
 Implements the method on <https://atlas.smolevich.com/content/keyword-clusters/>. Read that page if you
 need the reasoning. This file is the procedure.
