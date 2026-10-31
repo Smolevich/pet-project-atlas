@@ -96,3 +96,7 @@ test('сборка воспроизводима: тот же исходник �
     await rm(again, { recursive: true, force: true });
   }
 });
+
+test('страны заданы явно: без поля портал оставляет прошлый выбор, пустой список — все страны', () => {
+  assert.deepEqual(built.manifest.extensions['com.openai'].publication.countries, []);
+});

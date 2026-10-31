@@ -82,3 +82,23 @@ never asks for a token — the OpenAI plugin guidelines forbid collecting creden
 
 **Renaming a heading in `SKILL.md` breaks the build** when an override points at it. That is on
 purpose: otherwise ChatGPT would quietly keep the old text. Fix the override in the same change.
+
+## The Codex marketplace
+
+Codex installs the plugin straight from this repository:
+
+```text
+codex plugin marketplace add Smolevich/pet-project-atlas
+codex plugin add laviolab-atlas@pet-project-atlas
+```
+
+Codex reads `.agents/plugins/marketplace.json`, which points at `plugin/`, and the portable manifest
+`plugin/plugin.json`. Codex runs locally, so it gets the Claude Code skills unchanged, not the
+ChatGPT overrides. The manifest is generated from the same two sources as the ZIP:
+
+```bash
+npm run build:codex     # → plugin/plugin.json
+```
+
+`npm test` fails when it has drifted. The icon sits in `plugin/assets/`, where the portable format
+expects listing assets, and both the manifest and the ZIP point at it.

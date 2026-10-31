@@ -1,0 +1,20 @@
+{
+  "name": "pet-project-atlas",
+  "interface": {
+    "displayName": "LaVioLab Atlas"
+  },
+  "plugins": [
+    {
+      "name": "laviolab-atlas",
+      "source": {
+        "source": "local",
+        "path": "./plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Data & Analytics"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # LaVioLab Atlas
 
-![LaVioLab Atlas](.claude-plugin/icon.png)
+![LaVioLab Atlas](assets/icon.png)
 
 LaVioLab Atlas helps you get a side project found. It routes a live site through search, AI search,
 content and analytics, and every result links to the page of the [Pet Project Atlas](https://atlas.smolevich.com)
@@ -11,6 +11,13 @@ under the MIT licence.
 
 ```text
 /plugin install laviolab-atlas --marketplace Smolevich/pet-project-atlas
+```
+
+In Codex:
+
+```text
+codex plugin marketplace add Smolevich/pet-project-atlas
+codex plugin add laviolab-atlas@pet-project-atlas
 ```
 
 ## Commands

@@ -68,7 +68,7 @@ export async function buildChatgptPlugin(outDir = DEFAULT_OUT) {
 
   await writeFile(path.join(root, 'plugin.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   await copyFile(path.join(PLUGIN, 'LICENSE'), path.join(root, 'LICENSE'));
-  await copyFile(path.join(PLUGIN, '.claude-plugin/icon.png'), path.join(root, 'assets/icon.png'));
+  await copyFile(path.join(PLUGIN, 'assets/icon.png'), path.join(root, 'assets/icon.png'));
 
   const skills = (await readdir(path.join(PLUGIN, 'skills'), { withFileTypes: true }))
     .filter((e) => e.isDirectory())

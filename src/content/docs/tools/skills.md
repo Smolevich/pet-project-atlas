@@ -95,12 +95,23 @@ Search Console and Analytics are not in it. The failure below is me finding that
 
 ### How the three /laviolab-atlas: commands get installed
 
+The plugin is LaVioLab Atlas, published by Stanislav Shupilkin at LaVioLab, free and open source under the MIT licence. It holds three skills and nothing else: no server, no scripts, no account to connect.
+
 Two lines in Claude Code — add this repository as a marketplace, then install the plugin:
 
 ```text
 /plugin marketplace add Smolevich/pet-project-atlas
 /plugin install laviolab-atlas@pet-project-atlas
 ```
+
+In Codex the same three skills install from the same repository, from a terminal:
+
+```text
+codex plugin marketplace add Smolevich/pet-project-atlas
+codex plugin add laviolab-atlas@pet-project-atlas
+```
+
+Codex has no `/laviolab-atlas:` prefix. It picks a skill by its description, so ask in plain words: where do I start with SEO, make me a content plan, what moved this week.
 
 The auditing stays with the third-party skills above, and that is deliberate. `/laviolab-atlas:start` checks nothing itself: it decides which third-party skill to run and in what order to read what they return.
 
