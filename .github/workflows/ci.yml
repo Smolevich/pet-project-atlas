@@ -37,6 +37,13 @@ jobs:
       - run: npm run build
       # Ссылки проверяются по собранному сайту, поэтому только после build.
       - run: npm run check:links
+      # ZIP для портала OpenAI собирается здесь же: качать его отсюда, не с ноутбука.
+      - run: npm run build:chatgpt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: laviolab-atlas-chatgpt
+          path: dist-chatgpt/*.zip
+          if-no-files-found: error
       # Конфиг уезжает на сервер как есть: синтаксическую ошибку ловим до мержа.
       - name: nginx -t
         run: |

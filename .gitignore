@@ -10,3 +10,6 @@ docs/superpowers/
 
 # Прогоны claude plugin eval: дорогие, локальные, в репо не нужны.
 plugin/evals/results/
+
+# ZIP плагина для ChatGPT собирается из plugin/ и chatgpt/, в репо не хранится.
+dist-chatgpt/

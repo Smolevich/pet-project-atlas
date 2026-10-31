@@ -1,0 +1,35 @@
+{
+  "interface": {
+    "displayName": "LaVioLab Atlas",
+    "shortDescription": "Get a side project found",
+    "longDescription": "LaVioLab Atlas helps the author of a small product or side project get it found in search and in AI answers. It has three skills.\n\nstart takes the reports of two open-source audits, seo-audit and geo-audit, merges them into one list ordered by what blocks what (fetchable, allowed, indexed, findable, quotable, attributed), links each item to the page of the Pet Project Atlas that explains it, and names three things to do this week. It runs no checks of its own: without both reports it says how to get them and stops.\n\ncontent-plan turns a description of the product and an optional Search Console query export into query clusters, one page per cluster, and a writing queue ordered by intent and money. It never invents search volumes.\n\nreport reads Search Console Performance and Page indexing exports plus your own product export, and returns six numbers with the delta against the previous period, three conclusions and one action.\n\nLimitations: it does not connect to Google or to any account. Every number comes from a file you upload. It does not write pages for you. Made by Stanislav Shupilkin at LaVioLab; free and open source under the MIT licence.",
+    "developerName": "Stanislav Shupilkin",
+    "category": "Data & Analytics",
+    "capabilities": [
+      "Merge SEO and AI-search audit reports into one ordered plan",
+      "Build a content plan from query clusters",
+      "Weekly Search Console report from exports"
+    ],
+    "websiteURL": "https://atlas.smolevich.com",
+    "supportURL": "https://github.com/Smolevich/pet-project-atlas/issues",
+    "privacyPolicyURL": "https://atlas.smolevich.com/privacy/",
+    "defaultPrompt": [
+      "Here are my seo-audit and geo-audit reports for my site. What do I fix first?",
+      "Make a content plan from my product description and this Search Console export.",
+      "Here is my Search Console export with a comparison. What moved this week?"
+    ],
+    "brandColor": "#2f6f4f",
+    "brandColorDark": "#a7d7bd",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  },
+  "publication": {
+    "release_notes": "First ChatGPT release: start, content-plan and report. report works from uploaded Search Console exports.",
+    "translations": {
+      "ru-RU": {
+        "subtitle": "Чтобы проект находили",
+        "description": "LaVioLab Atlas помогает автору небольшого продукта или пет-проекта добиться, чтобы его находили в поиске и в ответах AI. Три скилла.\n\nstart берёт отчёты двух открытых аудитов, seo-audit и geo-audit, сводит их в один список по порядку блокировок (доступен, разрешён, проиндексирован, находится, цитируется, атрибутирован), к каждому пункту даёт страницу Pet Project Atlas с объяснением и называет три дела на неделю. Своих проверок не делает: без обоих отчётов говорит, как их получить, и останавливается.\n\ncontent-plan превращает описание продукта и выгрузку запросов из Search Console в кластеры, одну страницу на кластер и очередь текстов по интенту и деньгам. Объёмы поиска не выдумывает.\n\nreport читает выгрузки Search Console (Эффективность и Индексирование страниц) и выгрузку из вашего продукта и возвращает шесть чисел с дельтой к прошлому периоду, три вывода и одно действие.\n\nОграничения: к Google и к аккаунтам не подключается, каждое число берётся из загруженного вами файла. Страницы за вас не пишет. Автор — Станислав Шупилкин, LaVioLab; бесплатно, открытый код под MIT."
+      }
+    }
+  }
+}

@@ -54,3 +54,31 @@ there.
 They need `claude plugin eval`, which is early access and rolled out per organization. Where the
 rollout has not arrived, `CLAUDE_CODE_WALNUT_SPIRE=1` turns it on. See
 [plugin/evals/README.md](../plugin/evals/README.md).
+
+## The ChatGPT build
+
+ChatGPT gets the same three skills as a ZIP for the OpenAI plugin portal (**Skills only**). It is
+built, never edited by hand:
+
+```bash
+npm run build:chatgpt   # → dist-chatgpt/laviolab-atlas-<version>.zip
+```
+
+CI builds it on every run and keeps it as the `laviolab-atlas-chatgpt` artifact.
+
+`plugin/` stays the only source. `chatgpt/` holds what differs:
+
+- `chatgpt/manifest.json` — the listing (`extensions.com.openai`): name on the card, subtitle,
+  description, category, starter prompts, the Russian translation. Name, version and description
+  come from `plugin/.claude-plugin/plugin.json`, so bump the version there.
+- `chatgpt/skills/<skill>/overrides.md` — sections of a `SKILL.md` that cannot work in ChatGPT,
+  each under `<!-- replace: ## Heading -->`. An empty block drops the section; `preamble` and
+  `description` stand for the text before the first H2 and the frontmatter description.
+
+What ChatGPT cannot do, and so what the overrides replace: list the user's home directory, run
+`gcloud`, reach a logged-in browser profile. `start` asks for the two audit reports instead of
+looking for installed audits; `report` reads Search Console exports instead of calling the API, and
+never asks for a token — the OpenAI plugin guidelines forbid collecting credentials.
+
+**Renaming a heading in `SKILL.md` breaks the build** when an override points at it. That is on
+purpose: otherwise ChatGPT would quietly keep the old text. Fix the override in the same change.
