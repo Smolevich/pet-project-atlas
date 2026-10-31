@@ -1,0 +1,75 @@
+---
+// Юридическая справка к плагину, пара к /privacy/: каталог OpenAI просит ссылку на
+// условия (termsOfServiceURL). Лежит вне src/content/docs по той же причине, что и
+// privacy: не страница атласа и не под линтером голоса.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Terms of use',
+    description: 'Terms of use for LaVioLab Atlas, a free and open-source plugin for Claude, ChatGPT and Codex.',
+  }}
+>
+  <p>
+    These terms cover LaVioLab Atlas (<code>laviolab-atlas</code>), the plugin, and this site. The author
+    is Stanislav Shupilkin (LaVioLab). By installing or using the plugin you accept these terms. If you
+    do not accept them, do not use it.
+  </p>
+
+  <h2 id="what-it-is">What it is</h2>
+  <p>
+    LaVioLab Atlas is a set of instructions, called skills, for Claude Code, ChatGPT and Codex:
+    <code>start</code>, <code>content-plan</code> and <code>report</code>. It has no server and no
+    account. It is free and its source code is open under the
+    <a href="https://github.com/Smolevich/pet-project-atlas/blob/main/plugin/LICENSE">MIT licence</a>.
+  </p>
+
+  <h2 id="as-is">Provided as is</h2>
+  <p>
+    The plugin is provided "as is", without warranty of any kind, express or implied, including
+    warranties of merchantability, fitness for a particular purpose and non-infringement. To the extent
+    the MIT licence allows, the author is not liable for any claim, damages or other liability arising
+    from the plugin or its use.
+  </p>
+
+  <h2 id="results">Results are recommendations</h2>
+  <p>
+    What the skills return are recommendations built from the reports and exports you give them. They
+    are not a promise of positions in search or in AI answers, of traffic or of revenue. Check a
+    recommendation before you act on it.
+  </p>
+
+  <h2 id="your-responsibility">Your data and your site</h2>
+  <ul>
+    <li>
+      You are responsible for the data and exports you upload or paste into a chat, and for having the
+      right to share them.
+    </li>
+    <li>You are responsible for the changes you make to your own site and for their consequences.</li>
+  </ul>
+  <p>
+    The plugin itself collects no data. See <a href="/privacy/">Privacy</a>.
+  </p>
+
+  <h2 id="third-party">Third-party services</h2>
+  <p>
+    The plugin runs inside services it does not control: ChatGPT (OpenAI), Claude and Claude Code
+    (Anthropic), Codex (OpenAI), and Google Search Console when you use its exports or API. Each one is
+    governed by its own terms and privacy policy.
+  </p>
+
+  <h2 id="changes">Changes</h2>
+  <p>
+    Changes to these terms are published on this page with a new date. Using the plugin after a change
+    means you accept the new version. The history is in the
+    <a href="https://github.com/Smolevich/pet-project-atlas/commits/main/src/pages/terms.astro">repository</a>.
+  </p>
+
+  <h2 id="contact">Contact</h2>
+  <p>
+    Questions: <a href="https://github.com/Smolevich/pet-project-atlas/issues">open an issue</a> in the
+    repository.
+  </p>
+  <p>Effective 31 October 2026.</p>
+</StarlightPage>

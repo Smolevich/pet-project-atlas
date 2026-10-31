@@ -100,3 +100,13 @@ test('сборка воспроизводима: тот же исходник �
 test('страны заданы явно: без поля портал оставляет прошлый выбор, пустой список — все страны', () => {
   assert.deepEqual(built.manifest.extensions['com.openai'].publication.countries, []);
 });
+
+test('листинг ссылается на privacy и terms, и обе страницы есть на сайте', async () => {
+  const ui = built.manifest.extensions['com.openai'].interface;
+  for (const key of ['privacyPolicyURL', 'termsOfServiceURL']) {
+    const url = new URL(ui[key]);
+    assert.equal(url.origin, 'https://atlas.smolevich.com', `${key}: не наш сайт`);
+    const page = path.join(ROOT, 'src/pages', `${url.pathname.replace(/^\/|\/$/g, '')}.astro`);
+    await assert.doesNotReject(readFile(page), `${key}: нет страницы ${path.relative(ROOT, page)}`);
+  }
+});

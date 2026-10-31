@@ -13,6 +13,7 @@
     "websiteURL": "https://atlas.smolevich.com/tools/skills/",
     "supportURL": "https://github.com/Smolevich/pet-project-atlas/issues",
     "privacyPolicyURL": "https://atlas.smolevich.com/privacy/",
+    "termsOfServiceURL": "https://atlas.smolevich.com/terms/",
     "defaultPrompt": [
       "Here are my seo-audit and geo-audit reports for my site. What do I fix first?",
       "Make a content plan from my product description and this Search Console export.",

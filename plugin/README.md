@@ -55,7 +55,8 @@ a command.
 LaVioLab Atlas collects nothing. It has no server, no telemetry and no analytics; nothing you run
 through it is sent to LaVioLab or to the author. The only network traffic is what is listed above: the
 sites you ask it to check, and Google's APIs when you choose the API route of `report`. Full note:
-<https://atlas.smolevich.com/privacy/>.
+<https://atlas.smolevich.com/privacy/>. Terms of use:
+<https://atlas.smolevich.com/terms/>.
 
 ## Support
 

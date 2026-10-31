@@ -10,6 +10,11 @@ export type FooterStrings = {
   didNotHelp: string;
   /** Заголовок этого issue: получает адрес страницы, которую читатель видел. */
   issueTitle: (page: string) => string;
+  /** Справка к плагину: каталоги Claude и OpenAI ждут её рядом с сайтом. */
+  privacy: string;
+  terms: string;
+  /** Адрес условий: у них есть русская версия, у privacy — нет. */
+  termsHref: string;
   /** Заголовок блока источников. */
   sources: string;
   /** Пометка у собственного замера: публичной ссылки у него нет. */
@@ -75,6 +80,9 @@ const EN: FooterStrings = {
   edit: 'Suggest an edit',
   didNotHelp: 'This did not help',
   issueTitle: (page) => `Did not help: ${page}`,
+  privacy: 'Privacy',
+  terms: 'Terms of use',
+  termsHref: '/terms/',
   sources: 'Sources',
   ownMeasurement: 'own measurement',
   figuresRead: 'Figures on this page were read on',
@@ -88,6 +96,9 @@ const RU: FooterStrings = {
   edit: 'Предложить правку',
   didNotHelp: 'Страница не помогла',
   issueTitle: (page) => `Страница не помогла: ${page}`,
+  privacy: 'Конфиденциальность',
+  terms: 'Условия использования',
+  termsHref: '/ru/terms/',
   sources: 'Источники',
   ownMeasurement: 'свой замер',
   figuresRead: 'Цифры на странице сняты',
