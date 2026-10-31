@@ -10,7 +10,7 @@
       "Build a content plan from query clusters",
       "Weekly Search Console report from exports"
     ],
-    "websiteURL": "https://atlas.smolevich.com",
+    "websiteURL": "https://atlas.smolevich.com/tools/skills/",
     "supportURL": "https://github.com/Smolevich/pet-project-atlas/issues",
     "privacyPolicyURL": "https://atlas.smolevich.com/privacy/",
     "defaultPrompt": [
@@ -23,8 +23,16 @@
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/icon.png"
   },
+  "review": {
+    "prompts": [
+      "Here are my seo-audit and geo-audit reports for my site. What do I fix first?",
+      "Make a content plan from my product description and this Search Console export.",
+      "Here is my Search Console export with a comparison. What moved this week?"
+    ]
+  },
   "publication": {
-    "release_notes": "First ChatGPT release: start, content-plan and report. report works from uploaded Search Console exports.",
+    "release_notes": "First ChatGPT release: start, content-plan and report. Report works from uploaded Search Console exports.",
+    "countries": [],
     "translations": {
       "ru-RU": {
         "subtitle": "Чтобы проект находили",

@@ -95,12 +95,23 @@ Search Console и Analytics в нём нет, и в блоке ниже я ка�
 
 ### Как подключаются три команды /laviolab-atlas:
 
+Плагин называется LaVioLab Atlas, его выпускает Станислав Шупилкин, LaVioLab, бесплатно и с открытым кодом под MIT. В нём три скилла и ничего больше: ни сервера, ни скриптов, ни аккаунта для подключения.
+
 Две строки в Claude Code — добавить этот репозиторий как marketplace, потом поставить плагин:
 
 ```text
 /plugin marketplace add Smolevich/pet-project-atlas
 /plugin install laviolab-atlas@pet-project-atlas
 ```
+
+В Codex те же три скилла ставятся из того же репозитория, командами в терминале:
+
+```text
+codex plugin marketplace add Smolevich/pet-project-atlas
+codex plugin add laviolab-atlas@pet-project-atlas
+```
+
+Префикса `/laviolab-atlas:` в Codex нет. Скилл он выбирает по описанию, поэтому просите обычными словами: с чего начать с SEO, составь контент-план, что сдвинулось за неделю.
 
 Сам аудит остаётся за сторонними скиллами выше, и это осознанно. `/laviolab-atlas:start` не проверяет ничего сам, он решает, какой чужой скилл запустить и в каком порядке читать то, что они вернули.
 

@@ -8,6 +8,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CODEX_MANIFEST, codexManifestText } from './build-codex-manifest.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const MARKETPLACE = path.join(ROOT, '.claude-plugin/marketplace.json');
@@ -115,7 +116,7 @@ test('в папке плагина есть всё, без чего катало
   const words = readme.replace(/```[\s\S]*?```/g, '').split(/\s+/).filter(Boolean);
   assert.ok(words.length >= 40, 'README короче 40 слов вне блоков кода — каталог блокирует подачу');
   await readFile(path.join(PLUGIN_DIR, 'LICENSE'), 'utf8');
-  await readFile(path.join(PLUGIN_DIR, '.claude-plugin/icon.png'));
+  await readFile(path.join(PLUGIN_DIR, 'assets/icon.png'));
 });
 
 test('страница инструментов ставит скиллы глобально', async () => {
@@ -152,4 +153,28 @@ test('ссылки скиллов на атлас ведут на существ
       assert.ok(slugs.has(slug), `${name}: ссылается на ${url}, такой страницы в атласе нет`);
     }
   }
+});
+
+test('Codex ставит плагин по маркетплейсу из .agents/plugins', async () => {
+  const market = await json(path.join(ROOT, '.agents/plugins/marketplace.json'));
+  const claude = await json(MARKETPLACE);
+  assert.equal(market.name, claude.name, 'имя маркетплейса стоит в команде установки: у Codex и Claude Code оно одно');
+  assert.equal(market.plugins.length, 1);
+  const [entry] = market.plugins;
+  assert.ok(entry.category, 'category у записи маркетплейса Codex обязательна');
+  const manifest = await json(path.join(ROOT, entry.source.path, 'plugin.json'));
+  assert.equal(manifest.name, entry.name, 'имя записи и манифеста задают plugin@marketplace');
+});
+
+test('манифест Codex собран из манифеста Claude и листинга ChatGPT, а не правлен руками', async () => {
+  assert.equal(
+    await readFile(CODEX_MANIFEST, 'utf8'),
+    await codexManifestText(),
+    'plugin/plugin.json разошёлся с источниками: npm run build:codex',
+  );
+});
+
+test('иконка, на которую ссылается манифест Codex, лежит в папке плагина', async () => {
+  const ui = (await json(CODEX_MANIFEST)).extensions['com.openai'].interface;
+  for (const icon of [ui.logo, ui.composerIcon]) await readFile(path.join(PLUGIN_DIR, icon));
 });

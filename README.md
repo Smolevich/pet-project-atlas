@@ -45,6 +45,13 @@ The repo also ships a thin Claude Code plugin, so the atlas answers from inside 
 /plugin install laviolab-atlas --marketplace Smolevich/pet-project-atlas
 ```
 
+In Codex, the same skills install from a terminal:
+
+```
+codex plugin marketplace add Smolevich/pet-project-atlas
+codex plugin add laviolab-atlas@pet-project-atlas
+```
+
 That gives you three commands. `/laviolab-atlas:start` walks a live URL through the route and calls the audit skills at the right points. `/laviolab-atlas:content-plan` turns a project description and a query export into clusters. `/laviolab-atlas:report` cuts a weekly slice of Search Console and Analytics. A fourth skill, `/voice`, brings a draft in line with `STYLE.md` before the linter sees it; it lives in [`.claude/skills/`](.claude/skills/) and works only inside this repository.
 
 The plugin is **LaVioLab Atlas** and lives in [`plugin/`](plugin/), with its own [README](plugin/README.md) and [privacy note](https://atlas.smolevich.com/privacy/). [Tools](https://atlas.smolevich.com/tools/skills/) says which one to run for which symptom.
