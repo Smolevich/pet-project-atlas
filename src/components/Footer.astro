@@ -27,6 +27,10 @@ const issueUrl =
   {editUrl && <a href={editUrl.href}>{t.edit}</a>}
   {editUrl && ' · '}
   <a href={issueUrl}>{t.didNotHelp}</a>
+  {' · '}
+  <a href="/privacy/">{t.privacy}</a>
+  {' · '}
+  <a href={t.termsHref}>{t.terms}</a>
 </p>
 
 <style>
