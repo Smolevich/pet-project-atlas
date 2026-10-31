@@ -12,7 +12,8 @@
     "check:links": "node scripts/check-links.mjs dist",
     "check:types": "astro check",
     "test": "node --test \"scripts/**/*.test.mjs\"",
-    "check:skills": "node scripts/check-skill-sources.mjs"
+    "check:skills": "node scripts/check-skill-sources.mjs",
+    "build:chatgpt": "node scripts/build-chatgpt-plugin.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

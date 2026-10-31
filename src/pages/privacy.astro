@@ -1,6 +1,6 @@
 ---
-// Не страница атласа, а юридическая справка к плагину: каталог Claude просит
-// ссылку на неё. Лежит вне src/content/docs, чтобы не попасть в маршрут и под
+// Не страница атласа, а юридическая справка к плагину: каталоги Claude и OpenAI
+// просят ссылку на неё. Лежит вне src/content/docs, чтобы не попасть в маршрут и под
 // линтер голоса с его четырьмя обязательными блоками.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
@@ -8,7 +8,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 <StarlightPage
   frontmatter={{
     title: 'Privacy',
-    description: 'LaVioLab Atlas, the Claude Code plugin, collects no data. What it runs and where it connects.',
+    description: 'LaVioLab Atlas, the plugin for Claude Code and ChatGPT, collects no data. What it runs and where it connects.',
   }}
 >
   <p>
@@ -50,6 +50,14 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
     own on top of that.
   </p>
 
+  <h2 id="in-chatgpt">In ChatGPT</h2>
+  <p>
+    The ChatGPT version has the same three skills and connects to nothing. <code>start</code> reads the
+    audit reports you paste or upload, <code>content-plan</code> reads the export you upload, and
+    <code>report</code> reads the Search Console and product exports you upload. It never asks for a
+    password, an API key or an access token. What you type and upload passes through your ChatGPT
+    session under OpenAI's own terms and privacy policy. The plugin adds no destination of its own.
+  </p>
   <h2 id="this-site">This site</h2>
   <p>
     atlas.smolevich.com is a static site. It sets no cookies of its own and has no accounts or forms.
@@ -60,5 +68,5 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
     Questions: <a href="https://github.com/Smolevich/pet-project-atlas/issues">open an issue</a> in the
     repository. Source code: <a href="https://github.com/Smolevich/pet-project-atlas">github.com/Smolevich/pet-project-atlas</a>.
   </p>
-  <p>Last updated 30 October 2026.</p>
+  <p>Last updated 31 October 2026.</p>
 </StarlightPage>
