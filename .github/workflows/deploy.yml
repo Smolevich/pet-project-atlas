@@ -64,6 +64,8 @@ jobs:
             dist
             dist-mcp
             nginx-atlas.conf
+          # Без этого артефакт молча теряет dist/.well-known.
+          include-hidden-files: true
           retention-days: 1
           if-no-files-found: error
 
@@ -93,7 +95,8 @@ jobs:
           username: ${{ secrets.VDS_USER }}
           key: ${{ secrets.VDS_SSH_KEY }}
           passphrase: ${{ secrets.VDS_SSH_PASSPHRASE }}
-          source: dist/**,dist-mcp/**,nginx-atlas.conf
+          # `**` пропускает каталоги с точкой: .well-known перечислен отдельно.
+          source: dist/**,dist/.well-known/**,dist-mcp/**,nginx-atlas.conf
           target: /tmp/deploy-atlas
           strip_components: 0
 
@@ -147,3 +150,4 @@ jobs:
             curl -fsS -H "Host: atlas.smolevich.com" http://127.0.0.1/ | grep -q "a route out of zero traffic"
             curl -fsS -H "Host: atlas.smolevich.com" -H "Content-Type: application/json" \
               -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' http://127.0.0.1/mcp | grep -q '"search_playbook"'
+            curl -fsS -o /dev/null -H "Host: atlas.smolevich.com" http://127.0.0.1/.well-known/openai-apps-challenge
