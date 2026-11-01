@@ -13,3 +13,6 @@ plugin/evals/results/
 
 # ZIP плагина для ChatGPT собирается из plugin/ и chatgpt/, в репо не хранится.
 dist-chatgpt/
+
+# Индекс и сервер MCP собираются из src/content/docs и mcp/, в репо не хранятся.
+dist-mcp/

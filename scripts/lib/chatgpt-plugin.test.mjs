@@ -80,8 +80,18 @@ test('упоминание Claude ловится, имя чужого репоз
 });
 
 const claude = { name: 'laviolab-atlas', version: '1.2.3', description: 'd', author: { name: 'a' } };
-const openai = (ui) => ({
-  interface: { displayName: 'LaVioLab Atlas', shortDescription: 'Get found', longDescription: 'x', developerName: 'S', ...ui },
+const URLS = {
+  websiteURL: 'https://example.com/',
+  supportURL: 'https://example.com/support',
+  privacyPolicyURL: 'https://example.com/privacy',
+  termsOfServiceURL: 'https://example.com/terms',
+};
+const positive = { description: 'd', prompt: 'p', tools_triggered: 'search_playbook', expected_behavior: 'e' };
+const negative = { description: 'd', prompt: 'p' };
+const REVIEW = { test_cases: { positive: Array(5).fill(positive), negative: Array(3).fill(negative) } };
+const openai = (ui, review = REVIEW) => ({
+  review,
+  interface: { displayName: 'LaVioLab Atlas', shortDescription: 'Get found', longDescription: 'x', developerName: 'S', ...URLS, ...ui },
 });
 
 test('имя и версия берутся из манифеста Claude, листинг — из ChatGPT', () => {
@@ -98,8 +108,29 @@ test('подзаголовок длиннее 30 символов не прой�
   assert.match(problems.join(), /shortDescription/);
 });
 
-test('скриншоты в skills-only ZIP запрещены', () => {
-  assert.match(listingProblems(buildManifest(claude, openai({ screenshots: ['./a.png'] }))).join(), /screenshots/);
+test('слово free в описании не пройдёт сканер портала', () => {
+  const problems = listingProblems(buildManifest(claude, openai({ longDescription: 'Free and open source.' })));
+  assert.match(problems.join(), /цене/);
+});
+
+test('«бесплатно» в русском переводе ловится так же', () => {
+  const manifest = buildManifest(claude, { ...openai({}), publication: { translations: { 'ru-RU': { description: 'Бесплатно, MIT.' } } } });
+  assert.match(listingProblems(manifest).join(), /цене/);
+});
+
+test('у MCP-плагина без terms подача не пройдёт', () => {
+  assert.match(listingProblems(buildManifest(claude, openai({ termsOfServiceURL: undefined }))).join(), /termsOfServiceURL/);
+});
+
+test('ревью MCP требует ровно пять позитивных и три негативных теста', () => {
+  const review = { test_cases: { positive: Array(4).fill(positive), negative: Array(3).fill(negative) } };
+  assert.match(listingProblems(buildManifest(claude, openai({}, review))).join(), /positive: 4/);
+});
+
+test('позитивный тест без ожидаемого поведения не пройдёт', () => {
+  const broken = { ...positive, expected_behavior: '' };
+  const review = { test_cases: { positive: [broken, ...Array(4).fill(positive)], negative: Array(3).fill(negative) } };
+  assert.match(listingProblems(buildManifest(claude, openai({}, review))).join(), /expected_behavior/);
 });
 
 test('больше трёх стартовых промптов не пройдёт подачу', () => {

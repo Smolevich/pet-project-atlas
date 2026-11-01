@@ -142,13 +142,39 @@ export function listingProblems(manifest) {
   if (prompts.length > 3) problems.push('defaultPrompt: больше трёх');
   for (const p of prompts) max(p, 128, `defaultPrompt «${p.slice(0, 20)}…»`);
   if (new Set(prompts).size !== prompts.length) problems.push('defaultPrompt: повторы');
-  if ('screenshots' in ui) problems.push('screenshots: в skills-only ZIP запрещены');
+  // С MCP-сервером все четыре ссылки обязательны.
   for (const key of ['websiteURL', 'supportURL', 'privacyPolicyURL', 'termsOfServiceURL']) {
-    if (key in ui && !/^https:\/\/[^\s@]+$/.test(ui[key])) problems.push(`${key}: не HTTPS`);
+    if (!/^https:\/\/[^\s@]+$/.test(ui[key] ?? '')) problems.push(`${key}: нет или не HTTPS`);
   }
-  for (const [lang, t] of Object.entries(manifest.extensions['com.openai'].publication?.translations ?? {})) {
+  const translations = Object.entries(manifest.extensions['com.openai'].publication?.translations ?? {});
+  for (const [lang, t] of translations) {
     if (t.subtitle) max(t.subtitle, 30, `translations.${lang}.subtitle`);
     if (t.description && t.description.length > 4000) problems.push(`translations.${lang}.description: длиннее 4000`);
+  }
+  const texts = [ui.shortDescription, ui.longDescription, ...(ui.capabilities ?? []), ...translations.flatMap(([, t]) => [t.subtitle, t.description])];
+  if (texts.some((text) => PRICE_WORDS.test(text ?? ''))) problems.push('листинг говорит о цене: сканер OpenAI это отмечает');
+  problems.push(...testCaseProblems(manifest.extensions['com.openai'].review));
+  return problems;
+}
+
+// Сканер портала отметил «free» в описании: о цене листинг не говорит вовсе.
+const PRICE_WORDS = /\bfree\b|бесплатн|\bpric(e|es|ing)\b|\$\s?\d|€\s?\d|\bцен[аыу]\b|стоимост/i;
+
+/** Ревью MCP-плагина: ровно пять позитивных и три негативных теста. */
+export function testCaseProblems(review) {
+  const cases = review?.test_cases ?? {};
+  const positive = cases.positive ?? [];
+  const negative = cases.negative ?? [];
+  const problems = [];
+  if (positive.length !== 5) problems.push(`test_cases.positive: ${positive.length}, нужно 5`);
+  if (negative.length !== 3) problems.push(`test_cases.negative: ${negative.length}, нужно 3`);
+  for (const [i, c] of positive.entries()) {
+    for (const key of ['description', 'prompt', 'tools_triggered', 'expected_behavior']) {
+      if (!c[key]) problems.push(`test_cases.positive[${i}].${key}: пусто`);
+    }
+  }
+  for (const [i, c] of negative.entries()) {
+    for (const key of ['description', 'prompt']) if (!c[key]) problems.push(`test_cases.negative[${i}].${key}: пусто`);
   }
   return problems;
 }

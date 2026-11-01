@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Собирает ZIP плагина для портала OpenAI (platform.openai.com/plugins → Skills only)
+ * Собирает ZIP плагина для портала OpenAI (platform.openai.com/plugins → With MCP)
  * из plugin/ и правок в chatgpt/. Руками ZIP не собирается: что в нём, решает
  * этот скрипт, а тесты проверяют результат.
  *
@@ -68,6 +68,8 @@ export async function buildChatgptPlugin(outDir = DEFAULT_OUT) {
 
   await writeFile(path.join(root, 'plugin.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   await copyFile(path.join(PLUGIN, 'LICENSE'), path.join(root, 'LICENSE'));
+  // Переносимый mcp.json (type streamable-http), а не .mcp.json Claude Code: у того другой type.
+  await copyFile(path.join(PLUGIN, 'mcp.json'), path.join(root, 'mcp.json'));
   await copyFile(path.join(PLUGIN, 'assets/icon.png'), path.join(root, 'assets/icon.png'));
 
   const skills = (await readdir(path.join(PLUGIN, 'skills'), { withFileTypes: true }))

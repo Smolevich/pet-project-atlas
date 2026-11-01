@@ -3,7 +3,7 @@
   "name": "laviolab-atlas",
   "displayName": "LaVioLab Atlas",
   "description": "Get a side project found: run existing SEO and AI-search audits and order them into one plan, plan content by query clusters, and read a weekly Search Console slice from exports. By LaVioLab.",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "author": {
     "name": "Stanislav Shupilkin / LaVioLab",
     "url": "https://atlas.smolevich.com"

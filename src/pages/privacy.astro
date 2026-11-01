@@ -8,27 +8,53 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 <StarlightPage
   frontmatter={{
     title: 'Privacy',
-    description: 'LaVioLab Atlas, the plugin for Claude Code and ChatGPT, collects no data. What it runs and where it connects.',
+    description: 'LaVioLab Atlas, the plugin for Claude Code and ChatGPT, collects no personal data. What it runs and where it connects.',
   }}
 >
   <p>
-    <strong>LaVioLab Atlas collects no data.</strong> The plugin has no server, no telemetry and no
-    analytics. Nothing you run through it is sent to LaVioLab or to the author, Stanislav Shupilkin.
+    <strong>LaVioLab Atlas collects no personal data.</strong> It has no telemetry, no analytics and no
+    accounts. The one thing that reaches the author's server is a call to its read-only search tools,
+    described below, and nothing from it is stored.
   </p>
 
   <h2 id="what-the-plugin-is">What the plugin is</h2>
   <p>
     LaVioLab Atlas (<code>laviolab-atlas</code>) is a set of instructions for Claude Code: three skills,
-    <code>start</code>, <code>content-plan</code> and <code>report</code>. It ships no scripts, binaries,
-    MCP servers or hooks. It runs on your machine, inside your own Claude Code session, and only when you
-    call one of its commands.
+    <code>start</code>, <code>content-plan</code> and <code>report</code>, plus one remote MCP server. It
+    ships no scripts, binaries or hooks. The skills run on your machine, inside your own Claude Code
+    session, and only when you call one of their commands.
   </p>
+
+  <h2 id="mcp-server">The MCP server</h2>
+  <p>
+    The server at <code>https://atlas.smolevich.com/mcp</code> has four read-only tools over the published
+    pages of this site: <code>search_playbook</code>, <code>get_page</code>, <code>list_sections</code> and
+    <code>checklist</code>. It needs no login and has no data about you.
+  </p>
+  <ul>
+    <li>
+      <strong>What it receives:</strong> the arguments of a tool call: the words of a search, a page
+      slug, a topic, a language. The assistant decides what goes into them; the server never asks for
+      your files, your chat or your site address.
+    </li>
+    <li>
+      <strong>What it keeps:</strong> nothing. The server answers from a fixed copy of the atlas and does
+      not write the arguments anywhere. The web server in front of it keeps a standard access log for 14
+      days: IP address, time, path and user agent, never the request body.
+    </li>
+    <li>
+      <strong>Who it shares with:</strong> nobody. There are no third-party services behind it.
+    </li>
+  </ul>
 
   <h2 id="where-it-connects">Where it connects</h2>
   <ul>
     <li>
       <strong>The sites you ask it to check.</strong> <code>start</code> and <code>content-plan</code>
       fetch the public pages you name.
+    </li>
+    <li>
+      <strong>The atlas MCP server</strong>, when the assistant calls one of its tools, as described above.
     </li>
     <li>
       <strong>Nowhere else.</strong> <code>report</code> connects to nothing: it reads the Search Console
@@ -44,17 +70,19 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
   <h2 id="what-anthropic-sees">What Claude and Anthropic see</h2>
   <p>
     The plugin runs inside Claude Code, so what you type and what the commands read passes through your
-    Claude session under Anthropic's own terms and privacy policy. The plugin adds no destination of its
-    own on top of that.
+    Claude session under Anthropic's own terms and privacy policy. Besides the MCP server above, the plugin adds no
+    destination of its own on top of that.
   </p>
 
   <h2 id="in-chatgpt">In ChatGPT</h2>
   <p>
-    The ChatGPT version has the same three skills and connects to nothing. <code>start</code> reads the
+    The ChatGPT version has the same three skills and the same MCP server, which is the only place it
+    connects to. <code>start</code> reads the
     audit reports you paste or upload, <code>content-plan</code> reads the export you upload, and
     <code>report</code> reads the Search Console and product exports you upload. It never asks for a
     password, an API key or an access token. What you type and upload passes through your ChatGPT
-    session under OpenAI's own terms and privacy policy. The plugin adds no destination of its own.
+    session under OpenAI's own terms and privacy policy. Besides the MCP server, the plugin adds no
+    destination of its own.
   </p>
   <h2 id="this-site">This site</h2>
   <p>
@@ -66,5 +94,5 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
     Questions: <a href="https://github.com/Smolevich/pet-project-atlas/issues">open an issue</a> in the
     repository. Source code: <a href="https://github.com/Smolevich/pet-project-atlas">github.com/Smolevich/pet-project-atlas</a>.
   </p>
-  <p>Last updated 31 October 2026.</p>
+  <p>Last updated 1 November 2026.</p>
 </StarlightPage>

@@ -57,7 +57,7 @@ rollout has not arrived, `CLAUDE_CODE_WALNUT_SPIRE=1` turns it on. See
 
 ## The ChatGPT build
 
-ChatGPT gets the same three skills as a ZIP for the OpenAI plugin portal (**Skills only**). It is
+ChatGPT gets the same three skills and the MCP server as a ZIP for the OpenAI plugin portal (**With MCP**). It is
 built, never edited by hand:
 
 ```bash
@@ -106,3 +106,29 @@ npm run build:codex     # → plugin/plugin.json
 
 `npm test` fails when it has drifted. The icon sits in `plugin/assets/`, where the portable format
 expects listing assets, and both the manifest and the ZIP point at it.
+
+## The MCP server
+
+`mcp/` is a read-only MCP server at `https://atlas.smolevich.com/mcp` that both plugins connect to:
+`plugin/.mcp.json` for Claude Code (`type: http`), `plugin/mcp.json` for Codex and the ChatGPT ZIP
+(`type: streamable-http`). Same URL in both; a test holds them together.
+
+Four tools, all `readOnlyHint: true`, `destructiveHint: false`, `openWorldHint: false`:
+`search_playbook`, `get_page`, `list_sections`, `checklist`. No login: there is no user data behind
+them, only the published pages.
+
+- **The index is built, not written.** `npm run build:mcp` reads `src/content/docs`, strips MDX and
+  writes `dist-mcp/index.json` next to the server files. A page appears in search the moment it is
+  merged. Only translated Russian pages are indexed, because the index reads sources, not the
+  fallback routes Starlight generates.
+- **No runtime dependencies.** The server is `node:http` and the two pure modules in `mcp/lib/`;
+  `content.mjs` (YAML, slugs) runs only at build time. The host needs `node` and nothing from npm.
+- **Stateless Streamable HTTP.** POST only, JSON responses, no sessions and no SSE: the server has
+  nothing to push. GET is 405 by the spec's own allowance.
+- **Section anchors** come from `github-slugger`, the same one Starlight uses, so a link from
+  `search_playbook` lands on the heading it quoted.
+
+```bash
+npm run build:mcp
+ATLAS_MCP_INDEX=dist-mcp/index.json node mcp/server.mjs   # 127.0.0.1:8770/mcp
+```

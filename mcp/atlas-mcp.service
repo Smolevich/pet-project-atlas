@@ -1,0 +1,28 @@
+[Unit]
+Description=LaVioLab Atlas MCP server (read-only, behind nginx at /mcp)
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /opt/atlas-mcp/server.mjs
+Environment=ATLAS_MCP_PORT=8770
+Environment=NODE_ENV=production
+Restart=always
+RestartSec=2
+
+# Сервер только читает свой индекс и слушает loopback: всё остальное закрыто.
+DynamicUser=yes
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target
