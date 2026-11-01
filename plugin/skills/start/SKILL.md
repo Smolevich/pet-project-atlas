@@ -5,8 +5,6 @@ user-invocable: true
 allowed-tools:
   - Skill
   - Read
-  - Bash(ls *)
-  - WebFetch
 ---
 
 # /laviolab-atlas:start
@@ -29,11 +27,16 @@ The audits below need a page to fetch.
 
 ## 2. Check the audits are installed
 
-```bash
-ls ~/.agents/skills/ ~/.claude/skills/ ./.claude/skills/ 2>/dev/null
+Look for `seo-audit` and `geo-audit` among the skills available in this session first. If one is not
+listed, read its `SKILL.md` in each of these directories before calling it missing:
+
+```text
+~/.agents/skills/<name>/SKILL.md
+~/.claude/skills/<name>/SKILL.md
+./.claude/skills/<name>/SKILL.md
 ```
 
-`seo-audit` and `geo-audit` have to appear in at least one of those. Three paths, not one: the installer
+Each audit has to turn up in at least one of those. Three paths, not one: the installer
 keeps packages in `~/.agents/skills/` and symlinks them into the agent directory, and it installs into
 the current project unless it was told `-g`. A skill missing from the home directory may still be
 installed.

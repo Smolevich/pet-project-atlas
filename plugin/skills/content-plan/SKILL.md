@@ -5,8 +5,6 @@ user-invocable: true
 allowed-tools:
   - Read
   - Write
-  - Bash(head *)
-  - Bash(wc *)
   - WebFetch
 ---
 
@@ -28,12 +26,8 @@ Ask for these and wait:
 3. **A Search Console export, if there is one** — the Performance report, queries, CSV or TSV.
    Optional. Say plainly that without it steps 2 and 3 below run on guesses, and the plan is weaker.
 
-If an export is given, read it and confirm the column you are using:
-
-```bash
-head -3 <export.csv>
-wc -l <export.csv>
-```
+If an export is given, read it, and name the columns you are using and the row count before going on.
+A Search Console UI export stops at 1,000 rows; if the file has exactly 1,000, say the tail is cut off.
 
 **Sort by impressions, not by clicks.** A query with impressions and no clicks is demand you already
 touch and lose — the cheapest cluster in the file.
