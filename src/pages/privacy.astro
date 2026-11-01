@@ -31,11 +31,9 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
       fetch the public pages you name.
     </li>
     <li>
-      <strong>Google, only if you choose the API route of <code>report</code>.</strong> It reads an
-      access token from your own local <code>gcloud</code> login and sends it only to
-      <code>searchconsole.googleapis.com</code> and, if you use GA4,
-      <code>analyticsdata.googleapis.com</code>. The token is not stored and not sent anywhere else. The
-      other route uses a browser you have already connected and are logged into.
+      <strong>Nowhere else.</strong> <code>report</code> connects to nothing: it reads the Search Console
+      and product exports you download and hand it, and never asks for a password, an API key or an
+      access token.
     </li>
   </ul>
   <p>

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "laviolab-atlas",
-  "version": "0.2.2",
-  "description": "Get a side project found: run existing SEO and AI-search audits and order them into one plan, plan content by query clusters, and pull a weekly Search Console slice. By LaVioLab.",
+  "version": "0.2.3",
+  "description": "Get a side project found: run existing SEO and AI-search audits and order them into one plan, plan content by query clusters, and read a weekly Search Console slice from exports. By LaVioLab.",
   "author": {
     "name": "Stanislav Shupilkin / LaVioLab",
     "url": "https://atlas.smolevich.com"

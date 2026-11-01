@@ -48,8 +48,8 @@ class of breakage arrives — quietly, between two of your commits.
 Structure is tested; behaviour is not, and the two fail differently. Three cases sit under
 `plugin/evals/`, each one written from a failure that already happened: `/laviolab-atlas:start`
 inventing its own checks when the audits are missing, ordering findings by score instead of by
-rung, and `/laviolab-atlas:report` demanding a Cloud project when a logged-in browser was right
-there.
+rung, and `/laviolab-atlas:report` demanding a Cloud project and a token for numbers the author
+could export in a minute.
 
 They need `claude plugin eval`, which is early access and rolled out per organization. Where the
 rollout has not arrived, `CLAUDE_CODE_WALNUT_SPIRE=1` turns it on. See
@@ -75,10 +75,14 @@ CI builds it on every run and keeps it as the `laviolab-atlas-chatgpt` artifact.
   each under `<!-- replace: ## Heading -->`. An empty block drops the section; `preamble` and
   `description` stand for the text before the first H2 and the frontmatter description.
 
-What ChatGPT cannot do, and so what the overrides replace: list the user's home directory, run
-`gcloud`, reach a logged-in browser profile. `start` asks for the two audit reports instead of
-looking for installed audits; `report` reads Search Console exports instead of calling the API, and
-never asks for a token — the OpenAI plugin guidelines forbid collecting credentials.
+What ChatGPT cannot do, and so what the overrides replace: read the user's home directory or write
+a file on their machine. `start` asks for the two audit reports instead of looking for installed
+audits; `report` hands back the weekly block as markdown instead of appending it to a file.
+
+`report` reads Search Console exports in both builds and never asks for a token. Since 0.2.3 no skill
+pre-approves a shell command or an MCP tool in `allowed-tools`: the Claude directory holds back a
+plugin whose skills pre-approve broad shell access, and the OpenAI plugin guidelines forbid collecting
+credentials.
 
 **Renaming a heading in `SKILL.md` breaks the build** when an override points at it. That is on
 purpose: otherwise ChatGPT would quietly keep the old text. Fix the override in the same change.

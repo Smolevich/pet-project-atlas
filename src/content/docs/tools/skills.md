@@ -41,7 +41,7 @@ Every third-party row below is a package sitting on my own machine. The one exce
 | Semrush | Domain Overview over Google data: positions, backlinks, an authority score, an AI Search panel | You want positions and links for a domain you cannot measure from the inside | Hosted service, `semrush.com` | Paid subscription, not a skill |
 | `/laviolab-atlas:start` | Walks a project through the route, calling the audit skills at the right points | You have a live URL and no idea which problem to fix first | This repo, `plugin/` | MIT |
 | `/laviolab-atlas:content-plan` | Turns a project description and a query export into clusters, one page each | You need to know what to write, and in which order | This repo, `plugin/` | MIT |
-| `/laviolab-atlas:report` | A weekly slice of Search Console and Analytics: what moved, what to do | The weekly snapshot, once the property is verified and a token exists | This repo, `plugin/` | MIT |
+| `/laviolab-atlas:report` | A weekly slice of Search Console and Analytics: what moved, what to do | The weekly snapshot, once the property is verified and you can download its exports | This repo, `plugin/` | MIT |
 | `/voice` | Brings a draft in line with `STYLE.md` before the linter sees it | Before opening a pull request against this repository | This repo, `.claude/skills/` | MIT |
 
 ### Where these skills come from, and where their licence lives
@@ -115,13 +115,11 @@ Codex has no `/laviolab-atlas:` prefix. It picks a skill by its description, so 
 
 The auditing stays with the third-party skills above, and that is deliberate. `/laviolab-atlas:start` checks nothing itself: it decides which third-party skill to run and in what order to read what they return.
 
-`/laviolab-atlas:report` takes one of two routes into Search Console, and says which before it pulls anything.
+`/laviolab-atlas:report` works from files only. You download the Performance export with a comparison and the Page indexing totals from Search Console, add your product's own export, and hand over the paths. No Cloud project, no token, no browser driven on your behalf.
 
-The cheap one is the browser you are already logged into: Playwright MCP opens the Performance report in your own profile, with no Cloud project and no token. The other is the REST API, which costs a project with the API enabled, a token scoped to `webmasters.readonly` and a quota project. Without the last one Search Console answers 403.
+None of the three pre-approves a shell command or an MCP tool, so the plugin asks before it runs anything beyond reading and writing files.
 
-Take the browser for a report you run by hand on a Monday. Take the API when it has to run unattended.
-
-The other two do their own work, but none of it is auditing: `/laviolab-atlas:content-plan` builds clusters, `/laviolab-atlas:report` calls the Search Console API. That is cheaper to keep alive than a second audit engine.
+The other two do their own work, but none of it is auditing: `/laviolab-atlas:content-plan` builds clusters, `/laviolab-atlas:report` reads your exports. That is cheaper to keep alive than a second audit engine.
 
 `/voice` is different. It reads a draft against `STYLE.md`, a file that exists only inside this repository, so it ships as a project skill for whoever clones the repo and never reaches a reader who installs the plugin.
 

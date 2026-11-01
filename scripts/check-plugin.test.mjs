@@ -106,6 +106,19 @@ test('строка установки ставит плагин под его н
   }
 });
 
+test('ни один скилл не разрешает заранее shell или MCP', async () => {
+  // Каталог Claude держит плагин на ручной проверке с пометкой «broad shell access»,
+  // если allowed-tools пускает Bash или mcp__* без вопроса (0.2.2: curl, gcloud, Playwright).
+  for (const name of await skillNames()) {
+    const raw = await readFile(path.join(SKILLS_DIR, name, 'SKILL.md'), 'utf8');
+    const front = /^---\n([\s\S]*?)\n---/.exec(raw)[1];
+    const tools = [...front.matchAll(/^\s+-\s+(\S.*)$/gm)].map(([, tool]) => tool.trim());
+    for (const tool of tools) {
+      assert.ok(!/^(Bash|mcp__)/.test(tool), `${name}: allowed-tools разрешает ${tool}`);
+    }
+  }
+});
+
 test('скилл, который работает только в этом репозитории, в плагин не входит', async () => {
   // /voice читает STYLE.md и линтер этого репо: у читателя плагина их нет.
   assert.ok(!(await skillNames()).includes('voice'));

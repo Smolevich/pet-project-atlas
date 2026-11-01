@@ -1,15 +1,10 @@
 ---
 name: report
-description: The weekly slice — six numbers from Search Console and your own product data, the delta against the previous period, three conclusions and one action. Use when the user says "weekly report", "what moved this week", "pull my Search Console numbers", "недельный отчёт", "сними цифры за неделю", or names a domain and a period.
+description: The weekly slice — six numbers from Search Console exports and your own product data, the delta against the previous period, three conclusions and one action. Use when the user says "weekly report", "what moved this week", "недельный отчёт", "сними цифры за неделю", or hands over a Search Console Performance export and asks what changed.
 user-invocable: true
 allowed-tools:
   - Read
   - Write
-  - mcp__playwright__*
-  - Bash(curl *)
-  - Bash(gcloud auth *)
-  - Bash(jq *)
-  - Bash(date *)
 ---
 
 # /laviolab-atlas:report
@@ -17,83 +12,32 @@ allowed-tools:
 Collects the six numbers defined on <https://atlas.smolevich.com/analytics/what-to-measure/>, compares
 them with the previous period, and ends with three conclusions and one action.
 
-## Do not use `gws` for this
-
-`gws` is a Google Workspace command line. It does not expose Search Console or Analytics. Both were
-tested against the installed build and both are rejected:
-
-```
-gws searchconsole:v1   -> Unknown service 'searchconsole'
-gws analyticsdata:v1beta -> Unknown service 'analyticsdata'
-```
-
-Its known services are Drive, Sheets, Gmail, Calendar and the rest of Workspace. If a guide tells you
-to pull Search Console through `gws`, the guide is wrong. Use the REST APIs below.
+**This skill works only from files.** The author downloads the exports and hands over the paths; the
+skill reads them. It does not connect to Google, does not drive a browser and runs no commands.
 
 ## Prerequisites — check all of these first, and stop on the first one missing
 
-Say exactly which one failed and what the author has to do. **Do not continue with a partial report.**
+**Never ask for a password, an API key or an access token, and do not use one if the author pastes it.**
+Tell them to remove it and to hand over the export instead.
 
-1. **A verified Search Console property** for the domain. A domain property is `sc-domain:example.com`;
-   a URL-prefix property is the full origin. The value must be URL-encoded in the path
-   (`sc-domain%3Aexample.com`).
-2. **A way into Search Console.** There are two, and the browser one is cheaper. Pick whichever the
-   author already has, and only fail this check when neither is available.
+Say exactly which input is missing and how to get it. **Do not continue with a partial report** unless
+the author says to go ahead with what is there; then label it partial.
 
-   **A — the browser they are already logged into.** A browser tool driving their real profile
-   (Playwright MCP, for one) opens the Performance report with the session that already exists: no
-   Cloud project, no token, no scopes. Set the property, set the date range, read the six numbers off
-   the screen or take the CSV export. This is the right route for a report somebody runs by hand
-   every week. It cannot be scheduled, it needs a live login, and a chromium in a clean profile shows
-   the sign-in page and nothing else.
-
-   **B — the REST API.** Scriptable, repeatable, cron-able, and it costs the setup in points 3 and 4.
-   Take this route when the report has to run unattended.
-
-   Say which route you are on before pulling anything, because the numbers are the same and the
-   failure modes are not.
-3. **For route B only: an OAuth access token** with `https://www.googleapis.com/auth/webmasters.readonly`, and
-   `https://www.googleapis.com/auth/analytics.readonly` as well if GA4 is in scope. The author's own
-   credentials, not a service account they do not control.
-
-   ```bash
-   gcloud auth application-default login \
-     --scopes=https://www.googleapis.com/auth/webmasters.readonly,https://www.googleapis.com/auth/analytics.readonly
-   gcloud auth application-default print-access-token
-   ```
-
-   Any OAuth flow that yields a token with those scopes is fine. This is the one that is installed here.
-4. **For route B only: a quota project the caller is allowed to use.** Application Default Credentials carry no quota
-   project, and Search Console rejects the call without one:
-
-   ```
-   403  The searchconsole.googleapis.com API requires a quota project, which is not set by default.
-   ```
-
-   Set it once, or send it per request as a header:
-
-   ```bash
-   gcloud auth application-default set-quota-project PROJECT_ID
-   # or:  -H "x-goog-user-project: PROJECT_ID"
-   ```
-
-   The caller needs `roles/serviceusage.serviceUsageConsumer` on that project, and the Search Console
-   API has to be enabled on it. Without the role the call fails again, differently:
-
-   ```
-   403  Caller does not have required permission to use project PROJECT_ID.
-   ```
-
-   Both of these are permission problems, not empty data. Report them as such and stop.
-5. **A GA4 property id**, if metrics 4 to 6 come from GA4 rather than the product's own database. The
-   numeric id, not the measurement id.
-6. **The product's own source for signups, activation and repeat use** — a database, a query, an export.
-   Ask which one. Search Console cannot answer any of metrics 4 to 6.
-7. **The name of the single action that counts as activation.** If the author cannot name one action,
+1. **The domain and the Search Console property** it belongs to.
+2. **A Performance export with a comparison.** In Search Console: Performance → Search results → Date →
+   Compare → the current window against the previous one → Export → Download CSV. That gives a ZIP of
+   tables; ask for the unpacked CSV files. You need `Queries.csv` and `Dates.csv`; `Filters.csv`
+   confirms the property and the date range.
+3. **The submitted-URL count and the indexed count.** Indexing → Pages, switch the filter from
+   "All known pages" to "All submitted pages", then either export it or read the two totals, indexed
+   and not indexed, off the screen.
+4. **The product's own export for signups, activation and repeat use** — a CSV from their database or a
+   GA4 exploration. Ask which. Search Console cannot answer metrics 4 to 6.
+5. **The name of the single action that counts as activation.** If the author cannot name one action,
    the metric does not exist yet. Say that, and report metrics 1 to 4 only.
 
-Missing prerequisites are the expected outcome the first time. A report that quietly comes back empty
-is worse than one that refuses to run.
+Missing inputs are the expected outcome the first time. A report that quietly comes back empty is worse
+than one that refuses to run.
 
 ## The period
 
@@ -105,53 +49,23 @@ Compute the previous period as the 28 days immediately before it. Every number g
 Search Console data lags behind real time and the most recent days are incomplete. If the window ends
 today, say that the tail is provisional.
 
-## Pull the numbers
+## Read the numbers from the exports
 
-**Search Console — Search Analytics** (metrics 1 and 2):
+Before any arithmetic, read `Filters` and say which property and which two date ranges the export
+covers. If they do not match the period above, stop and say so.
 
-```bash
-curl -s -X POST \
-  "https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain%3AEXAMPLE.COM/searchAnalytics/query" \
-  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
-  -d '{"startDate":"START","endDate":"END","dimensions":["query"],"rowLimit":25000}'
-```
+**Metrics 1 and 2** — from `Dates`: sum clicks and impressions over each window. Average position is
+the impressions-weighted mean of the daily position; say that it is computed, not read off the screen.
+The distinct query count is the number of rows in `Queries` with impressions in the window. The UI
+export stops at 1,000 rows: if the table has 1,000, report the count as "1,000 or more".
 
-Totals come from the same call with `"dimensions": []`. The distinct query count is the number of rows
-returned with the `query` dimension.
+**Metric 3** — indexed submitted URLs divided by all submitted URLs, from step 3 of the prerequisites.
+If the export has the daily chart, take the value at the end of each window for the delta.
 
-**Search Console — URL Inspection** (metric 3, per-URL truth):
+**Metrics 4 to 6** — from the product export. Prefer the product's own database to GA4 where both
+exist: it knows which accounts are the author's; GA4 does not.
 
-```bash
-curl -s -X POST "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect" \
-  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
-  -d '{"inspectionUrl":"https://EXAMPLE.COM/page/","siteUrl":"sc-domain:EXAMPLE.COM"}'
-```
-
-Read `inspectionResult.indexStatusResult.coverageState`. This endpoint is rate-limited per property —
-check the current quota in Google's documentation before inspecting a large site, and sample rather
-than sweeping if the site is bigger than the quota allows.
-
-The denominator is the URLs the author submitted, from the sitemap, not the pages they remember writing:
-
-```bash
-curl -s "https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain%3AEXAMPLE.COM/sitemaps" \
-  -H "Authorization: Bearer $TOKEN"
-```
-
-**GA4 Data API** (metrics 4 to 6, when the product numbers live in GA4):
-
-```bash
-curl -s -X POST "https://analyticsdata.googleapis.com/v1beta/properties/PROPERTY_ID:runReport" \
-  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
-  -d '{"dateRanges":[{"startDate":"START","endDate":"END"}],
-       "dimensions":[{"name":"date"}],"metrics":[{"name":"activeUsers"}]}'
-```
-
-Prefer the product's own database where it exists. It knows which accounts are the author's; GA4 does
-not.
-
-Any non-200 response stops the report. Print the status and the error body verbatim. Do not fall back
-to an estimate.
+Show the formula next to each number, so the author can redo it by hand.
 
 ## The six numbers
 
@@ -159,12 +73,12 @@ Report each one with its delta against the previous period, and never one withou
 
 | # | Number | Source | What it answers |
 |---|---|---|---|
-| 1 | Impressions, plus the count of distinct queries | Search Analytics | Whether search considers you an answer to anything at all |
-| 2 | Clicks and average position, together | Search Analytics | Ranking problem or packaging problem |
-| 3 | Share of submitted URLs actually indexed | Sitemaps + URL Inspection | How much of the writing is eligible to rank |
-| 4 | Signups, the author's own accounts subtracted | Product database or GA4 | Whether the traffic contains anyone who wants the thing |
-| 5 | Activation — the share reaching the one named action | Product database | Whether they got the thing at all |
-| 6 | Repeat use on a later day, cohorted by week of first contact | Product database | Whether this is a product or a demo |
+| 1 | Impressions, plus the count of distinct queries | Performance export | Whether search considers you an answer to anything at all |
+| 2 | Clicks and average position, together | Performance export | Ranking problem or packaging problem |
+| 3 | Share of submitted URLs actually indexed | Page indexing, submitted pages | How much of the writing is eligible to rank |
+| 4 | Signups, the author's own accounts subtracted | Product export or GA4 | Whether the traffic contains anyone who wants the thing |
+| 5 | Activation — the share reaching the one named action | Product export | Whether they got the thing at all |
+| 6 | Repeat use on a later day, cohorted by week of first contact | Product export | Whether this is a product or a demo |
 
 Rules that change the answer:
 
@@ -178,14 +92,14 @@ Rules that change the answer:
 If the period has no data, **say so in one plain line and stop.**
 
 ```
-No Search Console data for 2026-07-13..2026-08-09. The property returned zero rows.
+No Search Console data for 2026-07-13..2026-08-09. The export has zero rows.
 ```
 
 Never interpolate, never carry the previous period forward, never round a zero into "a handful". Zero
 is a result worth publishing: "0 clicks in the first month" tells the reader more than a hedge. Every
-number in the output traces to a response body you actually received.
+number in the output traces to a row of a file the author gave you.
 
-If only some sources answered, report those and list the missing ones by name. A partial report labelled
+If only some inputs arrived, report those and list the missing ones by name. A partial report labelled
 partial is fine. A partial report presented as whole is not.
 
 ## Close the report
@@ -212,7 +126,8 @@ Common readings:
 
 ## Append to the series
 
-One snapshot a week, same weekday, same window. Append the block to a file and keep the history.
+One snapshot a week, same weekday, same window. Ask which history file to append the block to, and
+write it there; if the author names none, give them the block as markdown to paste.
 
 A number you cannot compare with itself last month is decoration. One reading is not a trend, and two
 are barely a line.
