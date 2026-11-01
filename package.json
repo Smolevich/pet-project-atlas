@@ -11,10 +11,11 @@
     "lint:voice": "node scripts/lint-voice.mjs src/content/docs",
     "check:links": "node scripts/check-links.mjs dist",
     "check:types": "astro check",
-    "test": "node --test \"scripts/**/*.test.mjs\"",
+    "test": "node --test \"scripts/**/*.test.mjs\" \"mcp/**/*.test.mjs\"",
     "check:skills": "node scripts/check-skill-sources.mjs",
     "build:chatgpt": "node scripts/build-chatgpt-plugin.mjs",
-    "build:codex": "node scripts/build-codex-manifest.mjs"
+    "build:codex": "node scripts/build-codex-manifest.mjs",
+    "build:mcp": "node scripts/build-mcp-index.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@beoe/rehype-mermaid": "^0.4.2",
+    "github-slugger": "^2.0.0",
     "js-yaml": "^4.3.2",
     "playwright": "^1.64.1",
     "typescript": "^6.0.3"

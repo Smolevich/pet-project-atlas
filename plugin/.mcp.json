@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "laviolab-atlas": {
+      "type": "http",
+      "url": "https://atlas.smolevich.com/mcp"
+    }
+  }
+}

@@ -18,7 +18,9 @@ Push to `main` → workflow **"Deploy"** (`.github/workflows/deploy.yml`), two j
    because this repo takes outside contributions.
 2. **Ship to the origin host** — downloads that artifact, joins the tailnet, `scp`s the
    files over, then `ssh` moves the build into `/var/www/atlas`, installs the nginx site,
-   runs `nginx -t`, reloads and smoke-tests the live page through nginx.
+   runs `nginx -t`, reloads and smoke-tests the live page through nginx. The same job
+   installs the MCP server (`dist-mcp/` → `/opt/atlas-mcp`, unit `atlas-mcp.service` on
+   loopback) before the reload, and the smoke test calls `tools/list` on `/mcp` through nginx.
 
 The split is the security boundary, not a style choice. `npm ci` runs install scripts from
 every dependency in the tree; the SSH key lives only in the second job, where no
@@ -53,6 +55,8 @@ one.
 - `gh run list --repo Smolevich/pet-project-atlas --limit 5` — latest run should be green.
 - `curl -fsS https://atlas.smolevich.com/ | grep "a route out of zero traffic"` — confirms
   nginx is serving the current build, not a stale one.
+- `curl -fsS -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' https://atlas.smolevich.com/mcp`
+  — lists the four MCP tools.
 - Spot-check a directory-style route, e.g. `https://atlas.smolevich.com/indexing/`, and a
   bad path, e.g. `https://atlas.smolevich.com/does-not-exist` — the latter must return a
   real `404`, not a soft-200.

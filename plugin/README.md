@@ -4,8 +4,8 @@
 
 LaVioLab Atlas helps you get a side project found. It routes a live site through search, AI search,
 content and analytics, and every result links to the page of the [Pet Project Atlas](https://atlas.smolevich.com)
-that explains why it matters. It is made by Stanislav Shupilkin at LaVioLab and is free and open source
-under the MIT licence.
+that explains why it matters. It is made by Stanislav Shupilkin at LaVioLab and is open source under the
+MIT licence.
 
 ## Install
 
@@ -30,9 +30,15 @@ codex plugin add laviolab-atlas@pet-project-atlas
 
 ## What it runs and where it connects
 
-The plugin contains only instructions (skills). It ships no scripts, no binaries, no MCP server and
-no hooks. Everything below happens on your machine, in your Claude Code session, and only when you run
-a command.
+The plugin contains instructions (skills) and one remote, read-only MCP server. It ships no scripts,
+no binaries and no hooks. The skills run on your machine, in your Claude Code session, and only when you
+run a command.
+
+**MCP server** `laviolab-atlas` at `https://atlas.smolevich.com/mcp` (Streamable HTTP, no login). Its
+four tools only read the published atlas: `search_playbook` returns matching sections with a short
+quote and a link, `get_page` returns one page in full, `list_sections` lists the route, and
+`checklist` returns the checklist items for a topic such as robots.txt or llms.txt. It receives the
+words of your question and nothing else from your session, and it never reads your site.
 
 None of the skills pre-approves a shell command or an MCP tool. Their `allowed-tools` are `Skill` and
 `Read` for `start`, `Read`, `Write` and `WebFetch` for `content-plan`, and `Read` and `Write` for
@@ -52,9 +58,10 @@ None of the skills pre-approves a shell command or an MCP tool. Their `allowed-t
 
 ## Data and privacy
 
-LaVioLab Atlas collects nothing. It has no server, no telemetry and no analytics; nothing you run
-through it is sent to LaVioLab or to the author. The only network traffic is what is listed above: the
-sites you ask it to check. Full note:
+LaVioLab Atlas collects nothing. It has no telemetry and no analytics. The MCP server gets only the
+arguments of a tool call, such as the words of a search, answers from the published atlas and stores
+nothing; the web server in front of it keeps the usual access log (address, time, path, never the
+request body). The rest of the network traffic is what is listed above: the sites you ask it to check. Full note:
 <https://atlas.smolevich.com/privacy/>. Terms of use:
 <https://atlas.smolevich.com/terms/>.
 

@@ -11,6 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
 import { buildChatgptPlugin } from './build-chatgpt-plugin.mjs';
+import { TOOLS } from '../mcp/lib/protocol.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 let out;
@@ -95,6 +96,29 @@ test('сборка воспроизводима: тот же исходник �
   } finally {
     await rm(again, { recursive: true, force: true });
   }
+});
+
+test('в ZIP переносимый mcp.json с одним удалённым сервером по Streamable HTTP', async () => {
+  const { mcpServers } = JSON.parse(await readFile(path.join(built.root, 'mcp.json'), 'utf8'));
+  const servers = Object.values(mcpServers);
+  assert.deepEqual(servers.map((s) => [s.type, s.url]), [['streamable-http', 'https://atlas.smolevich.com/mcp']]);
+});
+
+test('Claude Code и ChatGPT подключают один и тот же сервер', async () => {
+  const read = async (file) => Object.values(JSON.parse(await readFile(path.join(ROOT, 'plugin', file), 'utf8')).mcpServers);
+  const [claudeServers, portable] = await Promise.all([read('.mcp.json'), read('mcp.json')]);
+  assert.deepEqual(claudeServers.map((s) => [s.type, s.url]), portable.map((s) => ['http', s.url]));
+});
+
+test('в mcp.json нет ни секретов, ни заголовков: портал их отвергает', async () => {
+  const text = await readFile(path.join(built.root, 'mcp.json'), 'utf8');
+  assert.doesNotMatch(text, /clientSecret|headers|token/i);
+});
+
+test('тест-кейсы ревью называют только настоящие инструменты сервера', () => {
+  const names = new Set(TOOLS.map((tool) => tool.name));
+  const triggered = built.manifest.extensions['com.openai'].review.test_cases.positive.map((c) => c.tools_triggered);
+  assert.deepEqual(triggered.filter((name) => !names.has(name)), []);
 });
 
 test('страны заданы явно: без поля портал оставляет прошлый выбор, пустой список — все страны', () => {

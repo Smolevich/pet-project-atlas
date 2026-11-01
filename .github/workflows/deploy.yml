@@ -54,6 +54,7 @@ jobs:
           npm run lint:voice
           npm run build
           npm run check:links
+          npm run build:mcp
 
       - name: Upload build
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -61,6 +62,7 @@ jobs:
           name: site
           path: |
             dist
+            dist-mcp
             nginx-atlas.conf
           retention-days: 1
           if-no-files-found: error
@@ -91,7 +93,7 @@ jobs:
           username: ${{ secrets.VDS_USER }}
           key: ${{ secrets.VDS_SSH_KEY }}
           passphrase: ${{ secrets.VDS_SSH_PASSPHRASE }}
-          source: dist/**,nginx-atlas.conf
+          source: dist/**,dist-mcp/**,nginx-atlas.conf
           target: /tmp/deploy-atlas
           strip_components: 0
 
@@ -121,6 +123,20 @@ jobs:
             sudo find "$WEB_DIR" -type d -exec chmod 755 {} +
             sudo find "$WEB_DIR" -type f -exec chmod 644 {} +
 
+            # MCP-сервер встаёт раньше nginx: после reload /mcp сразу должен отвечать.
+            MCP_DIR=/opt/atlas-mcp
+            sudo rm -rf "$MCP_DIR.new"
+            sudo cp -a /tmp/deploy-atlas/dist-mcp "$MCP_DIR.new"
+            sudo chown -R root:root "$MCP_DIR.new"
+            sudo find "$MCP_DIR.new" -type d -exec chmod 755 {} +
+            sudo find "$MCP_DIR.new" -type f -exec chmod 644 {} +
+            sudo rm -rf "$MCP_DIR"
+            sudo mv "$MCP_DIR.new" "$MCP_DIR"
+            sudo install -m 0644 "$MCP_DIR/atlas-mcp.service" /etc/systemd/system/atlas-mcp.service
+            sudo systemctl daemon-reload
+            sudo systemctl enable atlas-mcp >/dev/null
+            sudo systemctl restart atlas-mcp
+
             sudo install -m 0644 /tmp/deploy-atlas/nginx-atlas.conf /etc/nginx/sites-available/atlas.conf
             sudo ln -sfn /etc/nginx/sites-available/atlas.conf /etc/nginx/sites-enabled/atlas.conf
             rm -rf /tmp/deploy-atlas
@@ -129,3 +145,5 @@ jobs:
             sudo systemctl reload nginx
             sleep 1
             curl -fsS -H "Host: atlas.smolevich.com" http://127.0.0.1/ | grep -q "a route out of zero traffic"
+            curl -fsS -H "Host: atlas.smolevich.com" -H "Content-Type: application/json" \
+              -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' http://127.0.0.1/mcp | grep -q '"search_playbook"'
