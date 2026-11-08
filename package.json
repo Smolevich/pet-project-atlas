@@ -18,13 +18,14 @@
     "build:mcp": "node scripts/build-mcp-index.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/starlight": "^0.41.3",
+    "@astrojs/markdown-remark": "^7.3.6",
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/starlight": "^0.42.8",
     "astro": "^7.2.2",
     "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "@beoe/rehype-mermaid": "^0.4.2",
     "github-slugger": "^2.0.0",
     "js-yaml": "^4.3.2",
