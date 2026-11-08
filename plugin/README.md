@@ -40,9 +40,9 @@ quote and a link, `get_page` returns one page in full, `list_sections` lists the
 `checklist` returns the checklist items for a topic such as robots.txt or llms.txt. It receives the
 words of your question and nothing else from your session, and it never reads your site.
 
-None of the skills pre-approves a shell command or an MCP tool. Their `allowed-tools` are `Skill` and
-`Read` for `start`, `Read`, `Write` and `WebFetch` for `content-plan`, and `Read` and `Write` for
-`report`.
+The skills pre-approve only `Read` in `allowed-tools`. Everything else they use (calling the audit
+skills in `start`, fetching a public page in `content-plan`, writing a file in `content-plan` and
+`report`) goes through Claude Code's usual permission prompt, so you approve each one.
 
 - **`start`** looks for `seo-audit` and `geo-audit` among your skills, reading their `SKILL.md` in
   `~/.agents/skills/`, `~/.claude/skills/` and `./.claude/skills/`, and runs them on the URL you give it.

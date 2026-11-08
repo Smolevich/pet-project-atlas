@@ -4,7 +4,6 @@ description: The weekly slice — six numbers from Search Console exports and yo
 user-invocable: true
 allowed-tools:
   - Read
-  - Write
 ---
 
 # /laviolab-atlas:report
@@ -127,7 +126,8 @@ Common readings:
 ## Append to the series
 
 One snapshot a week, same weekday, same window. Ask which history file to append the block to, and
-write it there; if the author names none, give them the block as markdown to paste.
+write it there; if the author names none or declines the write, give them the block as markdown to
+paste.
 
 A number you cannot compare with itself last month is decoration. One reading is not a trend, and two
 are barely a line.
