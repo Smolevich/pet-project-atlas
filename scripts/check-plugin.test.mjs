@@ -106,15 +106,16 @@ test('строка установки ставит плагин под его н
   }
 });
 
-test('ни один скилл не разрешает заранее shell или MCP', async () => {
-  // Каталог Claude держит плагин на ручной проверке с пометкой «broad shell access»,
-  // если allowed-tools пускает Bash или mcp__* без вопроса (0.2.2: curl, gcloud, Playwright).
+test('скиллы заранее разрешают только чтение', async () => {
+  // Каталог Claude принимает в allowed-tools сверх Read/Grep/Glob/LS только от Verified-организаций:
+  // 0.3.0 отклонён за Skill, Write и WebFetch, 0.2.2 держали за Bash и mcp__*.
+  const allowed = new Set(['Read', 'Grep', 'Glob', 'LS']);
   for (const name of await skillNames()) {
     const raw = await readFile(path.join(SKILLS_DIR, name, 'SKILL.md'), 'utf8');
     const front = /^---\n([\s\S]*?)\n---/.exec(raw)[1];
     const tools = [...front.matchAll(/^\s+-\s+(\S.*)$/gm)].map(([, tool]) => tool.trim());
     for (const tool of tools) {
-      assert.ok(!/^(Bash|mcp__)/.test(tool), `${name}: allowed-tools разрешает ${tool}`);
+      assert.ok(allowed.has(tool), `${name}: allowed-tools разрешает ${tool}`);
     }
   }
 });

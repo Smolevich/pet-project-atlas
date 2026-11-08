@@ -4,8 +4,6 @@ description: Turn a project description and an optional Search Console export in
 user-invocable: true
 allowed-tools:
   - Read
-  - Write
-  - WebFetch
 ---
 
 # /laviolab-atlas:content-plan

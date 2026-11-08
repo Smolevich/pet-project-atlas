@@ -79,10 +79,10 @@ What ChatGPT cannot do, and so what the overrides replace: read the user's home 
 a file on their machine. `start` asks for the two audit reports instead of looking for installed
 audits; `report` hands back the weekly block as markdown instead of appending it to a file.
 
-`report` reads Search Console exports in both builds and never asks for a token. Since 0.2.3 no skill
-pre-approves a shell command or an MCP tool in `allowed-tools`: the Claude directory holds back a
-plugin whose skills pre-approve broad shell access, and the OpenAI plugin guidelines forbid collecting
-credentials.
+`report` reads Search Console exports in both builds and never asks for a token. Since 0.3.1 the skills
+pre-approve only `Read` in `allowed-tools`: the Claude directory accepts entries beyond Read, Grep,
+Glob and LS only from Verified organizations, and 0.3.0 was refused for `Skill`, `Write` and
+`WebFetch`. The OpenAI plugin guidelines forbid collecting credentials.
 
 **Renaming a heading in `SKILL.md` breaks the build** when an override points at it. That is on
 purpose: otherwise ChatGPT would quietly keep the old text. Fix the override in the same change.

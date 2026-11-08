@@ -3,7 +3,6 @@ name: start
 description: Route a live pet project through the atlas — run the existing SEO and GEO audits, merge them into one prioritised list, link the page that explains each item, and name three things to do this week. Use when the user says "nobody finds my project", "where do I start with SEO", "audit my site and tell me what to do first", "прогони проект по атласу", or gives a URL and asks what to fix.
 user-invocable: true
 allowed-tools:
-  - Skill
   - Read
 ---
 
