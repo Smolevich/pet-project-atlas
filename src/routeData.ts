@@ -30,4 +30,8 @@ export const onRequest = defineRouteMiddleware((context) => {
   });
 
   if (isFallback) route.head = pointAtOriginal(route.head);
+
+  // Starlight links the site title to "/ru"; the server answers that with a 301 to "/ru/",
+  // so every Russian page sent crawlers into a redirect.
+  if (!route.siteTitleHref.endsWith('/')) route.siteTitleHref += '/';
 });
