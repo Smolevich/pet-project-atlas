@@ -6,7 +6,7 @@ description: Sixteen days of nginx access logs from one small box — which agen
 updated: 2026-08-12
 sources:
   - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
-  - Google's crawlers and their user agents — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - Google's crawlers and their user agents — https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
   - Reading AI traffic in Cloudflare — https://developers.cloudflare.com/ai-crawl-control/features/analyze-ai-traffic/
 ---
 
@@ -217,7 +217,7 @@ All of this rests on identities I never verified, and the window showed the cost
 - **Attributing the totals to a single site**. These counts come from every per-site log on the box, and 340 of the 341 `ChatGPT-User` requests belong to one site. The split is inferred from paths, not read from a field.
 - **Taking a name in the log as an identity**. Every agent above is an unverified `User-Agent` string, and mine were plainly fake. Which of the rest are somebody else's scanner, I still cannot say.
 - **Counting nginx as the total**. A request that Cloudflare served from cache never reaches the box. These figures are a floor, not a total.
-- **Pulling the Cloudflare-side numbers for comparison**. The API call failed on token permissions, so the comparison is not in this page. Whatever the edge absorbed is missing from every table above.
+- **Pulling the Cloudflare-side numbers for comparison**. The API call failed on token permissions, so whatever the edge absorbed is missing from every table above. Later I read the Cloudflare side by hand: what the edge blocks is in [llms.txt and crawlers](/geo/llms-txt-and-crawlers/), and which bots are real is in [real crawler or fake one](/geo/real-or-fake-crawlers/).
 
 ## Verify
 

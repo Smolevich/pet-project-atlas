@@ -6,7 +6,7 @@ description: Сайт в проде, а поиск по нему ничего н
 updated: 2026-10-09
 sources:
   - Что может и чего не может robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/intro
-  - Как Google читает robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
+  - Как Google читает robots.txt — https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec
   - noindex в теге и в заголовке — https://developers.google.com/search/docs/crawling-indexing/block-indexing
   - Как задать canonical — https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
   - Что краулер видит в JavaScript-приложении — https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics

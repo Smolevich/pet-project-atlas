@@ -3,21 +3,21 @@ title: AI-crawler и llms.txt
 sidebar:
   order: 1
 description: Какие AI-агенты приходят на сайт, кому они принадлежат, где на самом деле решается доступ и что писать в llms.txt.
-updated: 2026-08-13
+updated: 2026-11-14
 sources:
   - Cloudflare GraphQL Analytics, site atlas.smolevich.com, measured 2026-08-13
   - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
   - RFC 9309, стандарт robots.txt — https://www.rfc-editor.org/rfc/rfc9309.html
   - Краулеры OpenAI и их задачи — https://developers.openai.com/api/docs/bots
   - Краулеры Anthropic и как их закрыть — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
-  - Краулеры Perplexity — https://docs.perplexity.ai/guides/bots
-  - Краулеры Google и их user agent — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - Краулеры Perplexity — https://docs.perplexity.ai/docs/resources/perplexity-crawlers
+  - Краулеры Google и их user agent — https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
   - Google про AI-функции и сниппеты — https://developers.google.com/search/docs/appearance/ai-features
   - Переключатель Search generative AI — https://support.google.com/webmasters/answer/16908024
   - Анонс новых настроек для владельцев сайтов — https://blog.google/products-and-platforms/products/search/new-controls-website-owners/
   - Спецификация llms.txt — https://llmstxt.org/
-  - Dark Visitors, справочник AI-агентов — https://darkvisitors.com/
-  - Переключатель Block AI bots в Cloudflare — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+  - Known Agents, бывший Dark Visitors, справочник AI-агентов — https://knownagents.com/
+  - AI Crawler and Agent access policies в Cloudflare, проверено 2026-11-14 — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
   - Как Cloudflare делит ботов на категории — https://developers.cloudflare.com/bots/concepts/bot/
   - Управляемый robots.txt в Cloudflare — https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
   - Управление AI-краулерами на edge — https://developers.cloudflare.com/ai-crawl-control/features/manage-ai-crawlers/
@@ -103,11 +103,13 @@ RFC 9309 говорит, что crawler слушается одной групп
 
 Под `robots.txt` лежат ещё три слоя: `X-Robots-Tag`, мета-тег и edge. В файле не виден ни один, а 403 отдаёт переключатель в CDN, правило WAF или rate limit, пока вы правите файл, который никто не читает. WAF — это firewall, который матчит HTTP-запросы.
 
-В Cloudflare контрол называется **Configure AI bot policies**, лежит на странице **Security Settings** зоны и есть на всех тарифах, включая Free. Агентов он раскладывает на Search, Agent и Training, для каждой группы — Allow, Block on all pages или Block only on pages with ads.
+В Cloudflare контрол называется **AI Crawler and Agent access policies**, раньше он назывался **Configure AI bot policies**. Лежит он в **Security** → **Settings**, фильтр **Bot traffic**, и есть на всех тарифах, включая Free.
+
+Агентов он раскладывает на Search, Agent и Training, для каждой группы — Allow, Block или Block on pages with ads, а у Training есть ещё Disallow, который только пишет отказ в `robots.txt`.
 
 Кто попадает в каждую группу, решает список Cloudflare, и меняется он без вас. Block здесь терминирующий: Cloudflare отвечает 403 из своей сети, и ваш сервер запроса не видит.
 
-С 15 сентября 2026 новый для Cloudflare домен приезжает с блоком Training и Agent на страницах с рекламой, а старый одиночный переключатель рядом, **Block AI bots**, в тот же день уходит. Существующие зоны сохраняют свои настройки. Отказаться от новых умолчаний можно до 15 сентября.
+Когда я проверял документацию Cloudflare 2026-11-14, новый домен приезжал с Allow на всех трёх группах — Search, Agent и Training. В августе обещали блок на Training и Agent, так что смотрите в саму панель, а не на дату с чужой страницы, включая мою.
 
 Та же панель умеет не отказывать, а брать деньги: pay per crawl отвечает 402 и живёт в закрытой бете.
 
@@ -219,7 +221,7 @@ zcat -f /var/log/nginx/example.access.log* \
   ```
 
   Заголовок `cf-ray` означает Cloudflare. Vercel, Netlify и Fastly представляются своими заголовками. Если впереди нет ничего, отказать crawler'у могут только файрвол и веб-сервер, и проверки ниже тогда переезжают туда.
-- На Cloudflare откройте **Security Settings** и прочитайте, что стоит в **Configure AI bot policies**. Умолчание вы не выбирали, но настройка всё равно ваша.
+- На Cloudflare откройте **Security Settings** и прочитайте, что стоит в **AI Crawler and Agent access policies**. Умолчание вы не выбирали, но настройка всё равно ваша.
 - Откройте **Analytics** → **Events** и отфильтруйте действие по Block. Агентов, которым отказали там, нет ни в одном логе на вашей машине.
 - Запросите страницу как crawler, из чужой сети, и убедитесь, что пришло 200.
 

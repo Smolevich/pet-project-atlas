@@ -35,11 +35,11 @@ sources:
   - Руководство Google по AI-функциям поиска, про llms.txt, schema и Merchant Center — https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
   - Массовый контент и ссылочный спам — https://developers.google.com/search/docs/essentials/spam-policies
   - Обновление Google против ссылочного спама — https://developers.google.com/search/blog/2022/12/december-22-link-spam-update
-  - За что отвечает Google-Extended — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - За что отвечает Google-Extended — https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
   - Зачем нужны метки UTM — https://support.google.com/analytics/answer/10917952
   - Отчёт о показах в ИИ в Search Console — https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports
   - Роботы OpenAI — https://developers.openai.com/api/docs/bots
-  - Роботы Anthropic — https://support.claude.com/en/articles/8896518
+  - Роботы Anthropic — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
   - Управляемый robots.txt у Cloudflare — https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
   - Пресс-релизы King of AEO — https://edwardsturm.com/articles/king-of-aeo-seo-tactics/
   - Вымышленный бренд и что за ним повторяли ассистенты — https://ahrefs.com/blog/ai-vs-made-up-brand-experiment/
@@ -138,7 +138,7 @@ sources:
 | Сотни шаблонных страниц под варианты запроса, включая свои списки «лучших X», Google считает злоупотреблением массовым контентом. | [Правила Google о спаме](https://developers.google.com/search/docs/essentials/spam-policies) |
 | Купленные ссылки и сетки сайтов (PBN) Google обнуляет. | [Правила Google о спаме](https://developers.google.com/search/docs/essentials/spam-policies), [обновление против ссылочного спама](https://developers.google.com/search/blog/2022/12/december-22-link-spam-update) |
 | Руководство Google по AI-функциям само советует держать актуальными Merchant Center и профиль компании. | [Google](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) |
-| `Google-Extended` управляет обучением Gemini и grounding. ИИ-сводки работают через Googlebot, так что попадание в них этот токен не решает. | [Роботы Google](https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers) |
+| `Google-Extended` управляет обучением Gemini и grounding. ИИ-сводки работают через Googlebot, так что попадание в них этот токен не решает. | [Роботы Google](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers) |
 | Метки UTM нужны, чтобы считать переходы в аналитике. На то, цитируют ли страницу, они не влияют. | [Google Analytics](https://support.google.com/analytics/answer/10917952) |
 | В июне 2026 в Search Console появился отчёт о показах в AI-функциях. С 31 августа 2026 он есть у всех сайтов. | [Google](https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports) |
 
@@ -147,7 +147,7 @@ sources:
 | Что показывает источник | Источник |
 |---|---|
 | У OpenAI `OAI-SearchBot` — для поиска, `ChatGPT-User` — для запросов по просьбе пользователя, `GPTBot` — для обучения. К `ChatGPT-User` robots.txt может не применяться. | [OpenAI](https://developers.openai.com/api/docs/bots) |
-| У Anthropic `ClaudeBot` — для обучения, `Claude-SearchBot` — для поиска, `Claude-User` — для запросов пользователя. Anthropic предупреждает, что блокировка по IP может работать ненадёжно. | [Anthropic](https://support.claude.com/en/articles/8896518) |
+| У Anthropic `ClaudeBot` — для обучения, `Claude-SearchBot` — для поиска, `Claude-User` — для запросов пользователя. Anthropic предупреждает, что блокировка по IP может работать ненадёжно. | [Anthropic](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler) |
 | Управляемый robots.txt у Cloudflare сам дописывает `Disallow` для `GPTBot`, `ClaudeBot` и `Google-Extended`. Сайт может закрыться для crawler, хотя владелец robots.txt не трогал. | [Cloudflare](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/) |
 
 ## Неправда о бренде и доверие

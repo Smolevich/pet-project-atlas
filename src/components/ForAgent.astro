@@ -29,6 +29,9 @@ const installLead = isRu
   ? 'В Claude Code этой команды нет из коробки —'
   : 'The command is not in Claude Code out of the box —';
 const installLink = isRu ? 'как поставить плагин' : 'how to install the plugin';
+const chatgptHref = 'https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597';
+const chatgptLead = isRu ? 'или' : 'or';
+const chatgptLink = isRu ? 'добавьте его из каталога ChatGPT' : 'add it from the ChatGPT directory';
 ---
 
 <aside class="atlas-for-agent">
@@ -37,7 +40,7 @@ const installLink = isRu ? 'как поставить плагин' : 'how to in
     <code>{run}</code> — {does}
   </p>
   <p class="atlas-for-agent-install">
-    {installLead} <a href={installHref}>{installLink}</a>.
+    {installLead} <a href={installHref}>{installLink}</a>, {chatgptLead} <a href={chatgptHref}>{chatgptLink}</a>.
   </p>
 </aside>
 

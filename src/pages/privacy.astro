@@ -8,7 +8,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 <StarlightPage
   frontmatter={{
     title: 'Privacy',
-    description: 'LaVioLab Atlas, the plugin for Claude Code and ChatGPT, collects no personal data. What it runs and where it connects.',
+    description: 'LaVioLab Atlas, the plugin for Claude Code, Codex and ChatGPT, collects no personal data. What it runs and where it connects.',
   }}
 >
   <p>
@@ -22,7 +22,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
     LaVioLab Atlas (<code>laviolab-atlas</code>) is a set of instructions for Claude Code: three skills,
     <code>start</code>, <code>content-plan</code> and <code>report</code>, plus one remote MCP server. It
     ships no scripts, binaries or hooks. The skills run on your machine, inside your own Claude Code
-    session, and only when you call one of their commands.
+    session, and only when you call one of their commands. Codex installs the same skills unchanged.
   </p>
 
   <h2 id="mcp-server">The MCP server</h2>
@@ -76,7 +76,8 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 
   <h2 id="in-chatgpt">In ChatGPT</h2>
   <p>
-    The ChatGPT version has the same three skills and the same MCP server, which is the only place it
+    The ChatGPT version is listed in the
+    <a href="https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597">ChatGPT plugin directory</a>. It has the same three skills and the same MCP server, which is the only place it
     connects to. <code>start</code> reads the
     audit reports you paste or upload, <code>content-plan</code> reads the export you upload, and
     <code>report</code> reads the Search Console and product exports you upload. It never asks for a

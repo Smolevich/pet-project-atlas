@@ -6,7 +6,7 @@ description: The site is live and search returns nothing for it. The checks that
 updated: 2026-10-09
 sources:
   - What robots.txt can and cannot do — https://developers.google.com/search/docs/crawling-indexing/robots/intro
-  - How Google reads robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
+  - How Google reads robots.txt — https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec
   - noindex in a tag and in a header — https://developers.google.com/search/docs/crawling-indexing/block-indexing
   - How to set a canonical URL — https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
   - What the crawler sees in a JavaScript app — https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics

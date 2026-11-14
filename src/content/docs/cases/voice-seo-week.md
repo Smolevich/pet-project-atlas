@@ -1,8 +1,10 @@
 ---
 title: One week, three search strategies and a control group
 description: On my voice bot's site I ran three strategies at once on separate pages, with the verdict rules written before the edits. New pages with my own measurements were crawled the same day. Edited pages mostly were not, so the week could not judge them.
-updated: 2026-10-14
+updated: 2026-11-14
 sources:
+  - Search Console API, property telegram-voice-bot, measured 2026-10-17
+  - nginx access log, dataset 2026-10-04..2026-10-16, measured 2026-10-17
   - Search Console API, property telegram-voice-bot, measured 2026-10-10
   - Search Console API, property telegram-voice-bot, measured 2026-10-14
   - nginx access log, dataset 2026-09-19..2026-10-09, measured 2026-10-10
@@ -43,8 +45,17 @@ Here is where each group stood on 10 October, against the rules written on 3 Oct
 | A | answers and facts for AI | edited landing not opened by OAI-SearchBot, ChatGPT referrals 1.17 a day | not tested, extended to 17 October |
 | B | titles and descriptions | 64 impressions after re-crawl, 300 needed | not tested, extended to 17 October |
 
+On 17 October, at day 14, I ran the same calculation again for the two extended groups.
+
+| Group | Result on 17 October | Verdict |
+|---|---|---|
+| A | OAI-SearchBot and ChatGPT-User did open the edited pages, 8–9 October. ChatGPT referrals 1.46 a day against 1.43 in the baseline, 2.1 needed | no effect, edits stay, no more separate measuring |
+| B | 304 impressions after the re-crawl, CTR 2.0% against 2.3% in the baseline | drop it |
+
+Group C had already met the condition set for 31 October: Googlebot on 8 of 8, 8 indexed, impressions on 7 of 8, 0 clicks.
+
 On 14 October, eleven days in, the 8 new URLs still had impressions on 6 and 0 clicks between them. Their average positions sat between 5 and 9.
 
 The bigger number did not move at all. Across the baseline, 36 of 377 new users came through a button on the site, which is 9.5%. In the test window it was 19 of 205, 9.3%. Almost all the rest came straight from inside Telegram, with no tag from the site.
 
-In general, a week judges new pages and cannot judge edits. If you run your own version, give the edited pages three weeks.
+In general, a week judges new pages and cannot judge edits. Two weeks judged them, and neither edit helped. If you run your own version, give the edited pages three weeks.

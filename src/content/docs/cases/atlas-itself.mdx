@@ -1,13 +1,15 @@
 ---
 title: This atlas, measured on itself
 description: Readings of the site you are reading, taken as it goes. Two days in Google had never heard of the home page; three days in it is indexed, and the impressions are still zero.
-updated: 2026-08-13
+updated: 2026-11-14
 sources:
   - Search Console, property atlas.smolevich.com, measured 2026-08-12
   - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
   - sitemap.xml, site atlas.smolevich.com, measured 2026-08-12
   - Search Console, property atlas.smolevich.com, measured 2026-08-13
   - Google Search, site atlas.smolevich.com, measured 2026-08-13
+  - Search Console API, property atlas.smolevich.com, measured 2026-11-14
+  - sitemap.xml, site atlas.smolevich.com, measured 2026-11-14
 ---
 
 import { Image } from 'astro:assets';
@@ -17,7 +19,7 @@ import serpIndexed from '../../../assets/screenshots/serp-site-atlas-indexed.png
 
 Every guide promises results in a few weeks. Almost none of them show what the first days look like, so when your own project is silent you have nothing to compare that silence with.
 
-This site went live on 10 August 2026. Here is everything it has two days later, and I will keep adding to this page monthly, including the months where nothing moved.
+This site went live on 10 August 2026. Here is everything it has two days later, and I promised to add to this page monthly, including the months where nothing moved. I skipped September and October, so the next reading is from 14 November.
 
 The first thing worth writing down arrived sooner than a month. So the tables below carry a second reading, taken on 13 August.
 
@@ -101,4 +103,17 @@ That last line is the one I keep coming back to: Google has read the map of this
 
 If your own project is two days old and quiet, this is what quiet looks like from the inside.
 
-Next measurement in a month, on this page, whatever it says.
+## Three months in: 14 November
+
+I skipped the monthly readings in September and October. This one I took on 14 November 2026.
+
+| What | 13 August | 14 November |
+|---|---|---|
+| URLs in the sitemap | 66 | 86 |
+| Impressions in Search Console, from 14 August to 11 November | 0 | 233 |
+| Clicks, same window | 0 | 2 |
+| Pages with at least one impression | 0 | 48 |
+
+Search Console had data up to 11 November on the day I read it. One page took 72 of the 233 impressions — [visibility inside a platform](/distribution/in-platform-visibility/), at an average position near 8.
+
+So three months in the site is visible and still nearly unclicked: 2 clicks in 90 days. I did not re-read the access log this time, so the agents table above is still the August one.

@@ -3,10 +3,11 @@ title: What one user costs when the product calls an AI
 sidebar:
   order: 1
 description: Variable cost per action, fixed cost per month, and break-even expressed in payers rather than percentages. How to measure the cost of an action instead of estimating it.
-updated: 2026-08-10
+updated: 2026-11-14
 sources:
-  - Usage and cost on the API response — https://openrouter.ai/docs/use-cases/usage-accounting
-  - Credit limits and rate limits — https://openrouter.ai/docs/api-reference/limits
+  - Voice AI bot database, measured 2026-11-14
+  - Usage and cost on the API response — https://openrouter.ai/docs/cookbook/administration/usage-accounting
+  - Credit limits and rate limits — https://openrouter.ai/docs/api_reference/limits
   - Telegram Stars for digital goods — https://core.telegram.org/bots/payments-stars
   - Telegram Bot Payments API — https://core.telegram.org/bots/payments
 ---
@@ -119,4 +120,6 @@ Make the default the cheapest engine that clears your quality bar. The default i
 - Say your break-even out loud as a whole number of payers this month. If you cannot, the model is not finished.
 - Re-run the revenue aggregation and confirm your own test purchase is absent from it.
 
-In practice the threshold at this size comes out small, and the payers come out missing. That is a demand problem rather than a cost problem, and it sends you back to [distribution](/distribution/) and to activation instead of another round of savings.
+In practice the threshold at this size comes out small, and in August my payers came out missing.
+
+By 14 November 11 people had paid since 5 October, and why that changed is on [getting the first person to pay](/money/first-payer/). That is a demand problem rather than a cost problem, and it sends you back to [distribution](/distribution/) and to activation instead of another round of savings.

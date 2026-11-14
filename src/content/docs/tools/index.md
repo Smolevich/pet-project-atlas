@@ -7,7 +7,7 @@ description: Start from the symptom you actually have. Each branch names the che
 
 Start from what you can see, not from the tool you already know.
 
-[What to run and when](/tools/skills/) is one table of tools: third-party skills, the browser MCP, the CLI, and this repository's four plugin commands, each row carrying its source and its licence.
+[What to run and when](/tools/skills/) is one table of tools: third-party skills, the browser MCP, the CLI, and this repository's three plugin commands plus `/voice`, each row carrying its source and its licence.
 
 [What a paid rank tracker measures](/tools/paid-tools/) reads one panel on live data: what the panel said, what my own Search Console said, and why the two instruments disagreed.
 

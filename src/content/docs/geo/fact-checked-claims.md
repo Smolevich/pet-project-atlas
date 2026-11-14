@@ -35,11 +35,11 @@ sources:
   - Google's guide to AI features, on llms.txt, schema and Merchant Center — https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
   - Scaled content abuse and link spam — https://developers.google.com/search/docs/essentials/spam-policies
   - Google's link spam update — https://developers.google.com/search/blog/2022/12/december-22-link-spam-update
-  - What Google-Extended controls — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - What Google-Extended controls — https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
   - What UTM parameters are for — https://support.google.com/analytics/answer/10917952
   - The AI report in Search Console — https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports
   - OpenAI's crawlers — https://developers.openai.com/api/docs/bots
-  - Anthropic's crawlers — https://support.claude.com/en/articles/8896518
+  - Anthropic's crawlers — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
   - Cloudflare's managed robots.txt — https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
   - The King of AEO press releases — https://edwardsturm.com/articles/king-of-aeo-seo-tactics/
   - A made-up brand and what assistants repeated — https://ahrefs.com/blog/ai-vs-made-up-brand-experiment/
@@ -138,7 +138,7 @@ These figures age fast: the data in most rows covers mid-2025 to autumn 2026. If
 | Hundreds of templated pages per query variant, including self-made "best X" lists, count as scaled content abuse. | [Google spam policies](https://developers.google.com/search/docs/essentials/spam-policies) |
 | Bought links and private blog networks get neutralised. | [Google spam policies](https://developers.google.com/search/docs/essentials/spam-policies), [link spam update](https://developers.google.com/search/blog/2022/12/december-22-link-spam-update) |
 | Google's own AI guide recommends keeping Merchant Center and the business profile current. | [Google](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) |
-| `Google-Extended` controls Gemini training and grounding. AI Overviews go through Googlebot, so the token does not decide whether you appear there. | [Google's crawlers](https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers) |
+| `Google-Extended` controls Gemini training and grounding. AI Overviews go through Googlebot, so the token does not decide whether you appear there. | [Google's crawlers](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers) |
 | UTM tags are for counting visits in analytics. They do not affect whether a page gets cited. | [Google Analytics](https://support.google.com/analytics/answer/10917952) |
 | Search Console got a report on impressions in AI features in June 2026. Since 31 August 2026 every site has it. | [Google](https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports) |
 
@@ -147,7 +147,7 @@ These figures age fast: the data in most rows covers mid-2025 to autumn 2026. If
 | What the source shows | Source |
 |---|---|
 | OpenAI runs `OAI-SearchBot` for search, `ChatGPT-User` for fetches on a user's request, and `GPTBot` for training. robots.txt may not apply to `ChatGPT-User`. | [OpenAI](https://developers.openai.com/api/docs/bots) |
-| Anthropic runs `ClaudeBot` for training, `Claude-SearchBot` for search and `Claude-User` for user fetches. Anthropic warns that blocking by IP may not work reliably. | [Anthropic](https://support.claude.com/en/articles/8896518) |
+| Anthropic runs `ClaudeBot` for training, `Claude-SearchBot` for search and `Claude-User` for user fetches. Anthropic warns that blocking by IP may not work reliably. | [Anthropic](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler) |
 | Cloudflare's managed robots.txt adds `Disallow` lines for `GPTBot`, `ClaudeBot` and `Google-Extended` on its own. A site can be closed to crawlers without the owner touching robots.txt. | [Cloudflare](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/) |
 
 ## False claims and trust

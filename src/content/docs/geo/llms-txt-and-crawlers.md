@@ -3,21 +3,21 @@ title: AI crawlers and llms.txt
 sidebar:
   order: 1
 description: Which AI agents visit a site, who owns them, where access is really decided, and what belongs in llms.txt.
-updated: 2026-08-13
+updated: 2026-11-14
 sources:
   - Cloudflare GraphQL Analytics, site atlas.smolevich.com, measured 2026-08-13
   - nginx access log, dataset 2026-07-19..2026-08-12, measured 2026-08-12
   - RFC 9309, the robots.txt standard — https://www.rfc-editor.org/rfc/rfc9309.html
   - OpenAI crawlers and what each does — https://developers.openai.com/api/docs/bots
   - Anthropic crawlers and how to block them — https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler
-  - Perplexity crawlers — https://docs.perplexity.ai/guides/bots
-  - Google's crawlers and their user agents — https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
+  - Perplexity crawlers — https://docs.perplexity.ai/docs/resources/perplexity-crawlers
+  - Google's crawlers and their user agents — https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
   - Google on AI features and snippets — https://developers.google.com/search/docs/appearance/ai-features
   - The Search generative AI control — https://support.google.com/webmasters/answer/16908024
   - Google announces the new owner controls — https://blog.google/products-and-platforms/products/search/new-controls-website-owners/
   - The llms.txt specification — https://llmstxt.org/
-  - Dark Visitors, a directory of AI agents — https://darkvisitors.com/
-  - Cloudflare's Block AI bots switch — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+  - Known Agents, formerly Dark Visitors, a directory of AI agents — https://knownagents.com/
+  - Cloudflare's AI Crawler and Agent access policies, checked 2026-11-14 — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
   - How Cloudflare classifies bots — https://developers.cloudflare.com/bots/concepts/bot/
   - Cloudflare's managed robots.txt — https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
   - Managing AI crawlers at the edge — https://developers.cloudflare.com/ai-crawl-control/features/manage-ai-crawlers/
@@ -103,11 +103,13 @@ The rule cuts both ways. Here is the half that bites: one stale group silently o
 
 Three layers sit under `robots.txt`: `X-Robots-Tag`, the meta tag, and the edge. None of them show in the file, so a CDN toggle, a WAF rule or a rate limit answers 403 while you keep editing a file nobody reads. A WAF is a firewall that matches HTTP requests.
 
-On Cloudflare the control is **Configure AI bot policies**, on the zone's **Security Settings** page, on every plan including Free. It sorts agents into Search, Agent and Training, and each group takes Allow, Block on all pages, or Block only on pages with ads.
+On Cloudflare the control is **AI Crawler and Agent access policies** — it used to be called **Configure AI bot policies**. It sits under **Security** → **Settings**, filter **Bot traffic**, on every plan including Free.
+
+It sorts agents into Search, Agent and Training, and each group takes Allow, Block, or Block on pages with ads. Training also takes Disallow, which only writes the refusal into `robots.txt`.
 
 Which agents land in each group is Cloudflare's own list, and it changes without you. Block is terminating: Cloudflare answers 403 from its own network and your server never sees the request.
 
-From 15 September 2026 a domain new to Cloudflare arrives with Training and Agent blocked on ad-bearing pages, and the older switch beside it, **Block AI bots**, retires the same day. Existing zones keep their settings, and you can opt out until then.
+When I checked Cloudflare's documentation on 2026-11-14, a new domain arrived with Allow on all three groups, Search, Agent and Training. In August the announced default was a block on Training and Agent, so read the panel itself and do not trust a date from someone's page, mine included.
 
 The same panel can charge instead of refusing: pay per crawl answers 402, and it is in closed beta.
 
@@ -219,7 +221,7 @@ Then check from outside:
   ```
 
   A `cf-ray` header means Cloudflare, and Vercel, Netlify and Fastly announce themselves the same way. With nothing in front, only your firewall and web server can refuse a crawler, and the checks below move there.
-- On Cloudflare, open **Security Settings** and read what **Configure AI bot policies** is set to. A default you never chose is still your setting.
+- On Cloudflare, open **Security Settings** and read what **AI Crawler and Agent access policies** is set to. A default you never chose is still your setting.
 - On Cloudflare, open **Analytics** → **Events** and filter the action to Block: agents refused there appear in no log on your own box. Other platforms keep their own edge log, and with none, a request either reached your server or vanished where you cannot see it.
 - Request a page as a crawler, from a network that is not yours, and check for 200.
 

@@ -3,13 +3,13 @@ title: Real crawler or fake one
 sidebar:
   order: 4
 description: A bot name in the User-Agent proves nothing. How Cloudflare confirms a crawler, what the free plan shows, a GraphQL query that splits real from fake, and one WAF rule — with thirty days of numbers from my own zone.
-updated: 2026-10-24
+updated: 2026-11-14
 sources:
   - Cloudflare GraphQL Analytics, site voice.smolevich.com, measured 2026-10-18
   - Cloudflare GraphQL Analytics, site smolevich.com, measured 2026-10-17
   - How Cloudflare verifies a bot — https://developers.cloudflare.com/bots/concepts/bot/verified-bots/
   - Reverse DNS and published IP lists — https://developers.cloudflare.com/bots/reference/bot-verification/ip-validation/
-  - The category names a verified bot gets — https://developers.cloudflare.com/bots/concepts/bot/verified-bots/categories/
+  - The category names a verified bot gets, now legacy — https://developers.cloudflare.com/bots/concepts/bot/verified-bots/#legacy-categories
   - The rule field cf.client.bot — https://developers.cloudflare.com/ruleset-engine/rules-language/fields/reference/cf.client.bot/
   - The rule field cf.verified_bot_category — https://developers.cloudflare.com/ruleset-engine/rules-language/fields/reference/cf.verified_bot_category/
   - Rule operators, and which plans get regex — https://developers.cloudflare.com/ruleset-engine/rules-language/operators/
@@ -25,7 +25,7 @@ sources:
   - Cloudflare GraphQL firewall events, site smolevich.com, measured 2026-10-24
   - Anthropic's published outbound IP addresses — https://platform.claude.com/docs/en/api/ip-addresses
   - Anthropic's crawler list bots.json — https://claude.com/crawling/bots.json
-  - Who announces each part of 160.79.104.0/21, RIPEstat — https://stat.ripe.net/160.79.104.0/21
+  - Who announces each part of 160.79.104.0/21, RIPEstat — https://stat.ripe.net/resource/160.79.104.0/21
   - Who owns 160.79.104.0/21, ARIN — https://search.arin.net/rdap/?query=160.79.104.0
 ---
 
@@ -51,7 +51,11 @@ Cloudflare keeps a list of verified bots. A bot owner registers a User-Agent pat
 
 There are three ways to prove it: a published list of IP ranges that Cloudflare fetches, reverse DNS — the IP resolves back to a domain the owner named, like `googlebot.com` — or a cryptographic signature on each request, called Web Bot Auth.
 
-A request that passes gets a category: `Search Engine Crawler`, `AI Crawler`, `AI Assistant`, `AI Search` and a dozen more. A request that fails the check, or comes from a bot that never registered, gets an empty category, and that empty field is the whole test I use.
+A request that passes gets a category: `Search Engine Crawler`, `AI Crawler`, `AI Assistant`, `AI Search` and a dozen more.
+
+Since 1 July 2026 Cloudflare files bots under a new taxonomy — Search, Agent, Training, plus Direct or Intermediary for who operates the bot — and calls these names legacy categories, checked 2026-11-14. The legacy names still work in the **Traffic** filter and in WAF rules, so everything below holds.
+
+A request that fails the check, or comes from a bot that never registered, gets an empty category, and that empty field is the whole test I use.
 
 One bot fails it on purpose. In August 2025 Cloudflare de-listed Perplexity as a verified bot, after catching it crawling under undeclared names. So every PerplexityBot request is unconfirmed, the real ones included.
 
@@ -187,7 +191,7 @@ Anthropic's crawler list `bots.json` does not help here. It holds 216.73.216.0/2
 
 Why a subnet and not an ASN. RIPEstat shows the /21 announced by three networks: 160.79.106.0/24 by AS396982 (Google Cloud), 160.79.104.0/23 by AS399358 (Anthropic) and 160.79.108.0/22 by AS16509 (Amazon). Claude-User comes from the Google Cloud part. The fakes come from AS396982 too, so an exception by ASN would let them in.
 
-The fakes also give themselves away in the signature. The real one ends its User-Agent with `+claude-user@anthropic.com`. The fake from Google Cloud wrote `+claudebot@anthropic.com`.
+The fakes also give themselves away in the signature. <!--email_off-->The real one ends its User-Agent with `+claude-user@anthropic.com`. The fake from Google Cloud wrote `+claudebot@anthropic.com`.<!--/email_off-->
 
 The week of 17–23 October, from sampled firewall events:
 

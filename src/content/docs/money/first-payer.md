@@ -3,16 +3,21 @@ title: Getting the first person to pay
 sidebar:
   order: 4
 description: Break-even comes out as a small whole number of payers and none of them exist. Picking a price without a study, where the wall goes in a free tier, and the difference between nobody paying and nobody being asked.
-updated: 2026-08-12
+updated: 2026-11-14
 sources:
+  - Voice AI bot database, measured 2026-11-14
   - Telegram Stars for digital goods — https://core.telegram.org/bots/payments-stars
 ---
 
 ## What we are solving
 
-The money route ends at a diagnosis. Break-even comes out as a small whole number of payers, and the count of payers is zero.
+The money route ends at a diagnosis. Break-even comes out as a small whole number of payers, and in August 2026 my count of payers was zero.
 
 A product nobody pays for and a product nobody has been asked to pay for look identical from the dashboard: no revenue either way, and both feel like a verdict. Only one is. Telling them apart costs one question you have not asked.
+
+By 14 November it had moved.
+
+From 5 October to 7 November 11 people paid my voice bot, 18 payments, not counting my own and test accounts. In the same weeks I added a $2 pack, new users came faster than before, and the first referral invites went out. The data does not tell me which of the three brought the payers, so I am not crediting any of them.
 
 ```mermaid
 flowchart TD
