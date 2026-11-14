@@ -3,15 +3,16 @@ title: What to run and when
 sidebar:
   order: 1
 description: The audit skills, the browser driver and the CLI this atlas points at — what each one does, when it earns the time, where it came from and under what licence.
-updated: 2026-08-18
+updated: 2026-11-14
 sources:
   - marketingskills, source of seo-audit — https://github.com/coreyhaines31/marketingskills
   - geo-seo-claude, source of the GEO skills — https://github.com/zubair-trabzada/geo-seo-claude
   - Playwright MCP server — https://github.com/microsoft/playwright-mcp
   - gws, the Workspace command line — https://github.com/googleworkspace/cli
   - Semrush, the one paid tool here — https://www.semrush.com/
-  - The skills directory and its CLI — https://skills.sh/
+  - The skills directory and its CLI — https://www.skills.sh/
   - This repository and its plugin — https://github.com/Smolevich/pet-project-atlas
+  - LaVioLab Atlas in the ChatGPT plugin directory — https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597
 ---
 
 ## What we are solving
@@ -95,7 +96,7 @@ Search Console and Analytics are not in it. The failure below is me finding that
 
 ### How the three /laviolab-atlas: commands get installed
 
-The plugin is LaVioLab Atlas, published by Stanislav Shupilkin at LaVioLab, free and open source under the MIT licence. It holds three skills and nothing else: no server, no scripts, no account to connect.
+The plugin is LaVioLab Atlas, published by Stanislav Shupilkin at LaVioLab, free and open source under the MIT licence. It holds three skills and one read-only MCP server — a small service the skills call to search the atlas pages. No scripts, no login, no account to connect.
 
 Two lines in Claude Code — add this repository as a marketplace, then install the plugin:
 
@@ -113,11 +114,13 @@ codex plugin add laviolab-atlas@pet-project-atlas
 
 Codex has no `/laviolab-atlas:` prefix. It picks a skill by its description, so ask in plain words: where do I start with SEO, make me a content plan, what moved this week.
 
+In ChatGPT the plugin is listed in the public plugin directory, checked on 2026-11-14: open [LaVioLab Atlas in ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597) and add it. There is no prefix there either, so ask in plain words, like in Codex. ChatGPT cannot read your disk, so `start` asks you to paste the two audit reports and `report` returns the weekly block as text.
+
 The auditing stays with the third-party skills above, and that is deliberate. `/laviolab-atlas:start` checks nothing itself: it decides which third-party skill to run and in what order to read what they return.
 
 `/laviolab-atlas:report` works from files only. You download the Performance export with a comparison and the Page indexing totals from Search Console, add your product's own export, and hand over the paths. No Cloud project, no token, no browser driven on your behalf.
 
-None of the three pre-approves a shell command or an MCP tool, so the plugin asks before it runs anything beyond reading and writing files.
+None of the three pre-approves a shell command or an MCP tool, so the plugin asks before it runs anything beyond reading files.
 
 The other two do their own work, but none of it is auditing: `/laviolab-atlas:content-plan` builds clusters, `/laviolab-atlas:report` reads your exports. That is cheaper to keep alive than a second audit engine.
 

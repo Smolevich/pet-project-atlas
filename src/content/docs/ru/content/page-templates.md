@@ -4,7 +4,7 @@ description: Ответ в первых трёх предложениях, вы�
 updated: 2026-08-12
 sources:
   - Изменения в HowTo и FAQ-сниппетах — https://developers.google.com/search/blog/2023/08/howto-faq-changes
-  - FAQ-сниппет убрали из выдачи — https://developers.google.com/search/docs/appearance/structured-data/faqpage
+  - FAQ-сниппет убрали из выдачи — https://developers.google.com/search/updates#removing-faq-rich-result
   - Google про полезный контент — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 ---
 

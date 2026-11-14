@@ -4,7 +4,7 @@ description: The answer in the first three sentences, executable steps, a failur
 updated: 2026-08-12
 sources:
   - Changes to HowTo and FAQ rich results — https://developers.google.com/search/blog/2023/08/howto-faq-changes
-  - FAQ rich result removed — https://developers.google.com/search/docs/appearance/structured-data/faqpage
+  - FAQ rich result removed — https://developers.google.com/search/updates#removing-faq-rich-result
   - Google on helpful content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 ---
 

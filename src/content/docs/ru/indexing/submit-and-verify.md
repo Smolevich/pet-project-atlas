@@ -10,10 +10,10 @@ sources:
   - Отчёт Page indexing — https://support.google.com/webmasters/answer/7440203
   - Инструмент URL Inspection — https://support.google.com/webmasters/answer/9012289
   - Как собрать и отдать sitemap — https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-  - Рекомендации Bing Webmaster Tools — https://www.bing.com/webmasters/help/webmasters-guidelines-30fba23a
+  - Рекомендации Bing Webmaster Tools — https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a
   - IndexNow, ключ и API — https://www.indexnow.org/documentation
   - FAQ IndexNow, какие системы участвуют — https://www.indexnow.org/faq
-  - Справка Yandex Webmaster — https://yandex.com/support/webmaster/
+  - Справка Yandex Webmaster — https://yandex.com/support/webmaster/en/
 ---
 
 ## Что решаем

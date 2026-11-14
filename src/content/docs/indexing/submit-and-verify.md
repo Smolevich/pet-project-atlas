@@ -10,10 +10,10 @@ sources:
   - Page indexing report — https://support.google.com/webmasters/answer/7440203
   - URL Inspection tool — https://support.google.com/webmasters/answer/9012289
   - Building and submitting a sitemap — https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-  - Bing Webmaster Tools guidelines — https://www.bing.com/webmasters/help/webmasters-guidelines-30fba23a
+  - Bing Webmaster Tools guidelines — https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a
   - IndexNow, the key and the API — https://www.indexnow.org/documentation
   - IndexNow FAQ, which engines take it — https://www.indexnow.org/faq
-  - Yandex Webmaster help — https://yandex.com/support/webmaster/
+  - Yandex Webmaster help — https://yandex.com/support/webmaster/en/
 ---
 
 ## What we are solving

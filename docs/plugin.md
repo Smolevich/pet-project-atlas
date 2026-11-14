@@ -84,6 +84,12 @@ pre-approve only `Read` in `allowed-tools`: the Claude directory accepts entries
 Glob and LS only from Verified organizations, and 0.3.0 was refused for `Skill`, `Write` and
 `WebFetch`. The OpenAI plugin guidelines forbid collecting credentials.
 
+**Where it is listed.** Version 0.3.0 is published in the public ChatGPT plugin directory (OpenAI
+dashboard, 2026-11-14): https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597.
+The repo is at 0.3.1. The directory serves only what was submitted, so **a new version means a new
+ZIP submitted through the portal**; merging to `main` changes nothing in ChatGPT. The Claude directory
+has not published the plugin: 0.3.0 was refused there (see above).
+
 **Renaming a heading in `SKILL.md` breaks the build** when an override points at it. That is on
 purpose: otherwise ChatGPT would quietly keep the old text. Fix the override in the same change.
 

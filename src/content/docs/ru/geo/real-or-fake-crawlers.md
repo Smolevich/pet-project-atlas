@@ -3,13 +3,13 @@ title: Настоящий краулер или подделка
 sidebar:
   order: 4
 description: Имя бота в User-Agent ничего не доказывает. Как Cloudflare подтверждает краулер, что видно на бесплатном тарифе, запрос GraphQL, который отделяет настоящих от подделок, и одно правило WAF — с цифрами за тридцать дней по моей зоне.
-updated: 2026-10-24
+updated: 2026-11-14
 sources:
   - Cloudflare GraphQL Analytics, site voice.smolevich.com, measured 2026-10-18
   - Cloudflare GraphQL Analytics, site smolevich.com, measured 2026-10-17
   - Как Cloudflare подтверждает бота — https://developers.cloudflare.com/bots/concepts/bot/verified-bots/
   - Обратный DNS и опубликованные списки IP — https://developers.cloudflare.com/bots/reference/bot-verification/ip-validation/
-  - Какие категории получает подтверждённый бот — https://developers.cloudflare.com/bots/concepts/bot/verified-bots/categories/
+  - Какие категории получает подтверждённый бот, теперь legacy — https://developers.cloudflare.com/bots/concepts/bot/verified-bots/#legacy-categories
   - Поле правил cf.client.bot — https://developers.cloudflare.com/ruleset-engine/rules-language/fields/reference/cf.client.bot/
   - Поле правил cf.verified_bot_category — https://developers.cloudflare.com/ruleset-engine/rules-language/fields/reference/cf.verified_bot_category/
   - Операторы правил и на каких тарифах regex — https://developers.cloudflare.com/ruleset-engine/rules-language/operators/
@@ -25,7 +25,7 @@ sources:
   - Cloudflare GraphQL firewall events, site smolevich.com, measured 2026-10-24
   - Опубликованные исходящие адреса Anthropic — https://platform.claude.com/docs/en/api/ip-addresses
   - Список краулеров Anthropic bots.json — https://claude.com/crawling/bots.json
-  - Кто анонсирует части 160.79.104.0/21, RIPEstat — https://stat.ripe.net/160.79.104.0/21
+  - Кто анонсирует части 160.79.104.0/21, RIPEstat — https://stat.ripe.net/resource/160.79.104.0/21
   - Чей блок 160.79.104.0/21, ARIN — https://search.arin.net/rdap/?query=160.79.104.0
 ---
 
@@ -51,7 +51,11 @@ User-Agent — это то, что клиент решил отправить, �
 
 Способов три: опубликованный список диапазонов IP, который Cloudflare забирает сам, обратный DNS — IP резолвится обратно в домен, названный владельцем, например `googlebot.com`, — или криптографическая подпись на каждом запросе, она называется Web Bot Auth.
 
-Запрос, прошедший проверку, получает категорию: `Search Engine Crawler`, `AI Crawler`, `AI Assistant`, `AI Search` и ещё с десяток. Запрос, который проверку не прошёл или пришёл от незарегистрированного бота, получает пустую категорию, и это пустое поле — весь мой тест.
+Запрос, прошедший проверку, получает категорию: `Search Engine Crawler`, `AI Crawler`, `AI Assistant`, `AI Search` и ещё с десяток.
+
+С 1 июля 2026 Cloudflare раскладывает ботов по новой схеме — Search, Agent, Training и ещё Direct или Intermediary, то есть кто управляет ботом, — а эти имена называет legacy categories, проверено 2026-11-14. В фильтре **Traffic** и в правилах WAF старые имена работают, так что всё ниже в силе.
+
+Запрос, который проверку не прошёл или пришёл от незарегистрированного бота, получает пустую категорию, и это пустое поле — весь мой тест.
 
 Один бот не проходит его нарочно: в августе 2025 Cloudflare убрал Perplexity из подтверждённых ботов, после того как поймал его на обходе сайтов под необъявленными именами. Так что любой запрос PerplexityBot неподтверждённый, настоящий тоже.
 
@@ -185,7 +189,7 @@ and not (http.user_agent contains "Claude-User"
 
 Почему подсеть, а не ASN. По RIPEstat этот /21 анонсируют три сети: 160.79.106.0/24 — AS396982 (Google Cloud), 160.79.104.0/23 — AS399358 (Anthropic), 160.79.108.0/22 — AS16509 (Amazon). Claude-User ходит из части Google Cloud, но с того же AS396982 идут и подделки, так что исключение по ASN пропустило бы их вместе с настоящим Claude.
 
-Подделку видно и по подписи в конце User-Agent, если присмотреться. Настоящий заканчивает User-Agent на `+claude-user@anthropic.com`. Поддельный из Google Cloud писал `+claudebot@anthropic.com`.
+Подделку видно и по подписи в конце User-Agent, если присмотреться. <!--email_off-->Настоящий заканчивает User-Agent на `+claude-user@anthropic.com`. Поддельный из Google Cloud писал `+claudebot@anthropic.com`.<!--/email_off-->
 
 Неделя 17–23 октября, по выборке событий файрвола:
 
