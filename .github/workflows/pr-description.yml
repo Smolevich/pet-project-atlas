@@ -1,0 +1,43 @@
+name: PR description
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  pr-description:
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require What / Why / Checks sections
+        env:
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # Template hints are HTML comments; a section holding only a hint counts as empty.
+          body=$(printf '%s' "$BODY" | tr -d '\r' | perl -0pe 's/<!--.*?-->//gs')
+          if [ -z "$(printf '%s' "$body" | tr -d '[:space:]')" ]; then
+            echo "::error::PR description is empty. Add sections: ## What, ## Why, ## Checks."
+            exit 1
+          fi
+          failed=0
+          for section in What Why Checks; do
+            if ! printf '%s\n' "$body" | grep -qE "^## ${section}[[:space:]]*$"; then
+              echo "::error::Missing heading '## ${section}'."
+              failed=1
+              continue
+            fi
+            # Text between this heading and the next '## ' heading must be non-blank.
+            content=$(printf '%s\n' "$body" | awk -v h="## ${section}" '
+              $0 ~ "^"h"[[:space:]]*$" { inside = 1; next }
+              inside && /^## / { exit }
+              inside { print }
+            ' | tr -d '[:space:]')
+            if [ -z "$content" ]; then
+              echo "::error::Section '## ${section}' has no text."
+              failed=1
+            fi
+          done
+          exit $failed
