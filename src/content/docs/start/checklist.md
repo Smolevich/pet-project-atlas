@@ -21,7 +21,7 @@ If a line makes you ask why, the answer is on the page it links to. I wrote the 
 - [ ] Search the platform your product lives in, from an account that never used it — [words](/demand/how-people-search/)
 - [ ] Read a zero on your most obvious phrase as a finding, not a glitch. Either nobody has this problem, or you invented the word — [words](/demand/how-people-search/)
 - [ ] Name the paid competitor. Count the ads on the query, and write down the free path — [paying](/demand/will-they-pay/)
-- [ ] Fetch a page with `curl -sL` from outside, without cookies. Find your own text in the response — [blockers](/indexing/why-google-does-not-see-you/)
+- [ ] Fetch a page with `curl -sL` from outside, without cookies. Look for your text in the initial HTML; if it is missing, check Google’s rendered HTML in URL Inspection — [blockers](/indexing/why-google-does-not-see-you/)
 - [ ] Read `robots.txt`, then check `noindex` in the tag and in the header. No browser shows you the header — [blockers](/indexing/why-google-does-not-see-you/)
 - [ ] Point every canonical at its own page. Redirect URL variants to one form. Canonical is the tag that names the real URL of a page — [blockers](/indexing/why-google-does-not-see-you/)
 - [ ] Verify a domain property in Search Console and submit the sitemap once. Import the same property into Bing. A URL-prefix property covers only the form you typed — [submit](/indexing/submit-and-verify/)

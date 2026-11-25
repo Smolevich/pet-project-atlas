@@ -20,9 +20,9 @@ codex plugin marketplace add Smolevich/pet-project-atlas
 codex plugin add laviolab-atlas@pet-project-atlas
 ```
 
-In ChatGPT, add [LaVioLab Atlas from the plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597). There is no command prefix there: ask in plain words, as in Codex.
+In ChatGPT, add [LaVioLab Atlas from the plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597). Ask in plain words. For the start workflow, provide completed SEO and GEO audit reports. The ChatGPT plugin does not run those audits from a URL.
 
-## Commands
+## Claude Code commands
 
 | Command | What it does |
 |---|---|

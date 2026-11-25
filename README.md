@@ -52,9 +52,9 @@ codex plugin marketplace add Smolevich/pet-project-atlas
 codex plugin add laviolab-atlas@pet-project-atlas
 ```
 
-In ChatGPT, add [LaVioLab Atlas from the plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597). There is no command prefix there: ask in plain words, as in Codex.
+In ChatGPT, add [LaVioLab Atlas from the plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597). Ask in plain words. For the start workflow, give ChatGPT the two completed audit reports (SEO and GEO); it does not run the audits from a URL.
 
-That gives you three commands. `/laviolab-atlas:start` walks a live URL through the route and calls the audit skills at the right points. `/laviolab-atlas:content-plan` turns a project description and a query export into clusters. `/laviolab-atlas:report` reads a weekly slice from your Search Console and product exports. A fourth skill, `/voice`, brings a draft in line with `STYLE.md` before the linter sees it; it lives in [`.claude/skills/`](.claude/skills/) and works only inside this repository.
+In Claude Code, `/laviolab-atlas:start` takes a live URL and runs the separately installed SEO and GEO audit skills. `/laviolab-atlas:content-plan` turns a project description and a query export into clusters. `/laviolab-atlas:report` reads a weekly slice from your Search Console and product exports. A fourth skill, `/voice`, brings a draft in line with `STYLE.md` before the linter sees it; it lives in [`.claude/skills/`](.claude/skills/) and works only inside this repository.
 
 The plugin is **LaVioLab Atlas** and lives in [`plugin/`](plugin/), with its own [README](plugin/README.md) and [privacy note](https://atlas.smolevich.com/privacy/). [Tools](https://atlas.smolevich.com/tools/skills/) says which one to run for which symptom.
 
