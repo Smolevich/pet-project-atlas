@@ -48,8 +48,8 @@ skills in `start`, fetching a public page in `content-plan`, writing a file in `
 
 - **`start`** looks for `seo-audit` and `geo-audit` among your skills, reading their `SKILL.md` in
   `~/.agents/skills/`, `~/.claude/skills/` and `./.claude/skills/`, and runs them on the URL you give it.
-  **It never installs anything.** If an audit is missing, it prints the `npx skills add -g …` line and
-  stops; you decide whether to install third-party code. Those audits are maintained by other people
+  **It never installs anything.** If an audit is missing, it links the audit's repository, asks you to
+  review the source and install it from that README, and stops; you decide whether to install third-party code. Those audits are maintained by other people
   (`coreyhaines31/marketingskills`, `zubair-trabzada/geo-seo-claude`) and are not part of this plugin.
 - **`content-plan`** reads files you hand it, such as a query export, and may fetch public pages you
   name. It writes the plan as a markdown file in your project, so you can commit it next to the pages.

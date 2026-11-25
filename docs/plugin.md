@@ -51,8 +51,7 @@ inventing its own checks when the audits are missing, ordering findings by score
 rung, and `/laviolab-atlas:report` demanding a Cloud project and a token for numbers the author
 could export in a minute.
 
-They need `claude plugin eval`, which is early access and rolled out per organization. Where the
-rollout has not arrived, `CLAUDE_CODE_WALNUT_SPIRE=1` turns it on. See
+They need `claude plugin eval`, which is early access and rolled out per organization. See
 [plugin/evals/README.md](../plugin/evals/README.md).
 
 ## The ChatGPT build
@@ -82,11 +81,12 @@ audits; `report` hands back the weekly block as markdown instead of appending it
 `report` reads Search Console exports in both builds and never asks for a token. Since 0.3.1 the skills
 pre-approve only `Read` in `allowed-tools`: the Claude directory accepts entries beyond Read, Grep,
 Glob and LS only from Verified organizations, and 0.3.0 was refused for `Skill`, `Write` and
-`WebFetch`. The OpenAI plugin guidelines forbid collecting credentials.
+`WebFetch`. 0.3.2 adds `privacyPolicyUrl` to the Claude manifest and drops ready-to-paste
+install commands from `start` and the eval docs: the directory scan flags download-and-run commands. The OpenAI plugin guidelines forbid collecting credentials.
 
 **Where it is listed.** Version 0.3.0 is published in the public ChatGPT plugin directory (OpenAI
 dashboard, 2026-11-14): https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597.
-The repo is at 0.3.1. The directory serves only what was submitted, so **a new version means a new
+The repo is at 0.3.2. The directory serves only what was submitted, so **a new version means a new
 ZIP submitted through the portal**; merging to `main` changes nothing in ChatGPT. The Claude directory
 has not published the plugin: 0.3.0 was refused there (see above).
 

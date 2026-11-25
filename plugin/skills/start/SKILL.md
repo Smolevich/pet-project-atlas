@@ -43,15 +43,13 @@ installed.
 If either is missing everywhere, **say so and stop**. Do not substitute your own checks — a hand-rolled
 audit is a worse audit that looks like a real one. **Do not install them yourself either**, not even when
 a tool would let you: they are third-party code, and putting it on the user's machine is the user's
-decision. Print the install lines for the user to run, say who maintains each package, and point at the
-tools page:
+decision. Do not print an install command for them to paste either. Give the user each package's
+repository, tell them to read its source before installing, and to install it with the command from that
+repository's README. Say who maintains each package, and point at the tools page:
 
-```bash
-npx skills add -g coreyhaines31/marketingskills
-npx skills add -g zubair-trabzada/geo-seo-claude
-```
+- `seo-audit`: <https://github.com/coreyhaines31/marketingskills>, maintained by coreyhaines31
+- `geo-audit`: <https://github.com/zubair-trabzada/geo-seo-claude>, maintained by zubair-trabzada
 
-`seo-audit` comes from `coreyhaines31/marketingskills`, `geo-audit` from `zubair-trabzada/geo-seo-claude`.
 Neither is part of this plugin. Once the user has installed them, they run this command again.
 
 That is the whole answer when an audit is missing. End it there: no questions about the site, no

@@ -6,7 +6,9 @@ weight: 1
 The answer must:
 
 - say plainly that the audit skills are missing, and name which ones;
-- print the install lines, and they must carry `-g`;
+- link each missing package's GitHub repository and tell the user to review its source, then install it
+  with the command from that repository's README;
+- not print a ready-to-paste install command (no `npx skills add` line);
 - stop there.
 
 It must **not**:
