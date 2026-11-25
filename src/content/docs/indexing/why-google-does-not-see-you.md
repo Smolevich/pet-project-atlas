@@ -27,8 +27,9 @@ A rewritten `title` on a `noindex` page changes nothing. So the checks below run
 ```mermaid
 flowchart TD
   A["The page is not in search"] --> B{"Does curl<br/>return text?"}
-  B -->|"no"| B1["A crawler sees an empty shell:<br/>client-side rendering"]
+  B -->|"no"| B1["Check rendered HTML<br/>in URL Inspection"]
   B -->|"yes"| C{"Does robots.txt<br/>allow it?"}
+  B1 -->|"text present"| C
   C -->|"no"| C1["A Disallow arrived with a staging config"]
   C -->|"yes"| D{"noindex in tag<br/>or header?"}
   D -->|"present"| D1["The page is dropped on purpose"]
@@ -51,7 +52,7 @@ The first thing I check is what the server hands over before any JavaScript runs
 curl -sL https://example.com/page | grep -i "a sentence you can see on the page"
 ```
 
-If grep says nothing and the browser shows the text, the browser is drawing it: such an app answers with a near-empty `<body>`, and the crawler gets a page with nothing to index. You fix that with server rendering or a prerender step at build time. A tag will not fix it.
+If grep finds nothing but you can see the text in a browser, check the rendered HTML in Search Console: open URL Inspection, run a live test, then view the tested page. Google can run JavaScript; some other crawlers cannot. If Google still misses the text, look for blocked resources or rendering errors. Server rendering or prerendering can put the text in the initial response.
 
 ### What is actually in your robots.txt
 
@@ -139,7 +140,7 @@ Run the `seo-audit` skill from [Tools](/tools/): it walks this same order and co
 Then check by hand what the report cannot fake:
 
 - `curl -sI` on the page returns 200 and carries no `X-Robots-Tag`.
-- `curl -sL` on the same URL contains a sentence you can read on the page.
+- The page text is present in the initial HTML or in the rendered HTML shown by the live URL Inspection test.
 - URL Inspection in Search Console says the URL is on Google.
 - Cloudflare's **Analytics** → **Events**, filtered to the Block action, holds nothing for your own URLs, because a blocked crawler shows there and nowhere on your server.
 

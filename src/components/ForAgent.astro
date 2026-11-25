@@ -32,6 +32,10 @@ const installLink = isRu ? 'как поставить плагин' : 'how to in
 const chatgptHref = 'https://chatgpt.com/plugins/plugin_asdk_app_6ae7ba73a20c819194ad481a9bf41597';
 const chatgptLead = isRu ? 'или' : 'or';
 const chatgptLink = isRu ? 'добавьте его из каталога ChatGPT' : 'add it from the ChatGPT directory';
+const chatgptStartNote = isRu
+  ? 'В ChatGPT для start нужны два готовых отчёта: SEO и GEO. По одной ссылке плагин аудит не запустит.'
+  : 'In ChatGPT, give start your SEO and GEO audit reports. The plugin does not run the audits from a URL.';
+const isStart = run === '/laviolab-atlas:start';
 ---
 
 <aside class="atlas-for-agent">
@@ -42,6 +46,7 @@ const chatgptLink = isRu ? 'добавьте его из каталога ChatGP
   <p class="atlas-for-agent-install">
     {installLead} <a href={installHref}>{installLink}</a>, {chatgptLead} <a href={chatgptHref}>{chatgptLink}</a>.
   </p>
+  {isStart && <p class="atlas-for-agent-install">{chatgptStartNote}</p>}
 </aside>
 
 <style>

@@ -9,13 +9,13 @@ sources:
 
 import ForAgent from '../../../components/ForAgent.astro';
 
-Below is the order I did this in, and under each step what it costs to do that step at the wrong moment. Each of those costs is one I paid. If you would rather tick boxes than read reasons, take [the checklist](/start/checklist/).
+Below is the order I did this in, and under each step what it costs to do that step at the wrong moment. Each of those costs is one I paid. If your project is live and you are not sure what has failed, start with [the checklist](/start/checklist/). If you know the symptom, use [Tools](/tools/) to find the relevant check.
 
 One thing comes before step one. You have to be able to say what you are building and how it differs from what is already on sale. If you cannot say it yet, start there: [where a niche starts when everything is taken](/demand/pick-a-niche/).
 
 Everything below assumes you have that answer. And this is my log rather than a method: your numbers will come out different, but the order is the part I hope saves you a month.
 
-<ForAgent run="/laviolab-atlas:start" does="walks a project through the route, runs the audits at the right points and names three things to do this week" />
+<ForAgent run="/laviolab-atlas:start" does="runs the installed SEO and GEO audit skills in Claude Code, then picks three things to do this week" />
 
 ## What we are solving
 
@@ -63,7 +63,7 @@ This takes a day or two, all of it in a browser, and it decides whether the rest
 
 ### Once there is a live domain — can a crawler read the site, and does anyone know it is there
 
-8. Run `curl -sL` on your own page and look for the body text in the response, because text that is missing there is text the crawler never sees — [Google does not see your site](/indexing/why-google-does-not-see-you/).
+8. Run `curl -sL` on your own page and look for the body text in the response, to check the initial HTML. If the text is missing, inspect the rendered page in Google Search Console before deciding what to fix — [Google does not see your site](/indexing/why-google-does-not-see-you/).
 9. Read `robots.txt` on the live domain, every line of it, because one line closes the whole domain: a `Disallow: /` that came over from a staging config — [same page](/indexing/why-google-does-not-see-you/).
 10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header. It drops the page from the index on purpose, and no browser shows you that header — [same page](/indexing/why-google-does-not-see-you/).
 11. Check that the canonical on a few pages points at those pages. It names the real URL, so aiming it at the home page asks search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
