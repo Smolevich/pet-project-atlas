@@ -52,7 +52,9 @@ The first thing I check is what the server hands over before any JavaScript runs
 curl -sL https://example.com/page | grep -i "a sentence you can see on the page"
 ```
 
-If grep finds nothing but you can see the text in a browser, check the rendered HTML in Search Console: open URL Inspection, run a live test, then view the tested page. Google can run JavaScript; some other crawlers cannot. If Google still misses the text, look for blocked resources or rendering errors. Server rendering or prerendering can put the text in the initial response.
+If my browser shows the text but grep finds nothing, I look at the rendered HTML in Search Console. It is under View tested page after a live URL Inspection test.
+
+Google can run JavaScript; some other crawlers cannot. If Google still misses the text, look for blocked resources or rendering errors. Server rendering or prerendering can put the text in the initial response.
 
 ### What is actually in your robots.txt
 
