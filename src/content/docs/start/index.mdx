@@ -67,11 +67,11 @@ This takes a day or two, all of it in a browser, and it decides whether the rest
 9. Read `robots.txt` on the live domain, every line of it, because one line closes the whole domain: a `Disallow: /` that came over from a staging config — [same page](/indexing/why-google-does-not-see-you/).
 10. Check `noindex` in the meta tag and in the `X-Robots-Tag` header. It drops the page from the index on purpose, and no browser shows you that header — [same page](/indexing/why-google-does-not-see-you/).
 11. Check that the canonical on a few pages points at those pages. It names the real URL, so aiming it at the home page asks search to discard the rest — [same page](/indexing/why-google-does-not-see-you/).
-12. Request one page from outside your network, without cookies. Your own network is trusted, so an edge rule that blocks the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/).
+12. Request one page from outside your network, without cookies. Your own network is trusted, so an edge rule that blocks the crawler stays invisible from home — [same page](/indexing/why-google-does-not-see-you/). If the edge itself is the question, read [what the free Cloudflare plan gives you](/indexing/cloudflare-free/).
 13. Verify a domain property in Search Console and submit the sitemap once. A URL-prefix property covers only the form you typed, and its report then stays empty — [submit and verify](/indexing/submit-and-verify/).
 14. Import the property into Bing Webmaster Tools. Its index also feeds Copilot answers, and those readers are a separate audience — [submit and verify](/indexing/submit-and-verify/).
 15. Serve `User-agent: *` and `Allow: /`, and name an agent only to block it: an allow-list expires the first time a vendor renames something. This site has never named one to allow it — [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
-16. **First crossing.** Tag every outbound link and store the source on first contact. A messenger or a store passes no source unless you ask for it — [where the user came from](/analytics/attribution/).
+16. **First crossing.** Put a UTM value or its deep-link equivalent on every outbound link and store the source on first contact. A messenger or a store passes no source unless you ask for it — [where the user came from](/analytics/attribution/).
 17. Name the single action that counts as activation. Activation is the one thing a user does that proves the product worked — [the numbers worth reading weekly](/analytics/what-to-measure/).
 
 Step sixteen belongs to section six, and you have to do it now. You cannot reconstruct attribution afterwards.

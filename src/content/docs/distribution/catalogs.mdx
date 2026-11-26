@@ -1,13 +1,14 @@
 ---
 title: Where the first external links come from
 description: The venues that exist, the card you prepare once, how to tell a live directory from an abandoned one, and why mass submission wastes the week.
-updated: 2026-08-10
+updated: 2026-11-26
 sources:
   - What Google counts as link spam — https://developers.google.com/search/docs/essentials/spam-policies
   - Wikidata inclusion rules — https://www.wikidata.org/wiki/Wikidata:Notability
 ---
 
 import { Image } from 'astro:assets';
+import Faq from '../../../components/Faq.astro';
 import serpRu from '../../../assets/screenshots/serp-ru-rasshifrovka.png';
 
 ## What we are solving
@@ -16,7 +17,7 @@ The pages are written and the site is technically clean. It still sits on page t
 
 You are missing authority off your own domain. Nothing you do on the domain builds it.
 
-The first move is a handful of places that confirm the project exists at all: a model reads those same listings long before it reads your site.
+The first move is a handful of places that confirm the project exists outside its own domain. Search and assistants can then see the same name and category on independent pages.
 
 Here is page one for a query my own bot answers, read on 13 August 2026:
 
@@ -30,7 +31,7 @@ Sort the venues before you touch any of them, because each one costs you the sam
 
 | Kind | Examples | What it buys |
 |---|---|---|
-| Entity anchors | Wikidata, structured knowledge bases | Recognition as a thing, which every AI answer needs first |
+| Entity anchors | Wikidata, structured knowledge bases | A stable identifier that connects mentions of the same project |
 | Category directories and review sites | Software directories, alternative-to listings | A category, a position, a comparison surface |
 | Platform-native catalogs | Bot lists, extension and plugin stores | An audience that already has the platform open |
 | Other people's listicles | "Top tools for X" articles | The page that is already ranking above you |
@@ -66,7 +67,7 @@ Last, check that submissions are moderated at all. A venue that publishes everyt
 
 ### The listicle author, not only the directory
 
-That article ranking above you has a byline and a contact — one inclusion in a page that already ranks beats several entries in directories nobody reads.
+That article ranking above you has a byline and a contact. I would trade several entries in unread directories for one honest inclusion on a page people already find.
 
 The honest part: writing to the author is much harder. It needs a name, an email and a reason the author cares — a form needs none of those, which is exactly why I kept filling forms.
 
@@ -101,5 +102,25 @@ Paid listings exist and some of them are expensive. Buy one when you know what a
 - Check analytics for referrals carrying the parameter you attached to that venue.
 - Watch for your own name showing up as a query in Search Console, because brand queries are the first sign the entity exists outside your head.
 - After a few weeks, ask an assistant for tools in your category, several runs each, because directories move exactly this: whether it names you at all.
+
+## Questions about using several venues
+
+<Faq items={[
+  {
+    id: 'why-several-venues',
+    question: 'Why use several venues instead of concentrating on one?',
+    answer: 'Because a platform catalog, a comparison directory, a search result and a community thread meet people in different contexts. One venue cannot cover all of those discovery paths.',
+  },
+  {
+    id: 'same-card-everywhere',
+    question: 'Should every venue get the same product description?',
+    answer: 'Keep the name, category, factual claims and destination consistent. Adapt the length and opening sentence to the field and the audience, without inventing a different product for each form.',
+  },
+  {
+    id: 'which-venue-worked',
+    question: 'How do I know which venue worked?',
+    answer: 'Give every published link its own campaign value and store that value on first contact. A live listing without a distinct tag may help discovery, but you cannot honestly attribute a signup to it.',
+  },
+]} />
 
 You build recognition off-site, and the on-page work converts it: [why AI answers cite someone else](/geo/citable-pages/). Inside a platform the rules are different again: [search inside the platform](/distribution/in-platform-visibility/).

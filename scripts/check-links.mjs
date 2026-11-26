@@ -8,7 +8,7 @@
  */
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { extractHrefs, findBrokenLinks } from './lib/links.mjs';
+import { extractHrefs, extractIds, findBrokenAnchors, findBrokenLinks } from './lib/links.mjs';
 
 async function walk(dir, base = dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -50,9 +50,11 @@ async function main() {
 
   const pages = [];
   for (const file of scanned) {
+    const html = await readFile(path.join(dist, file), 'utf8');
     pages.push({
       pathname: pathnameOf(file),
-      hrefs: extractHrefs(await readFile(path.join(dist, file), 'utf8')),
+      hrefs: extractHrefs(html),
+      ids: extractIds(html),
     });
   }
 
@@ -61,9 +63,15 @@ async function main() {
     console.error(`${link.from}: ссылка ${link.href} ведёт в никуда — нет ${link.target}`);
   }
 
+  const brokenAnchors = findBrokenAnchors(pages, origin);
+  for (const link of brokenAnchors) {
+    console.error(`${link.from}: ссылка ${link.href} ведёт на отсутствующий якорь ${link.target}`);
+  }
+
   const total = pages.reduce((sum, page) => sum + page.hrefs.length, 0);
-  console.log(`Страниц: ${pages.length}. Ссылок: ${total}. Битых: ${broken.length}.`);
-  process.exit(broken.length ? 1 : 0);
+  const problems = broken.length + brokenAnchors.length;
+  console.log(`Страниц: ${pages.length}. Ссылок: ${total}. Битых: ${problems}.`);
+  process.exit(problems ? 1 : 0);
 }
 
 await main();

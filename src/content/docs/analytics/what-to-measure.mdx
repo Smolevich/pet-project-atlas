@@ -3,7 +3,7 @@ title: The numbers worth reading weekly
 sidebar:
   order: 2
 description: A dashboard with forty numbers hides growth in noise. The short list — impressions, clicks, index share, signups, activation, repeat use — and what each one answers.
-updated: 2026-08-12
+updated: 2026-11-26
 sources:
   - Performance report in Search Console — https://support.google.com/webmasters/answer/7576553
   - Page indexing report — https://support.google.com/webmasters/answer/7440203
@@ -13,6 +13,7 @@ sources:
 ---
 
 import ForAgent from '../../../components/ForAgent.astro';
+import Faq from '../../../components/Faq.astro';
 
 <ForAgent run="/laviolab-atlas:report" does="reads the weekly slice from your Search Console and product exports, works out the delta and names one action" />
 
@@ -96,5 +97,25 @@ The rest of it a report cannot check for you.
 - The activation metric names exactly one action, and if you cannot say which action, the metric does not exist yet.
 - The index share uses submitted URLs as its denominator, not the pages you remember writing.
 - The series has more than one point in it, because one reading is not a trend and two readings are barely a line.
+
+## Questions about project statistics
+
+<Faq items={[
+  {
+    id: 'why-statistics-matter',
+    question: 'Why do statistics matter when the project is still small?',
+    answer: 'Because the same empty total can mean no demand, no indexing, no clicks or a broken first screen. A short series separates those failures and tells you which one to work on first.',
+  },
+  {
+    id: 'which-numbers-first',
+    question: 'Which numbers should a side project read first?',
+    answer: 'Start with impressions, clicks, index share, signups, activation and repeat use. Keep a number only when it answers a question the others cannot answer.',
+  },
+  {
+    id: 'why-collect-rows',
+    question: 'Why collect event rows instead of building the final dashboard immediately?',
+    answer: 'A dashboard can be rebuilt when the question changes. A source, cost, client or outcome that was never stored is missing for that whole period and cannot be recreated honestly.',
+  },
+]} />
 
 Knowing a number moved is useless until you know who moved it. Next: [where the user actually came from](/analytics/attribution/).

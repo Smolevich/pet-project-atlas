@@ -1,0 +1,44 @@
+---
+// Один массив рисует и видимые ответы, и FAQPage. Так JSON-LD не может тихо
+// разойтись с текстом, а явный ASCII-id остаётся пригодным для внешней ссылки.
+interface Item {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: Item[];
+  open?: boolean;
+}
+
+const { items, open = false } = Astro.props;
+for (const item of items) {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id)) {
+    throw new Error(`FAQ id должен быть ASCII-слагом: ${item.id}`);
+  }
+}
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': new URL('#faq', Astro.url).href,
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+
+const json = JSON.stringify(data).replaceAll('<', '\\u003c');
+---
+
+<div class="atlas-faq">
+  {items.map((item) => (
+    <details id={item.id} open={open}>
+      <summary>{item.question}</summary>
+      <p>{item.answer}</p>
+    </details>
+  ))}
+</div>
+<script type="application/ld+json" set:html={json} />

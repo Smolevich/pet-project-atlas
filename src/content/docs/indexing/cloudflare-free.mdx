@@ -1,0 +1,130 @@
+---
+title: What Cloudflare's free plan gives a side project
+sidebar:
+  order: 4
+description: Free DNS, proxy, cache, operational analytics, Access, Tunnel and bot controls — which problem each one solves, and which switches can hide a public site from crawlers.
+updated: 2026-11-26
+sources:
+  - What the Free website plan includes — https://www.cloudflare.com/plans/
+  - Free authoritative DNS and what changes at the registrar — https://developers.cloudflare.com/dns/faq/
+  - What the proxied DNS status changes — https://developers.cloudflare.com/dns/proxy-status/
+  - What Cloudflare caches by default — https://developers.cloudflare.com/cache/get-started/
+  - Zone analytics available on the Free plan — https://developers.cloudflare.com/analytics/account-and-zone-analytics/zone-analytics/
+  - Free Access plan and its user limit — https://www.cloudflare.com/plans/zero-trust-services/
+  - Publishing through Tunnel does not require paid Access — https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/
+  - Bot controls on the Free plan — https://developers.cloudflare.com/bots/plans/free/
+  - AI crawler policies and their defaults — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+---
+
+import Faq from '../../../components/Faq.astro';
+
+## What we are solving
+
+Cloudflare's free plan puts authoritative DNS, an HTTP proxy, a CDN and basic security controls in front of a small site. It also offers operational request data, Access for private screens, and Tunnel for publishing an application without a paid Access plan.
+
+The useful part is one place to see and control requests before they reach the site. The dangerous part is the same: one switch there can block search and AI crawlers before your own log sees them.
+
+I use this layer only where I can name the problem it solves and the check that proves it works. Cloudflare is not a ranking feature, and a managed host that already covers these jobs may need none of it.
+
+The boundary is practical. If a public request should reach the site, I need to know which Cloudflare setting can stop it, where that refusal appears, and how to test the same route without my signed-in browser hiding the result.
+
+## Steps
+
+### What changes when Cloudflare becomes the DNS provider
+
+Cloudflare can be the authoritative DNS provider without moving the domain away from its registrar. You change the nameservers at the registrar, then manage the records in Cloudflare.
+
+A grey-cloud record is DNS-only: Cloudflare answers the name lookup and visitors connect to the destination directly. An orange-cloud record is proxied: HTTP traffic passes through Cloudflare, which can protect, cache and measure those requests.
+
+That distinction matters because none of the proxy features apply to a DNS-only hostname. I check the cloud status before debugging cache or security rules; otherwise I am debugging a path the request never takes.
+
+### What the free proxy and cache save
+
+The Free website plan includes CDN service, TLS and DDoS protection. For a static site, the immediate win is smaller: images, CSS and JavaScript can be served from Cloudflare's cache, so the site handles fewer repeat requests for the same assets.
+
+HTML is not cached by default. I do not assume the home page is cached merely because the orange cloud is on; I inspect the response headers and the cache rules.
+
+Caching also creates one more stale copy. After a deploy, verify the changed asset from outside your own browser before blaming the build.
+
+### Which analytics exist without a browser tracker
+
+Zone Analytics reads requests seen by Cloudflare's edge. On the Free plan it includes HTTP traffic, DNS and security views, so it can answer whether a request arrived and whether an edge rule stopped it.
+
+That is operational data, not product analytics. It cannot tell you whether a person activated, paid or returned; those facts have to be recorded by the product as described in [what an event row has to carry](/analytics/product-metrics/).
+
+Cloudflare Web Analytics is a separate product that uses a browser beacon. Atlas does not add that beacon or any third-party analytics script. A feature being free is not a reason to break the privacy promise of the site using it.
+
+### When Access and Tunnel belong in the design
+
+Access puts an identity check in front of a private application. Its free plan is for teams under fifty users, which is enough for a private admin screen or an early internal tool.
+
+It does not belong in front of public documentation. A crawler cannot complete your company login, so the protected page disappears from search even while it opens normally for you.
+
+Tunnel publishes an application through an outbound connection and does not require paid Access. Tunnel and Access solve different jobs: Tunnel carries the connection, while Access decides who may pass. Neither one improves search visibility by itself.
+
+### Which free bot controls help, and which hide the site
+
+The Free plan includes Bot Fight Mode and controls for AI crawler traffic. Current AI policies separate Search, Agent and Training, so they do not have to receive the same answer.
+
+For a public reference site that wants citations, Search and Agent need to stay allowed. Training is a separate choice. The old all-in-one *Block AI bots* switch is too broad for this goal because it can stop the agents you are trying to reach.
+
+Bot Fight Mode also applies across the domain and cannot be tuned with exceptions on the Free plan. I turn it on only after testing real crawlers, monitoring and product callbacks from outside the network.
+
+### Why use Cloudflare at all
+
+I use Cloudflare when I need the domain, proxy, cache and edge controls to stay independent of the application host. That makes a host move smaller: the DNS record changes, while public URLs and the control layer stay put.
+
+I skip it when the existing platform already provides the same boundary and I have no rule to add. Another dashboard is not resilience; it is another place where a setting can drift.
+
+## What did not work
+
+- **Turning on every free switch.** Bot controls and Access are not harmless bonuses. Both can make a healthy public page return a challenge, a login screen or a refusal to a crawler.
+- **Assuming the orange cloud caches HTML.** Static files were cache hits while the document still came from the site on every request. The default behavior was working; my assumption was wrong.
+- **Looking only in the site log for a block.** A refusal made at the edge never reached that log. It appeared in Cloudflare's security events instead.
+- **Putting Access in front of public docs.** The page looked perfect in my signed-in browser and vanished for every anonymous fetch. Public reference content has to stay public.
+- **Adding a browser beacon because the plan offered one.** It answered no product question I had and changed the privacy story. I left it out of Atlas.
+- **Treating Tunnel as an SEO setting.** It changes the path to an application. Crawlers still judge the public response, canonical, content and links.
+
+## Verify
+
+- Ask DNS which nameservers are authoritative. They should be the ones you deliberately set at the registrar.
+
+  ```bash
+  dig +short NS example.com
+  ```
+- Request a static asset twice and inspect `CF-Cache-Status`, `Cache-Control` and the status code. A cache hit proves that asset was served from cache; it says nothing about the HTML beside it.
+
+  ```bash
+  curl -sI https://example.com/assets/app.css
+  ```
+- Open the public page in a private window. It must return the content without an Access login or a challenge.
+- In **Analytics**, check HTTP Traffic and Security Events for the same path. A request blocked there may never appear in the application log.
+- Read the live `robots.txt`, then review the Search, Agent and Training policies under **Security**. The file and the dashboard have to express the choice you intended.
+- Test one search crawler and one user-triggered agent from outside your network. Both need a normal successful response if the project wants to appear in AI answers.
+
+## Questions about the free plan
+
+<Faq items={[
+  {
+    id: 'is-cloudflare-required',
+    question: 'Does every side project need Cloudflare?',
+    answer: 'No. It earns its place when you need independent DNS, an edge proxy, caching or request controls. A managed platform that already solves those jobs may be simpler without another layer.',
+  },
+  {
+    id: 'what-is-free',
+    question: 'Are DNS, CDN, cache and zone analytics available on the free plan?',
+    answer: 'Yes, with plan limits and default behavior. Static assets are cacheable by default, while HTML is not. The dashboard exposes operational traffic and security data, but product outcomes still belong in your own event rows.',
+  },
+  {
+    id: 'block-ai-bots',
+    question: 'Should a project that wants AI citations turn on Block AI bots?',
+    answer: 'No. Keep Search and Agent traffic allowed when assistants should discover and fetch the public pages. Decide separately whether training crawlers may use them.',
+  },
+  {
+    id: 'atlas-web-analytics',
+    question: 'Does Atlas install Cloudflare Web Analytics?',
+    answer: 'No. Atlas ships no Web Analytics beacon and no third-party analytics script. This page describes a feature of the plan; it does not enable that feature on the site.',
+  },
+]} />
+
+The next checks are the responses a crawler actually receives: [why Google does not see your site](/indexing/why-google-does-not-see-you/). AI-specific access lives on [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
