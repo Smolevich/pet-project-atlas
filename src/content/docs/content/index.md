@@ -9,6 +9,6 @@ Two pages here.
 
 [What to write about when nobody searches your name](/content/keyword-clusters/) is the plan. Collect the real phrasings and group them into clusters — sets of phrases that want one answer. One page per cluster, and the order of the pages last.
 
-[What a page that ranks and gets cited is made of](/content/page-templates/) is the shape of the page itself. It includes the failures block, and that is the part nobody can copy off you.
+[What a page that ranks and gets cited is made of](/content/page-templates/) is the shape of the page itself. It includes the failures block and the visual test: a screenshot proves a screen, a diagram explains a mechanism, and decoration stays out.
 
 Do the plan first. I spent a month writing pages around my own word for the feature. It was a good word. Nobody typed it.

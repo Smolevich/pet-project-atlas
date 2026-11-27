@@ -6,6 +6,7 @@
 // микроданные, размазанные по вёрстке, тихо ломаются на первом же редизайне.
 import Default from '@astrojs/starlight/components/Head.astro';
 import { isoDate, pageGraph } from '../../scripts/lib/schema.mjs';
+import { SECTIONS } from '../../scripts/lib/sections.mjs';
 
 const route = Astro.locals.starlightRoute;
 const site = Astro.site;
@@ -19,6 +20,40 @@ const canonical = route.head.find(
 // Страница с hero — витрина раздела, а не процедура. Fallback описывать нечем:
 // его canonical указывает на английский оригинал, там статья и описана.
 const isArticle = route.entry.data.template !== 'splash' && !route.isFallback;
+
+function sectionFor(url: string, lang: string) {
+  const parts = new URL(url).pathname.split('/').filter(Boolean);
+  if (parts[0] === 'ru') parts.shift();
+  const found = SECTIONS.find((section) => section.slug === parts[0]);
+  if (!found) return null;
+
+  const prefix = lang === 'ru' ? '/ru' : '';
+  return {
+    name: lang === 'ru' ? found.ru : found.label,
+    url: new URL(`${prefix}/${found.slug}/`, site).href,
+  };
+}
+
+function howToSteps(
+  headings: Array<{ depth: number; text: string; slug: string }>,
+  lang: string,
+  url: string,
+) {
+  const stepsTitle = lang === 'ru' ? 'Шаги' : 'Steps';
+  const steps = [];
+  let inside = false;
+
+  for (const heading of headings) {
+    if (heading.depth === 2) {
+      inside = heading.text === stepsTitle;
+      continue;
+    }
+    if (inside && heading.depth === 3) {
+      steps.push({ name: heading.text, url: new URL(`#${heading.slug}`, url).href });
+    }
+  }
+  return steps;
+}
 
 let graph = null;
 if (site && typeof canonical === 'string') {
@@ -35,6 +70,8 @@ if (site && typeof canonical === 'string') {
           // Язык текста, а не адреса: на непереведённой странице это разные вещи.
           inLanguage: route.entryMeta.lang,
           dateModified: isoDate(route.entry.data.updated),
+          section: sectionFor(canonical, route.entryMeta.lang),
+          steps: howToSteps(route.headings, route.entryMeta.lang, canonical),
         }
       : null,
   });

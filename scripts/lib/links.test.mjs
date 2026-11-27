@@ -1,6 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { extractHrefs, internalPath, candidateFiles, findBrokenLinks } from './links.mjs';
+import {
+  candidateFiles,
+  extractHrefs,
+  extractIds,
+  findBrokenAnchors,
+  findBrokenLinks,
+  internalPath,
+} from './links.mjs';
 
 const ORIGIN = 'https://atlas.smolevich.com';
 const at = (href, from = '/') => internalPath(href, { origin: ORIGIN, from });
@@ -12,6 +19,10 @@ test('ссылки вынимаются из всего документа, не
 
 test('сущности в адресе разворачиваются', () => {
   assert.deepEqual(extractHrefs('<a href="/issues/new?a=1&amp;b=2">x</a>'), ['/issues/new?a=1&b=2']);
+});
+
+test('id элементов вынимаются и HTML-сущности в них раскрываются', () => {
+  assert.deepEqual(extractIds('<h2 id="steps">Steps</h2><div id="a&amp;b"></div>'), ['steps', 'a&b']);
 });
 
 test('внешние адреса и не-http схемы пропускаются', () => {
@@ -68,4 +79,31 @@ test('ссылка в никуда возвращается с адресом с
 test('внешняя ссылка не считается битой, даже если файла такого нет', () => {
   const pages = [{ pathname: '/', hrefs: ['https://llmstxt.org/'] }];
   assert.deepEqual(findBrokenLinks(pages, new Set(['index.html']), ORIGIN), []);
+});
+
+test('якорь на текущей и на другой странице проверяется по id', () => {
+  const pages = [
+    { pathname: '/geo/', hrefs: ['#steps', '/tools/#run'], ids: ['steps'] },
+    { pathname: '/tools/', hrefs: [], ids: ['run'] },
+  ];
+  assert.deepEqual(findBrokenAnchors(pages, ORIGIN), []);
+});
+
+test('битый якорь возвращает исходную ссылку и отсутствующую цель', () => {
+  const pages = [
+    { pathname: '/geo/', hrefs: ['/tools/#missing'], ids: [] },
+    { pathname: '/tools/', hrefs: [], ids: ['run'] },
+  ];
+  assert.deepEqual(findBrokenAnchors(pages, ORIGIN), [
+    { from: '/geo/', href: '/tools/#missing', target: '/tools/#missing' },
+  ]);
+});
+
+test('fragment файла и внешняя ссылка не считаются якорями HTML', () => {
+  const pages = [{
+    pathname: '/',
+    hrefs: ['/guide.pdf#page=2', 'https://example.com/#part'],
+    ids: [],
+  }];
+  assert.deepEqual(findBrokenAnchors(pages, ORIGIN), []);
 });

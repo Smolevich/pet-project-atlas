@@ -1,6 +1,7 @@
 /**
- * JSON-LD атласа одним графом: сайт, автор, страница. Чистая часть — на вход
- * данные страницы, на выход объект. Рендер — в src/components/Head.astro.
+ * JSON-LD атласа одним графом: сайт, автор, статья, хлебные крошки и процедура.
+ * Чистая часть — на вход данные страницы, на выход объект. Рендер — в
+ * src/components/Head.astro.
  *
  * Зачем вообще: на /geo/citable-pages/ восьмым шагом стоит `sameAs` — список
  * профилей, который сшивает разрозненные упоминания в одну сущность. У самого
@@ -82,6 +83,53 @@ export function articleNode({ url, headline, description, inLanguage, dateModifi
 }
 
 /**
+ * Хлебные крошки повторяют реальный маршрут: корень локали, раздел, страница.
+ * Раздел на своей index-странице не дублируется вторым пунктом.
+ */
+export function breadcrumbNode({ url, headline, localeRoot, siteName, section }) {
+  const root = directoryUrl(localeRoot);
+  const items = [{ name: siteName, item: root }];
+
+  if (section && section.url !== url) items.push({ name: section.name, item: section.url });
+  if (url !== root) items.push({ name: headline, item: url });
+
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': idAt(url, 'breadcrumbs'),
+    itemListElement: items.map(({ name, item }, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name,
+      item,
+    })),
+  };
+}
+
+/**
+ * HowTo появляется только там, где внутри обязательного блока Steps/Шаги есть
+ * настоящие H3-подшаги. Текст шага остаётся на странице; разметка ведёт к его
+ * устойчивому якорю и не выдумывает время, цену или результат.
+ */
+export function howToNode({ url, headline, description, inLanguage, steps }) {
+  if (!steps?.length) return null;
+
+  return {
+    '@type': 'HowTo',
+    '@id': idAt(url, 'how-to'),
+    name: headline,
+    ...(description ? { description } : {}),
+    inLanguage,
+    step: steps.map(({ name, url: stepUrl }, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name,
+      text: name,
+      url: stepUrl,
+    })),
+  };
+}
+
+/**
  * Граф одной страницы. `page` опускается там, где статьи нет, — на главной с
  * hero и на 404: у них нет ни текста процедуры, ни даты.
  */
@@ -90,7 +138,18 @@ export function pageGraph({ siteRoot, localeRoot, siteName, inLanguage, page }) 
     websiteNode({ localeRoot, name: siteName, inLanguage, siteRoot }),
     personNode(siteRoot),
   ];
-  if (page) graph.push(articleNode({ ...page, localeRoot, siteRoot }));
+  if (page) {
+    graph.push(articleNode({ ...page, localeRoot, siteRoot }));
+    graph.push(breadcrumbNode({
+      url: page.url,
+      headline: page.headline,
+      localeRoot,
+      siteName,
+      section: page.section,
+    }));
+    const howTo = howToNode(page);
+    if (howTo) graph.push(howTo);
+  }
   return { '@context': CONTEXT, '@graph': graph };
 }
 

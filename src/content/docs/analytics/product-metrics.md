@@ -3,12 +3,14 @@ title: What an event row has to carry, and where people get stuck
 sidebar:
   order: 3
 description: The weekly numbers come from somewhere. What one event row must hold to answer questions later, why cost and source belong on it at insert time, and how to find the step where people stop.
-updated: 2026-08-13
+updated: 2026-11-26
 sources:
   - Voice AI bot database, measured 2026-08-13
 ---
 
 ## What we are solving
+
+Collecting product data means writing a fact while the product still knows it: who acted, what happened, when, where they came from, what it cost, which client they used and how it ended. I collect those facts because a dashboard can be rebuilt, while a field that was never written is missing for the whole period.
 
 The weekly list tells you which numbers to read. It does not tell you how they get collected. And it cannot tell you where a person stopped.
 

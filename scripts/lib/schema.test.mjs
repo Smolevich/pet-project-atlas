@@ -1,6 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { AUTHOR, articleNode, isoDate, pageGraph, personNode, websiteNode } from './schema.mjs';
+import {
+  AUTHOR,
+  articleNode,
+  breadcrumbNode,
+  howToNode,
+  isoDate,
+  pageGraph,
+  personNode,
+  websiteNode,
+} from './schema.mjs';
 
 const SITE = 'https://atlas.smolevich.com/';
 const RU = 'https://atlas.smolevich.com/ru/';
@@ -11,6 +20,13 @@ const page = {
   description: 'Variable cost per action, fixed cost per month.',
   inLanguage: 'en',
   dateModified: '2026-08-10',
+  section: { name: '7. Money', url: 'https://atlas.smolevich.com/money/' },
+  steps: [
+    {
+      name: 'Measure one action',
+      url: 'https://atlas.smolevich.com/money/unit-economics/#measure-one-action',
+    },
+  ],
 };
 
 const graphOf = (options) => pageGraph({ siteRoot: SITE, siteName: 'Pet Project Atlas', ...options });
@@ -60,6 +76,48 @@ test('статья ссылается на автора и на свою язы�
   assert.deepEqual(node.isPartOf, { '@id': 'https://atlas.smolevich.com/#website' });
 });
 
+test('хлебные крошки ведут от корня через раздел к странице', () => {
+  const node = breadcrumbNode({
+    url: page.url,
+    headline: page.headline,
+    localeRoot: SITE,
+    siteName: 'Pet Project Atlas',
+    section: page.section,
+  });
+  assert.deepEqual(
+    node.itemListElement.map(({ position, name, item }) => [position, name, item]),
+    [
+      [1, 'Pet Project Atlas', SITE],
+      [2, '7. Money', 'https://atlas.smolevich.com/money/'],
+      [3, page.headline, page.url],
+    ],
+  );
+});
+
+test('index раздела не повторяет один адрес дважды в хлебных крошках', () => {
+  const url = 'https://atlas.smolevich.com/money/';
+  const node = breadcrumbNode({
+    url,
+    headline: '7. Money',
+    localeRoot: SITE,
+    siteName: 'Pet Project Atlas',
+    section: { name: '7. Money', url },
+  });
+  assert.deepEqual(node.itemListElement.map(({ item }) => item), [SITE, url]);
+});
+
+test('HowTo ссылается на видимые подшаги и ничего не придумывает о времени', () => {
+  const node = howToNode(page);
+  assert.equal(node['@type'], 'HowTo');
+  assert.equal(node.step[0].url, page.steps[0].url);
+  assert.equal('totalTime' in node, false);
+  assert.equal('estimatedCost' in node, false);
+});
+
+test('страница без подшагов не получает пустой HowTo', () => {
+  assert.equal(howToNode({ ...page, steps: [] }), null);
+});
+
 test('страница без updated не получает выдуманной даты', () => {
   const node = articleNode({ ...page, dateModified: undefined, localeRoot: SITE, siteRoot: SITE });
   assert.equal('dateModified' in node, false);
@@ -82,6 +140,8 @@ test('страница с hero остаётся без статьи, но с с�
 test('обычная страница описана статьёй', () => {
   const graph = graphOf({ localeRoot: SITE, inLanguage: 'en', page });
   assert.equal(typed(graph, 'TechArticle').headline, page.headline);
+  assert.equal(typed(graph, 'BreadcrumbList').itemListElement.length, 3);
+  assert.equal(typed(graph, 'HowTo').step.length, 1);
 });
 
 test('контекст один на весь граф — блок в head остаётся одним', () => {

@@ -3,7 +3,7 @@ title: Google does not see your site
 sidebar:
   order: 1
 description: The site is live and search returns nothing for it. The checks that find the real blocker, in the order they have to run.
-updated: 2026-10-09
+updated: 2026-11-26
 sources:
   - What robots.txt can and cannot do — https://developers.google.com/search/docs/crawling-indexing/robots/intro
   - How Google reads robots.txt — https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec
@@ -11,7 +11,7 @@ sources:
   - How to set a canonical URL — https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
   - What the crawler sees in a JavaScript app — https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
   - Sitemap protocol and its limits — https://www.sitemaps.org/protocol.html
-  - Cloudflare's Block AI bots switch — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
+  - Cloudflare's AI Crawler and Agent access policies — https://developers.cloudflare.com/bots/additional-configurations/block-ai-bots/
   - What a Cloudflare rule action does — https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
   - Security Events, where a block shows up — https://developers.cloudflare.com/waf/analytics/security-events/
 ---
@@ -121,9 +121,11 @@ ssh other-box 'curl -sI https://example.com/page'
 
 Access control, basic auth and edge bot rules answer with a login page or a 403. None of that is visible in `robots.txt`.
 
-The edge rule has a name and a screen it lives on: on Cloudflare it is **Configure AI bot policies**, on the zone's **Security Settings** page, on every plan. Cloudflare refuses a matching agent with a 403 from its own network, and that request never reaches your server.
+The edge control has a name and a screen it lives on: **AI Crawler and Agent access policies**, under **Security** → **Settings**, filter **Bot traffic**, on every plan. When a policy is set to Block, Cloudflare refuses a matching agent from its own network, and that request never reaches your server.
 
 So the refusal is not in your server log either: you can see it only in Cloudflare's **Analytics** → **Events**. The whole mechanism is on [AI crawlers and llms.txt](/geo/llms-txt-and-crawlers/).
+
+If the edge itself is still a choice, [what Cloudflare's free plan gives a side project](/indexing/cloudflare-free/) separates DNS, cache, Access, Tunnel and bot controls by the problem each one solves.
 
 ## What did not work
 
@@ -131,7 +133,7 @@ So the refusal is not in your server log either: you can see it only in Cloudfla
 - **Re-submitting one URL in the inspection tool**. The re-fetch uses the same `robots.txt`, the same header, the same empty body. The verdict comes back identical. The daily quota is gone.
 - **Trusting a third-party crawler as proof of access**. The report says what someone else's bot could fetch from its own address, and whether search decided to keep the page is a different question.
 - **Checking only from my own laptop**. A logged-in session, a warm service worker and a home network the edge already trusts hid the failure between them. The edge is the CDN in front of your origin — Cloudflare, Fastly, a load balancer — and it answers some requests before they reach you.
-- **Editing `robots.txt` when the block lived at the edge**. Bot-protection and WAF rules are invisible in that file, and the file was clean the whole time. Look for Cloudflare's **Configure AI bot policies** under **Security Settings**, and any WAF custom rule beside it — this is the most common hidden blocker I run into.
+- **Editing `robots.txt` when the block lived at the edge**. Bot-protection and WAF rules are invisible there, and the file was clean the whole time. Look for **AI Crawler and Agent access policies** under **Security Settings**, and any WAF custom rule beside it — this is the common hidden blocker I run into.
 - **A catch-all 404 rule on a client-routed site**. On my other site, `/* /404.html 404` in the redirects file also caught routes with no file in the build. The Russian home page answered 404 from the sitemap, and the browser hid it. Now every route is prerendered and the sitemap check runs after deploys.
 - **Rewriting titles and descriptions first**. On a page that is not in the index, on-page work produces nothing you can measure.
 

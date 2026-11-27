@@ -3,7 +3,7 @@ title: Whether that audience pays for anything
 sidebar:
   order: 3
 description: Paid competitors, ads on the query, what a pre-sale actually proves, and why a large query with nobody bidding on it usually means an audience looking for the free way.
-updated: 2026-08-12
+updated: 2026-11-26
 sources:
   - How to use Keyword Planner — https://support.google.com/google-ads/answer/7337243
   - How the ad auction works — https://support.google.com/google-ads/answer/1704431
@@ -13,17 +13,16 @@ sources:
 ---
 
 import { Image } from 'astro:assets';
+import Faq from '../../../components/Faq.astro';
 import serpAds from '../../../assets/screenshots/serp-ai-voice-agent-ads.png';
 
 ## What we are solving
 
-I picked the niche by intent in the first place: I took the keywords where the intent reads transactional or commercial, because on the rest people read and leave instead of buying.
+A niche can have real searches and still be a poor paid market. Search volume tells me people want an outcome; paid competitors, ads, free alternatives and a real price conversation tell me whether anyone spends money on it.
 
-And then the part the guides stay quiet about starts. You have to write content often, then check the new pages got into the index at all and that the keyword actually carries weight on them — otherwise there are no impressions even in theory.
+I run that check before development. Code can improve the product, but it cannot repair an audience that expects the result for free.
 
-Impressions are half of it. Turning one into a click means climbing the results, and hardly anyone scrolls as far as page four 😀
-
-So volume answers one question, whether they search. Whether they pay is a different question — look at it before you have written anything, not after.
+The transactional or commercial label in a keyword panel is only a hypothesis. I keep it until the live results or a conversation about money contradicts it.
 
 ## Steps
 
@@ -41,7 +40,7 @@ Ask yourself this before you have written anything, because afterwards you are n
 
 ### Is anyone putting money on this query
 
-The ads above the results are people paying for a click and repeating the purchase, because nobody buys the same audience a second month running if that audience does not spend.
+Ads above the results prove that somebody is paying to reach people on that query. They do not prove the campaign is profitable, and they say nothing about whether your offer will sell.
 
 Count them by hand: run the query and look at how many ads sit above the organic results. A panel like Semrush shows an `Ads` field, but that is its own count of ad copies in its database, not what a person sees today.
 
@@ -52,7 +51,9 @@ Here are two live groups, read on the same day:
 | `ai voice agent` | 1,900 | $16.18 | 14 |
 | `youtube transcript` | 60,500 | $0.86 | none |
 
-Demand for `youtube transcript` is thirty-two times bigger. And there is no money behind it at all: sixty thousand searches a month and not one advertiser is not a market, just people who need a free tool.
+Demand for `youtube transcript` is thirty-two times bigger. On that day I saw no paid-search evidence behind it, so the larger volume did not give me a reason to build for it.
+
+That is not proof that nobody pays. It is a reason to look for a paid competitor, a purchase or a real price conversation before treating the query as a market.
 
 Here is what those fourteen look like on the live page:
 
@@ -99,5 +100,25 @@ Compare it with the number of people you have actually spoken to. Break-even big
 - State your break-even as a whole number of payers. If you cannot say it out loud, your price is a guess with a confident face on it.
 
 Ads, CPC and intent read side by side across three niches: [which market to build for](/demand/pick-a-market/).
+
+## Questions to answer before development
+
+<Faq items={[
+  {
+    id: 'why-before-development',
+    question: 'Why check for money before building the product?',
+    answer: 'Because search demand and willingness to pay are different facts. Finding a paid competitor, a live ad market or one real buyer is cheaper than discovering after development that everyone expects the outcome for free.',
+  },
+  {
+    id: 'do-ads-prove-market',
+    question: 'Do ads on the query prove that my product will sell?',
+    answer: 'No. Ads prove that somebody paid to reach that audience. They do not reveal the campaign margin, the advertiser\'s results or demand for your particular offer.',
+  },
+  {
+    id: 'what-presale-proves',
+    question: 'What does a pre-sale prove?',
+    answer: 'A pre-sale proves that one person accepted one offer at one price on that day. It does not prove the size of the market, but it is stronger evidence than a signup or a stated intention.',
+  },
+]} />
 
 If both questions came back yes, the next wall is technical rather than commercial: search has to be able to read the site at all. That is [indexing](/indexing/).

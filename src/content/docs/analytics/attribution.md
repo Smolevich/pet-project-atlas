@@ -2,8 +2,8 @@
 title: Where the user actually came from
 sidebar:
   order: 1
-description: A browser sends a referrer, a bot or an app sends nothing. Tagging links, storing the source on first contact, and why the honest answer is often zero rather than approximate.
-updated: 2026-08-12
+description: A browser sends a referrer, a bot or an app sends nothing. Why UTM tags belong on every link, where to store the first source and why the honest answer is often zero.
+updated: 2026-11-26
 sources:
   - Deep links and the start payload — https://core.telegram.org/bots/features#deep-linking
   - Campaign parameters in a URL — https://support.google.com/analytics/answer/10917952
@@ -13,11 +13,11 @@ sources:
 
 ## What we are solving
 
-Signups arrive and you cannot say which link sent them — on the web that is only a reporting problem, because you can usually clean a report up later. Inside a bot or a mobile app there is nothing to clean: the data is simply not there.
+Signups arrive, and you cannot say which link sent them. On the web, that starts as a reporting problem. You can often clean the report later. Inside a bot or a mobile app there is nothing to clean: the data is simply missing.
 
-A browser sends a referrer on its own. The worst you get on the web is a messy report. A messenger and an app store send you nothing, so you have to ask for the tag in the link and store it yourself the moment somebody arrives.
+A browser sends a referrer on its own. A messenger and an app store may send nothing. Put the tag in the link and store it the moment somebody arrives.
 
-So the honest answer is not "roughly half of them came from that directory" but "I do not know", because no amount of analysis after the fact makes something out of nothing.
+Without that row, the honest answer is "I do not know". Analysis after the fact cannot recover a value that was never stored.
 
 ## Steps
 
@@ -32,6 +32,16 @@ Tagging as you go does not work. Inside a month you have `reddit`, `Reddit`, `re
 You put a tag on every outbound link. Your own channel, your own newsletter and your own pinned post get one too. On the web the tag lives in campaign parameters, in a bot it lives in the deep-link payload, and in an app store it lives in a campaign link.
 
 Skipping your own posts is the easiest shortcut and it costs the most. Untagged, they land in direct traffic. Then you open direct traffic and read word of mouth there that never happened.
+
+### Why use UTM parameters when the browser already sends a referrer
+
+UTM parameters are campaign fields in the URL. I use `utm_source` for the venue, `utm_medium` for the kind of placement and `utm_campaign` for the launch or batch.
+
+The referrer is evidence about the last browser hop, and in-app browsers or previews can remove it. A UTM value is the label I chose before publishing, so it survives the route as long as my own landing code stores it.
+
+UTM parameters do not improve ranking and do not make a page more citable. Their job is narrower: tell me which exact link brought the visit, so I can compare placements and decide which one to repeat.
+
+One source value for a whole platform is still too wide when several posts are live. Keep the controlled source vocabulary, then distinguish the placement in the campaign or content field.
 
 ### Does a real scheme fit in a Telegram deep link
 

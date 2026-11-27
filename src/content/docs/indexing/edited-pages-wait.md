@@ -12,13 +12,13 @@ sources:
 
 ## What we are solving
 
-You rewrote a title or the first screen of a page. A week later Search Console shows no change, and you are about to call the edit useless.
+You rewrote a title or the first screen of a page. A week later Search Console shows no change. You are about to call the edit useless.
 
-On my site the edit usually had not reached search at all. Google and the AI crawlers kept the old copy, because they had not come back for the page.
+On my site the edit usually had not reached search. Google and the AI crawlers kept the old copy. They had not come back for the page.
 
 ## Steps
 
-1. **Read the last crawl date before reading any metric.** URL Inspection — the search bar at the top of every Search Console screen — shows "Last crawl" for a URL. The same field comes back from the API as `lastCrawlTime`. If it is older than your deploy, every number on that page still describes the old version.
+1. **Read the last crawl date before reading any metric.** URL Inspection shows "Last crawl" for a URL. The API returns the same field as `lastCrawlTime`. If it is older than your deploy, every number still describes the old version.
 
    ```bash
    curl -s -X POST \
@@ -36,19 +36,19 @@ On my site the edit usually had not reached search at all. Google and the AI cra
      | grep 'GET /edited-page' | grep -c 'OAI-SearchBot'
    ```
 
-3. **Count impressions only after the crawl date.** Everything before it is the old title. On my three edited pages that cut 169 impressions down to 64 — including the day of the crawl itself — and 19 strictly after it.
-4. **Expect new pages to move first.** On the same day I shipped 8 new URLs. Googlebot fetched 3 of them that night and 7 of 8 within two days, and 6 had impressions by the third day. The edited pages sat beside them in the same sitemap.
+3. **Count impressions only after the crawl date.** Everything before it is the old title. On my three edited pages, that cut 169 impressions down to 64 when I included the crawl day. Only 19 came strictly after it.
+4. **Expect new pages to move first.** On the same day I shipped 8 new URLs, and Googlebot fetched 3 that night. Within two days it had fetched 7 of 8, and 6 had impressions by the third day. The edited pages sat beside them in the same sitemap.
 
 ## What did not work
 
-- **Judging a title change on a one-week window.** Of 3 pages with new titles, Googlebot re-fetched 2, on day 1 and day 3. The third had been crawled that morning, a few hours before my deploy, and not again all week.
+- **Judging a title change on a one-week window.** Of 3 pages with new titles, Googlebot re-fetched 2. It came on day 1 and day 3. The third had been crawled before my deploy and not again all week.
 - **Expecting an assistant to notice a rewrite.** I rebuilt a landing page for AI answers. OAI-SearchBot, the crawler that feeds ChatGPT search, did not request it once in seven days.
 - **Trusting one inspection reading.** The status for a new URL flipped between "URL is unknown to Google", "Discovered" and "indexed" from one day to the next. Only the most recent reading means anything.
 - **Reading crawler visits from Yandex and Bing as interest.** My deploy pings IndexNow — a shared endpoint that tells Bing and Yandex which URLs changed — with the whole sitemap. Their visits that week were an answer to my ping, so I left them out of the count.
 
 ## Verify
 
-For each page you changed, write down three dates: the deploy, the last crawl from inspection, and the first crawler hit in your log after the deploy. If the crawl is not later than the deploy, the page is still in the old state.
+For each changed page, write down three dates: deploy, last crawl from inspection and first crawler hit after deploy. If the crawl is not later than the deploy, the page is still in the old state.
 
 Mine on day 7 looked like this.
 
@@ -58,4 +58,4 @@ Mine on day 7 looked like this.
 | landing page, Russian | title and description | day 3 | one day of data |
 | comparison article | description | not re-crawled | none |
 
-In general, give an edited page three weeks before you judge it. A new page answers within days, so a week-long test only works on new pages.
+Give an edited page three weeks before you judge it. A new page can answer within days. A one-week test works only on those new pages.

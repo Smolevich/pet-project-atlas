@@ -12,19 +12,19 @@ sources:
 
 ## What we are solving
 
-You changed something on the site and want to know if it helped. Impressions went up that week, so it worked — except they went up on the pages you did not touch as well.
+You changed something on the site and want to know if it helped. Impressions went up that week. They also went up on pages you did not touch.
 
-I ran three strategies at once on my voice bot's site. The results are in [the case](/cases/voice-seo-week/). This page is the setup that let a week give an answer, and the places where my own data almost lied to me.
+I ran three strategies at once on my voice bot's site. The results are in [the case](/cases/voice-seo-week/). This page is the setup that let a week answer. It also shows where my own data almost lied.
 
 ## Steps
 
-1. **One page belongs to one group.** If a page gets two changes, nobody can say which one moved it. My sitemap and the blog index were shared by all groups, so I wrote that down as a known limit.
+1. **One page belongs to one group.** If a page gets two changes, nobody can say which one moved it. All groups shared my sitemap and blog index. I wrote that down as a known limit.
 2. **Keep a control group.** Pages you leave alone show what the whole site did that week anyway. My rule: if the control moved the same way within 30%, the effect is zero.
-3. **Write the verdict rules before the first edit.** Each group gets three outcomes — keep going, drop it, not tested — with numbers. "Not tested" needs its own condition. Mine was "the crawler has not opened the edited page at least three days before the cut-off".
-4. **Measure the baseline the same way you will measure the test.** My first baseline for ChatGPT referrals said 2.1 a day. Recounted from the same log by the same method, it came to 1.4. I moved the thresholds that same day, before shipping.
+3. **Write the verdict rules before the first edit.** Each group gets three outcomes with numbers: keep going, drop it, not tested. "Not tested" needs its own condition. Mine was "the crawler has not opened the edited page at least three days before the cut-off".
+4. **Measure the baseline the same way you will measure the test.** My first baseline for ChatGPT referrals said 2.1 a day. The same log, counted by the test method, came to 1.4. I moved the thresholds before shipping.
 5. **Ship one deploy at a time and log the minute.** Daily data cannot split a day, so the deploy day goes into neither window.
 6. **Collect on a schedule, not by hand.** A scheduled job pulled Search Console, URL Inspection, the access log and new signups at 09:30 every morning. Keep its raw output somewhere permanent.
-7. **Tag the button with the page it sits on.** My site adds the page to the bot's start link, so each signup carries the page where the person clicked. Before this, every blog article sent the same tag, and 8 signups in 60 days could not be placed in any group.
+7. **Tag the button with the page it sits on.** My site adds the page to the bot's start link. Each signup then carries the page where the person clicked. Before this, every article sent the same tag, and 8 signups in 60 days could not be placed in any group.
 
 ## What did not work
 

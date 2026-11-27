@@ -4,10 +4,12 @@ import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import { SECTIONS } from './scripts/lib/sections.mjs';
 import { isFallbackPath, readDocFiles, writtenTranslations } from './scripts/lib/locales.mjs';
+import { lastmodByPath } from './scripts/lib/sitemap.mjs';
 import rehypeMermaid from '@beoe/rehype-mermaid';
 
 const DOCS = new URL('./src/content/docs/', import.meta.url);
 const WRITTEN_TRANSLATIONS = writtenTranslations(readDocFiles(DOCS));
+const LASTMOD = lastmodByPath(DOCS);
 
 export default defineConfig({
   site: 'https://atlas.smolevich.com',
@@ -83,6 +85,10 @@ export default defineConfig({
     sitemap({
       i18n: { defaultLocale: 'root', locales: { root: 'en', ru: 'ru' } },
       filter: (url) => !isFallbackPath(new URL(url).pathname, WRITTEN_TRANSLATIONS),
+      serialize(item) {
+        const lastmod = LASTMOD.get(new URL(item.url).pathname);
+        return lastmod ? { ...item, lastmod } : item;
+      },
     }),
   ],
 });

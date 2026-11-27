@@ -1,11 +1,13 @@
 ---
 title: What a page that ranks and gets cited is made of
 description: The answer in the first three sentences, executable steps, a failures block, an FAQ people actually asked, and a linter that keeps the shape.
-updated: 2026-08-12
+updated: 2026-11-26
 sources:
   - Changes to HowTo and FAQ rich results — https://developers.google.com/search/blog/2023/08/howto-faq-changes
   - FAQ rich result removed — https://developers.google.com/search/updates#removing-faq-rich-result
   - Google on helpful content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+  - How Google reads images, captions and alt text — https://developers.google.com/search/docs/appearance/google-images
+  - When a screenshot or diagram belongs in documentation — https://developers.google.com/style/images
 ---
 
 ## What we are solving
@@ -31,6 +33,18 @@ A reader uses that block to decide whether to keep going, and a model lifts the 
 One command, one click, or one file. "Optimise your content" is not a step: if you cannot run it, either cut the wording or split it into the things you really can run.
 
 Where a command exists, print the command. A one-line shell check, described in words instead, costs the reader ten minutes — that is how long it takes them to reconstruct the line themselves.
+
+### Does this answer need a screenshot or a diagram
+
+A visual earns its weight when it answers a question faster than prose. I use a screenshot to prove what a panel or result page showed, and a diagram when order or branching is the hard part.
+
+The screenshot needs a caption with the query, date and source. The conclusion also stays in the text, because a screenshot can go stale and a reader or crawler may not see it.
+
+The diagram needs the same treatment. On Atlas, Mermaid diagrams render to SVG during the build, but the paragraph below still states the conclusion in words.
+
+Google reads an image through its `alt` text and the surrounding text. I describe the evidence the image carries, not every pixel; a decorative image gets no job on this kind of page.
+
+Do not screenshot code, terminal output or a paragraph. Real text can be copied, searched, translated and quoted, while text trapped in an image can do none of those reliably.
 
 ### The block nobody can copy off you
 
@@ -64,6 +78,7 @@ Put a linter in CI and let it fail the build. A style document gets read once an
 - **Matching headings loosely**. "What didn't work" and "What did not work" read the same to a human, and as two different strings to a check. The linter matches the heading text literally.
 - **Allowing an empty required block**. A heading with nothing under it passed the first version of the check. An empty block now counts as missing.
 - **Writing an FAQ for the markup**. Questions nobody asked, answered by repeating the paragraph above them. Schema did not make an empty answer worth quoting.
+- **Adding an image to break up the text**. It proved nothing and made the page heavier. The useful screenshots on this site show a result I cite in the paragraph beside them.
 - **Publishing a restriction as the current state**. This page said FAQPage was limited to government and health sites. That had been true since 2023. Google retired the rich result outright in May 2026, and the sentence had simply stopped being checked.
 - **Softening a number instead of sourcing it**. "Roughly a couple of thousand visits" looks like data and is not. A number ships with a date and a source, or it does not ship.
 

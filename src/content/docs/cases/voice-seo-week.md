@@ -15,13 +15,15 @@ sources:
 
 The blog on my voice bot's site had gone 56 days without a new article, and impressions were sliding. I had three ideas for getting them back and no way to tell which one worked.
 
-So on 3 October 2026 I shipped all three at once, each on its own set of pages, and left a fourth set untouched as a control. The rules for "keep going", "drop it" and "not tested" were written that afternoon, before any page changed.
+So on 3 October 2026 I shipped all three at once. Each had its own set of pages, and a fourth set stayed untouched as a control. I wrote the rules for "keep going", "drop it" and "not tested" before any page changed.
 
-This is what a week showed, including the two strategies it could not judge.
+This is what one week showed. Two strategies were still too early to judge.
+
+The control mattered. Without those untouched pages, every rise in impressions would have looked like proof for all three changes at once, even when the same movement across the control showed that the whole site was changing for another reason.
 
 ## Steps
 
-1. **Split the pages into groups that do not overlap.** Group A got changes for AI answers: a direct answer under the heading, a table of facts, an FAQ and a new how-to article. Group B got new titles and descriptions only. Group C was 8 new URLs, 4 articles in two languages, each built on my own measurement.
+1. **Split the pages into groups that do not overlap.** Group A got a direct answer, a table of facts, an FAQ and a new how-to article. Group B got new titles and descriptions. Group C was 8 new URLs built on my own measurements.
 2. **Leave a control group alone.** Five existing articles and the about page in both languages, 7 URLs in all, stayed as they were. If the control moved the same way within 30%, I would count the effect as zero.
 3. **Fix the verdict rules before shipping.** For C: Googlebot on 4 of the 8 URLs and any AI crawler on one. For B: CTR — clicks divided by impressions — of 4% on 300 impressions after a re-crawl. For A: ChatGPT referrals up from 1.4 to 2.1 a day.
 4. **Ship one change at a time and log the minute.** Five deploys went out between 19:10 and 20:38 Belgrade time, each one in the log with its time. The test window for a group starts from its own deploy.
